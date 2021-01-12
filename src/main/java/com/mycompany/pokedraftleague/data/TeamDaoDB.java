@@ -68,7 +68,16 @@ public class TeamDaoDB implements TeamDao {
 
     @Override
     public Team addTeam(Team team) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String ADD_TEAM = "INSERT INTO team (name, acronym) "
+                + "VALUES (?, ?)";
+        jdbc.update(ADD_TEAM,
+                team.getName(),
+                team.getAcronym());
+        
+        int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        team.setId(newId);
+        
+        return team;
     }
 
     @Override
