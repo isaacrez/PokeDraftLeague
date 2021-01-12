@@ -15,6 +15,7 @@ CREATE TABLE `League` (
 
 CREATE TABLE `Team` (
 	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `coachId` INT NOT NULL,
     `name` VARCHAR(60) NOT NULL,
     `acronym` VARCHAR(4) NOT NULL
 );
@@ -30,12 +31,6 @@ CREATE TABLE `Coach` (
     `nickname` VARCHAR(30) NOT NULL,
     `discordName` VARCHAR(30),
     `showdownName` VARCHAR(30)
-);
-
-CREATE TABLE `CoachTeam` (
-    `teamId` INT NOT NULL,
-    `coachId` INT NOT NULL,
-    PRIMARY KEY(`teamId`, `coachId`)
 );
 
 CREATE TABLE `Roster` (
@@ -83,13 +78,10 @@ ALTER TABLE `LeagueTeam`
 		FOREIGN KEY (`teamId`)
         REFERENCES `team`(`id`);
 
-ALTER TABLE `CoachTeam`
-	ADD CONSTRAINT `fk_coachTeam_coachId`
+ALTER TABLE `Team`
+	ADD CONSTRAINT `fk_team_coachId`
 		FOREIGN KEY (`coachId`)
-        REFERENCES `Coach`(`id`),
-	ADD CONSTRAINT `fk_coachTeam_teamId`
-		FOREIGN KEY(`teamId`)
-        REFERENCES `Team`(`id`);
+        REFERENCES `Coach`(`id`);
 
 ALTER TABLE `Match`
 	ADD CONSTRAINT `fk_match_leagueId`
