@@ -17,7 +17,7 @@ public class Lineup {
     
     private List<Pokemon> lineup;
     
-    Lineup() {
+    public Lineup() {
         lineup = new ArrayList<>();
     }
     
