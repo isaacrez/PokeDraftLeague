@@ -91,10 +91,6 @@ public class TeamDaoDB implements TeamDao {
                 team.getCoach().getId(),
                 team.getId());
     }
-    
-    private void updateCoach(Team team) {
-        final String REMOVE_COACH_TEAM = "DELETE FROM coachteam WHERE ";
-    }
 
     @Override
     public void deleteTeamById(int id) {
