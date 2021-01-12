@@ -13,9 +13,18 @@ import java.util.Objects;
  */
 public class Coach {
     
+    private int id;
     private String nickname;
     private String discordName;
     private String showdownName;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNickname() {
         return nickname;
@@ -44,9 +53,10 @@ public class Coach {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.nickname);
-        hash = 61 * hash + Objects.hashCode(this.discordName);
-        hash = 61 * hash + Objects.hashCode(this.showdownName);
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.nickname);
+        hash = 29 * hash + Objects.hashCode(this.discordName);
+        hash = 29 * hash + Objects.hashCode(this.showdownName);
         return hash;
     }
 
@@ -62,6 +72,9 @@ public class Coach {
             return false;
         }
         final Coach other = (Coach) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.nickname, other.nickname)) {
             return false;
         }

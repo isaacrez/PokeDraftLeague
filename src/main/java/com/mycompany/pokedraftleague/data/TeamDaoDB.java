@@ -82,7 +82,18 @@ public class TeamDaoDB implements TeamDao {
 
     @Override
     public void updateTeam(Team team) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String UPDATE_TEAM = "UPDATE team "
+                + "SET name = ?, acronym = ?, coachId = ? "
+                + "WHERE id = ?";
+        jdbc.update(UPDATE_TEAM,
+                team.getName(),
+                team.getAcronym(),
+                team.getCoach().getId(),
+                team.getId());
+    }
+    
+    private void updateCoach(Team team) {
+        final String REMOVE_COACH_TEAM = "DELETE FROM coachteam WHERE ";
     }
 
     @Override
