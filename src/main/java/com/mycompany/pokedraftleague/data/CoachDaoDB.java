@@ -73,7 +73,8 @@ public class CoachDaoDB implements CoachDao {
 
     @Override
     public void deleteCoachById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String DELETE_COACH = "DELETE FROM coach WHERE id = ?";
+        jdbc.update(DELETE_COACH, id);
     }
     
     public static final class CoachMapper implements RowMapper<Coach> {
