@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -30,12 +31,18 @@ public class CoachDaoDB implements CoachDao {
 
     @Override
     public List<Coach> getAllCoaches() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String GET_ALL_COACHES = "SELECT * FROM coach";
+        return jdbc.query(GET_ALL_COACHES, new CoachMapper());
     }
 
     @Override
     public Coach getCoachById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            final String GET_COACH_BY_ID = "SELECT * FROM coach WHERE id = ?";
+            return jdbc.queryForObject(GET_COACH_BY_ID, new CoachMapper(), id);
+        } catch (DataAccessException e) {
+            return null;
+        }
     }
 
     @Override
@@ -57,6 +64,7 @@ public class CoachDaoDB implements CoachDao {
         @Override
         public Coach mapRow(ResultSet rs, int index) throws SQLException {
             Coach coach = new Coach();
+            coach.setId(rs.getInt("id"));
             coach.setNickname(rs.getString("nickname"));
             coach.setDiscordName(rs.getString("discordName"));
             coach.setShowdownName(rs.getString("showdownName"));
