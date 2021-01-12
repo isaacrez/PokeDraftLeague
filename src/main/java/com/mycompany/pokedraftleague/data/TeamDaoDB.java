@@ -102,6 +102,7 @@ public class TeamDaoDB implements TeamDao {
         @Override
         public Team mapRow(ResultSet rs, int index) throws SQLException {
             Team team = new Team();
+            team.setId(rs.getInt("id"));
             team.setName(rs.getString("name"));
             team.setAcronym(rs.getString("acronym"));
             return team;
