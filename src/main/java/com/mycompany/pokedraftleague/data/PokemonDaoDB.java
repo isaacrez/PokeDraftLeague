@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -33,12 +34,18 @@ public class PokemonDaoDB implements PokemonDao {
 
     @Override
     public List<Pokemon> getAllPokemon() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String GET_ALL_POKEMON = "SELECT * FROM pokemon";
+        return jdbc.query(GET_ALL_POKEMON, new PokemonMapper());
     }
 
     @Override
     public Pokemon getPokemonById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            final String GET_POKEMON_BY_ID = "SELECT * FROM pokemon WHERE id = ?";
+            return jdbc.queryForObject(GET_POKEMON_BY_ID, new PokemonMapper(), id);
+        } catch (DataAccessException e) {
+            return null;
+        }
     }
 
     @Override
