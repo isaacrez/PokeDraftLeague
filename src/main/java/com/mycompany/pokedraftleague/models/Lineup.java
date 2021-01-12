@@ -21,8 +21,18 @@ public class Lineup {
         lineup = new ArrayList<>();
     }
     
+    public Lineup(List<Pokemon> pokemon) {
+        lineup = pokemon;
+    }
+    
     public void addPokemon(Pokemon pokemon) {
         lineup.add(pokemon);
+    }
+    
+    public void addPokemon(List<Pokemon> pokemon) {
+        for (Pokemon poke : pokemon) {
+            addPokemon(poke);
+        }
     }
     
     public void clearLineup() {

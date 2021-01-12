@@ -5,12 +5,15 @@
  */
 package com.mycompany.pokedraftleague.data;
 
+import com.mycompany.pokedraftleague.data.PokemonDaoDB.PokemonMapper;
 import com.mycompany.pokedraftleague.models.Lineup;
+import com.mycompany.pokedraftleague.models.Pokemon;
 import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -31,22 +34,36 @@ public class TeamDaoDB implements TeamDao {
 
     @Override
     public List<Team> getAllTeams() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String GET_ALL_TEAMS = "SELECT * FROM team";
+        return jdbc.query(GET_ALL_TEAMS, new TeamMapper());
     }
 
     @Override
     public List<Team> getAllTeamsForLeague(int leagueId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String GET_TEAM_BY_LEAGUE_ID = "SELECT t.* FROM team AS t "
+                + "JOIN leagueteam AS lt ON t.id = lt.teamId "
+                + "WHERE lt.leagueId = ?";
+        return jdbc.query(GET_TEAM_BY_LEAGUE_ID, new TeamMapper(), leagueId);
     }
 
     @Override
     public Lineup getRosterById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String GET_POKEMON_BY_TEAM_ID = "SELECT p.* FROM team AS t "
+                + "JOIN roster AS r ON t.id = r.teamId "
+                + "JOIN pokemon AS p ON r.pokeId = p.id "
+                + "WHERE t.id = ?";
+        List<Pokemon> pokemon = jdbc.query(GET_POKEMON_BY_TEAM_ID, new PokemonMapper(), id);
+        return new Lineup(pokemon);
     }
 
     @Override
     public Team getTeamById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            final String GET_TEAM_BY_ID = "SELECT * FROM team WHERE id = ?";
+            return jdbc.queryForObject(GET_TEAM_BY_ID, new TeamMapper(), id);
+        } catch (DataAccessException e) {
+            return null;
+        }
     }
 
     @Override
