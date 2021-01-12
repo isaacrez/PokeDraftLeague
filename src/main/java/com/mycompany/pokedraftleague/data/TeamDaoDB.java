@@ -94,7 +94,8 @@ public class TeamDaoDB implements TeamDao {
 
     @Override
     public void deleteTeamById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String DELETE_TEAM_BY_ID = "DELETE FROM team WHERE id = ?";
+        jdbc.update(DELETE_TEAM_BY_ID, id);
     }
     
     public static final class TeamMapper implements RowMapper<Team> {
