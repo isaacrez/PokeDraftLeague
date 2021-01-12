@@ -61,7 +61,14 @@ public class CoachDaoDB implements CoachDao {
 
     @Override
     public void updateCoach(Coach coach) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String UPDATE_COACH = "UPDATE coach "
+                + "SET nickname = ?, discordName = ?, showdownName = ? "
+                + "WHERE id = ?";
+        jdbc.update(UPDATE_COACH,
+                coach.getNickname(),
+                coach.getDiscordName(),
+                coach.getShowdownName(),
+                coach.getId());
     }
 
     @Override
