@@ -3,7 +3,6 @@
  * Author:  isaacrez
  * Created: Jan 11, 2021
  */
-
 DROP DATABASE IF EXISTS `PokeDraft`;
 CREATE DATABASE `PokeDraft`;
 USE `PokeDraft`;
@@ -50,6 +49,7 @@ CREATE TABLE `Match` (
     `leagueId` INT NOT NULL,
     `homeTeamId` INT NOT NULL,
     `awayTeamId` INT NOT NULL,
+    `statusId` INT NOT NULL,
     `scheduledWeek` INT NOT NULL, 
     `dateSubmitted` Date DEFAULT(NOW())
 );
@@ -65,7 +65,7 @@ CREATE TABLE `MatchAttendee` (
 );
 
 CREATE TABLE `MatchStatus` (
-	`statusId` INT PRIMARY KEY,
+	`id` INT PRIMARY KEY,
     `label` VARCHAR(20) NOT NULL
 );
 
@@ -100,8 +100,11 @@ ALTER TABLE `Match`
         REFERENCES `Team`(`id`),
 	ADD CONSTRAINT `fk_match_awayTeamId`
 		FOREIGN KEY (`homeTeamID`)
-        REFERENCES `Team`(`id`);
-        
+        REFERENCES `Team`(`id`),
+	ADD CONSTRAINT `fk_match_statusId`
+		FOREIGN KEY (`statusId`)
+        REFERENCES `MatchStatus`(`id`);
+
 ALTER TABLE `MatchAttendee`
 	ADD CONSTRAINT `fk_matchAttendee_matchId`
 		FOREIGN KEY (`matchId`)
@@ -112,3 +115,11 @@ ALTER TABLE `MatchAttendee`
 	ADD CONSTRAINT `fk_matchAttendee_teamId`
 		FOREIGN KEY (`teamId`)
         REFERENCES `Team`(`id`);
+
+ALTER TABLE `Roster`
+	ADD CONSTRAINT `fk_roster_teamId`
+		FOREIGN KEY (`teamId`)
+        REFERENCES `Team`(`id`),
+	ADD CONSTRAINT `fk_roster_pokeId`
+		FOREIGN KEY (`pokeId`)
+        REFERENCES `Pokemon`(`id`);
