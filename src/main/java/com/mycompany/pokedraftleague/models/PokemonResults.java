@@ -13,10 +13,19 @@ import java.util.Objects;
  */
 public class PokemonResults {
     
+    private int id;
     private Pokemon pokemon;
     private int directKOs;
     private int indirectKOs;
     private int deaths;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Pokemon getPokemon() {
         return pokemon;
@@ -46,17 +55,18 @@ public class PokemonResults {
         return deaths;
     }
 
-    public void setDied(int deaths) {
+    public void setDeaths(int deaths) {
         this.deaths = deaths;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 71 * hash + Objects.hashCode(this.pokemon);
-        hash = 71 * hash + this.directKOs;
-        hash = 71 * hash + this.indirectKOs;
-        hash = 71 * hash + this.deaths;
+        hash = 17 * hash + this.id;
+        hash = 17 * hash + Objects.hashCode(this.pokemon);
+        hash = 17 * hash + this.directKOs;
+        hash = 17 * hash + this.indirectKOs;
+        hash = 17 * hash + this.deaths;
         return hash;
     }
 
@@ -72,6 +82,9 @@ public class PokemonResults {
             return false;
         }
         final PokemonResults other = (PokemonResults) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (this.directKOs != other.directKOs) {
             return false;
         }
@@ -86,5 +99,5 @@ public class PokemonResults {
         }
         return true;
     }
-
+    
 }
