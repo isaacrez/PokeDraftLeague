@@ -8,13 +8,13 @@ CREATE DATABASE `PokeDraft`;
 USE `PokeDraft`;
 
 CREATE TABLE `League` (
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(60) NOT NULL,
     `admin` VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE `Team` (
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
     `coachId` INT NOT NULL,
     `name` VARCHAR(60) NOT NULL,
     `acronym` VARCHAR(4) NOT NULL
@@ -27,7 +27,7 @@ CREATE TABLE `LeagueTeam` (
 );
 
 CREATE TABLE `Coach` (
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
     `nickname` VARCHAR(30) NOT NULL,
     `discordName` VARCHAR(30),
     `showdownName` VARCHAR(30)
@@ -40,7 +40,7 @@ CREATE TABLE `Roster` (
 );
 
 CREATE TABLE `Match` (
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
     `leagueId` INT NOT NULL,
     `homeTeamId` INT NOT NULL,
     `awayTeamId` INT NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE `Match` (
 );
 
 CREATE TABLE `MatchAttendee` (
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
     `matchId` INT NOT NULL,
     `pokeId` INT NOT NULL,
     `teamId` INT NOT NULL,
@@ -60,14 +60,14 @@ CREATE TABLE `MatchAttendee` (
 );
 
 CREATE TABLE `MatchStatus` (
-	`id` INT PRIMARY KEY,
+    `id` INT PRIMARY KEY,
     `label` VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE `Pokemon` (
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
-    `pokedexId` INT NOT NULL,
-    `form` VARCHAR(16)
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(16) NOT NULL,
+    `form` VARCHAR(32)
 );
 
 ALTER TABLE `LeagueTeam`
