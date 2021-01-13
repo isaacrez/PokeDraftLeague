@@ -35,7 +35,7 @@ public class PokemonController {
     }
     
     @GetMapping("forms/{pokeName}")
-    public ResponseEntity templateCall2(@PathVariable String pokeName) {
+    public ResponseEntity getPokemonForms(@PathVariable String pokeName) {
         return ResponseEntity.ok(pokemonDao.getFormsFor(pokeName));
     }
     
