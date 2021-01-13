@@ -47,6 +47,12 @@ public class PokemonDaoDB implements PokemonDao {
             return null;
         }
     }
+    
+    @Override
+    public List<Pokemon> getFormsFor(String name) {
+        final String GET_FORMS_FOR = "SELECT * FROM pokemon WHERE name = ?";
+        return jdbc.query(GET_FORMS_FOR, new PokemonMapper(), name);
+    }
 
     @Override
     public Pokemon getPokemonWithStatsFrom(int pokeId, Match match) {

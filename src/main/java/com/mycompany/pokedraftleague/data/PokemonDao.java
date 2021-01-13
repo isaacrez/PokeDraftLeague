@@ -17,6 +17,7 @@ import java.util.List;
 public interface PokemonDao {
     List<Pokemon> getAllPokemon();
     Pokemon getPokemonById(int id);
+    List<Pokemon> getFormsFor(String name);
     Pokemon getPokemonWithStatsFrom(int pokeId, Match match);
     Pokemon getPokemonWithStatsFrom(int pokeId, League league);
     Pokemon addPokemon(Pokemon pokemon);

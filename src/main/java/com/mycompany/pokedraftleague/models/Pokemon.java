@@ -24,6 +24,14 @@ public class Pokemon {
         this.form = form;
     }
     
+    public String getName() {
+        return name;
+    }
+    
+    public String getForm() {
+        return form;
+    }
+    
     public String getUrlID() {
         if (form != null && !form.isEmpty()) {
             return name + "-" + form;
