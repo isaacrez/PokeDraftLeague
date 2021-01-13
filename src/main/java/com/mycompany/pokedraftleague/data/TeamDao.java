@@ -16,7 +16,7 @@ import java.util.List;
 public interface TeamDao {
     List<Team> getAllTeams();
     List<Team> getAllTeamsForLeague(int leagueId);
-    Lineup getRosterById(int id);
+    Lineup getRosterById(int teamId);
     Team getTeamById(int id);
     Team addTeam(Team team);
     void updateTeam(Team team);

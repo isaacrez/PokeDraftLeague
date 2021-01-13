@@ -53,12 +53,12 @@ public class TeamDaoDB implements TeamDao {
     }
 
     @Override
-    public Lineup getRosterById(int id) {
+    public Lineup getRosterById(int teamId) {
         final String GET_POKEMON_BY_TEAM_ID = "SELECT p.* FROM team AS t "
                 + "JOIN roster AS r ON t.id = r.teamId "
                 + "JOIN pokemon AS p ON r.pokeId = p.id "
                 + "WHERE t.id = ?";
-        List<Pokemon> pokemon = jdbc.query(GET_POKEMON_BY_TEAM_ID, new PokemonMapper(), id);
+        List<Pokemon> pokemon = jdbc.query(GET_POKEMON_BY_TEAM_ID, new PokemonMapper(), teamId);
         return new Lineup(pokemon);
     }
 
