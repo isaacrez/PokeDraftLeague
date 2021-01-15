@@ -2,7 +2,6 @@
  * Author:  isaacrez
  * Created: Jan 13, 2021
  */
-
 USE pokedraft;
 
 INSERT INTO pokemon (`name`) VALUES 
@@ -10,3 +9,129 @@ INSERT INTO pokemon (`name`) VALUES
 
 INSERT INTO pokemon (`name`, `form`) VALUES
 ("nidoran", "f"), ("nidoran", "m"), ("deoxys", "normal"), ("wormadam", "plant"), ("giratina", "altered"), ("shaymin", "land"), ("basculin", "red-striped"), ("darmanitan", "standard"), ("tornadus", "incarnate"), ("thundurus", "incarnate"), ("landorus", "incarnate"), ("keldeo", "ordinary"), ("meloetta", "aria"), ("meowstic", "male"), ("aegislash", "shield"), ("pumpkaboo", "average"), ("gourgeist", "average"), ("oricorio", "baile"), ("lycanroc", "midday"), ("wishiwashi", "solo"), ("type", "null"), ("minior", "red-meteor"), ("mimikyu", "disguised"), ("toxtricity", "amped"), ("eiscue", "ice"), ("indeedee", "male"), ("zacian", "hero"), ("zamazenta", "hero"), ("urshifu", "single-strike"), ("deoxys", "attack"), ("deoxys", "defense"), ("deoxys", "speed"), ("wormadam", "sandy"), ("wormadam", "trash"), ("shaymin", "sky"), ("giratina", "origin"), ("rotom", "heat"), ("rotom", "wash"), ("rotom", "frost"), ("rotom", "fan"), ("rotom", "mow"), ("castform", "sunny"), ("castform", "rainy"), ("castform", "snowy"), ("basculin", "blue-striped"), ("darmanitan", "zen"), ("meloetta", "pirouette"), ("tornadus", "therian"), ("thundurus", "therian"), ("landorus", "therian"), ("kyurem", "black"), ("kyurem", "white"), ("keldeo", "resolute"), ("meowstic", "female"), ("aegislash", "blade"), ("pumpkaboo", "small"), ("pumpkaboo", "large"), ("pumpkaboo", "super"), ("gourgeist", "small"), ("gourgeist", "large"), ("gourgeist", "super"), ("venusaur", "mega"), ("charizard", "mega-x"), ("charizard", "mega-y"), ("blastoise", "mega"), ("alakazam", "mega"), ("gengar", "mega"), ("kangaskhan", "mega"), ("pinsir", "mega"), ("gyarados", "mega"), ("aerodactyl", "mega"), ("mewtwo", "mega-x"), ("mewtwo", "mega-y"), ("ampharos", "mega"), ("scizor", "mega"), ("heracross", "mega"), ("houndoom", "mega"), ("tyranitar", "mega"), ("blaziken", "mega"), ("gardevoir", "mega"), ("mawile", "mega"), ("aggron", "mega"), ("medicham", "mega"), ("manectric", "mega"), ("banette", "mega"), ("absol", "mega"), ("garchomp", "mega"), ("lucario", "mega"), ("abomasnow", "mega"), ("floette", "eternal"), ("latias", "mega"), ("latios", "mega"), ("swampert", "mega"), ("sceptile", "mega"), ("sableye", "mega"), ("altaria", "mega"), ("gallade", "mega"), ("audino", "mega"), ("sharpedo", "mega"), ("slowbro", "mega"), ("steelix", "mega"), ("pidgeot", "mega"), ("glalie", "mega"), ("diancie", "mega"), ("metagross", "mega"), ("kyogre", "primal"), ("groudon", "primal"), ("rayquaza", "mega"), ("pikachu", "rock-star"), ("pikachu", "belle"), ("pikachu", "pop-star"), ("pikachu", "phd"), ("pikachu", "libre"), ("pikachu", "cosplay"), ("hoopa", "unbound"), ("camerupt", "mega"), ("lopunny", "mega"), ("salamence", "mega"), ("beedrill", "mega"), ("rattata", "alola"), ("raticate", "alola"), ("raticate", "totem-alola"), ("pikachu", "original-cap"), ("pikachu", "hoenn-cap"), ("pikachu", "sinnoh-cap"), ("pikachu", "unova-cap"), ("pikachu", "kalos-cap"), ("pikachu", "alola-cap"), ("raichu", "alola"), ("sandshrew", "alola"), ("sandslash", "alola"), ("vulpix", "alola"), ("ninetales", "alola"), ("diglett", "alola"), ("dugtrio", "alola"), ("meowth", "alola"), ("persian", "alola"), ("geodude", "alola"), ("graveler", "alola"), ("golem", "alola"), ("grimer", "alola"), ("muk", "alola"), ("exeggutor", "alola"), ("marowak", "alola"), ("greninja", "battle-bond"), ("greninja", "ash"), ("zygarde", "10"), ("zygarde", "50"), ("zygarde", "complete"), ("gumshoos", "totem"), ("vikavolt", "totem"), ("oricorio", "pom-pom"), ("oricorio", "pau"), ("oricorio", "sensu"), ("lycanroc", "midnight"), ("wishiwashi", "school"), ("lurantis", "totem"), ("salazzle", "totem"), ("minior", "orange-meteor"), ("minior", "yellow-meteor"), ("minior", "green-meteor"), ("minior", "blue-meteor"), ("minior", "indigo-meteor"), ("minior", "violet-meteor"), ("minior", "red"), ("minior", "orange"), ("minior", "yellow"), ("minior", "green"), ("minior", "blue"), ("minior", "indigo"), ("minior", "violet"), ("mimikyu", "busted"), ("mimikyu", "totem-disguised"), ("mimikyu", "totem-busted"), ("kommo-o", "totem"), ("magearna", "original"), ("pikachu", "partner-cap"), ("marowak", "totem"), ("ribombee", "totem"), ("rockruff", "own-tempo"), ("lycanroc", "dusk"), ("araquanid", "totem"), ("togedemaru", "totem"), ("necrozma", "dusk"), ("necrozma", "dawn"), ("necrozma", "ultra"), ("meowth", "galar"), ("ponyta", "galar"), ("rapidash", "galar"), ("slowpoke", "galar"), ("slowbro", "galar"), ("farfetchd", "galar"), ("weezing", "galar"), ("mr", "mime-galar"), ("articuno", "galar"), ("zapdos", "galar"), ("moltres", "galar"), ("slowking", "galar"), ("corsola", "galar"), ("zigzagoon", "galar"), ("linoone", "galar"), ("darumaka", "galar"), ("darmanitan", "standard-galar"), ("darmanitan", "zen-galar"), ("yamask", "galar"), ("stunfisk", "galar"), ("toxtricity", "low-key"), ("eiscue", "noice"), ("indeedee", "female"), ("zacian", "crowned"), ("zamazenta", "crowned"), ("urshifu", "rapid-strike"), ("calyrex", "ice-rider"), ("calyrex", "shadow-rider"), ("venusaur", "gmax"), ("charizard", "gmax"), ("blastoise", "gmax"), ("butterfree", "gmax"), ("pikachu", "gmax"), ("meowth", "gmax"), ("machamp", "gmax"), ("gengar", "gmax"), ("kingler", "gmax"), ("lapras", "gmax"), ("eevee", "gmax"), ("snorlax", "gmax"), ("garbodor", "gmax"), ("melmetal", "gmax"), ("rillaboom", "gmax"), ("cinderace", "gmax"), ("inteleon", "gmax"), ("corviknight", "gmax"), ("orbeetle", "gmax"), ("drednaw", "gmax"), ("coalossal", "gmax"), ("flapple", "gmax"), ("appletun", "gmax"), ("sandaconda", "gmax"), ("toxtricity", "amped-gmax"), ("centiskorch", "gmax"), ("hatterene", "gmax"), ("grimmsnarl", "gmax"), ("alcremie", "gmax"), ("copperajah", "gmax"), ("duraludon", "gmax"), ("eternatus", "eternamax"), ("urshifu", "single-strike-gmax"), ("urshifu", "rapid-strike-gmax"), ("toxtricity", "low-key-gmax");
+
+INSERT INTO matchstatus (`id`, `label`) VALUES
+    (1, "complete"),
+    (2, "incomplete"),
+    (3, "forfeit");
+
+INSERT INTO league (`name`, `admin`) VALUES
+    ("Engineering with Pixelmon S1", "nick_reznee"),
+    ("Engineering with Pixelmon S2", "nick_reznee"),
+    ("PROH World", "nick_reznee");
+
+INSERT INTO coach (`nickname`, `discordName`, `showdownName`) VALUES
+    ("Nick Reznouf", "nick_reznouf", "MyLastMistake"),
+    ("Mike", "mike420", "mike420");
+
+INSERT INTO team (`coachId`, `name`, `acronym`) VALUES
+    (1, "New York Noiverns", "NYN"),
+    (2, "San Antonio Swamperts", "SAS"),
+    (1, "Brooklyn Beedrills", "BrB"),
+    (1, "Sawk 'Em City", "SEC");
+
+INSERT INTO leagueteam (`leagueId`, `teamId`) VALUES
+    (1, 1),
+    (1, 2),
+    (2, 3), 
+    (2, 2), 
+    (3, 4), 
+    (3, 2);
+
+INSERT INTO roster (`leagueId`, `teamId`, `pokeId`) VALUES
+    (1, 1, 41),
+    (1, 1, 693),
+    (1, 1, 213),
+    (1, 1, 207),
+    (1, 1, 705),
+    (1, 1, 997),
+    (1, 1, 987),
+    (1, 1, 786),
+    (1, 1, 220),
+    (1, 1, 620),
+    (1, 1, 743),
+    (1, 2, 916),
+    (1, 2, 194),
+    (1, 2, 401),
+    (1, 2, 458),
+    (1, 2, 442),
+    (1, 2, 424),
+    (1, 2, 961),
+    (1, 2, 219),
+    (1, 2, 238),
+    (1, 2, 60),
+    (1, 2, 131),
+    (2, 3, 789),
+    (2, 3, 74),
+    (2, 3, 1077),
+    (2, 3, 699),
+    (2, 3, 583),
+    (2, 3, 679),
+    (2, 3, 791),
+    (2, 3, 619),
+    (2, 3, 999),
+    (2, 3, 685),
+    (2, 3, 1024),
+    (2, 2, 923),
+    (2, 2, 138),
+    (2, 2, 1061),
+    (2, 2, 9),
+    (2, 2, 442),
+    (2, 2, 570),
+    (2, 2, 527),
+    (2, 2, 509),
+    (2, 2, 743),
+    (2, 2, 511),
+    (2, 2, 728),
+    (3, 4, 855),
+    (3, 4, 153),
+    (3, 4, 286),
+    (3, 4, 143),
+    (3, 4, 221),
+    (3, 4, 28),
+    (3, 4, 123),
+    (3, 4, 363),
+    (3, 4, 250),
+    (3, 4, 824),
+    (3, 4, 564),
+    (3, 2, 860),
+    (3, 2, 37),
+    (3, 2, 472),
+    (3, 2, 583),
+    (3, 2, 999),
+    (3, 2, 531),
+    (3, 2, 527),
+    (3, 2, 893),
+    (3, 2, 836),
+    (3, 2, 780),
+    (3, 2, 731);
+
+INSERT INTO `match` (`id`, `leagueId`, `statusId`, `scheduledWeek`, `dateSubmitted`) VALUES
+    (1, 1, 1, 2, "2020-8-31"),
+    (2, 2, 1, 4, "2020-10-31");
+
+INSERT INTO `matchattendees`(`matchId`, `teamId`, `pokeid`, `directKOs`, `indirectKOs`, `wasKOed`) VALUES
+    (1, 1, 743, 0, 0, 1), 
+    (1, 1, 41, 0, 0, 1), 
+    (1, 1, 997, 0, 0, 1), 
+    (1, 1, 220, 1, 0, 1), 
+    (1, 1, 693, 0, 0, 1), 
+    (1, 1, 987, 1, 0, 1), 
+    (1, 2, 238, 3, 0, 0), 
+    (1, 2, 961, 0, 0, 1), 
+    (1, 2, 194, 1, 0, 1), 
+    (1, 2, 916, 0, 0, 0), 
+    (1, 2, 442, 0, 0, 0), 
+    (1, 2, 60, 2, 0, 0),
+    (2, 3, 923, 1, 0, 0), 
+    (2, 3, 138, 1, 0, 0), 
+    (2, 3, 1061, 2, 0, 0), 
+    (2, 3, 527, 0, 0, 0), 
+    (2, 3, 509, 1, 0, 0), 
+    (2, 3, 570, 1, 0, 1), 
+    (2, 2, 74, 0, 0, 1), 
+    (2, 2, 1024, 0, 0, 1), 
+    (2, 2, 791, 0, 0, 1), 
+    (2, 2, 679, 0, 1, 1), 
+    (2, 2, 131, 0, 0, 1), 
+    (2, 2, 789, 0, 0, 1);
