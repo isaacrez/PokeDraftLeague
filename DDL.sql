@@ -42,11 +42,15 @@ CREATE TABLE `Roster` (
 CREATE TABLE `Match` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `leagueId` INT NOT NULL,
-    `homeTeamId` INT NOT NULL,
-    `awayTeamId` INT NOT NULL,
     `statusId` INT NOT NULL,
     `scheduledWeek` INT NOT NULL, 
     `dateSubmitted` Date DEFAULT(NOW())
+);
+
+CREATE TABLE `MatchTeam` (
+	`matchId` INT NOT NULL,
+    `teamId` INT NOT NULL,
+    PRIMARY KEY(`matchId`, `teamId`)
 );
 
 CREATE TABLE `MatchAttendee` (
@@ -87,15 +91,17 @@ ALTER TABLE `Match`
 	ADD CONSTRAINT `fk_match_leagueId`
 		FOREIGN KEY (`leagueId`)
         REFERENCES `League`(`id`),
-	ADD CONSTRAINT `fk_match_homeTeamId`
-		FOREIGN KEY (`homeTeamID`)
-        REFERENCES `Team`(`id`),
-	ADD CONSTRAINT `fk_match_awayTeamId`
-		FOREIGN KEY (`homeTeamID`)
-        REFERENCES `Team`(`id`),
 	ADD CONSTRAINT `fk_match_statusId`
 		FOREIGN KEY (`statusId`)
         REFERENCES `MatchStatus`(`id`);
+
+ALTER TABLE `MatchTeam`
+	ADD CONSTRAINT `fk_matchTeam_matchId`
+		FOREIGN KEY(`matchId`)
+        REFERENCES `Match`(`id`),
+	ADD CONSTRAINT `fk_matchTeam_teamId`
+		FOREIGN KEY(`teamId`)
+		REFERENCES `Team`(`id`);
 
 ALTER TABLE `MatchAttendee`
 	ADD CONSTRAINT `fk_matchAttendee_matchId`
