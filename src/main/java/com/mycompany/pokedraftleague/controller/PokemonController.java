@@ -20,18 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @author isaacrez
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/pokemon")
 public class PokemonController {
     
     @Autowired
     private final PokemonDao pokemonDao;
     
-    @Autowired
-    private final PokemonResultsDao pokemonResultsDao;
-    
-    public PokemonController (PokemonDao pokemonDao, PokemonResultsDao pokemonResultsDao) {
+    public PokemonController (PokemonDao pokemonDao) {
         this.pokemonDao = pokemonDao;
-        this.pokemonResultsDao = pokemonResultsDao;
+    }
+    
+    @GetMapping("/")
+    public ResponseEntity getPokemon() {
+        return ResponseEntity.ok(pokemonDao.getAllPokemon());
     }
     
     @GetMapping("forms/{pokeName}")
