@@ -30,7 +30,7 @@ public class PokemonController {
         this.pokemonDao = pokemonDao;
     }
     
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity getPokemon() {
         return ResponseEntity.ok(pokemonDao.getAllPokemon());
     }
