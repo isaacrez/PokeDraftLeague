@@ -7,6 +7,7 @@ package com.mycompany.pokedraftleague.data;
 
 import com.mycompany.pokedraftleague.models.Match;
 import com.mycompany.pokedraftleague.models.MatchResults;
+import com.mycompany.pokedraftleague.models.Team;
 import java.util.List;
 
 /**
@@ -16,7 +17,8 @@ import java.util.List;
 public interface MatchDao {
     List<Match> getAllMatches();
     Match getMatchById(int id);
-    MatchResults getMatchResultsById(int id);
+    MatchResults getMatchResultsFor(MatchResults matchResults);
+    List<Team> getTeamsInMatch(int id);
     Match addMatch(Match match);
     void updateMatch(Match match);
     void deleteMatchById(int id);

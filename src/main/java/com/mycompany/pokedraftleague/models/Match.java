@@ -14,46 +14,37 @@ import java.util.Objects;
  */
 public class Match {
     
-    private Team homeTeam;
-    private Lineup homeTeamLineup;
+    private int id;
     
-    private Team awayTeam;
-    private Lineup awayTeamLineup;
+    private Team team;
+    private Lineup teamLineup;
     
     private String status;
     private Date completedOn;
     private int scheduledWeek;
 
-    public Team getHomeTeamName() {
-        return homeTeam;
+    public int getId() {
+        return id;
     }
 
-    public void setHomeTeamName(Team homeTeam) {
-        this.homeTeam = homeTeam;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Lineup getHomeTeamLineup() {
-        return homeTeamLineup;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setHomeTeamLineup(Lineup homeTeamLineup) {
-        this.homeTeamLineup = homeTeamLineup;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
-    public Team getAwayTeamName() {
-        return awayTeam;
+    public Lineup getTeamLineup() {
+        return teamLineup;
     }
 
-    public void setAwayTeamName(Team awayTeam) {
-        this.awayTeam = awayTeam;
-    }
-
-    public Lineup getAwayTeamLineup() {
-        return awayTeamLineup;
-    }
-
-    public void setAwayTeamLineup(Lineup awayTeamLineup) {
-        this.awayTeamLineup = awayTeamLineup;
+    public void setTeamLineup(Lineup teamLineup) {
+        this.teamLineup = teamLineup;
     }
 
     public String getStatus() {
@@ -82,14 +73,13 @@ public class Match {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.homeTeam);
-        hash = 37 * hash + Objects.hashCode(this.homeTeamLineup);
-        hash = 37 * hash + Objects.hashCode(this.awayTeam);
-        hash = 37 * hash + Objects.hashCode(this.awayTeamLineup);
-        hash = 37 * hash + Objects.hashCode(this.status);
-        hash = 37 * hash + Objects.hashCode(this.completedOn);
-        hash = 37 * hash + this.scheduledWeek;
+        int hash = 5;
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.team);
+        hash = 23 * hash + Objects.hashCode(this.teamLineup);
+        hash = 23 * hash + Objects.hashCode(this.status);
+        hash = 23 * hash + Objects.hashCode(this.completedOn);
+        hash = 23 * hash + this.scheduledWeek;
         return hash;
     }
 
@@ -105,22 +95,19 @@ public class Match {
             return false;
         }
         final Match other = (Match) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (this.scheduledWeek != other.scheduledWeek) {
-            return false;
-        }
-        if (!Objects.equals(this.homeTeam, other.homeTeam)) {
-            return false;
-        }
-        if (!Objects.equals(this.awayTeam, other.awayTeam)) {
             return false;
         }
         if (!Objects.equals(this.status, other.status)) {
             return false;
         }
-        if (!Objects.equals(this.homeTeamLineup, other.homeTeamLineup)) {
+        if (!Objects.equals(this.team, other.team)) {
             return false;
         }
-        if (!Objects.equals(this.awayTeamLineup, other.awayTeamLineup)) {
+        if (!Objects.equals(this.teamLineup, other.teamLineup)) {
             return false;
         }
         if (!Objects.equals(this.completedOn, other.completedOn)) {

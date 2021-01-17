@@ -13,40 +13,60 @@ import java.util.Objects;
  */
 public class MatchResults {
     
-    private String winner;
-    private String loser;
-    private int differential;
+    private int matchId;
+    private int teamId;
+    private int directKOs;
+    private int indirectKOs;
+    private int deaths;
 
-    public String getWinner() {
-        return winner;
+    public int getMatchId() {
+        return matchId;
     }
 
-    public void setWinner(String winner) {
-        this.winner = winner;
+    public void setMatchId(int matchId) {
+        this.matchId = matchId;
     }
 
-    public String getLoser() {
-        return loser;
+    public int getTeamId() {
+        return teamId;
     }
 
-    public void setLoser(String loser) {
-        this.loser = loser;
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
-    public int getDifferential() {
-        return differential;
+    public int getDirectKOs() {
+        return directKOs;
     }
 
-    public void setDifferential(int differential) {
-        this.differential = differential;
+    public void setDirectKOs(int directKOs) {
+        this.directKOs = directKOs;
+    }
+
+    public int getIndirectKOs() {
+        return indirectKOs;
+    }
+
+    public void setIndirectKOs(int indirectKOs) {
+        this.indirectKOs = indirectKOs;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.winner);
-        hash = 53 * hash + Objects.hashCode(this.loser);
-        hash = 53 * hash + this.differential;
+        int hash = 5;
+        hash = 97 * hash + this.matchId;
+        hash = 97 * hash + this.teamId;
+        hash = 97 * hash + this.directKOs;
+        hash = 97 * hash + this.indirectKOs;
+        hash = 97 * hash + this.deaths;
         return hash;
     }
 
@@ -62,16 +82,22 @@ public class MatchResults {
             return false;
         }
         final MatchResults other = (MatchResults) obj;
-        if (this.differential != other.differential) {
+        if (this.matchId != other.matchId) {
             return false;
         }
-        if (!Objects.equals(this.winner, other.winner)) {
+        if (this.teamId != other.teamId) {
             return false;
         }
-        if (!Objects.equals(this.loser, other.loser)) {
+        if (this.directKOs != other.directKOs) {
+            return false;
+        }
+        if (this.indirectKOs != other.indirectKOs) {
+            return false;
+        }
+        if (this.deaths != other.deaths) {
             return false;
         }
         return true;
     }
-    
+   
 }
