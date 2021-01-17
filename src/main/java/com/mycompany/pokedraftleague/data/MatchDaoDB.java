@@ -53,8 +53,7 @@ public class MatchDaoDB implements MatchDao {
     public List<Team> getTeamsInMatch(int id) {
         final String GET_TEAMS_FOR_MATCH = "SELECT t.* FROM team AS t "
                 + "JOIN matchteam AS mt ON t.id = mt.teamId "
-                + "JOIN match AS m ON mt.matchId = m.id "
-                + "WHERE m.id = ?";
+                + "WHERE mt.matchId = ?";
         return jdbc.query(GET_TEAMS_FOR_MATCH, new TeamMapper(), id);
     }
     
