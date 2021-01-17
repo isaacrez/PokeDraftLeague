@@ -50,8 +50,13 @@ public class MatchController {
         return ResponseEntity.ok(matchDao.getTeamsInMatch(matchId));
     }
     
+    @GetMapping("/lineup/{matchId}")
+    public ResponseEntity getAllParticipantsIn(@PathVariable int matchId) {
+        return ResponseEntity.ok(pokemonResultsDao.getAllPokemonInMatch(matchId));
+    }
+    
     @GetMapping("/lineup/{matchId}/{teamId}")
     public ResponseEntity getParticipantsIn(@PathVariable int matchId, @PathVariable int teamId) {
-        return ResponseEntity.ok(pokemonResultsDao.getPokemonInMatchFor(matchId, teamId));
+        return ResponseEntity.ok(pokemonResultsDao.getAllPokemonInMatch(matchId));
     }
 }

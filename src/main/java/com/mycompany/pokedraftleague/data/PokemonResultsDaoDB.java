@@ -45,6 +45,17 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
         addPokemonToResults(results);
         return results;
     }
+    
+    @Override
+    public List<PokemonResults> getAllPokemonInMatch(int matchId) {
+        final String GET_ALL_POKEMON_IN_MATCH = "SELECT * FROM matchAttendee "
+                + "WHERE matchId = ?";
+        List<PokemonResults> results = jdbc.query(GET_ALL_POKEMON_IN_MATCH,
+                new PokemonResultsMapper(),
+                matchId);
+        addPokemonToResults(results);
+        return results;
+    }
 
     @Override
     public List<PokemonResults> getPokemonInMatchFor(int matchId, int teamId) {
