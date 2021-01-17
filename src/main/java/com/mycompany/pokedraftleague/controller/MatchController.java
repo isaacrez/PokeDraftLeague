@@ -7,6 +7,7 @@ package com.mycompany.pokedraftleague.controller;
 
 import com.mycompany.pokedraftleague.data.MatchDao;
 import com.mycompany.pokedraftleague.data.MatchResultsDao;
+import com.mycompany.pokedraftleague.data.PokemonResultsDao;
 import com.mycompany.pokedraftleague.models.MatchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +31,13 @@ public class MatchController {
     @Autowired
     private final MatchResultsDao matchResultsDao;
     
-    public MatchController(MatchDao matchDao, MatchResultsDao matchResultsDao) {
+    @Autowired
+    private final PokemonResultsDao pokemonResultsDao;
+    
+    public MatchController(MatchDao matchDao, MatchResultsDao matchResultsDao, PokemonResultsDao pokemonResultsDao) {
         this.matchDao = matchDao;
         this.matchResultsDao = matchResultsDao;
+        this.pokemonResultsDao = pokemonResultsDao;
     }
     
     @GetMapping("/results")
@@ -43,5 +48,10 @@ public class MatchController {
     @GetMapping("/teams/{matchId}")
     public ResponseEntity getTeamsIn(@PathVariable int matchId) {
         return ResponseEntity.ok(matchDao.getTeamsInMatch(matchId));
+    }
+    
+    @GetMapping("/lineup/{matchId}/{teamId}")
+    public ResponseEntity getParticipantsIn(@PathVariable int matchId, @PathVariable int teamId) {
+        return ResponseEntity.ok(pokemonResultsDao.getPokemonInMatchFor(matchId, teamId));
     }
 }

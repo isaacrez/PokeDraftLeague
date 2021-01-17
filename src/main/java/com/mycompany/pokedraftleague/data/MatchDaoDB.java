@@ -69,7 +69,7 @@ public class MatchDaoDB implements MatchDao {
             team.setCoach(coach);
         }
     }
-
+    
     @Override
     public Match addMatch(Match match) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
