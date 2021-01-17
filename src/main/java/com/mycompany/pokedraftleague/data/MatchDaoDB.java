@@ -5,7 +5,9 @@
  */
 package com.mycompany.pokedraftleague.data;
 
+import com.mycompany.pokedraftleague.data.CoachDaoDB.CoachMapper;
 import com.mycompany.pokedraftleague.data.TeamDaoDB.TeamMapper;
+import com.mycompany.pokedraftleague.models.Coach;
 import com.mycompany.pokedraftleague.models.Match;
 import com.mycompany.pokedraftleague.models.MatchResults;
 import com.mycompany.pokedraftleague.models.Team;
@@ -54,7 +56,20 @@ public class MatchDaoDB implements MatchDao {
         final String GET_TEAMS_FOR_MATCH = "SELECT t.* FROM team AS t "
                 + "JOIN matchteam AS mt ON t.id = mt.teamId "
                 + "WHERE mt.matchId = ?";
-        return jdbc.query(GET_TEAMS_FOR_MATCH, new TeamMapper(), id);
+        List<Team> teams = jdbc.query(GET_TEAMS_FOR_MATCH, new TeamMapper(), id);
+        addCoachToTeams(teams);
+        return teams;
+    }
+    
+    private void addCoachToTeams(List<Team> teams) {
+        final String GET_COACH_FOR_TEAM = "SELECT c.* FROM coach AS c "
+                + "JOIN team AS t ON t.coachId = c.id "
+                + "WHERE t.id = ?";
+        
+        for (Team team : teams) {
+            Coach coach = jdbc.queryForObject(GET_COACH_FOR_TEAM, new CoachMapper(), team.getId());
+            team.setCoach(coach);
+        }
     }
     
     @Override
