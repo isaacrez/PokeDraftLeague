@@ -83,6 +83,7 @@ public class PokemonDaoDB implements PokemonDao {
         @Override
         public Pokemon mapRow(ResultSet rs, int index) throws SQLException {
             Pokemon pokemon = new Pokemon();
+            pokemon.setId(rs.getInt("id"));
             pokemon.setName(rs.getString("name"));
             pokemon.setForm(rs.getString("form"));
             return pokemon;

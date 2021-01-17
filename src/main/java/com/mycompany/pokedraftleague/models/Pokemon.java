@@ -13,8 +13,17 @@ import java.util.Objects;
  */
 public class Pokemon {
     
+    private int id;
     private String name;
     private String form;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -42,9 +51,10 @@ public class Pokemon {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.name);
-        hash = 37 * hash + Objects.hashCode(this.form);
+        int hash = 5;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.form);
         return hash;
     }
 
@@ -60,6 +70,9 @@ public class Pokemon {
             return false;
         }
         final Pokemon other = (Pokemon) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
