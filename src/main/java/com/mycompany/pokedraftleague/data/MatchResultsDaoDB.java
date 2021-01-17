@@ -5,16 +5,9 @@
  */
 package com.mycompany.pokedraftleague.data;
 
-import com.mycompany.pokedraftleague.data.CoachDaoDB.CoachMapper;
-import com.mycompany.pokedraftleague.data.TeamDaoDB.TeamMapper;
-import com.mycompany.pokedraftleague.models.Coach;
-import com.mycompany.pokedraftleague.models.Match;
 import com.mycompany.pokedraftleague.models.MatchResults;
-import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

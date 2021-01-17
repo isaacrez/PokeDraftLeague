@@ -6,7 +6,6 @@
 package com.mycompany.pokedraftleague.data;
 
 import com.mycompany.pokedraftleague.models.Match;
-import com.mycompany.pokedraftleague.models.MatchResults;
 import com.mycompany.pokedraftleague.models.Team;
 import java.util.List;
 
