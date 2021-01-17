@@ -6,6 +6,7 @@
 package com.mycompany.pokedraftleague.models;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -16,8 +17,8 @@ public class Match {
     
     private int id;
     
-    private Team team;
-    private Lineup teamLineup;
+    private List<Team> teams;
+    private List<PokemonResults> pokemonParticipants;
     
     private String status;
     private Date completedOn;
@@ -31,20 +32,20 @@ public class Match {
         this.id = id;
     }
 
-    public Team getTeam() {
-        return team;
+    public List<Team> getTeams() {
+        return teams;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
-    public Lineup getTeamLineup() {
-        return teamLineup;
+    public List<PokemonResults> getPokemonParticipants() {
+        return pokemonParticipants;
     }
 
-    public void setTeamLineup(Lineup teamLineup) {
-        this.teamLineup = teamLineup;
+    public void setPokemonParticipants(List<PokemonResults> pokemonParticipants) {
+        this.pokemonParticipants = pokemonParticipants;
     }
 
     public String getStatus() {
@@ -73,13 +74,13 @@ public class Match {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + this.id;
-        hash = 23 * hash + Objects.hashCode(this.team);
-        hash = 23 * hash + Objects.hashCode(this.teamLineup);
-        hash = 23 * hash + Objects.hashCode(this.status);
-        hash = 23 * hash + Objects.hashCode(this.completedOn);
-        hash = 23 * hash + this.scheduledWeek;
+        int hash = 3;
+        hash = 13 * hash + this.id;
+        hash = 13 * hash + Objects.hashCode(this.teams);
+        hash = 13 * hash + Objects.hashCode(this.pokemonParticipants);
+        hash = 13 * hash + Objects.hashCode(this.status);
+        hash = 13 * hash + Objects.hashCode(this.completedOn);
+        hash = 13 * hash + this.scheduledWeek;
         return hash;
     }
 
@@ -104,10 +105,10 @@ public class Match {
         if (!Objects.equals(this.status, other.status)) {
             return false;
         }
-        if (!Objects.equals(this.team, other.team)) {
+        if (!Objects.equals(this.teams, other.teams)) {
             return false;
         }
-        if (!Objects.equals(this.teamLineup, other.teamLineup)) {
+        if (!Objects.equals(this.pokemonParticipants, other.pokemonParticipants)) {
             return false;
         }
         if (!Objects.equals(this.completedOn, other.completedOn)) {
