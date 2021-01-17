@@ -6,9 +6,7 @@
 package com.mycompany.pokedraftleague.controller;
 
 import com.mycompany.pokedraftleague.data.PokemonDao;
-import com.mycompany.pokedraftleague.data.PokemonResultsDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
