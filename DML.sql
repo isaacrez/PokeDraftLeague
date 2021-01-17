@@ -21,8 +21,8 @@ INSERT INTO league (`name`, `admin`) VALUES
     ("PROH World", "nick_reznee");
 
 INSERT INTO coach (`nickname`, `discordName`, `showdownName`) VALUES
-    ("Nick Reznouf", "nick_reznouf", "MyLastMistake"),
-    ("Mike", "mike420", "mike420");
+    ("Nick Reznee", "nick_reznee", "MyFirstMistake"),
+    ("Mike", "mike30452", "mike30452");
 
 INSERT INTO team (`coachId`, `name`, `acronym`) VALUES
     (1, "New York Noiverns", "NYN"),
@@ -107,10 +107,16 @@ INSERT INTO roster (`leagueId`, `teamId`, `pokeId`) VALUES
     (3, 2, 731);
 
 INSERT INTO `match` (`id`, `leagueId`, `statusId`, `scheduledWeek`, `dateSubmitted`) VALUES
-    (1, 1, 1, 2, "2020-8-31"),
+	(1, 1, 1, 2, "2020-8-31"),
     (2, 2, 1, 4, "2020-10-31");
+    
+INSERT INTO `matchteam` (`matchId`, `teamId`) VALUES
+    (1, 1),
+    (1, 2),
+    (2, 2),
+    (2, 3);
 
-INSERT INTO `matchattendees`(`matchId`, `teamId`, `pokeid`, `directKOs`, `indirectKOs`, `wasKOed`) VALUES
+INSERT INTO `matchattendee`(`matchId`, `teamId`, `pokeid`, `directKOs`, `indirectKOs`, `wasKOed`) VALUES
     (1, 1, 743, 0, 0, 1), 
     (1, 1, 41, 0, 0, 1), 
     (1, 1, 997, 0, 0, 1), 
