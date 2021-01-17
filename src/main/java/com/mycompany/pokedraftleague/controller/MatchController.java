@@ -6,6 +6,7 @@
 package com.mycompany.pokedraftleague.controller;
 
 import com.mycompany.pokedraftleague.data.MatchDao;
+import com.mycompany.pokedraftleague.data.MatchResultsDao;
 import com.mycompany.pokedraftleague.models.MatchResults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +27,17 @@ public class MatchController {
     @Autowired
     private final MatchDao matchDao;
     
-    public MatchController(MatchDao matchDao) {
+    @Autowired
+    private final MatchResultsDao matchResultsDao;
+    
+    public MatchController(MatchDao matchDao, MatchResultsDao matchResultsDao) {
         this.matchDao = matchDao;
+        this.matchResultsDao = matchResultsDao;
     }
     
     @GetMapping("/results")
     public ResponseEntity getMatchResultsFor(@RequestBody MatchResults matchResults) {
-        return ResponseEntity.ok(matchDao.getMatchResultsFor(matchResults));
+        return ResponseEntity.ok(matchResultsDao.getMatchResultsFor(matchResults));
     }
     
     @GetMapping("/teams/{matchId}")

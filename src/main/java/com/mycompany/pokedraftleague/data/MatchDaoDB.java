@@ -71,23 +71,6 @@ public class MatchDaoDB implements MatchDao {
             team.setCoach(coach);
         }
     }
-    
-    @Override
-    public MatchResults getMatchResultsFor(MatchResults matchResults) {
-        try {
-            final String GET_STATS = "SELECT matchId, teamId, "
-                    + "SUM(directKOs), SUM(indirectKOs), SUM(wasKOed) "
-                    + "FROM matchattendee "
-                    + "WHERE matchId = ? AND teamId = ?";
-            
-            return jdbc.queryForObject(GET_STATS,
-                    new MatchResultsMapper(),
-                    matchResults.getMatchId(),
-                    matchResults.getTeamId());
-        } catch (DataAccessException e) {
-            return null;
-        }
-    }
 
     @Override
     public Match addMatch(Match match) {
@@ -102,19 +85,6 @@ public class MatchDaoDB implements MatchDao {
     @Override
     public void deleteMatchById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public static final class MatchResultsMapper implements RowMapper<MatchResults> {
-        @Override
-        public MatchResults mapRow(ResultSet rs, int index) throws SQLException {
-            MatchResults results = new MatchResults();
-            results.setMatchId(rs.getInt("matchId"));
-            results.setTeamId(rs.getInt("teamId"));
-            results.setDirectKOs(rs.getInt("SUM(directKOs)"));
-            results.setIndirectKOs(rs.getInt("SUM(indirectKOs)"));
-            results.setDeaths(rs.getInt("SUM(wasKOed)"));
-            return results;
-        }
     }
     
     public static final class MatchMapper implements RowMapper<Match> {
