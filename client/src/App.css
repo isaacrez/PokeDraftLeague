@@ -1,7 +1,15 @@
 body {
-  color: white;
+  color: #FBC6CA;
   background-color: #434343;
   min-height: 100vh;
+}
+
+h1 {
+  color: #F57A84;
+}
+
+Header {
+  margin-bottom: 10px;
 }
 
 nav {
