@@ -118,7 +118,9 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
     }
     
     private Pokemon getPokemonForResults(PokemonResults pokemonResults) {
-        return getPokemonForResults(pokemonResults.getId());
+        final String GET_POKE_ID = "SELECT pokeId FROM matchAttendee WHERE id = ?";
+        int pokeId = jdbc.queryForObject(GET_POKE_ID, Integer.class, pokemonResults.getId());
+        return getPokemonForResults(pokeId);
     }
     
     private Pokemon getPokemonForResults(int pokeId) {
