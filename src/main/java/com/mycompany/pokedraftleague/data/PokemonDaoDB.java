@@ -53,6 +53,14 @@ public class PokemonDaoDB implements PokemonDao {
         final String GET_FORMS_FOR = "SELECT * FROM pokemon WHERE name = ?";
         return jdbc.query(GET_FORMS_FOR, new PokemonMapper(), name);
     }
+    
+    @Override
+    public List<Pokemon> getPokemonOn(int teamId, int leagueId) {
+        final String GET_TEAM_FOR = "SELECT p.* FROM pokemon AS p "
+                + "JOIN roster AS r ON r.pokeId = p.id "
+                + "WHERE r.teamId = ? AND r.leagueId = ?";
+        return jdbc.query(GET_TEAM_FOR, new PokemonMapper(), teamId, leagueId);
+    }
 
     @Override
     public Pokemon getPokemonWithStatsFrom(int pokeId, Match match) {

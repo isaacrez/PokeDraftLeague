@@ -38,4 +38,9 @@ public class PokemonController {
         return ResponseEntity.ok(pokemonDao.getFormsFor(pokeName));
     }
     
+    @GetMapping("team/{teamId}/{leagueId}")
+    public ResponseEntity getPokemonOn(@PathVariable int teamId, @PathVariable int leagueId) {
+        return ResponseEntity.ok(pokemonDao.getPokemonOn(teamId, leagueId));
+    }
+    
 }

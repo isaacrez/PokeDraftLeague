@@ -18,6 +18,7 @@ public interface PokemonDao {
     List<Pokemon> getAllPokemon();
     Pokemon getPokemonById(int id);
     List<Pokemon> getFormsFor(String name);
+    List<Pokemon> getPokemonOn(int teamId, int leagueId);
     Pokemon getPokemonWithStatsFrom(int pokeId, Match match);
     Pokemon getPokemonWithStatsFrom(int pokeId, League league);
     Pokemon addPokemon(Pokemon pokemon);
