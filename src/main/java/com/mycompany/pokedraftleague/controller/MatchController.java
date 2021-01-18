@@ -9,7 +9,9 @@ import com.mycompany.pokedraftleague.data.MatchDao;
 import com.mycompany.pokedraftleague.data.MatchResultsDao;
 import com.mycompany.pokedraftleague.data.PokemonResultsDao;
 import com.mycompany.pokedraftleague.models.MatchResults;
+import com.mycompany.pokedraftleague.models.PokemonResults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +45,18 @@ public class MatchController {
     @GetMapping("/results")
     public ResponseEntity getMatchResultsFor(@RequestBody MatchResults matchResults) {
         return ResponseEntity.ok(matchResultsDao.getMatchResultsFor(matchResults));
+    }
+    
+    @GetMapping("/results/{pokeId}/{teamId}/{leagueId}")
+    public ResponseEntity getPokeStatsOnTeamForLeague(@PathVariable int pokeId, 
+            @PathVariable int teamId,
+            @PathVariable int leagueId) {
+        PokemonResults results = pokemonResultsDao.getResultsFor(pokeId, teamId, leagueId);
+        if (results == null) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        } else {
+            return ResponseEntity.ok(results);
+        }
     }
     
     @GetMapping("/teams/{matchId}")
