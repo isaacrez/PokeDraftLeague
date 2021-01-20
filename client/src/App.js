@@ -10,7 +10,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header league={league}/>
+      <Header
+        league={league}
+        setLeague={setLeague}/>
       {mainContent}
     </div>
   );

@@ -37,3 +37,13 @@ nav button:hover {
   background-color: #434343;
   text-decoration: none;
 }
+
+.select-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.select-wrapper select {
+  padding: 5px;
+  border-radius: 5px;
+}
