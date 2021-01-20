@@ -1,17 +1,17 @@
 import React from '../../node_modules/react';
 
-function Header() {
+function Header(props) {
     return (
         <header className="header">
             <nav>
-                <a href="#">Home</a>
-                <a href="#">Leaderboard</a>
-                <a href="#">Schedule</a>
-                <a href="#">Team Summary</a>
-                <a href="#">Match Results</a>
-                <a href="#">Pokémon</a>
+                <button>Home</button>
+                <button>Leaderboard</button>
+                <button>Schedule</button>
+                <button>Team Summary</button>
+                <button>Match Results</button>
+                <button>Pokémon</button>
             </nav>
-            <h1 className="text-center">PokéDraft League</h1>
+            <h1 className="text-center">{props.league} League</h1>
         </header>
     )
 }

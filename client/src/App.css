@@ -22,15 +22,17 @@ nav {
   border-bottom: #666666 solid 3px;
 }
 
-nav a {
+nav button {
   text-align: center;
   color:  #2589BD;
+  background-color: rgba(0,0,0,0);
+  border: none;
   font-size: calc(10px + 1vmin);
-  min-width: 100px;
+  width: 100%;
   padding: 10px;
 }
 
-nav a:hover {
+nav button:hover {
   color: #61dafb;
   background-color: #434343;
   text-decoration: none;
