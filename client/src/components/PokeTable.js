@@ -1,14 +1,19 @@
 import React from 'react';
 
 function PokeTable() {
-    const [tableData, setTableData] = React.useState(null);
+    const [tableData, setTableData] = React.useState([]);
 
     React.useEffect(() => {
-        let url = "https://pokeapi.co/api/v2/pokemon/regigigas";
-        fetch(url, {type: 'GET'})
-            .then((response) => response.json())
-            .then((pokemon) => setTableData(pokemon))
-            .catch((error) => console.log(error));
+        setTableData([]);
+
+        let pokemon = ["bulbasaur", "regigigas", "ditto"];
+        pokemon.forEach(poke => {
+            let url = "https://pokeapi.co/api/v2/pokemon/" + poke;
+            fetch(url, {type: 'GET'})
+                .then((response) => response.json())
+                .then((pokeData) => setTableData(tableData => [...tableData, pokeData]))
+                .catch((error) => console.log(error));
+        })
     }, [])
 
     return (
@@ -25,16 +30,21 @@ function PokeTable() {
                     <th>Spe</th>
                 </thead>
                 <tbody>
-                    {generateTableEntry(tableData)}
+                    {generateTable(tableData)}
                 </tbody>
             </table>
         </div>
     );
 }
 
+function generateTable(tableData) {
+    let formattedTable = [];
+    tableData.forEach(data => formattedTable.push(generateTableEntry(data)));
+    return formattedTable;
+}
+
 function generateTableEntry(data) {
-    return data === null ? null : 
-    (
+    return (
         <tr>
             <td className="align-middle"><img src={data.sprites.front_default} /></td>
             <td className="align-middle">{capitalize(data.name)}</td>
