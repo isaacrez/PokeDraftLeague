@@ -2,11 +2,16 @@ import React from 'react';
 
 function PokeTable() {
     const [tableData, setTableData] = React.useState([]);
+    const [page, setPage] = React.useState(0);
+    const [pageSize, setPageSize] = React.useState(25);
 
     React.useEffect(() => {
         setTableData([]);
+        fetchPokeData();
+    }, [page]);
 
-        let listPokemonUrl = "https://pokeapi.co/api/v2/pokemon?limit=50&offset=0";
+    function fetchPokeData() {
+        let listPokemonUrl = "https://pokeapi.co/api/v2/pokemon?limit=" + pageSize + "&offset=" + page * pageSize;
         fetch(listPokemonUrl, {type: "GET"})
             .then(response => response.json())
             .then(data => {
@@ -19,7 +24,7 @@ function PokeTable() {
                 })
             })
             .catch(error => console.log(error));
-    }, [])
+    }
 
     function generateTable(tableData) {
         let formattedTable = [];
