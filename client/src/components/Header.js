@@ -13,11 +13,13 @@ function Header(props) {
             </nav>
             <h1 className="text-center">{props.league} League</h1>
             <div className="select-wrapper">
-                <select onChange={(e) => {changeLeague(e, props.setLeague)}}>
-                    <option selected>Select a league</option>
-                    <option>Engineering with Pixelmon S1</option>
-                    <option>Engineering with Pixelmon S2</option>
-                    <option>PROH World</option>
+                <select
+                    onChange={(e) => {changeLeague(e, props.setLeague)}}
+                    defaultValue="">
+                    <option value="">Select a league</option>
+                    <option value="1">Engineering with Pixelmon S1</option>
+                    <option value="2">Engineering with Pixelmon S2</option>
+                    <option value="3">PROH World</option>
                 </select>
             </div>
         </header>
