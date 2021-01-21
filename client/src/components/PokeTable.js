@@ -6,14 +6,19 @@ function PokeTable() {
     React.useEffect(() => {
         setTableData([]);
 
-        let pokemon = ["bulbasaur", "regigigas", "ditto"];
-        pokemon.forEach(poke => {
-            let url = "https://pokeapi.co/api/v2/pokemon/" + poke;
-            fetch(url, {type: 'GET'})
-                .then((response) => response.json())
-                .then((pokeData) => setTableData(tableData => [...tableData, pokeData]))
-                .catch((error) => console.log(error));
-        })
+        let listPokemonUrl = "https://pokeapi.co/api/v2/pokemon?limit=50&offset=0";
+        fetch(listPokemonUrl, {type: "GET"})
+            .then(response => response.json())
+            .then(data => {
+                data.results.forEach(pokemon => {
+                    let statsUrl = pokemon.url;
+                    fetch(statsUrl, {type: "GET"})
+                        .then(response => response.json())
+                        .then(pokeData => setTableData(tableData => [...tableData, pokeData]))
+                        .catch(error => console.log(error));
+                })
+            })
+            .catch(error => console.log(error));
     }, [])
 
     return (
