@@ -1,6 +1,11 @@
 import React from '../../node_modules/react';
 
 function Header(props) {
+
+    React.useEffect(() => {
+
+    }, [])
+
     return (
         <header>
             <nav>
@@ -17,9 +22,9 @@ function Header(props) {
                     onChange={(e) => {changeLeague(e, props.setLeague)}}
                     defaultValue="">
                     <option value="">Select a league</option>
-                    <option value="1">Engineering with Pixelmon S1</option>
-                    <option value="2">Engineering with Pixelmon S2</option>
-                    <option value="3">PROH World</option>
+                    <option>Engineering with Pixelmon S1</option>
+                    <option>Engineering with Pixelmon S2</option>
+                    <option>PROH World</option>
                 </select>
             </div>
         </header>
