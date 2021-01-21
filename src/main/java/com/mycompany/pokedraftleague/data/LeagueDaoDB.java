@@ -30,7 +30,8 @@ public class LeagueDaoDB implements LeagueDao {
 
     @Override
     public List<League> getAllLeagues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String GET_ALL_LEAGUES = "SELECT * FROM league";
+        return jdbc.query(GET_ALL_LEAGUES, new LeagueMapper());
     }
 
     @Override
@@ -58,6 +59,7 @@ public class LeagueDaoDB implements LeagueDao {
         public League mapRow(ResultSet rs, int index) throws SQLException {
             League league = new League();
             league.setName(rs.getString("name"));
+            league.setAdmin(rs.getString("admin"));
             return league;
         }
     }

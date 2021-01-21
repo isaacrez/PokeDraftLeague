@@ -5,7 +5,6 @@
  */
 package com.mycompany.pokedraftleague.models;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,8 +14,7 @@ import java.util.Objects;
 public class League {
     
     private String name;
-    private List<Match> matches;
-    private List<Team> teams;
+    private String admin;
 
     public String getName() {
         return name;
@@ -26,28 +24,19 @@ public class League {
         this.name = name;
     }
 
-    public List<Match> getMatches() {
-        return matches;
+    public String getAdmin() {
+        return admin;
     }
 
-    public void setMatches(List<Match> matches) {
-        this.matches = matches;
-    }
-
-    public List<Team> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 19 * hash + Objects.hashCode(this.name);
-        hash = 19 * hash + Objects.hashCode(this.matches);
-        hash = 19 * hash + Objects.hashCode(this.teams);
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + Objects.hashCode(this.admin);
         return hash;
     }
 
@@ -66,10 +55,7 @@ public class League {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.matches, other.matches)) {
-            return false;
-        }
-        if (!Objects.equals(this.teams, other.teams)) {
+        if (!Objects.equals(this.admin, other.admin)) {
             return false;
         }
         return true;
