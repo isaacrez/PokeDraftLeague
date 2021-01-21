@@ -46,7 +46,7 @@ function generateTable(tableData) {
 function generateTableEntry(data) {
     return (
         <tr>
-            <td className="align-middle"><img src={data.sprites.front_default} /></td>
+            <td className="align-middle"><img src={data.sprites.front_default} alt={"Image of a " + data.name} /></td>
             <td className="align-middle">{capitalize(data.name)}</td>
             <td className="align-middle">{data.stats[0].base_stat}</td>
             <td className="align-middle">{data.stats[1].base_stat}</td>
