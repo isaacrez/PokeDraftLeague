@@ -20,14 +20,16 @@ function PokeTable() {
         <div>
             <table className="table table-secondary table-striped table-hover">
                 <thead className="thead-dark">
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>HP</th>
-                    <th>Atk</th>
-                    <th>Def</th>
-                    <th>SpAtk</th>
-                    <th>SpDef</th>
-                    <th>Spe</th>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>HP</th>
+                        <th>Atk</th>
+                        <th>Def</th>
+                        <th>SpAtk</th>
+                        <th>SpDef</th>
+                        <th>Spe</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {generateTable(tableData)}
