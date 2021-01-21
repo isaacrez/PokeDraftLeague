@@ -2,8 +2,14 @@ import React from '../../node_modules/react';
 
 function Header(props) {
 
-    React.useEffect(() => {
+    const [allLeagues, setAllLeagues] = React.useState([]);
 
+    React.useEffect(() => {
+        let url = "http://localhost:8080/api/league";
+        fetch(url, {type: "GET"})
+            .then(response => response.json())
+            .then(leagueData => setAllLeagues(leagueData))
+            .catch((error) => console.log(error));
     }, [])
 
     return (
@@ -22,9 +28,7 @@ function Header(props) {
                     onChange={(e) => {changeLeague(e, props.setLeague)}}
                     defaultValue="">
                     <option value="">Select a league</option>
-                    <option>Engineering with Pixelmon S1</option>
-                    <option>Engineering with Pixelmon S2</option>
-                    <option>PROH World</option>
+                    {createOptions(allLeagues)}
                 </select>
             </div>
         </header>
@@ -35,6 +39,12 @@ function changeLeague(e, setLeague) {
     if (e.target.value !== "Select a league") {
         setLeague(e.target.value);
     }
+}
+
+function createOptions(optionData) {
+    let options = [];
+    optionData.forEach(data => options.push(<option>{data.name}</option>));
+    return options;
 }
 
 export default Header;
