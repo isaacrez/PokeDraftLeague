@@ -12,6 +12,18 @@ function Header(props) {
             .catch((error) => console.log(error));
     }, [])
 
+    function createOptions(optionData) {
+        let options = [];
+        optionData.forEach(data => options.push(<option>{data.name}</option>));
+        return options;
+    }
+
+    function changeLeague(e, setLeague) {
+        if (e.target.value !== "Select a league") {
+            setLeague(e.target.value);
+        }
+    }
+    
     return (
         <header>
             <nav>
@@ -35,16 +47,5 @@ function Header(props) {
     )
 }
 
-function changeLeague(e, setLeague) {
-    if (e.target.value !== "Select a league") {
-        setLeague(e.target.value);
-    }
-}
-
-function createOptions(optionData) {
-    let options = [];
-    optionData.forEach(data => options.push(<option>{data.name}</option>));
-    return options;
-}
 
 export default Header;

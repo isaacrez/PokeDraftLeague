@@ -21,6 +21,31 @@ function PokeTable() {
             .catch(error => console.log(error));
     }, [])
 
+    function generateTable(tableData) {
+        let formattedTable = [];
+        tableData.forEach(data => formattedTable.push(generateTableEntry(data)));
+        return formattedTable;
+    }
+    
+    function generateTableEntry(data) {
+        return (
+            <tr>
+                <td className="align-middle"><img src={data.sprites.front_default} alt={"Image of a " + data.name} /></td>
+                <td className="align-middle">{capitalize(data.name)}</td>
+                <td className="align-middle">{data.stats[0].base_stat}</td>
+                <td className="align-middle">{data.stats[1].base_stat}</td>
+                <td className="align-middle">{data.stats[2].base_stat}</td>
+                <td className="align-middle">{data.stats[3].base_stat}</td>
+                <td className="align-middle">{data.stats[4].base_stat}</td>
+                <td className="align-middle">{data.stats[5].base_stat}</td>
+            </tr>
+        )
+    }
+    
+    function capitalize(string) {
+        return string.replace(/^\w/, (c) => c.toUpperCase());
+    }
+
     return (
         <div>
             <table className="table table-secondary table-striped table-hover">
@@ -42,31 +67,6 @@ function PokeTable() {
             </table>
         </div>
     );
-}
-
-function generateTable(tableData) {
-    let formattedTable = [];
-    tableData.forEach(data => formattedTable.push(generateTableEntry(data)));
-    return formattedTable;
-}
-
-function generateTableEntry(data) {
-    return (
-        <tr>
-            <td className="align-middle"><img src={data.sprites.front_default} alt={"Image of a " + data.name} /></td>
-            <td className="align-middle">{capitalize(data.name)}</td>
-            <td className="align-middle">{data.stats[0].base_stat}</td>
-            <td className="align-middle">{data.stats[1].base_stat}</td>
-            <td className="align-middle">{data.stats[2].base_stat}</td>
-            <td className="align-middle">{data.stats[3].base_stat}</td>
-            <td className="align-middle">{data.stats[4].base_stat}</td>
-            <td className="align-middle">{data.stats[5].base_stat}</td>
-        </tr>
-    )
-}
-
-function capitalize(string) {
-    return string.replace(/^\w/, (c) => c.toUpperCase());
 }
 
 export default PokeTable;
