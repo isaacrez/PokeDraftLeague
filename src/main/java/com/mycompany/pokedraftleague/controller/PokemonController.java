@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author isaacrez
  */
 @RestController
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/pokemon")
 public class PokemonController {
     
