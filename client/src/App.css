@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 body {
-  color: #FBC6CA;
+  color:  #77BEE4;
   background-color: #434343;
   height: 100%;
 }
@@ -11,7 +13,8 @@ body {
 }
 
 h1 {
-  color: #F57A84;
+  color:  #2589BD;
+  font-family: Lobster;
 }
 
 nav {
@@ -26,7 +29,7 @@ nav {
 
 nav button {
   text-align: center;
-  color:  #2589BD;
+  color:  #77BEE4;
   background-color: rgba(0,0,0,0);
   border: none;
   font-size: calc(10px + 1vmin);
@@ -46,8 +49,14 @@ nav button:hover {
 }
 
 .select-wrapper select {
-  padding: 5px;
-  border-radius: 5px;
+  background-color: #434343;
+  border: #666666 solid 2px;
+  color: white;
+
+  padding: 15px;
+  margin: 20px 0px;
+  border-radius: 15px;
+  font-size: 16pt;
 }
 
 .icon {
@@ -65,4 +74,8 @@ nav button:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.full-stripe p {
+  margin: 0;
 }
