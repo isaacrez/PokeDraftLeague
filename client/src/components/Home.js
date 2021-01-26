@@ -20,7 +20,7 @@ function Home(props) {
     return(
         <div className="full-stripe">
             <h1>Welcome!</h1>
-            
+
             <p>
                 To get started, select your league from
                 the dropdown menu below
@@ -39,6 +39,8 @@ function Home(props) {
                 Then, access relevant information about 
                 your league using the tabs above
             </p>
+
+            <div className="h-25"></div>
         </div>
     )
 }

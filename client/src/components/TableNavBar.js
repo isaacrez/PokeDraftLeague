@@ -6,7 +6,7 @@ function TableNavBar(props) {
     const totalPages = Math.ceil(totalPokeCount / props.pageSize);
 
     return(
-        <div className="d-flex justify-content-between align-items-center my-3">
+        <div className="d-flex justify-content-between align-items-center w-100">
             <div>
                 <p className="mb-0">Page {props.page} of {totalPages}</p>
             </div>

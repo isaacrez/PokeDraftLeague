@@ -59,7 +59,7 @@ function PokeTable() {
     }
 
     return (
-        <div className="mx-3">
+        <div className="full-stripe">
             <table className="table table-secondary table-striped table-hover">
                 <thead className="thead-dark">
                     <tr>
