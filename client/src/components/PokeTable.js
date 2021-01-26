@@ -1,5 +1,5 @@
 import React from 'react';
-import ArrowNavBar from './ArrowNavBar';
+import TableNavBar from './TableNavBar';
 
 function PokeTable() {
     const totalPokeCount = 1118;
@@ -83,23 +83,11 @@ function PokeTable() {
                     {generateTable(tableData)}
                 </tbody>
             </table>
-            <div className="d-flex justify-content-between align-items-center my-3">
-                <div>
-                    <p className="mb-0">Page {page} of {totalPages}</p>
-                </div>
-
-                <ArrowNavBar setPage={setPage} />
-                
-                <div className="d-flex">
-                    <p className="mb-0">Entries per page</p>
-                    <select className="ml-3"
-                        onClick={e => {setPageSize(e.target.value)}}>
-                        <option>5</option>
-                        <option>10</option>
-                        <option>25</option>
-                    </select>
-                </div>
-            </div>
+            <TableNavBar 
+                setPage={setPage}
+                setPageSize={setPageSize}
+                page={page}
+                totalPages={totalPages} />
         </div>
     );
 }
