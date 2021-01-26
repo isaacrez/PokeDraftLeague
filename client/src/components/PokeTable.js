@@ -76,10 +76,14 @@ function PokeTable() {
                 </div>
 
                 <div>
-                    <button className="btn btn-secondary"
+                    <button className="btn btn-secondary mx-1"
+                        onClick={() => (setPage(page - 5))}>&#x00AB;</button>
+                    <button className="btn btn-secondary mx-1"
                         onClick={() => (setPage(page - 1))}>←</button>
-                    <button className="btn btn-secondary"
+                    <button className="btn btn-secondary mx-1"
                         onClick={() => (setPage(page + 1))}>→</button>
+                    <button className="btn btn-secondary mx-1"
+                        onClick={() => (setPage(page + 5))}>&#x00BB;</button>
                 </div>
                 
                 <div className="d-flex">
