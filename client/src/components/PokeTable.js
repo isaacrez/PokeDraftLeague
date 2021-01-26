@@ -34,6 +34,7 @@ function PokeTable() {
 
     function generateTable(tableData) {
         let formattedTable = [];
+        tableData.sort((a, b) => {return a.id - b.id});
         tableData.forEach(data => formattedTable.push(generateTableEntry(data)));
         return formattedTable;
     }
