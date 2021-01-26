@@ -1,4 +1,5 @@
 import React from '../../node_modules/react';
+import PokeTable from './PokeTable';
 
 function Header(props) {
 
@@ -27,12 +28,12 @@ function Header(props) {
     return (
         <header>
             <nav>
-                <button>Home</button>
-                <button>Leaderboard</button>
-                <button>Schedule</button>
-                <button>Team Summary</button>
-                <button>Match Results</button>
-                <button>Pokémon</button>
+                <button onClick={() => props.setMainContent(<h2>Home!</h2>)}>Home</button>
+                <button onClick={() => props.setMainContent(<h2>Leaderboard!</h2>)}>Leaderboard</button>
+                <button onClick={() => props.setMainContent(<h2>Schedule!</h2>)}>Schedule</button>
+                <button onClick={() => props.setMainContent(<h2>Team Summary!</h2>)}>Team Summary</button>
+                <button onClick={() => props.setMainContent(<h2>Matches!</h2>)}>Match Results</button>
+                <button onClick={() => props.setMainContent(<PokeTable />)}>Pokémon</button>
             </nav>
             <h1 className="text-center">{props.league} League</h1>
             <div className="select-wrapper">

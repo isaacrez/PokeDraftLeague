@@ -12,7 +12,8 @@ function App() {
     <div className="App">
       <Header
         league={league}
-        setLeague={setLeague}/>
+        setLeague={setLeague}
+        setMainContent={setMainContent} />
       {mainContent}
     </div>
   );
