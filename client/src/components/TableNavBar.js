@@ -2,10 +2,13 @@ import React from 'react';
 import ArrowNavBar from './ArrowNavBar';
 
 function TableNavBar(props) {
+    const totalPokeCount = 1118;
+    const totalPages = Math.ceil(totalPokeCount / props.pageSize);
+
     return(
         <div className="d-flex justify-content-between align-items-center my-3">
             <div>
-                <p className="mb-0">Page {props.page} of {props.totalPages}</p>
+                <p className="mb-0">Page {props.page} of {totalPages}</p>
             </div>
 
             <ArrowNavBar setPage={props.setPage} />

@@ -2,15 +2,9 @@ import React from 'react';
 import TableNavBar from './TableNavBar';
 
 function PokeTable() {
-    const totalPokeCount = 1118;
     const [tableData, setTableData] = React.useState([]);
     const [page, setPage] = React.useState(1);
     const [pageSize, setPageSize] = React.useState(5);
-    const [totalPages, setTotalPages] = React.useState(Math.ceil(totalPokeCount / pageSize));
-
-    React.useEffect(() => {
-        setTotalPages(Math.ceil(totalPokeCount / pageSize))
-    }, [pageSize])
 
     React.useEffect(() => {
         setTableData([]);
@@ -83,11 +77,12 @@ function PokeTable() {
                     {generateTable(tableData)}
                 </tbody>
             </table>
+            
             <TableNavBar 
                 setPage={setPage}
-                setPageSize={setPageSize}
                 page={page}
-                totalPages={totalPages} />
+                setPageSize={setPageSize}
+                pageSize={pageSize} />
         </div>
     );
 }
