@@ -47,3 +47,7 @@ nav button:hover {
   padding: 5px;
   border-radius: 5px;
 }
+
+.icon {
+  max-width: 50px;
+}
