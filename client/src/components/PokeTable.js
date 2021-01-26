@@ -83,7 +83,7 @@ function PokeTable() {
                     {generateTable(tableData)}
                 </tbody>
             </table>
-            <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex justify-content-between align-items-center my-3">
                 <div>
                     <p className="mb-0">Page {page} of {totalPages}</p>
                 </div>
