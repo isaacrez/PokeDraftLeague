@@ -2,8 +2,9 @@ import React from 'react';
 
 function PokeTable() {
     const [tableData, setTableData] = React.useState([]);
-    const [page, setPage] = React.useState(0);
+    const [page, setPage] = React.useState(1);
     const [pageSize, setPageSize] = React.useState(5);
+    const [totalPages, setTotalPages] = React.useState(Math.ceil(1184 / pageSize));
 
     React.useEffect(() => {
         setTableData([]);
@@ -11,7 +12,7 @@ function PokeTable() {
     }, [page]);
 
     function fetchPokeData() {
-        let listPokemonUrl = "https://pokeapi.co/api/v2/pokemon?limit=" + pageSize + "&offset=" + page * pageSize;
+        let listPokemonUrl = "https://pokeapi.co/api/v2/pokemon?limit=" + pageSize + "&offset=" + (page - 1) * pageSize;
         fetch(listPokemonUrl, {type: "GET"})
             .then(response => response.json())
             .then(data => {
@@ -72,7 +73,7 @@ function PokeTable() {
             </table>
             <div className="d-flex justify-content-between align-items-center">
                 <div>
-                    <p className="mb-0">Page x / y</p>
+                    <p className="mb-0">Page {page} of {totalPages}</p>
                 </div>
 
                 <div>
