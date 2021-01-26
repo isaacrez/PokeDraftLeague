@@ -3,7 +3,7 @@ import React from 'react';
 function PokeTable() {
     const [tableData, setTableData] = React.useState([]);
     const [page, setPage] = React.useState(0);
-    const [pageSize, setPageSize] = React.useState(25);
+    const [pageSize, setPageSize] = React.useState(5);
 
     React.useEffect(() => {
         setTableData([]);
@@ -52,7 +52,7 @@ function PokeTable() {
     }
 
     return (
-        <div>
+        <div className="mx-3">
             <table className="table table-secondary table-striped table-hover">
                 <thead className="thead-dark">
                     <tr>
@@ -70,6 +70,27 @@ function PokeTable() {
                     {generateTable(tableData)}
                 </tbody>
             </table>
+            <div className="d-flex justify-content-between align-items-center">
+                <div>
+                    <p className="mb-0">Page x / y</p>
+                </div>
+
+                <div>
+                    <button className="btn btn-secondary"
+                        onClick={() => (setPage(page - 1))}>←</button>
+                    <button className="btn btn-secondary"
+                        onClick={() => (setPage(page + 1))}>→</button>
+                </div>
+                
+                <div className="d-flex">
+                    <p className="mb-0">Entries per page</p>
+                    <select className="ml-3">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>25</option>
+                    </select>
+                </div>
+            </div>
         </div>
     );
 }
