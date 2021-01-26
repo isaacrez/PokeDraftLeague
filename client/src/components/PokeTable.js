@@ -1,15 +1,20 @@
 import React from 'react';
 
 function PokeTable() {
+    const totalPokeCount = 1118;
     const [tableData, setTableData] = React.useState([]);
     const [page, setPage] = React.useState(1);
     const [pageSize, setPageSize] = React.useState(5);
-    const [totalPages, setTotalPages] = React.useState(Math.ceil(1184 / pageSize));
+    const [totalPages, setTotalPages] = React.useState(Math.ceil(totalPokeCount / pageSize));
+
+    React.useEffect(() => {
+        setTotalPages(Math.ceil(totalPokeCount / pageSize))
+    }, [pageSize])
 
     React.useEffect(() => {
         setTableData([]);
         fetchPokeData();
-    }, [page]);
+    }, [page, pageSize]);
 
     function fetchPokeData() {
         let listPokemonUrl = "https://pokeapi.co/api/v2/pokemon?limit=" + pageSize + "&offset=" + (page - 1) * pageSize;
@@ -89,7 +94,8 @@ function PokeTable() {
                 
                 <div className="d-flex">
                     <p className="mb-0">Entries per page</p>
-                    <select className="ml-3">
+                    <select className="ml-3"
+                        onClick={e => {setPageSize(e.target.value)}}>
                         <option>5</option>
                         <option>10</option>
                         <option>25</option>
