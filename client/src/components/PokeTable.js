@@ -1,4 +1,5 @@
 import React from 'react';
+import ArrowNavBar from './ArrowNavBar';
 
 function PokeTable() {
     const totalPokeCount = 1118;
@@ -82,16 +83,7 @@ function PokeTable() {
                     <p className="mb-0">Page {page} of {totalPages}</p>
                 </div>
 
-                <div>
-                    <button className="btn btn-secondary mx-1"
-                        onClick={() => (setPage(page - 5))}>&#x00AB;</button>
-                    <button className="btn btn-secondary mx-1"
-                        onClick={() => (setPage(page - 1))}>←</button>
-                    <button className="btn btn-secondary mx-1"
-                        onClick={() => (setPage(page + 1))}>→</button>
-                    <button className="btn btn-secondary mx-1"
-                        onClick={() => (setPage(page + 5))}>&#x00BB;</button>
-                </div>
+                <ArrowNavBar setPage={setPage} />
                 
                 <div className="d-flex">
                     <p className="mb-0">Entries per page</p>
