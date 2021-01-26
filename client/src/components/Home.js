@@ -18,8 +18,9 @@ function Home(props) {
     }
 
     return(
-        <div className="text-center">
-            <h2>Welcome!</h2>
+        <div className="full-stripe">
+            <h1>Welcome!</h1>
+            
             <p>
                 To get started, select your league from
                 the dropdown menu below
