@@ -1,4 +1,6 @@
 import React from 'react';
+import TableHeader from './TableHeader';
+import TableBody from './TableBody';
 
 function PokeTable(props) {
     const [tableData, setTableData] = React.useState([]);
@@ -29,81 +31,16 @@ function PokeTable(props) {
             .catch(error => console.log(error));
     }
 
-    function generateHeader() {
-        const extensions = {
-            "Base Stats": [
-                <th>HP</th>,
-                <th>Atk</th>,
-                <th>Def</th>,
-                <th>SpAtk</th>,
-                <th>SpDef</th>,
-                <th>Spe</th>
-            ]
-        }
-
-        return (
-            <tr>
-                <th>Pokémon</th>
-                {props.display["Base Stats"] ? extensions["Base Stats"] : null}
-            </tr>
-        )
-    }
-
-    function generateTable(tableData) {
-        let formattedTable = [];
-        tableData.sort((a, b) => {return a.id - b.id});
-        tableData.forEach(data => formattedTable.push(generateTableEntry(data)));
-        return formattedTable;
-    }
-
-    function generateTableEntry(data) {
-        return (
-            <tr key={data.id}>
-                {addLabel(data)}
-                {props.display["Base Stats"] ? addStats(data) : null}
-            </tr>
-        )
-    }
-
-    function addLabel(data) {
-        return (
-            <td className="d-flex flex-column justify-content-center align-items-center"
-                key={data.id}>
-                <img
-                    src={data.sprites.other["official-artwork"].front_default}
-                    className="icon"
-                    alt={"Image of a " + data.name} />
-                <p>{capitalize(data.name)}</p>
-            </td>
-        )
-    }
-
-    function addStats(data) {
-        let columns = [];
-        data.stats.forEach((stat, index) => 
-            columns.push(
-                <td className="align-middle"
-                    key={data.id + "" + index}>
-                    {stat.base_stat}
-                </td>
-            )
-        );
-        return columns;
-    }
-    
-    function capitalize(string) {
-        return string.replace(/^\w/, (c) => c.toUpperCase());
-    }
-
     return (
         <div className="scrollable-table">
             <table className="table table-secondary table-striped table-hover mb-0">
                 <thead className="thead-dark">
-                    {generateHeader()}
+                    <TableHeader 
+                        display={props.display} />
                 </thead>
-                <tbody>
-                    {generateTable(tableData)}
-                </tbody>
+                <TableBody 
+                    display={props.display}
+                    tableData={tableData} />
             </table>                
         </div>
     );
