@@ -2,15 +2,21 @@ import React from '../../node_modules/react';
 
 function ArrowNavBar(props) {
 
+    React.useEffect(() => {
+        updatePage(0)
+    }, [props.page.size]);
+
     function updatePage(shift) {
-        props.setPage(page => {
+        props.page.setCurrent(page => {
             page += shift;
 
-            if (page <= 0) {
-                page += props.maxPages;
-            } else if (props.maxPages < page) {
-                page -= props.maxPages;
-            }
+            page = page <= 0 ?
+                    props.page.max + page % props.page.max : 
+                props.page.max < page ? 
+                    page % props.page.max : 
+                    page;
+
+            page = page > 0 ? page : 1;
             
             return page;
         })
