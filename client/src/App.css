@@ -89,7 +89,6 @@ nav button:hover {
 }
 
 .scrollable-table {
-  height: 100%;
   max-height: 84vh;
   width: 100%;
   overflow: hidden;
