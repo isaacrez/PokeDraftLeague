@@ -48,11 +48,13 @@ nav button:hover {
   justify-content: center;
 }
 
-.select-wrapper select {
+.select-wrapper input {
   background-color: #434343;
   border: #666666 solid 2px;
   color: white;
 
+  width: 100vw;
+  max-width: 400px;
   padding: 15px;
   margin: 20px 0px;
   border-radius: 15px;

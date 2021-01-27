@@ -7,14 +7,23 @@ function Home(props) {
         let url = "http://localhost:8080/api/league";
         fetch(url, {type: "GET"})
             .then(response => response.json())
+            .then(response => response.map(obj => obj.name))
             .then(leagueData => setAllLeagues(leagueData))
             .catch((error) => console.log(error));
     }, [])
 
     function createOptions(optionData) {
         let options = [];
-        optionData.forEach(data => options.push(<option>{data.name}</option>));
+        optionData.forEach(data => options.push(<option>{data}</option>));
         return options;
+    }
+
+    function updateLeague(input) {
+        console.log(input + " is a league: " + allLeagues.includes(input));
+        console.log(allLeagues);
+        if (allLeagues.includes(input)) {
+            props.setLeague(input);
+        }
     }
 
     return(
@@ -27,12 +36,13 @@ function Home(props) {
             </p>
 
             <div className="select-wrapper">
-                <select
-                    onChange={(e) => {props.setLeague(e.target.value)}}
-                    defaultValue="">
-                    <option value="">Select a league</option>
+                <input
+                    list="leagues" 
+                    onChange={(e) => {updateLeague(e.target.value)}}
+                    />
+                <datalist id="leagues">
                     {createOptions(allLeagues)}
-                </select>
+                </datalist>
             </div>
 
             <p>
