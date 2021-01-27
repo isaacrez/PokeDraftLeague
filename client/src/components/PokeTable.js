@@ -1,18 +1,15 @@
 import React from 'react';
-import TableNavBar from './TableNavBar';
 
-function PokeTable() {
+function PokeTable(props) {
     const [tableData, setTableData] = React.useState([]);
-    const [page, setPage] = React.useState(1);
-    const [pageSize, setPageSize] = React.useState(5);
 
     React.useEffect(() => {
         setTableData([]);
         fetchPokeData();
-    }, [page, pageSize]);
+    }, [props.page, props.pageSize]);
 
     function fetchPokeData() {
-        let listPokemonUrl = "https://pokeapi.co/api/v2/pokemon?limit=" + pageSize + "&offset=" + (page - 1) * pageSize;
+        let listPokemonUrl = "https://pokeapi.co/api/v2/pokemon?limit=" + props.pageSize + "&offset=" + (props.page - 1) * props.pageSize;
         fetch(listPokemonUrl, {type: "GET"})
             .then(response => response.json())
             .then(data => {
@@ -33,7 +30,7 @@ function PokeTable() {
         tableData.forEach(data => formattedTable.push(generateTableEntry(data)));
         return formattedTable;
     }
-    
+
     function generateTableEntry(data) {
         return (
             <tr key={data.id}>
@@ -59,32 +56,24 @@ function PokeTable() {
     }
 
     return (
-        <div className="full-stripe">
-            <div className="scrollable-table">
-                <table className="table table-secondary table-striped table-hover mb-0">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>HP</th>
-                            <th>Atk</th>
-                            <th>Def</th>
-                            <th>SpAtk</th>
-                            <th>SpDef</th>
-                            <th>Spe</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {generateTable(tableData)}
-                    </tbody>
-                </table>                
-            </div>
-
-            <TableNavBar 
-                setPage={setPage}
-                page={page}
-                setPageSize={setPageSize}
-                pageSize={pageSize} />
+        <div className="scrollable-table">
+            <table className="table table-secondary table-striped table-hover mb-0">
+                <thead className="thead-dark">
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>HP</th>
+                        <th>Atk</th>
+                        <th>Def</th>
+                        <th>SpAtk</th>
+                        <th>SpDef</th>
+                        <th>Spe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {generateTable(tableData)}
+                </tbody>
+            </table>                
         </div>
     );
 }

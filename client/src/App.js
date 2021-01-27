@@ -2,7 +2,7 @@ import React from '../node_modules/react';
 
 import Header from './components/Header';
 import Home from './components/Home';
-import PokeTable from './components/PokeTable';
+import Pokemon from './components/Pokemon';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
@@ -14,7 +14,7 @@ function App() {
 
   let stringToContent = {
     "Home": <Home setLeague={setLeague}/>,
-    "Pokémon": <PokeTable />
+    "Pokémon": <Pokemon />
   }
 
   return (
