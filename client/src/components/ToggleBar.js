@@ -29,10 +29,6 @@ function ToggleBar(props) {
     return (
         <form className="w-100 d-flex justify-content-between align-items-center mb-2">
             {generateSwitches()}
-            <button className="btn btn-secondary h-75"
-                type="button">
-                {props.btnLabel}
-            </button>
         </form>
     )
 }
