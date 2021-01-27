@@ -1,6 +1,6 @@
 import React from 'react';
 import ToggleBar from './ToggleBar';
-import SearchBar from './SearchBar';
+import PokeSearchBar from './PokeSearchBar';
 import PokeTable from './PokeTable';
 import TableNavBar from './TableNavBar';
 
@@ -13,14 +13,6 @@ function Pokemon() {
         "Abilities": false,
         "League Stats": false
     });
-
-    const [pokemon, setPokemon] = React.useState([]);
-    React.useEffect(() => {
-        fetch("http://localhost:8080/api/pokemon", {type: "GET"})
-            .then(response => response.json())
-            .then(data => data.map(e => e.urlID))
-            .then(pokemonNames => setPokemon(pokemonNames));
-    }, [])
 
     const pageInfo = {
         current: page,
@@ -36,8 +28,7 @@ function Pokemon() {
                 setState={setOnDisplay}
                 btnLabel="Display" />
 
-            <SearchBar 
-                options={pokemon}/>
+            <PokeSearchBar />
 
             <PokeTable 
                 page={pageInfo} />
