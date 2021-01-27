@@ -96,3 +96,25 @@ nav button:hover {
   overflow-y: auto;
   margin-bottom: 10px;
 }
+
+.scrollable-table thead th {
+  position: sticky;
+  top: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #282828;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #666666;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #77BEE4;
+}
