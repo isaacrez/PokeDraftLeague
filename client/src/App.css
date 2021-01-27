@@ -118,6 +118,10 @@ nav button:hover {
   background: #77bee477;
 }
 
+label {
+  margin: 0;
+}
+
 .switch {
   position: relative;
   display: inline-block;
