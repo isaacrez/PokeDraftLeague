@@ -18,7 +18,6 @@ function Home(props) {
                 your league using the tabs above
             </p>
 
-            <div className="h-25"></div>
         </div>
     )
 }
