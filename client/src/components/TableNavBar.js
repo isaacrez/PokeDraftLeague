@@ -11,7 +11,9 @@ function TableNavBar(props) {
                 <p className="mb-0">Page {props.page} of {totalPages}</p>
             </div>
 
-            <ArrowNavBar setPage={props.setPage} />
+            <ArrowNavBar
+                setPage={props.setPage}
+                maxPages={totalPages} />
             
             <div className="d-flex minor-dropdown">
                 <p className="mb-0">Entries per page</p>
