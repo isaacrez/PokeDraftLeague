@@ -89,7 +89,7 @@ nav button:hover {
 }
 
 .scrollable-table {
-  max-height: 84vh;
+  max-height: 70vh;
   width: 100%;
   overflow: hidden;
   overflow-y: auto;
@@ -98,7 +98,7 @@ nav button:hover {
 
 .scrollable-table thead th {
   position: sticky;
-  top: 0;
+  top: -1px;
 }
 
 ::-webkit-scrollbar {
