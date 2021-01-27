@@ -1,15 +1,25 @@
 import React from '../../node_modules/react';
 
 function Header(props) {
+
+    const options = ["Home", "Leaderboard", "Schedule", "Team Summary", "Matches", "Pokémon"];
+
+    function makeButtons() {
+        let buttons = [];
+        options.forEach(option => 
+            buttons.push(
+                <button onClick={() => props.setMainContent(option)}>
+                    {option}
+                </button>
+            )    
+        )
+        return buttons;
+    }
+
     return (
         <header>
             <nav>
-                <button onClick={() => props.setMainContent("Home")}>Home</button>
-                <button onClick={() => props.setMainContent("Leaderboard")}>Leaderboard</button>
-                <button onClick={() => props.setMainContent("Schedule")}>Schedule</button>
-                <button onClick={() => props.setMainContent("TeamSummary")}>Team Summary</button>
-                <button onClick={() => props.setMainContent("Matches")}>Match Results</button>
-                <button onClick={() => props.setMainContent("PokeTable")}>Pokémon</button>
+                {makeButtons()}
             </nav>
         </header>
     )
