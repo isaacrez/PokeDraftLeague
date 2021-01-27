@@ -43,6 +43,10 @@ nav button:hover {
   text-decoration: none;
 }
 
+input:focus, button:focus {
+  outline: none;
+}
+
 .select-wrapper {
   display: flex;
   justify-content: center;
