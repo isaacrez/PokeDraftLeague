@@ -12,7 +12,8 @@ function Pokemon() {
         let types = ["Base Stats", "Typing", "Abilities", "League Stats"];
 
         types.forEach(type => switches.push(
-            <div className="d-flex flex-column align-items-center">
+            <div className="d-flex flex-column align-items-center"
+                key={type}>
                 <ToggleButton for={type} />
                 <label htmlFor={type}>{type}</label>
             </div>

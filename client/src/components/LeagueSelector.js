@@ -14,7 +14,7 @@ function LeagueSelector(props) {
 
     function createOptions(optionData) {
         let options = [];
-        optionData.forEach(data => options.push(<option>{data}</option>));
+        optionData.forEach(data => options.push(<option key={data}>{data}</option>));
         return options;
     }
 

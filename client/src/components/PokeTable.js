@@ -42,7 +42,8 @@ function PokeTable(props) {
 
     function addLabel(data) {
         return (
-            <td className="d-flex flex-column justify-content-center align-items-center">
+            <td className="d-flex flex-column justify-content-center align-items-center"
+                key={data.id}>
                 <img
                     src={data.sprites.other["official-artwork"].front_default}
                     className="icon"
@@ -54,8 +55,13 @@ function PokeTable(props) {
 
     function addStats(data) {
         let columns = [];
-        data.stats.forEach(stat => 
-            columns.push(<td className="align-middle">{stat.base_stat}</td>)
+        data.stats.forEach((stat, index) => 
+            columns.push(
+                <td className="align-middle"
+                    key={data.id + "" + index}>
+                    {stat.base_stat}
+                </td>
+            )
         );
         return columns;
     }

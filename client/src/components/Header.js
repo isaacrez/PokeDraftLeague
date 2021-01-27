@@ -8,7 +8,8 @@ function Header(props) {
         let buttons = [];
         options.forEach(option => 
             buttons.push(
-                <button onClick={() => props.setMainContent(option)}>
+                <button onClick={() => props.setMainContent(option)}
+                    key={option}>
                     {option}
                 </button>
             )    
