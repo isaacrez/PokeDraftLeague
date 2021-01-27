@@ -60,24 +60,26 @@ function PokeTable() {
 
     return (
         <div className="full-stripe">
-            <table className="table table-secondary table-striped table-hover">
-                <thead className="thead-dark">
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>HP</th>
-                        <th>Atk</th>
-                        <th>Def</th>
-                        <th>SpAtk</th>
-                        <th>SpDef</th>
-                        <th>Spe</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {generateTable(tableData)}
-                </tbody>
-            </table>
-            
+            <div className="scrollable-table">
+                <table className="table table-secondary table-striped table-hover mb-0">
+                    <thead className="thead-dark">
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>HP</th>
+                            <th>Atk</th>
+                            <th>Def</th>
+                            <th>SpAtk</th>
+                            <th>SpDef</th>
+                            <th>Spe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {generateTable(tableData)}
+                    </tbody>
+                </table>                
+            </div>
+
             <TableNavBar 
                 setPage={setPage}
                 page={page}
