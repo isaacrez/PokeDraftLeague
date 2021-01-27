@@ -1,7 +1,8 @@
 import React from 'react';
-import TableNavBar from './TableNavBar';
-import PokeTable from './PokeTable';
 import ToggleBar from './ToggleBar';
+import SearchBar from './SearchBar';
+import PokeTable from './PokeTable';
+import TableNavBar from './TableNavBar';
 
 function Pokemon() {
     const [page, setPage] = React.useState(1);
@@ -26,6 +27,8 @@ function Pokemon() {
                 state={onDisplay} 
                 setState={setOnDisplay}
                 btnLabel="Display" />
+
+            <SearchBar />
 
             <PokeTable 
                 page={pageInfo} />
