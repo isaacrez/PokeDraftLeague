@@ -14,6 +14,14 @@ function Pokemon() {
         "League Stats": false
     });
 
+    const [pokemon, setPokemon] = React.useState([]);
+    React.useEffect(() => {
+        fetch("http://localhost:8080/api/pokemon", {type: "GET"})
+            .then(response => response.json())
+            .then(data => data.map(e => e.urlID))
+            .then(pokemonNames => setPokemon(pokemonNames));
+    }, [])
+
     const pageInfo = {
         current: page,
         size: pageSize,
@@ -28,7 +36,8 @@ function Pokemon() {
                 setState={setOnDisplay}
                 btnLabel="Display" />
 
-            <SearchBar />
+            <SearchBar 
+                options={pokemon}/>
 
             <PokeTable 
                 page={pageInfo} />
