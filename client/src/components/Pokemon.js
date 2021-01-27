@@ -25,10 +25,12 @@ function Pokemon() {
                 pageSize={pageSize} />
 
             <TableNavBar 
-                setPage={setPage}
-                page={page}
-                setPageSize={setPageSize}
-                pageSize={pageSize} />
+                page={{
+                    current: page,
+                    setCurrent: setPage,
+                    size: pageSize,
+                    setSize: setPageSize
+                }} />
         </div>
     );
 }
