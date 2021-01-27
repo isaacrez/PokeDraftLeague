@@ -29,6 +29,26 @@ function PokeTable(props) {
             .catch(error => console.log(error));
     }
 
+    function generateHeader() {
+        const extensions = {
+            "Base Stats": [
+                <th>HP</th>,
+                <th>Atk</th>,
+                <th>Def</th>,
+                <th>SpAtk</th>,
+                <th>SpDef</th>,
+                <th>Spe</th>
+            ]
+        }
+
+        return (
+            <tr>
+                <th>Pokémon</th>
+                {props.display["Base Stats"] ? extensions["Base Stats"] : null}
+            </tr>
+        )
+    }
+
     function generateTable(tableData) {
         let formattedTable = [];
         tableData.sort((a, b) => {return a.id - b.id});
@@ -40,7 +60,7 @@ function PokeTable(props) {
         return (
             <tr key={data.id}>
                 {addLabel(data)}
-                {addStats(data)}
+                {props.display["Base Stats"] ? addStats(data) : null}
             </tr>
         )
     }
@@ -79,15 +99,7 @@ function PokeTable(props) {
         <div className="scrollable-table">
             <table className="table table-secondary table-striped table-hover mb-0">
                 <thead className="thead-dark">
-                    <tr>
-                        <th>Pokémon</th>
-                        <th>HP</th>
-                        <th>Atk</th>
-                        <th>Def</th>
-                        <th>SpAtk</th>
-                        <th>SpDef</th>
-                        <th>Spe</th>
-                    </tr>
+                    {generateHeader()}
                 </thead>
                 <tbody>
                     {generateTable(tableData)}

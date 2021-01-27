@@ -31,7 +31,8 @@ function Pokemon() {
             <PokeSearchBar />
 
             <PokeTable 
-                page={pageInfo} />
+                page={pageInfo}
+                display={onDisplay} />
 
             <TableNavBar 
                 page={pageInfo} />
