@@ -6,19 +6,34 @@ import ToggleButton from './ToggleButton';
 function Pokemon() {
     const [page, setPage] = React.useState(1);
     const [pageSize, setPageSize] = React.useState(5);
+    const [onDisplay, setOnDisplay] = React.useState({
+        "Base Stats": true,
+        "Typing": false,
+        "Abilities": false,
+        "League Stats": false
+    });
+
+    function updateDisplay(key, val) {
+        setOnDisplay(prevState => {
+            let newState = {...prevState}
+            newState[key] = val;
+            return newState;
+        });
+    }
 
     function generateSwitches() {
         let switches = [];
-        let types = ["Base Stats", "Typing", "Abilities", "League Stats"];
-
-        types.forEach(type => switches.push(
-            <div className="d-flex flex-column align-items-center"
-                key={type}>
-                <ToggleButton for={type} />
-                <label htmlFor={type}>{type}</label>
-            </div>
-        ))
-
+        for (let label in onDisplay) {
+            switches.push(
+                <div className="d-flex flex-column align-items-center"
+                    key={label}>
+                    <ToggleButton for={label}
+                        checked={onDisplay[label]}
+                        toggle={(val) => updateDisplay(label, val)} />
+                    <label htmlFor={label}>{label}</label>
+                </div>
+            )
+        }
         return switches;
     }
 
