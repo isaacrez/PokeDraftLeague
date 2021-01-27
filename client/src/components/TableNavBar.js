@@ -22,6 +22,7 @@ function TableNavBar(props) {
                     <option>5</option>
                     <option>10</option>
                     <option>25</option>
+                    <option>50</option>
                 </select>
             </div>
         </div>
