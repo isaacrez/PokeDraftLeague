@@ -189,9 +189,13 @@ input:checked + .slider:before {
 }
 
 .search-bar input {
+  color: white;
+  background-color: #434343;
+  border: #666666 solid 2px;
+  border-right: 0px;
+
   padding: 3px 15px;
   width: 90%;
-  border: 0px;
   border-radius: 50px 0 0 50px;
 }
 
@@ -201,7 +205,7 @@ input:checked + .slider:before {
 
   font-size: 14pt;
 
-  border: 0px;
+  border: 0;
   border-radius: 0 10px 10px 0;
   padding: 5px 10px;
 }
