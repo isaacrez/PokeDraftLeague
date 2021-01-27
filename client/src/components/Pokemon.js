@@ -13,6 +13,13 @@ function Pokemon() {
         "League Stats": false
     });
 
+    const pageInfo = {
+        current: page,
+        size: pageSize,
+        setCurrent: setPage,
+        setSize: setPageSize
+    }
+
     return (
         <div className="full-stripe">
             <ToggleBar 
@@ -21,16 +28,10 @@ function Pokemon() {
                 btnLabel="Display" />
 
             <PokeTable 
-                page={page}
-                pageSize={pageSize} />
+                page={pageInfo} />
 
             <TableNavBar 
-                page={{
-                    current: page,
-                    setCurrent: setPage,
-                    size: pageSize,
-                    setSize: setPageSize
-                }} />
+                page={pageInfo} />
         </div>
     );
 }

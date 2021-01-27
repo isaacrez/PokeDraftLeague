@@ -6,10 +6,15 @@ function PokeTable(props) {
     React.useEffect(() => {
         setTableData([]);
         fetchPokeData();
-    }, [props.page, props.pageSize]);
+    }, [props.page]);
+
+    function buildUrl() {
+        return "https://pokeapi.co/api/v2/pokemon?limit=" + props.page.size
+         + "&offset=" + (props.page.current - 1) * props.page.size
+    }
 
     function fetchPokeData() {
-        let listPokemonUrl = "https://pokeapi.co/api/v2/pokemon?limit=" + props.pageSize + "&offset=" + (props.page - 1) * props.pageSize;
+        let listPokemonUrl = buildUrl();
         fetch(listPokemonUrl, {type: "GET"})
             .then(response => response.json())
             .then(data => {
