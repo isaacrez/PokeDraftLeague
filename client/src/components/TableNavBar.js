@@ -13,7 +13,7 @@ function TableNavBar(props) {
 
             <ArrowNavBar setPage={props.setPage} />
             
-            <div className="d-flex">
+            <div className="d-flex minor-dropdown">
                 <p className="mb-0">Entries per page</p>
                 <select className="ml-3"
                     onClick={e => {props.setPageSize(e.target.value)}}>

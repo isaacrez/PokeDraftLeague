@@ -61,6 +61,13 @@ nav button:hover {
   font-size: 16pt;
 }
 
+.minor-dropdown select {
+  background-color: #434343;
+  border: #666666 solid 2px;
+  border-radius: 5px;
+  color: white;
+}
+
 .icon {
   max-width: 50px;
 }
