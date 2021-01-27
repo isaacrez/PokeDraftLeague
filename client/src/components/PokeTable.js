@@ -34,21 +34,30 @@ function PokeTable(props) {
     function generateTableEntry(data) {
         return (
             <tr key={data.id}>
-                <td className="align-middle">
-                    <img
-                        src={data.sprites.other["official-artwork"].front_default}
-                        className="icon"
-                        alt={"Image of a " + data.name} />
-                </td>
-                <td className="align-middle">{capitalize(data.name)}</td>
-                <td className="align-middle">{data.stats[0].base_stat}</td>
-                <td className="align-middle">{data.stats[1].base_stat}</td>
-                <td className="align-middle">{data.stats[2].base_stat}</td>
-                <td className="align-middle">{data.stats[3].base_stat}</td>
-                <td className="align-middle">{data.stats[4].base_stat}</td>
-                <td className="align-middle">{data.stats[5].base_stat}</td>
+                {addLabel(data)}
+                {addStats(data)}
             </tr>
         )
+    }
+
+    function addLabel(data) {
+        return (
+            <td className="d-flex flex-column justify-content-center align-items-center">
+                <img
+                    src={data.sprites.other["official-artwork"].front_default}
+                    className="icon"
+                    alt={"Image of a " + data.name} />
+                <p>{capitalize(data.name)}</p>
+            </td>
+        )
+    }
+
+    function addStats(data) {
+        let columns = [];
+        data.stats.forEach(stat => 
+            columns.push(<td className="align-middle">{stat.base_stat}</td>)
+        );
+        return columns;
     }
     
     function capitalize(string) {
@@ -60,8 +69,7 @@ function PokeTable(props) {
             <table className="table table-secondary table-striped table-hover mb-0">
                 <thead className="thead-dark">
                     <tr>
-                        <th>Image</th>
-                        <th>Name</th>
+                        <th>Pokémon</th>
                         <th>HP</th>
                         <th>Atk</th>
                         <th>Def</th>
