@@ -59,7 +59,7 @@ function TableBody(props) {
         data.types.forEach(typeHolder => columns.push(
             <td className="align-middle"
                 key={data.id  + "-"+ typeHolder.type.name}>
-                {typeHolder.type.name}
+                <img src={"https://www.serebii.net/pokedex-bw/type/" + typeHolder.type.name + ".gif"} />
             </td>)
         );
 
