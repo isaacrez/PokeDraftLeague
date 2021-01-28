@@ -13,6 +13,9 @@ function TableHeader(props) {
         ],
         "Typing": [
             <th key="type" colSpan="2">Type</th>
+        ],
+        "Abilities": [
+            <th key="abilities" colSpan="4">Abilities</th>
         ]
     };
 

@@ -13,7 +13,8 @@ function TableBody(props) {
         let columns = [];
         const mapping = {
             "Base Stats": addStats,
-            "Typing": addTyping
+            "Typing": addTyping,
+            "Abilities": addAbilities
         }
 
         for (let label in mapping) {
@@ -56,19 +57,37 @@ function TableBody(props) {
 
     function addTyping(data) {
         let columns = [];
-        data.types.forEach(typeHolder => columns.push(
-            <td className="align-middle"
-                key={data.id  + "-"+ typeHolder.type.name}>
-                <img src={"https://www.serebii.net/pokedex-bw/type/" + typeHolder.type.name + ".gif"} />
+        data.types.forEach(typeObj => columns.push(
+            <td key={data.id  + "-"+ typeObj.type.name}>
+                <img src={"https://www.serebii.net/pokedex-bw/type/" + typeObj.type.name + ".gif"} />
             </td>)
         );
 
         columns.length == 1 && columns.push(<td key={data.id + "-none"} />)
         return columns;
     }
+
+    function addAbilities(data) {
+        let columns = [];
+        data.abilities.forEach(abilityObj =>
+            columns.push(
+            <td key={data.id + abilityObj.ability.name}>
+                {cleanAbility(abilityObj.ability.name)}
+            </td>)
+        )
+
+        while (columns.length < 4) {
+            columns.push(<td key={data.id + "-none" + columns.length} />)
+        } 
+        return columns;
+    }
+
+    function cleanAbility(string) {
+        return capitalize(string.replace('-', ' '));
+    }
     
     function capitalize(string) {
-        return string.replace(/^\w/, (c) => c.toUpperCase());
+        return string.replace(/(\b[a-z](?!\s))/g, (c) => c.toUpperCase());
     }
 
     return (
