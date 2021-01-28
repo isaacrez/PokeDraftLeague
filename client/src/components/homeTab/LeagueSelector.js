@@ -1,4 +1,4 @@
-import React from '../../node_modules/react';
+import React from 'react';
 
 function LeagueSelector(props) {
     const [allLeagues, setAllLeagues] = React.useState([]);

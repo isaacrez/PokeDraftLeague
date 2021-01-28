@@ -1,8 +1,8 @@
-import React from '../node_modules/react';
+import React from 'react';
 
-import Header from './components/Header';
-import Home from './components/Home';
-import Pokemon from './components/Pokemon';
+import Header from './components/general/Header';
+import Home from './components/homeTab/Home';
+import Pokemon from './components/pokemonTab/Pokemon';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';

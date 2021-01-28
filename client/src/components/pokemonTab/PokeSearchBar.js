@@ -1,5 +1,5 @@
-import React from '../../node_modules/react';
-import SearchBar from './SearchBar';
+import React from 'react';
+import SearchBar from '../general/SearchBar';
 
 function PokeSearchBar() {
     const [pokemon, setPokemon] = React.useState([]);
