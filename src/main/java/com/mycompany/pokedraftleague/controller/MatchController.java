@@ -48,6 +48,12 @@ public class MatchController {
         return ResponseEntity.ok(matchResultsDao.getMatchResultsFor(matchResults));
     }
     
+    @GetMapping("/results/{pokeId}/{leagueId}")
+    public ResponseEntity getPokeStatsForLeague(@PathVariable int pokeId,
+            @PathVariable int leagueId) {
+        return ResponseEntity.ok(pokemonResultsDao.getResultsFor(pokeId, leagueId));
+    }
+    
     @GetMapping("/results/{pokeId}/{teamId}/{leagueId}")
     public ResponseEntity getPokeStatsOnTeamForLeague(@PathVariable int pokeId, 
             @PathVariable int teamId,

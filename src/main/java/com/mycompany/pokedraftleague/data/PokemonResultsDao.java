@@ -17,6 +17,7 @@ public interface PokemonResultsDao {
     List<PokemonResults> getAllResultsForTeam(int teamId);
     List<PokemonResults> getAllPokemonInMatch(int matchId);
     List<PokemonResults> getPokemonInMatchFor(int matchId, int teamId);
+    PokemonResults getResultsFor(int pokeId, int leagueId);
     PokemonResults getResultsFor(int pokeId, int teamId, int leagueId);
     PokemonResults getPokemonResultsById(int id);
     PokemonResults addPokemonResults(PokemonResults pokemonResults);

@@ -76,6 +76,11 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
     }
     
     @Override
+    public PokemonResults getResultsFor(int pokeId, int leagueId) {
+        return null;
+    }
+    
+    @Override
     public PokemonResults getResultsFor(int pokeId, int teamId, int leagueId) {
         try {            
             final String GET_RESULTS_FOR = "SELECT ma.teamId, SUM(directKOs), "
