@@ -10,10 +10,20 @@ function TableBody(props) {
     }
 
     function generateTableEntry(data) {
+        let columns = [];
+        const mapping = {
+            "Base Stats": addStats,
+            "Typing": addTyping
+        }
+
+        for (let label in mapping) {
+            props.display[label] && columns.push(mapping[label](data));
+        }
+
         return (
             <tr key={data.id}>
                 {addLabel(data)}
-                {props.display["Base Stats"] ? addStats(data) : null}
+                {columns}
             </tr>
         )
     }
@@ -41,6 +51,19 @@ function TableBody(props) {
                 </td>
             )
         );
+        return columns;
+    }
+
+    function addTyping(data) {
+        let columns = [];
+        data.types.forEach(typeHolder => columns.push(
+            <td className="align-middle"
+                key={data.id  + "-"+ typeHolder.type.name}>
+                {typeHolder.type.name}
+            </td>)
+        );
+
+        columns.length == 1 && columns.push(<td key={data.id + "-none"} />)
         return columns;
     }
     

@@ -10,13 +10,26 @@ function TableHeader(props) {
             <th key="SpAtk">SpAtk</th>,
             <th key="SpDef">SpDef</th>,
             <th key="Spe">Spe</th>
+        ],
+        "Typing": [
+            <th key="type" colSpan="2">Type</th>
         ]
     };
+
+    function addHeaders() {
+        let headers = [];
+        for (let label in extensions) {
+            if (props.display[label]) {
+                headers.push(extensions[label]);
+            }
+        }
+        return headers;
+    }
 
     return (
         <tr>
             <th>Pokémon</th>
-            {props.display["Base Stats"] ? extensions["Base Stats"] : null}
+            {addHeaders()}
         </tr>
     )
 } 
