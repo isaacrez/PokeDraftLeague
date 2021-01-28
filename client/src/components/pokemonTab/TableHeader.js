@@ -4,12 +4,12 @@ function TableHeader(props) {
 
     const extensions = {
         "Base Stats": [
-            <th>HP</th>,
-            <th>Atk</th>,
-            <th>Def</th>,
-            <th>SpAtk</th>,
-            <th>SpDef</th>,
-            <th>Spe</th>
+            <th key="HP">HP</th>,
+            <th key="Atk">Atk</th>,
+            <th key="Def">Def</th>,
+            <th key="SpAtk">SpAtk</th>,
+            <th key="SpDef">SpDef</th>,
+            <th key="Spe">Spe</th>
         ]
     };
 
