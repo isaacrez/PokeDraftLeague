@@ -63,7 +63,7 @@ function TableBody(props) {
             </td>)
         );
 
-        columns.length == 1 && columns.push(<td key={data.id + "-none"} />)
+        columns = addUpTo(columns, 2);
         return columns;
     }
 
@@ -76,10 +76,15 @@ function TableBody(props) {
             </td>)
         )
 
-        while (columns.length < 4) {
-            columns.push(<td key={data.id + "-none" + columns.length} />)
-        } 
+        columns = addUpTo(columns, 4);
         return columns;
+    }
+
+    function addUpTo(columns, limit) {
+        while (columns.length < limit) {
+            columns.push(<td key={columns.length} />)
+        }
+        return columns
     }
 
     function cleanAbility(string) {
