@@ -93,11 +93,23 @@ input:focus, button:focus {
   margin: 0;
 }
 
+th {
+  text-align: center;
+}
+
+.table-custom td {
+  vertical-align: middle;
+  justify-content:  center;
+}
+
+tbody {
+  text-align: center;
+}
+
 .scrollable-table {
   max-height: 70vh;
   width: 100%;
-  overflow: hidden;
-  overflow-y: auto;
+  overflow: auto;
   margin-bottom: 10px;
 }
 
@@ -107,6 +119,7 @@ input:focus, button:focus {
 }
 
 ::-webkit-scrollbar {
+  height: 6px;
   width: 6px;
 }
 
@@ -121,6 +134,10 @@ input:focus, button:focus {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #77bee477;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #282828;
 }
 
 label {
@@ -208,14 +225,4 @@ input:checked + .slider:before {
   border: 0;
   border-radius: 0 10px 10px 0;
   padding: 5px 10px;
-}
-
-th {
-  text-align: center;
-}
-
-tbody {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
 }
