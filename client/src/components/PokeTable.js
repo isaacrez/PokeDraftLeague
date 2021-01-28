@@ -6,9 +6,10 @@ function PokeTable(props) {
     const [tableData, setTableData] = React.useState([]);
 
     React.useEffect(() => {
+        console.log("Called!");
         setTableData([]);
         fetchPokeData();
-    }, [props.page]);
+    }, [props.page.current, props.page.size]);
 
     function buildUrl() {
         return "https://pokeapi.co/api/v2/pokemon?limit=" + props.page.size
