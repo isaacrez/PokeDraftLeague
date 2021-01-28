@@ -6,7 +6,6 @@ function PokeTable(props) {
     const [tableData, setTableData] = React.useState([]);
 
     React.useEffect(() => {
-        console.log("Called!");
         setTableData([]);
         fetchPokeData();
     }, [props.page.current, props.page.size]);
