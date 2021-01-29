@@ -45,7 +45,7 @@ CREATE TABLE `Match` (
     `leagueId` INT NOT NULL,
     `statusId` INT NOT NULL,
     `scheduledWeek` INT NOT NULL, 
-    `dateSubmitted` Date DEFAULT(NOW())
+    `dateSubmitted` Date DEFAULT(CURDATE())
 );
 
 CREATE TABLE `MatchTeam` (
