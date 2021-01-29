@@ -28,8 +28,8 @@ CREATE TABLE `LeagueTeam` (
 
 CREATE TABLE `Coach` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `nickname` VARCHAR(30) NOT NULL,
-    `discordName` VARCHAR(30),
+    `discordName` VARCHAR(30) NOT NULL,
+    `nickname` VARCHAR(30),
     `showdownName` VARCHAR(30)
 );
 
@@ -121,7 +121,7 @@ ALTER TABLE `Roster`
         REFERENCES `League`(`id`),
     ADD CONSTRAINT `fk_roster_teamId`
         FOREIGN KEY (`teamId`)
-        REFERENCES `Team`(`id`),
+    REFERENCES `Team`(`id`),
     ADD CONSTRAINT `fk_roster_pokeId`
         FOREIGN KEY (`pokeId`)
     REFERENCES `Pokemon`(`id`);
