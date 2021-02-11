@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from './components/general/Header';
 import Home from './components/homeTab/Home';
+import Schedule from './components/scheduleTab/Schedule';
 import Pokemon from './components/pokemonTab/Pokemon';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,6 +15,7 @@ function App() {
 
   let stringToContent = {
     "Home": <Home setLeague={setLeague}/>,
+    "Schedule": <Schedule league={league}/>,
     "Pokémon": <Pokemon />
   }
 
