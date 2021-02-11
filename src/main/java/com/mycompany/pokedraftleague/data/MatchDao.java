@@ -16,7 +16,7 @@ import java.util.List;
 public interface MatchDao {
     List<Match> getAllMatches();
     Match getMatchById(int id);
-    List<Team> getTeamsInMatch(int id);
+    List<Match> getMatchesByLeagueId(int id);
     Match addMatch(Match match);
     void updateMatch(Match match);
     void deleteMatchById(int id);

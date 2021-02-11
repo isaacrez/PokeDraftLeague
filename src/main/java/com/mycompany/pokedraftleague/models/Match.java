@@ -21,7 +21,7 @@ public class Match {
     private List<PokemonResults> pokemonParticipants;
     
     private String status;
-    private Date completedOn;
+    private Date dateSubmitted;
     private int scheduledWeek;
 
     public int getId() {
@@ -56,12 +56,12 @@ public class Match {
         this.status = status;
     }
 
-    public Date getCompletedOn() {
-        return completedOn;
+    public Date getDateSubmitted() {
+        return dateSubmitted;
     }
 
-    public void setCompletedOn(Date completedOn) {
-        this.completedOn = completedOn;
+    public void setDateSubmitted(Date completedOn) {
+        this.dateSubmitted = completedOn;
     }
 
     public int getScheduledWeek() {
@@ -79,7 +79,7 @@ public class Match {
         hash = 13 * hash + Objects.hashCode(this.teams);
         hash = 13 * hash + Objects.hashCode(this.pokemonParticipants);
         hash = 13 * hash + Objects.hashCode(this.status);
-        hash = 13 * hash + Objects.hashCode(this.completedOn);
+        hash = 13 * hash + Objects.hashCode(this.dateSubmitted);
         hash = 13 * hash + this.scheduledWeek;
         return hash;
     }
@@ -111,7 +111,7 @@ public class Match {
         if (!Objects.equals(this.pokemonParticipants, other.pokemonParticipants)) {
             return false;
         }
-        if (!Objects.equals(this.completedOn, other.completedOn)) {
+        if (!Objects.equals(this.dateSubmitted, other.dateSubmitted)) {
             return false;
         }
         return true;

@@ -5,9 +5,7 @@
  */
 package com.mycompany.pokedraftleague.data;
 
-import com.mycompany.pokedraftleague.data.CoachDaoDB.CoachMapper;
 import com.mycompany.pokedraftleague.data.TeamDaoDB.TeamMapper;
-import com.mycompany.pokedraftleague.models.Coach;
 import com.mycompany.pokedraftleague.models.Match;
 import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
@@ -26,48 +24,57 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MatchDaoDB implements MatchDao {
     
+    @Autowired
+    private final TeamDao teamDao;
+    
     private final JdbcTemplate jdbc;
     
     @Autowired
-    public MatchDaoDB(JdbcTemplate jdbcTemplate) {
+    public MatchDaoDB(JdbcTemplate jdbcTemplate, TeamDao teamDao) {
         this.jdbc = jdbcTemplate;
+        this.teamDao = teamDao;
     }
 
     @Override
     public List<Match> getAllMatches() {
         final String GET_ALL_MATCHES = "SELECT * FROM match";
-        return jdbc.query(GET_ALL_MATCHES, new MatchMapper());
+        List<Match> matches = jdbc.query(GET_ALL_MATCHES, new MatchMapper());
+        addTeamsToMatch(matches);
+        return matches;
     }
 
     @Override
     public Match getMatchById(int id) {
         try {
             final String GET_MATCH_BY_ID = "SELECT * FROM match WHERE id = ?";
-            return jdbc.queryForObject(GET_MATCH_BY_ID, new MatchMapper(), id);
+            Match match = jdbc.queryForObject(GET_MATCH_BY_ID, new MatchMapper(), id);
+            addTeamsToMatch(match);
+            return match;
         } catch (DataAccessException e) {
             return null;
         }
     }
     
     @Override
-    public List<Team> getTeamsInMatch(int id) {
-        final String GET_TEAMS_FOR_MATCH = "SELECT t.* FROM team AS t "
-                + "JOIN matchteam AS mt ON t.id = mt.teamId "
-                + "WHERE mt.matchId = ?";
-        List<Team> teams = jdbc.query(GET_TEAMS_FOR_MATCH, new TeamMapper(), id);
-        addCoachToTeams(teams);
-        return teams;
+    public List<Match> getMatchesByLeagueId(int id) {
+        final String GET_MATCH_BY_ID = "SELECT * FROM `match` WHERE leagueId = ?";
+        List<Match> matches = jdbc.query(GET_MATCH_BY_ID, new MatchMapper(), id);
+        addTeamsToMatch(matches);
+        return matches;
     }
     
-    private void addCoachToTeams(List<Team> teams) {
-        final String GET_COACH_FOR_TEAM = "SELECT c.* FROM coach AS c "
-                + "JOIN team AS t ON t.coachId = c.id "
-                + "WHERE t.id = ?";
-        
-        for (Team team : teams) {
-            Coach coach = jdbc.queryForObject(GET_COACH_FOR_TEAM, new CoachMapper(), team.getId());
-            team.setCoach(coach);
+    private void addTeamsToMatch(List<Match> matches) {
+        for (Match match : matches) {
+            addTeamsToMatch(match);
         }
+    }
+    
+    private void addTeamsToMatch(Match match) {
+        final String GET_TEAMS = "SELECT * FROM matchTeam AS mt "
+                + "JOIN team AS t ON mt.teamId = t.id "
+                + "WHERE mt.matchId = ?";
+        List<Team> teams = jdbc.query(GET_TEAMS, new TeamMapper(), match.getId());
+        match.setTeams(teams);
     }
     
     @Override
@@ -90,8 +97,7 @@ public class MatchDaoDB implements MatchDao {
         public Match mapRow(ResultSet rs, int index) throws SQLException {
             Match match = new Match();
             match.setId(rs.getInt("id"));
-            match.setStatus(rs.getString("status"));
-            match.setCompletedOn(rs.getDate("completedOn"));
+            match.setDateSubmitted(rs.getDate("dateSubmitted"));
             match.setScheduledWeek(rs.getInt("scheduledWeek"));
             return match;
         }
