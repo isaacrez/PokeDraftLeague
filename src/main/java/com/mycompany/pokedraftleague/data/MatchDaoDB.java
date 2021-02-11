@@ -5,9 +5,7 @@
  */
 package com.mycompany.pokedraftleague.data;
 
-import com.mycompany.pokedraftleague.data.TeamDaoDB.TeamMapper;
 import com.mycompany.pokedraftleague.models.Match;
-import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
