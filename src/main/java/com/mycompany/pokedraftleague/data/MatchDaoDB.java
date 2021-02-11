@@ -70,11 +70,7 @@ public class MatchDaoDB implements MatchDao {
     }
     
     private void addTeamsToMatch(Match match) {
-        final String GET_TEAMS = "SELECT * FROM matchTeam AS mt "
-                + "JOIN team AS t ON mt.teamId = t.id "
-                + "WHERE mt.matchId = ?";
-        List<Team> teams = jdbc.query(GET_TEAMS, new TeamMapper(), match.getId());
-        match.setTeams(teams);
+        match.setTeams(teamDao.getTeamsByMatchId(match.getId()));
     }
     
     @Override

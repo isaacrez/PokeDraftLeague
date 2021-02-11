@@ -128,7 +128,7 @@ public class TeamDaoDB implements TeamDao {
     }
     
     private Coach getCoachForTeam(Team team) {
-        final String GET_COACH_FOR_TEAM = "SELECT c.* FROM coach AS c"
+        final String GET_COACH_FOR_TEAM = "SELECT c.* FROM coach AS c "
                 + "JOIN team AS t ON t.coachId = c.id "
                 + "WHERE t.id = ?";
         return jdbc.queryForObject(GET_COACH_FOR_TEAM, new CoachMapper(), team.getId());
