@@ -39,7 +39,7 @@ public class MatchDaoDB implements MatchDao {
     public List<Match> getAllMatches() {
         final String GET_ALL_MATCHES = "SELECT * FROM match";
         List<Match> matches = jdbc.query(GET_ALL_MATCHES, new MatchMapper());
-        addTeamsToMatch(matches);
+        addAdvancedProperties(matches);
         return matches;
     }
 
@@ -48,7 +48,7 @@ public class MatchDaoDB implements MatchDao {
         try {
             final String GET_MATCH_BY_ID = "SELECT * FROM match WHERE id = ?";
             Match match = jdbc.queryForObject(GET_MATCH_BY_ID, new MatchMapper(), id);
-            addTeamsToMatch(match);
+            addAdvancedProperties(match);
             return match;
         } catch (DataAccessException e) {
             return null;
@@ -59,18 +59,26 @@ public class MatchDaoDB implements MatchDao {
     public List<Match> getMatchesByLeagueId(int id) {
         final String GET_MATCH_BY_ID = "SELECT * FROM `match` WHERE leagueId = ?";
         List<Match> matches = jdbc.query(GET_MATCH_BY_ID, new MatchMapper(), id);
-        addTeamsToMatch(matches);
+        addAdvancedProperties(matches);
         return matches;
     }
     
-    private void addTeamsToMatch(List<Match> matches) {
+    private void addAdvancedProperties(List<Match> matches) {
         for (Match match : matches) {
-            addTeamsToMatch(match);
+            addAdvancedProperties(match);
         }
     }
     
-    private void addTeamsToMatch(Match match) {
+    private void addAdvancedProperties(Match match) {
+        addStatusToMatch(match);
         match.setTeams(teamDao.getTeamsByMatchId(match.getId()));
+    }
+    
+    private void addStatusToMatch(Match match) {
+        final String GET_MATCH_STATUS = "SELECT ms.label FROM matchStatus AS ms "
+                + "JOIN `match` AS m ON m.statusId = ms.id "
+                + "WHERE m.id = ?";
+        match.setStatus(jdbc.queryForObject(GET_MATCH_STATUS, String.class, match.getId()));
     }
     
     @Override
