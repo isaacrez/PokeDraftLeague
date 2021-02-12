@@ -41,8 +41,15 @@ function RegularSchedule(props) {
         <div className="full-stripe">
             <h1>Match Schedule</h1>
             <h2>{props.league.name}</h2>
-            <select>{makeWeekOptions()}</select>
-                <div className="scrollable-table">
+
+            <div className="w-25 d-flex justify-content-around">
+                <label htmlFor="week">Week</label>
+                <select id="week" onChange={e => setWeek(Number(e.target.value))}>
+                        {makeWeekOptions()}
+                </select>
+            </div>
+
+            <div className="scrollable-table">
                 <table className="table table-secondary table-custom table-striped table-hover mb-0">
                     <thead className="thead-dark">
                         <tr>
