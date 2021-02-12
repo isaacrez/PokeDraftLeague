@@ -42,18 +42,20 @@ function RegularSchedule(props) {
             <h1>Match Schedule</h1>
             <h2>{props.league.name}</h2>
             <select>{makeWeekOptions()}</select>
-            <table className="w-100 table table-dark table-striped">
-                <thead>
-                    <tr>
-                        <th>Week</th>
-                        <th>Team</th>
-                        <th>Team</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {makeTableContent()}
-                </tbody>
-            </table>
+                <div className="scrollable-table">
+                <table className="table table-secondary table-custom table-striped table-hover mb-0">
+                    <thead className="thead-dark">
+                        <tr>
+                            <th>Week</th>
+                            <th>Team</th>
+                            <th>Team</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {makeTableContent()}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }
