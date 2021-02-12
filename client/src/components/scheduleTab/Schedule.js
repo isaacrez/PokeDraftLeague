@@ -8,6 +8,7 @@ function Schedule(props) {
 
 function RegularSchedule(props) {
     const [matches, setMatches] = React.useState([]);
+    const [week, setWeek] = React.useState(0);
 
     React.useEffect(() => {
         let url = "http://localhost:8080/api/match/schedule/" + props.league.id;
@@ -17,20 +18,30 @@ function RegularSchedule(props) {
             .catch(error => console.log(error));
     }, [])
 
+    function makeWeekOptions() {
+        let options = new Set(matches.map(match => match.scheduledWeek));
+        options = [...options].map(o => <option key={o}>{o}</option>);
+        options.unshift(<option key={0} value={0}>All</option>);
+        return options;
+    }
+
     function makeTableContent() {
-        return matches.map(match => 
-            <tr>
-                <td>{match.scheduledWeek}</td>
-                <td>{match.teams[0].name}</td>
-                <td>{match.teams[1].name}</td>
-            </tr>
-        );
+        return matches
+            .filter(match => week === 0 || match.scheduledWeek === week)
+            .map(match => 
+                <tr>
+                    <td>{match.scheduledWeek}</td>
+                    <td>{match.teams[0].name}</td>
+                    <td>{match.teams[1].name}</td>
+                </tr>
+            );
     }
 
     return (
         <div className="full-stripe">
             <h1>Match Schedule</h1>
             <h2>{props.league.name}</h2>
+            <select>{makeWeekOptions()}</select>
             <table className="w-100 table table-dark table-striped">
                 <thead>
                     <tr>
