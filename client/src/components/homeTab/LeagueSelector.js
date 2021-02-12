@@ -7,22 +7,20 @@ function LeagueSelector(props) {
         let url = "http://localhost:8080/api/league";
         fetch(url, {type: "GET"})
             .then(response => response.json())
-            .then(response => response.map(obj => obj.name))
             .then(leagueData => setAllLeagues(leagueData))
             .catch((error) => console.log(error));
     }, [])
 
     function createOptions(optionData) {
         let options = [];
-        optionData.forEach(data => options.push(<option key={data}>{data}</option>));
+        optionData.forEach(data => options.push(<option key={data.id}>{data.name}</option>));
         return options;
     }
 
     function updateLeague(input) {
-        console.log(input + " is a league: " + allLeagues.includes(input));
-        console.log(allLeagues);
-        if (allLeagues.includes(input)) {
-            props.setLeague(input);
+        let league = allLeagues.filter(league => league.name === input);
+        if (league.length === 1) {
+            props.setLeague(league[0])
         }
     }
 

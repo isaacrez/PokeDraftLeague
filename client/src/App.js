@@ -10,7 +10,7 @@ import './App.css';
 
 
 function App() {
-  const [league, setLeague] = React.useState("");
+  const [league, setLeague] = React.useState({name: "", id: -1});
   const [mainContent, setMainContent] = React.useState("Home");
 
   let stringToContent = {
