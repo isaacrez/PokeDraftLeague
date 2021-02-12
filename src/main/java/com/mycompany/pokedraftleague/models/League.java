@@ -13,8 +13,17 @@ import java.util.Objects;
  */
 public class League {
     
+    private int id;
     private String name;
     private String admin;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -34,9 +43,10 @@ public class League {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Objects.hashCode(this.admin);
+        int hash = 7;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.name);
+        hash = 89 * hash + Objects.hashCode(this.admin);
         return hash;
     }
 
@@ -52,6 +62,9 @@ public class League {
             return false;
         }
         final League other = (League) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -60,5 +73,5 @@ public class League {
         }
         return true;
     }
-    
+
 }

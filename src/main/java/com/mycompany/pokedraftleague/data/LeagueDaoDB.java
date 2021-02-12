@@ -58,6 +58,7 @@ public class LeagueDaoDB implements LeagueDao {
         @Override
         public League mapRow(ResultSet rs, int index) throws SQLException {
             League league = new League();
+            league.setId(rs.getInt("id"));
             league.setName(rs.getString("name"));
             league.setAdmin(rs.getString("admin"));
             return league;
