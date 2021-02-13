@@ -1,6 +1,7 @@
 import React from 'react';
 import EmptySchedule from './EmptySchedule';
 import WeekSelector from './WeekSelector';
+import TeamSelector from './TeamSelector';
 import TableBody from './TableBody';
 
 const NO_LEAGUE_SELECTED = -1;
@@ -34,11 +35,6 @@ function RegularSchedule(props) {
 
     }, [props.league.id])
 
-    function makeTeamOptions() {
-        let options = teams.map(team => <option key={team.id}>{team.name}</option>);
-        options.unshift(<option key={NO_TEAM_SELECT} value={NO_TEAM_SELECT}>All</option>)
-        return options;
-    }
 
     return (
         <div className="full-stripe">
@@ -51,12 +47,10 @@ function RegularSchedule(props) {
                     matches={matches}
                     NO_WEEK_SELECT={NO_WEEK_SELECT} />
 
-                <div className="minor-dropdown">
-                    <label htmlFor="team" className="mr-3">Team</label>
-                    <select id="team" onChange={e => setTeam(e.target.value)}>
-                        {makeTeamOptions()}
-                    </select>
-                </div>
+                <TeamSelector 
+                    setTeam={setTeam}
+                    teams={teams}
+                    NO_TEAM_SELECT={NO_TEAM_SELECT} />
             </div>
 
             <TableBody 
