@@ -81,7 +81,7 @@ function Entry(props) {
     }
 
     return (
-        <tr style={leagueStats.team && {"background-color": colorizeBy(leagueStats.team.acronym)}}>
+        <tr style={leagueStats.team && {backgroundColor: colorizeBy(leagueStats.team.acronym)}}>
             {
                 loaded ? [
                     addLabel(data),
