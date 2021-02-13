@@ -4,7 +4,7 @@ function TableBody(props) {
 
     function isMatchValidWeek(match) {
         return props.week === props.NO_WEEK_SELECT
-            || match.scheduledWeek === props.weeks;
+            || match.scheduledWeek === props.week;
     }
 
     function isTeamInMatch(match, teamName) {
