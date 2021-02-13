@@ -11,8 +11,8 @@ function WeekSelector(props) {
     }
 
     return (
-        <div className="d-flex minor-dropdown w-25 justify-content-around mb-3">
-            <label htmlFor="week">Week</label>
+        <div className="minor-dropdown">
+            <label htmlFor="week" className="mr-3">Week</label>
             <select id="week" onChange={e => props.setWeek(Number(e.target.value))}>
                 {makeWeekOptions()}
             </select>

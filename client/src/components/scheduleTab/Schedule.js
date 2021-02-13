@@ -44,13 +44,13 @@ function RegularSchedule(props) {
             <h1>Match Schedule</h1>
             <h2>{props.league.name}</h2>
 
-            <div className="w-100 d-flex justify-content-between">
+            <div className="w-100 d-flex flex-wrap justify-content-between mb-3">
                 <WeekSelector
                     setWeek={setWeek}
                     matches={matches}
                     NO_WEEK_SELECT={NO_WEEK_SELECT} />
 
-                <div className="d-flex minor-dropdown justify-content-around mb-3">
+                <div className="minor-dropdown">
                     <label htmlFor="team" className="mr-3">Team</label>
                     <select id="team" onChange={e => setTeam(e.target.value)}>
                         {makeTeamOptions()}
