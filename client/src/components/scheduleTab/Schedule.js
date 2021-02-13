@@ -1,4 +1,5 @@
 import React from 'react';
+import EmptySchedule from './EmptySchedule';
 
 function Schedule(props) {
     return props.league.id === -1 ?
@@ -67,14 +68,6 @@ function RegularSchedule(props) {
     )
 }
 
-function EmptySchedule() {
-    return (
-        <div className="full-stripe">
-            <h1>Match Schedule... is Missing!</h1>
-            <h2>Select a league first!</h2>
-            <p>You can select a league under the "Home" tab</p>
-        </div>
-    )
-}
+
 
 export default Schedule;
