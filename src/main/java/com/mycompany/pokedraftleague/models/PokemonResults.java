@@ -14,7 +14,7 @@ import java.util.Objects;
 public class PokemonResults {
     
     private int id;
-    private int teamId;
+    private Team team;
     private Pokemon pokemon;
     private int directKOs;
     private int indirectKOs;
@@ -28,14 +28,14 @@ public class PokemonResults {
         this.id = id;
     }
 
-    public int getTeamId() {
-        return teamId;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
-    
+
     public Pokemon getPokemon() {
         return pokemon;
     }
@@ -71,12 +71,12 @@ public class PokemonResults {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + this.id;
-        hash = 41 * hash + this.teamId;
-        hash = 41 * hash + Objects.hashCode(this.pokemon);
-        hash = 41 * hash + this.directKOs;
-        hash = 41 * hash + this.indirectKOs;
-        hash = 41 * hash + this.deaths;
+        hash = 73 * hash + this.id;
+        hash = 73 * hash + Objects.hashCode(this.team);
+        hash = 73 * hash + Objects.hashCode(this.pokemon);
+        hash = 73 * hash + this.directKOs;
+        hash = 73 * hash + this.indirectKOs;
+        hash = 73 * hash + this.deaths;
         return hash;
     }
 
@@ -95,9 +95,6 @@ public class PokemonResults {
         if (this.id != other.id) {
             return false;
         }
-        if (this.teamId != other.teamId) {
-            return false;
-        }
         if (this.directKOs != other.directKOs) {
             return false;
         }
@@ -105,6 +102,9 @@ public class PokemonResults {
             return false;
         }
         if (this.deaths != other.deaths) {
+            return false;
+        }
+        if (!Objects.equals(this.team, other.team)) {
             return false;
         }
         if (!Objects.equals(this.pokemon, other.pokemon)) {

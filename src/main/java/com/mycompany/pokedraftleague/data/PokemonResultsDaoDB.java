@@ -25,10 +25,12 @@ import org.springframework.stereotype.Repository;
 public class PokemonResultsDaoDB implements PokemonResultsDao {
     
     private final JdbcTemplate jdbc;
+    private final TeamDao teamDao;
     
     @Autowired
-    public PokemonResultsDaoDB(JdbcTemplate jdbcTemplate) {
+    public PokemonResultsDaoDB(JdbcTemplate jdbcTemplate, TeamDao teamDao) {
         this.jdbc = jdbcTemplate;
+        this.teamDao = teamDao;
     }
 
     @Override
@@ -88,7 +90,7 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
                     new AggregatePokemonResultsMapper(),
                     pokeId,
                     leagueId);
-            
+            result.setTeam(teamDao.getTeamOfPokemon(pokeId));
         } catch (DataAccessException e) {
             result = new PokemonResults();
             result.setDirectKOs(0);
@@ -114,7 +116,7 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
                     pokeId,
                     teamId,
                     leagueId);
-            result.setTeamId(teamId);
+            addTeamToResults(result, teamId);
             result.setPokemon(getPokemonForResults(pokeId));
             return result;
         } catch (DataAccessException e) {
@@ -135,6 +137,20 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
     @Override
     public void deletePokemonResultsById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void addTeamToResults(PokemonResults results) {
+        try {
+            final String GET_TEAM_ID = "SELECT teamId FROM matchAttendee WHERE id = ?";
+            int teamId = jdbc.queryForObject(GET_TEAM_ID, Integer.class, results.getId());
+            addTeamToResults(results, teamId);
+        } catch (DataAccessException e) {
+            
+        }
+    }
+    
+    private void addTeamToResults(PokemonResults results, int teamId) {
+        results.setTeam(teamDao.getTeamById(teamId));
     }
     
     private void addPokemonToResults(List<PokemonResults> results) {
@@ -170,7 +186,6 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
         public PokemonResults mapRow(ResultSet rs, int index) throws SQLException {
             PokemonResults pokemonResults = new PokemonResults();
             pokemonResults.setId(rs.getInt("id"));
-            pokemonResults.setTeamId(rs.getInt("teamId"));
             pokemonResults.setDirectKOs(rs.getInt("directKOs"));
             pokemonResults.setIndirectKOs(rs.getInt("indirectKOs"));
             pokemonResults.setDeaths(rs.getInt("wasKOed"));
