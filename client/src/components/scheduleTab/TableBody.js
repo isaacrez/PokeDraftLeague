@@ -2,9 +2,16 @@ import React from 'react';
 
 function TableBody(props) {
 
+    function isTeamInMatch(match, teamName) {
+        return props.team === ""
+            || match.teams[0].name == teamName
+            || match.teams[1].name == teamName;
+    }
+
     function makeTableContent() {
         return props.matches
             .filter(match => props.week === props.NO_WEEK_SELECT || match.scheduledWeek === props.week)
+            .filter(match => isTeamInMatch(match, props.team))
             .map(match => 
                 <tr>
                     <td>{match.scheduledWeek}</td>

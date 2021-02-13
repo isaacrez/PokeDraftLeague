@@ -5,6 +5,7 @@ import TableBody from './TableBody';
 
 const NO_LEAGUE_SELECTED = -1;
 const NO_WEEK_SELECT = 0;
+const NO_TEAM_SELECT = "";
 
 function Schedule(props) {
     return props.league.id === NO_LEAGUE_SELECTED ?
@@ -35,7 +36,7 @@ function RegularSchedule(props) {
 
     function makeTeamOptions() {
         let options = teams.map(team => <option key={team.id}>{team.name}</option>);
-        options.unshift(<option key={0}>All</option>)
+        options.unshift(<option key={""} value={""}>All</option>)
         return options;
     }
 
@@ -61,6 +62,7 @@ function RegularSchedule(props) {
             <TableBody 
                 matches={matches}
                 week={week}
+                team={team}
                 NO_WEEK_SELECT={NO_WEEK_SELECT} />
         </div>
     )
