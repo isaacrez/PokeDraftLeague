@@ -1,5 +1,6 @@
 import React from 'react';
 import EmptySchedule from './EmptySchedule';
+import WeekSelector from './WeekSelector';
 
 const NO_LEAGUE_SELECTED = -1;
 const NO_WEEK_SELECT = 0;
@@ -22,13 +23,6 @@ function RegularSchedule(props) {
             .catch(error => console.log(error));
     }, [props.league.id])
 
-    function makeWeekOptions() {
-        let options = new Set(matches.map(match => match.scheduledWeek));
-        options = [...options].map(o => <option key={o}>{o}</option>);
-        options.unshift(<option key={NO_WEEK_SELECT} value={NO_WEEK_SELECT}>All</option>);
-        return options;
-    }
-
     function makeTableContent() {
         return matches
             .filter(match => week === NO_WEEK_SELECT || match.scheduledWeek === week)
@@ -46,12 +40,10 @@ function RegularSchedule(props) {
             <h1>Match Schedule</h1>
             <h2>{props.league.name}</h2>
 
-            <div className="d-flex minor-dropdown w-25 justify-content-around mb-3">
-                <label htmlFor="week">Week</label>
-                <select id="week" onChange={e => setWeek(Number(e.target.value))}>
-                    {makeWeekOptions()}
-                </select>
-            </div>
+            <WeekSelector
+                setWeek={setWeek}
+                matches={matches}
+                NO_WEEK_SELECT={NO_WEEK_SELECT} />
 
             <div className="scrollable-table">
                 <table className="table table-secondary table-custom table-striped table-hover mb-0">
