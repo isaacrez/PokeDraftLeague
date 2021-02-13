@@ -9,8 +9,8 @@ function TableBody(props) {
 
     function isTeamInMatch(match, teamName) {
         return props.team === props.NO_TEAM_SELECT
-            || match.teams[0].name == teamName
-            || match.teams[1].name == teamName;
+            || match.teams[0].name === teamName
+            || match.teams[1].name === teamName;
     }
 
     function makeTableContent() {
@@ -20,7 +20,11 @@ function TableBody(props) {
             .map(match => 
                 <tr>
                     <td>{match.scheduledWeek}</td>
+                    <td><img src={`${process.env.PUBLIC_URL}/img/logos/${match.teams[0].acronym}.png`}
+                            className="lg-icon" /></td>
                     <td>{match.teams[0].name}</td>
+                    <td><img src={`${process.env.PUBLIC_URL}/img/logos/${match.teams[1].acronym}.png`}
+                            className="lg-icon" /></td>
                     <td>{match.teams[1].name}</td>
                 </tr>
             );
@@ -32,8 +36,8 @@ function TableBody(props) {
                 <thead className="thead-dark">
                     <tr>
                         <th>Week</th>
-                        <th>Team</th>
-                        <th>Team</th>
+                        <th colSpan="2">Team</th>
+                        <th colSpan="2">Team</th>
                     </tr>
                 </thead>
                 <tbody>

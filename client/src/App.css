@@ -77,6 +77,10 @@ input:focus, button:focus {
   max-width: 50px;
 }
 
+.lg-icon {
+  max-width: 150px;
+}
+
 .full-stripe {
   background-color: #282828;
   width: 80%;
