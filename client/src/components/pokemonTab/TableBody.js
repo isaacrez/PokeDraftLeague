@@ -33,10 +33,12 @@ function TableBody(props) {
         return (
             <td className="d-flex flex-column justify-content-center align-items-center"
                 key={data.id}>
+                {data.sprites.other["official-artwork"].front_default && 
                 <img
                     src={data.sprites.other["official-artwork"].front_default}
                     className="icon"
                     alt={"Image of a " + data.name} />
+                }
                 <p>{capitalize(data.name)}</p>
             </td>
         )
