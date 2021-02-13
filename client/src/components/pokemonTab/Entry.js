@@ -7,8 +7,7 @@ function Entry(props) {
 
     function addLabel(data) {
         return (
-            <td className="d-flex flex-column justify-content-center align-items-center"
-                key={data.id}>
+            <td key={data.id}>
                 {data.sprites.other["official-artwork"].front_default && 
                 <img
                     src={data.sprites.other["official-artwork"].front_default}
