@@ -16,7 +16,7 @@ function App() {
   let stringToContent = {
     "Home": <Home setLeague={setLeague}/>,
     "Schedule": <Schedule league={league}/>,
-    "Pokémon": <Pokemon />
+    "Pokémon": <Pokemon league={league}/>
   }
 
   return (

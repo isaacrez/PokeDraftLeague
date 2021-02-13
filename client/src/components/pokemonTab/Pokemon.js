@@ -4,7 +4,7 @@ import PokeSearchBar from './PokeSearchBar';
 import PokeTable from './PokeTable';
 import TableNavBar from '../general/TableNavBar';
 
-function Pokemon() {
+function Pokemon(props) {
     const [page, setPage] = React.useState(1);
     const [pageSize, setPageSize] = React.useState(5);
     const [onDisplay, setOnDisplay] = React.useState({
@@ -30,7 +30,8 @@ function Pokemon() {
 
             <PokeSearchBar />
 
-            <PokeTable 
+            <PokeTable
+                league={props.league} 
                 page={pageInfo}
                 display={onDisplay} />
 

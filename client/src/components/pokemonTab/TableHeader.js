@@ -16,6 +16,12 @@ function TableHeader(props) {
         ],
         "Abilities": [
             <th key="abilities" colSpan="4">Abilities</th>
+        ],
+        "League Stats": [
+            <th key="currentTeam">Team</th>,
+            <th key="directKOs">Direct KOs</th>,
+            <th key="indirectKOs">Indirect KOs</th>,
+            <th key="deaths">Deaths</th>
         ]
     };
 

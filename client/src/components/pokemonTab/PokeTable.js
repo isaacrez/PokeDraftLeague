@@ -41,7 +41,8 @@ function PokeTable(props) {
                 </thead>
                 <TableBody 
                     display={props.display}
-                    tableData={tableData} />
+                    tableData={tableData}
+                    league={props.league} />
             </table>                
         </div>
     );
