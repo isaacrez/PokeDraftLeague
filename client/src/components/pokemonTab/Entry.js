@@ -3,7 +3,15 @@ import React from 'react';
 function Entry(props) {
 
     const [leagueStats, setLeagueStats] = React.useState({});
-    props.display["League Stats"] && getLeagueStats(props.data);
+    React.useEffect(() => getLeagueStats(), []);
+
+    function getLeagueStats() {
+        let url = `http://localhost:8080/api/match/results/${props.data.id}/${props.league.id}`;
+        fetch(url, {type: "GET"})
+            .then(response => response.json())
+            .then(stats => setLeagueStats(stats))
+            .catch(error => console.log(error));
+    }
 
     function addLabel(data) {
         return (
@@ -45,20 +53,12 @@ function Entry(props) {
         ), 4);
     }
 
-    function getLeagueStats(data) {
-        let url = `http://localhost:8080/api/match/results/${data.id}/${props.league.id}`;
-        fetch(url, {type: "GET"})
-            .then(response => response.json())
-            .then(stats => setLeagueStats(stats))
-            .catch(error => console.log(error));
-    }
-
     function addLeagueStats() {
         return [
-            <td>FREE</td>,
-            <td>{leagueStats.directKOs}</td>,
-            <td>{leagueStats.indirectKOs}</td>,
-            <td>{leagueStats.deaths}</td>
+            <td key={"team"}>FREE</td>,
+            <td key={"directKOs"}>{leagueStats.directKOs}</td>,
+            <td key={"indirectKOs"}>{leagueStats.indirectKOs}</td>,
+            <td key={"deaths"}>{leagueStats.deaths}</td>
         ]
     }
 
