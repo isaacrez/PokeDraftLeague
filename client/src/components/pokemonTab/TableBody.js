@@ -37,7 +37,7 @@ function TableBody(props) {
                 <img
                     src={data.sprites.other["official-artwork"].front_default}
                     className="icon"
-                    alt={`Image of a ${data.name}`} />
+                    alt={`${data.name}`} />
                 }
                 <p>{cleanText(data.name)}</p>
             </td>
