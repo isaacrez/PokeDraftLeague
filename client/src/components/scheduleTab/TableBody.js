@@ -22,12 +22,14 @@ function TableBody(props) {
                     <td><h3 className="fancy">{match.scheduledWeek}</h3></td>
                     <td>
                         <img src={`${process.env.PUBLIC_URL}/img/logos/${match.teams[0].acronym}.png`}
-                            className="lg-icon" />
+                            className="lg-icon"
+                            alt={`${match.teams[0].acronym} team logo`} />
                         <h4>{match.teams[0].name}</h4>
                     </td>
                     <td>
                         <img src={`${process.env.PUBLIC_URL}/img/logos/${match.teams[1].acronym}.png`}
-                            className="lg-icon" />
+                            className="lg-icon" 
+                            alt={`${match.teams[1].acronym} team logo`} />
                         <h4>{match.teams[1].name}</h4>
                     </td>
                 </tr>
