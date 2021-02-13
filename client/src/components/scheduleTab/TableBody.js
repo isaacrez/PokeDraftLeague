@@ -2,15 +2,20 @@ import React from 'react';
 
 function TableBody(props) {
 
+    function isMatchValidWeek(match) {
+        return props.week === props.NO_WEEK_SELECT
+            || match.scheduledWeek === props.weeks;
+    }
+
     function isTeamInMatch(match, teamName) {
-        return props.team === ""
+        return props.team === props.NO_TEAM_SELECT
             || match.teams[0].name == teamName
             || match.teams[1].name == teamName;
     }
 
     function makeTableContent() {
         return props.matches
-            .filter(match => props.week === props.NO_WEEK_SELECT || match.scheduledWeek === props.week)
+            .filter(match => isMatchValidWeek(match))
             .filter(match => isTeamInMatch(match, props.team))
             .map(match => 
                 <tr>
