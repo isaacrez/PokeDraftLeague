@@ -3,14 +3,15 @@ import Entry from './Entry';
 
 function TableBody(props) {
 
-    function generateTable(tableData) {
-        return tableData.sort((a, b) => a.id - b.id)
-            .map(data => <Entry data={data} display={props.display} league={props.league} key={data.id} />);
+    function generateTable() {
+        return props.pokemon.map(poke => 
+            <Entry pokemon={poke} display={props.display} league={props.league} key={poke.name} />
+        );
     }
 
     return (
         <tbody>
-            {generateTable(props.tableData)}
+            {generateTable()}
         </tbody>
     )
 }

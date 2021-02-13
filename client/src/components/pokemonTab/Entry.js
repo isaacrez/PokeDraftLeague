@@ -2,11 +2,22 @@ import React from 'react';
 
 function Entry(props) {
 
+    const [data, setData] = React.useState({});
     const [leagueStats, setLeagueStats] = React.useState({});
-    React.useEffect(() => getLeagueStats(), []);
+    const [loaded, setLoaded] = React.useState(false);
 
-    function getLeagueStats() {
-        let url = `http://localhost:8080/api/match/results/${props.data.id}/${props.league.id}`;
+    React.useEffect(() => {
+        fetch(props.pokemon.url, {type: "GET"})
+            .then(response => response.json())
+            .then(pokeData => {
+                setData(pokeData);
+                getLeagueStats(pokeData);
+            }).then(() => setLoaded(true))
+            .catch(error => console.log(error));
+    }, [props.pokemon]);
+
+    function getLeagueStats(data) {
+        let url = `http://localhost:8080/api/match/results/${data.id}/${props.league.id}`;
         fetch(url, {type: "GET"})
             .then(response => response.json())
             .then(stats => setLeagueStats(stats))
@@ -69,23 +80,27 @@ function Entry(props) {
         return columns
     }
 
-    function cleanText(string) {
-        return capitalize(string.replace(/-/g, ' '));
-    }
-    
-    function capitalize(string) {
-        return string.replace(/(\b[a-z](?!\s))/g, (c) => c.toUpperCase());
-    }
-
     return (
         <tr>
-            {addLabel(props.data)}
-            {props.display["Base Stats"] && addStats(props.data)}
-            {props.display["Typing"] && addTyping(props.data)}
-            {props.display["Abilities"] && addAbilities(props.data)}
-            {props.display["League Stats"] && addLeagueStats()}
+            {
+                loaded ? [
+                    addLabel(data),
+                    props.display["Base Stats"] && addStats(data),
+                    props.display["Typing"] && addTyping(data),
+                    props.display["Abilities"] && addAbilities(data),
+                    props.display["League Stats"] && addLeagueStats()
+                ] : null
+            }
         </tr>
     )
+}
+
+function cleanText(string) {
+    return capitalize(string.replace(/-/g, ' '));
+}
+
+function capitalize(string) {
+    return string.replace(/(\b[a-z](?!\s))/g, (c) => c.toUpperCase());
 }
 
 export default Entry;
