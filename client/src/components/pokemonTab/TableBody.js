@@ -61,7 +61,8 @@ function TableBody(props) {
         let columns = [];
         data.types.forEach(typeObj => columns.push(
             <td key={data.id  + "-"+ typeObj.type.name}>
-                <img src={"https://www.serebii.net/pokedex-bw/type/" + typeObj.type.name + ".gif"} />
+                <img src={"https://www.serebii.net/pokedex-bw/type/" + typeObj.type.name + ".gif"}
+                    alt={`${typeObj.type.name} type`} />
             </td>)
         );
 
