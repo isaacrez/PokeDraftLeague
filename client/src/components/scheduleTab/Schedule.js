@@ -1,6 +1,7 @@
 import React from 'react';
 import EmptySchedule from './EmptySchedule';
 import WeekSelector from './WeekSelector';
+import TableBody from './TableBody';
 
 const NO_LEAGUE_SELECTED = -1;
 const NO_WEEK_SELECT = 0;
@@ -23,17 +24,6 @@ function RegularSchedule(props) {
             .catch(error => console.log(error));
     }, [props.league.id])
 
-    function makeTableContent() {
-        return matches
-            .filter(match => week === NO_WEEK_SELECT || match.scheduledWeek === week)
-            .map(match => 
-                <tr>
-                    <td>{match.scheduledWeek}</td>
-                    <td>{match.teams[0].name}</td>
-                    <td>{match.teams[1].name}</td>
-                </tr>
-            );
-    }
 
     return (
         <div className="full-stripe">
@@ -45,20 +35,10 @@ function RegularSchedule(props) {
                 matches={matches}
                 NO_WEEK_SELECT={NO_WEEK_SELECT} />
 
-            <div className="scrollable-table">
-                <table className="table table-secondary table-custom table-striped table-hover mb-0">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th>Week</th>
-                            <th>Team</th>
-                            <th>Team</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {makeTableContent()}
-                    </tbody>
-                </table>
-            </div>
+            <TableBody 
+                matches={matches}
+                week={week}
+                NO_WEEK_SELECT={NO_WEEK_SELECT} />
         </div>
     )
 }
