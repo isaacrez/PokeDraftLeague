@@ -42,10 +42,10 @@ function RegularSchedule(props) {
             <h1>Match Schedule</h1>
             <h2>{props.league.name}</h2>
 
-            <div className="w-25 d-flex justify-content-around">
+            <div className="d-flex minor-dropdown w-25 justify-content-around mb-3">
                 <label htmlFor="week">Week</label>
                 <select id="week" onChange={e => setWeek(Number(e.target.value))}>
-                        {makeWeekOptions()}
+                    {makeWeekOptions()}
                 </select>
             </div>
 
