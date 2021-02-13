@@ -39,7 +39,7 @@ function TableBody(props) {
                     className="icon"
                     alt={"Image of a " + data.name} />
                 }
-                <p>{capitalize(data.name)}</p>
+                <p>{cleanText(data.name)}</p>
             </td>
         )
     }
@@ -74,7 +74,7 @@ function TableBody(props) {
         data.abilities.forEach(abilityObj =>
             columns.push(
             <td key={data.id + abilityObj.ability.name}>
-                {cleanAbility(abilityObj.ability.name)}
+                {cleanText(abilityObj.ability.name)}
             </td>)
         )
 
@@ -89,8 +89,8 @@ function TableBody(props) {
         return columns
     }
 
-    function cleanAbility(string) {
-        return capitalize(string.replace('-', ' '));
+    function cleanText(string) {
+        return capitalize(string.replace(/-/g, ' '));
     }
     
     function capitalize(string) {
