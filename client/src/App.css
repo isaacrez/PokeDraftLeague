@@ -113,6 +113,17 @@ table {
   width: 100%;
 }
 
+table th, table td {
+  padding: 15px 0px;
+}
+
+table th {
+  color: #77BEE4;
+  background-color: #282828;
+  text-align: center;
+  min-width: 10vw;
+}
+
 thead {
   display: table-header-group;
   color: #77BEE4;
@@ -135,17 +146,10 @@ tbody tr:hover {
   background-color: #666666;
 }
 
-th {
-  color: #77BEE4;
-  background-color: #282828;
-  text-align: center;
-  min-width: 10vw;
-}
-
-.table-custom td {
+/* .table-custom td {
   vertical-align: middle;
   justify-content:  center;
-}
+} */
 
 tbody {
   text-align: center;
