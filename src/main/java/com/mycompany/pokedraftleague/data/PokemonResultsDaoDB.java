@@ -90,7 +90,7 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
                     new AggregatePokemonResultsMapper(),
                     pokeId,
                     leagueId);
-            result.setTeam(teamDao.getTeamOfPokemon(pokeId));
+            result.setTeam(teamDao.getTeamOfPokemonInLeague(pokeId, leagueId));
         } catch (DataAccessException e) {
             result = new PokemonResults();
             result.setDirectKOs(0);

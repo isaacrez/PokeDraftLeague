@@ -85,11 +85,11 @@ public class TeamDaoDB implements TeamDao {
     }
     
     @Override
-    public Team getTeamOfPokemon(int pokeId) {
+    public Team getTeamOfPokemonInLeague(int pokeId, int leagueId) {
         final String GET_TEAM_FOR_POKE = "SELECT t.* FROM team AS t "
-                + "JOIN roster AS r ON t.teamId = r.id "
-                + "WHERE r.pokeId = ?";
-        Team team = jdbc.queryForObject(GET_TEAM_FOR_POKE, new TeamMapper(), pokeId);
+                + "JOIN roster AS r ON t.id = r.teamId "
+                + "WHERE r.pokeId = ? AND r.leagueId = ?";
+        Team team = jdbc.queryForObject(GET_TEAM_FOR_POKE, new TeamMapper(), pokeId, leagueId);
         addCoachToTeam(team);
         return team;
     }
