@@ -121,7 +121,7 @@ table th {
   color: #77BEE4;
   background-color: #282828;
   text-align: center;
-  min-width: 10vw;
+  padding: 0px 5px;
 }
 
 thead {
@@ -145,11 +145,6 @@ tr:nth-child(even) {
 tbody tr:hover {
   background-color: #666666;
 }
-
-/* .table-custom td {
-  vertical-align: middle;
-  justify-content:  center;
-} */
 
 tbody {
   text-align: center;
