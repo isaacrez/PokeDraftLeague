@@ -24,7 +24,7 @@ function Entry(props) {
             .catch(error => console.log(error));
     }
 
-    function addLabel(data) {
+    function addLabel() {
         return (
             <td key={data.id}>
                 {data.sprites.other["official-artwork"].front_default && 
@@ -38,7 +38,7 @@ function Entry(props) {
         )
     }
 
-    function addStats(data) {
+    function addStats() {
         return data.stats.map((stat, index) => 
             <td className="align-middle"
                 key={`${data.id}-${index}`}>
@@ -47,7 +47,7 @@ function Entry(props) {
         );
     }
 
-    function addTyping(data) {
+    function addTyping() {
         return addUpTo(data.types.map((typeObj, index) =>
             <td key={`${data.id}-${index}`}>
                 <img src={`https://www.serebii.net/pokedex-bw/type/${typeObj.type.name}.gif`}
@@ -56,7 +56,7 @@ function Entry(props) {
         ), 2);
     }
 
-    function addAbilities(data) {
+    function addAbilities() {
         return addUpTo(data.abilities.map((abilityObj, index) =>
             <td key={`${data.id}-${index}`}>
                 {cleanText(abilityObj.ability.name)}
@@ -85,9 +85,9 @@ function Entry(props) {
             {
                 loaded ? [
                     addLabel(data),
-                    props.display["Base Stats"] && addStats(data),
-                    props.display["Typing"] && addTyping(data),
-                    props.display["Abilities"] && addAbilities(data),
+                    props.display["Base Stats"] && addStats(),
+                    props.display["Typing"] && addTyping(),
+                    props.display["Abilities"] && addAbilities(),
                     props.display["League Stats"] && addLeagueStats()
                 ] : null
             }
