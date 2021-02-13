@@ -5,7 +5,7 @@ function TableBody(props) {
 
     function generateTable(tableData) {
         return tableData.sort((a, b) => a.id - b.id)
-            .map(data => <Entry data={data} display={props.display} />);
+            .map(data => <Entry data={data} display={props.display} key={data.id} />);
     }
 
     return (
