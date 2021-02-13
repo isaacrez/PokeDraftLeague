@@ -36,7 +36,7 @@ function RegularSchedule(props) {
 
     function makeTeamOptions() {
         let options = teams.map(team => <option key={team.id}>{team.name}</option>);
-        options.unshift(<option key={""} value={""}>All</option>)
+        options.unshift(<option key={NO_TEAM_SELECT} value={NO_TEAM_SELECT}>All</option>)
         return options;
     }
 
@@ -63,7 +63,8 @@ function RegularSchedule(props) {
                 matches={matches}
                 week={week}
                 team={team}
-                NO_WEEK_SELECT={NO_WEEK_SELECT} />
+                NO_WEEK_SELECT={NO_WEEK_SELECT}
+                NO_TEAM_SELECT={NO_TEAM_SELECT} />
         </div>
     )
 }
