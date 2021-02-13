@@ -19,6 +19,7 @@ public interface TeamDao {
     Lineup getRosterById(int teamId);
     Team getTeamById(int id);
     List<Team> getTeamsByMatchId(int id);
+    Team getTeamOfPokemon(int pokeId);
     Team addTeam(Team team);
     void updateTeam(Team team);
     void deleteTeamById(int id);
