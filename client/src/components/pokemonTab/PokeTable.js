@@ -34,8 +34,8 @@ function PokeTable(props) {
 
     return (
         <div className="scrollable-table">
-            <table className="table table-secondary table-custom table-striped table-hover mb-0">
-                <thead className="thead-dark">
+            <table>
+                <thead>
                     <TableHeader 
                         display={props.display} />
                 </thead>

@@ -17,6 +17,18 @@ h1 {
   font-family: Lobster;
 }
 
+h2, h3, h4, h5, h6, p, td {
+  color: #FFE9AD;
+}
+
+.fancy {
+  font-family: Lobster;
+}
+
+/* tr {
+  background-color: #434343;
+} */
+
 nav {
   display: flex;
   justify-content: space-evenly;
@@ -97,8 +109,37 @@ input:focus, button:focus {
   margin: 0;
 }
 
+table {
+  width: 100%;
+}
+
+thead {
+  display: table-header-group;
+  color: #77BEE4;
+  background-color: #282828;
+}
+
+tr {
+  row-gap: 15px;
+}
+
+tr:nth-child(odd) {
+  background-color: #434343;
+}
+
+tr:nth-child(even) {
+  background-color: #282828;
+}
+
+tbody tr:hover {
+  background-color: #666666;
+}
+
 th {
+  color: #77BEE4;
+  background-color: #282828;
   text-align: center;
+  min-width: 10vw;
 }
 
 .table-custom td {
@@ -117,9 +158,9 @@ tbody {
   margin-bottom: 10px;
 }
 
-.scrollable-table thead th {
+.scrollable-table thead tr th {
   position: sticky;
-  top: -1px;
+  top: 0;
 }
 
 ::-webkit-scrollbar {

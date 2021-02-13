@@ -19,25 +19,29 @@ function TableBody(props) {
             .filter(match => isTeamInMatch(match, props.team))
             .map(match => 
                 <tr>
-                    <td>{match.scheduledWeek}</td>
-                    <td><img src={`${process.env.PUBLIC_URL}/img/logos/${match.teams[0].acronym}.png`}
-                            className="lg-icon" /></td>
-                    <td>{match.teams[0].name}</td>
-                    <td><img src={`${process.env.PUBLIC_URL}/img/logos/${match.teams[1].acronym}.png`}
-                            className="lg-icon" /></td>
-                    <td>{match.teams[1].name}</td>
+                    <td><h3 className="fancy">{match.scheduledWeek}</h3></td>
+                    <td>
+                        <img src={`${process.env.PUBLIC_URL}/img/logos/${match.teams[0].acronym}.png`}
+                            className="lg-icon" />
+                        <h4>{match.teams[0].name}</h4>
+                    </td>
+                    <td>
+                        <img src={`${process.env.PUBLIC_URL}/img/logos/${match.teams[1].acronym}.png`}
+                            className="lg-icon" />
+                        <h4>{match.teams[1].name}</h4>
+                    </td>
                 </tr>
             );
     }
 
     return (
         <div className="scrollable-table">
-            <table className="table table-secondary table-custom table-striped table-hover mb-0">
-                <thead className="thead-dark">
+            <table>
+                <thead>
                     <tr>
                         <th>Week</th>
-                        <th colSpan="2">Team</th>
-                        <th colSpan="2">Team</th>
+                        <th>Team</th>
+                        <th>Team</th>
                     </tr>
                 </thead>
                 <tbody>
