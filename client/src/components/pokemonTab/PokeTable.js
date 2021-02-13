@@ -11,24 +11,22 @@ function PokeTable(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.page.current, props.page.size]);
 
-    function buildUrl() {
-        return "https://pokeapi.co/api/v2/pokemon?limit=" + props.page.size
-         + "&offset=" + (props.page.current - 1) * props.page.size
+    function fetchPokeData() {
+        let offset = (props.page.current - 1) * props.page.size;
+        let listUrl = `https://pokeapi.co/api/v2/pokemon?limit=${props.page.size}&offset=${offset}`;
+
+        fetch(listUrl, {type: "GET"})
+            .then(response => response.json())
+            .then(data => data.results.forEach(pokemon => getPokemonStats(pokemon)))
+            .catch(error => console.log(error));
     }
 
-    function fetchPokeData() {
-        let listPokemonUrl = buildUrl();
-        fetch(listPokemonUrl, {type: "GET"})
+    function getPokemonStats(pokemon) {
+        let statsUrl = pokemon.url;
+
+        fetch(statsUrl, {type: "GET"})
             .then(response => response.json())
-            .then(data => {
-                data.results.forEach(pokemon => {
-                    let statsUrl = pokemon.url;
-                    fetch(statsUrl, {type: "GET"})
-                        .then(response => response.json())
-                        .then(pokeData => setTableData(tableData => [...tableData, pokeData]))
-                        .catch(error => console.log(error));
-                })
-            })
+            .then(pokeData => setTableData(tableData => [...tableData, pokeData]))
             .catch(error => console.log(error));
     }
 
