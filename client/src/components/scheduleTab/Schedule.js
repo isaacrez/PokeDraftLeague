@@ -1,7 +1,6 @@
 import React from 'react';
 import EmptySchedule from './EmptySchedule';
-import WeekSelector from './WeekSelector';
-import TeamSelector from './TeamSelector';
+import DropdownSelector from '../general/DropdownSelector';
 import TableBody from './TableBody';
 
 const NO_LEAGUE_SELECTED = -1;
@@ -42,15 +41,17 @@ function RegularSchedule(props) {
             <h2>{props.league.name}</h2>
 
             <div className="w-100 d-flex flex-wrap justify-content-between mb-3">
-                <WeekSelector
-                    setWeek={setWeek}
-                    matches={matches}
-                    NO_WEEK_SELECT={NO_WEEK_SELECT} />
+                <DropdownSelector 
+                    setValue={setWeek}
+                    values={[...new Set(matches.map(m => m.scheduledWeek))]}
+                    purpose={"Week"}
+                    DEFAULT_VALUE={NO_WEEK_SELECT} />
 
-                <TeamSelector 
-                    setTeam={setTeam}
-                    teams={teams}
-                    NO_TEAM_SELECT={NO_TEAM_SELECT} />
+                <DropdownSelector 
+                    setValue={setTeam}
+                    values={teams.map(t => t.name)}
+                    purpose={"Team"}
+                    DEFAULT_VALUE={NO_TEAM_SELECT} />
             </div>
 
             <TableBody 
