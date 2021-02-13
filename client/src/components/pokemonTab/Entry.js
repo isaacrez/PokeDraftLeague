@@ -2,6 +2,9 @@ import React from 'react';
 
 function Entry(props) {
 
+    const [leagueStats, setLeagueStats] = React.useState({});
+    props.display["League Stats"] && getLeagueStats(props.data);
+
     function addLabel(data) {
         return (
             <td className="d-flex flex-column justify-content-center align-items-center"
@@ -43,6 +46,23 @@ function Entry(props) {
         ), 4);
     }
 
+    function getLeagueStats(data) {
+        let url = `http://localhost:8080/api/match/results/${data.id}/${props.league.id}`;
+        fetch(url, {type: "GET"})
+            .then(response => response.json())
+            .then(stats => setLeagueStats(stats))
+            .catch(error => console.log(error));
+    }
+
+    function addLeagueStats() {
+        return [
+            <td>FREE</td>,
+            <td>{leagueStats.directKOs}</td>,
+            <td>{leagueStats.indirectKOs}</td>,
+            <td>{leagueStats.deaths}</td>
+        ]
+    }
+
     function addUpTo(columns, limit) {
         while (columns.length < limit) {
             columns.push(<td key={columns.length} />)
@@ -64,6 +84,7 @@ function Entry(props) {
             {props.display["Base Stats"] && addStats(props.data)}
             {props.display["Typing"] && addTyping(props.data)}
             {props.display["Abilities"] && addAbilities(props.data)}
+            {props.display["League Stats"] && addLeagueStats()}
         </tr>
     )
 }
