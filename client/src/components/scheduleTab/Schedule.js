@@ -16,7 +16,7 @@ function RegularSchedule(props) {
             .then(response => response.json())
             .then(matchData => setMatches(matchData))
             .catch(error => console.log(error));
-    }, [])
+    }, [props.league.id])
 
     function makeWeekOptions() {
         let options = new Set(matches.map(match => match.scheduledWeek));

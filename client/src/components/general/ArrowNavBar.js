@@ -4,6 +4,7 @@ function ArrowNavBar(props) {
 
     React.useEffect(() => {
         updatePage(0)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.page.size]);
 
     function updatePage(shift) {

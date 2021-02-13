@@ -8,6 +8,7 @@ function PokeTable(props) {
     React.useEffect(() => {
         setTableData([]);
         fetchPokeData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.page.current, props.page.size]);
 
     function buildUrl() {
