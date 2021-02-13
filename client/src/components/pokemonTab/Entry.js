@@ -66,7 +66,7 @@ function Entry(props) {
 
     function addLeagueStats() {
         return [
-            <td key={"team"}>FREE</td>,
+            <td key={"team"}>{leagueStats.team ? leagueStats.team.acronym : "FREE"}</td>,
             <td key={"directKOs"}>{leagueStats.directKOs}</td>,
             <td key={"indirectKOs"}>{leagueStats.indirectKOs}</td>,
             <td key={"deaths"}>{leagueStats.deaths}</td>
@@ -81,7 +81,7 @@ function Entry(props) {
     }
 
     return (
-        <tr>
+        <tr style={leagueStats.team && {"background-color": colorizeBy(leagueStats.team.acronym)}}>
             {
                 loaded ? [
                     addLabel(data),
@@ -101,6 +101,26 @@ function cleanText(string) {
 
 function capitalize(string) {
     return string.replace(/(\b[a-z](?!\s))/g, (c) => c.toUpperCase());
+}
+
+function colorizeBy(str) {
+    return intToRGB(hashCode(str));
+}
+
+function hashCode(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 12));
+    }
+    return hash;
+}
+
+function intToRGB(i) {
+    let c = (i & 0x00FFFFFF)
+        .toString(16)
+        .toUpperCase();
+
+    return "#00000".substring(0, 7 - c.length) + c;
 }
 
 export default Entry;
