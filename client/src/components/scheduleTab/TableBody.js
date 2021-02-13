@@ -18,7 +18,7 @@ function TableBody(props) {
             .filter(match => isMatchValidWeek(match))
             .filter(match => isTeamInMatch(match, props.team))
             .map(match => 
-                <tr>
+                <tr key={`${match.teams[0].acronym} vs ${match.teams[1].acronym}`}>
                     <td><h3 className="fancy">{match.scheduledWeek}</h3></td>
                     <td>
                         <img src={`${process.env.PUBLIC_URL}/img/logos/${match.teams[0].acronym}.png`}
