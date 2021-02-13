@@ -37,7 +37,7 @@ function TableBody(props) {
                 <img
                     src={data.sprites.other["official-artwork"].front_default}
                     className="icon"
-                    alt={"Image of a " + data.name} />
+                    alt={`Image of a ${data.name}`} />
                 }
                 <p>{cleanText(data.name)}</p>
             </td>
@@ -49,7 +49,7 @@ function TableBody(props) {
         data.stats.forEach((stat, index) => 
             columns.push(
                 <td className="align-middle"
-                    key={data.id + "" + index}>
+                    key={`${data.id}${index}`}>
                     {stat.base_stat}
                 </td>
             )
@@ -60,8 +60,8 @@ function TableBody(props) {
     function addTyping(data) {
         let columns = [];
         data.types.forEach(typeObj => columns.push(
-            <td key={data.id  + "-"+ typeObj.type.name}>
-                <img src={"https://www.serebii.net/pokedex-bw/type/" + typeObj.type.name + ".gif"}
+            <td key={`${data.id}-${typeObj.type.name}`}>
+                <img src={`https://www.serebii.net/pokedex-bw/type/${typeObj.type.name}.gif`}
                     alt={`${typeObj.type.name} type`} />
             </td>)
         );
