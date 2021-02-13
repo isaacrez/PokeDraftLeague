@@ -1,8 +1,11 @@
 import React from 'react';
 import EmptySchedule from './EmptySchedule';
 
+const NO_LEAGUE_SELECTED = -1;
+const NO_WEEK_SELECT = 0;
+
 function Schedule(props) {
-    return props.league.id === -1 ?
+    return props.league.id === NO_LEAGUE_SELECTED ?
         <EmptySchedule /> :
         <RegularSchedule league={props.league} />;
 }
@@ -22,13 +25,13 @@ function RegularSchedule(props) {
     function makeWeekOptions() {
         let options = new Set(matches.map(match => match.scheduledWeek));
         options = [...options].map(o => <option key={o}>{o}</option>);
-        options.unshift(<option key={0} value={0}>All</option>);
+        options.unshift(<option key={NO_WEEK_SELECT} value={NO_WEEK_SELECT}>All</option>);
         return options;
     }
 
     function makeTableContent() {
         return matches
-            .filter(match => week === 0 || match.scheduledWeek === week)
+            .filter(match => week === NO_WEEK_SELECT || match.scheduledWeek === week)
             .map(match => 
                 <tr>
                     <td>{match.scheduledWeek}</td>
@@ -67,7 +70,5 @@ function RegularSchedule(props) {
         </div>
     )
 }
-
-
 
 export default Schedule;
