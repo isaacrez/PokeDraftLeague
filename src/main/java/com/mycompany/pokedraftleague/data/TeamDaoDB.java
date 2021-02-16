@@ -8,7 +8,6 @@ package com.mycompany.pokedraftleague.data;
 import com.mycompany.pokedraftleague.data.CoachDaoDB.CoachMapper;
 import com.mycompany.pokedraftleague.data.PokemonDaoDB.PokemonMapper;
 import com.mycompany.pokedraftleague.models.Coach;
-import com.mycompany.pokedraftleague.models.Lineup;
 import com.mycompany.pokedraftleague.models.Pokemon;
 import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
@@ -53,13 +52,12 @@ public class TeamDaoDB implements TeamDao {
     }
 
     @Override
-    public Lineup getRosterById(int teamId) {
+    public List<Pokemon> getRosterById(int teamId) {
         final String GET_POKEMON_BY_TEAM_ID = "SELECT p.* FROM team AS t "
                 + "JOIN roster AS r ON t.id = r.teamId "
                 + "JOIN pokemon AS p ON r.pokeId = p.id "
                 + "WHERE t.id = ?";
-        List<Pokemon> pokemon = jdbc.query(GET_POKEMON_BY_TEAM_ID, new PokemonMapper(), teamId);
-        return new Lineup(pokemon);
+        return jdbc.query(GET_POKEMON_BY_TEAM_ID, new PokemonMapper(), teamId);
     }
 
     @Override
