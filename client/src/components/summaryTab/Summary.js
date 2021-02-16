@@ -1,5 +1,6 @@
 import React from 'react';
 import DropdownSelector from '../general/DropdownSelector';
+import {cleanText} from '../../util/pokeEntry';
 
 const NO_TEAM_SELECT = "";
 
@@ -39,7 +40,7 @@ function TableBody(props) {
     function makeRows() {
         return props.rosterInfo.roster.map(v => 
             <tr>
-                <td>{v.urlID}</td>
+                <td>{cleanText(v.urlID)}</td>
             </tr>
         )
     }
