@@ -6,6 +6,7 @@
 package com.mycompany.pokedraftleague.data;
 
 import com.mycompany.pokedraftleague.models.Pokemon;
+import com.mycompany.pokedraftleague.models.Roster;
 import com.mycompany.pokedraftleague.models.Team;
 import java.util.List;
 
@@ -16,7 +17,8 @@ import java.util.List;
 public interface TeamDao {
     List<Team> getAllTeams();
     List<Team> getAllTeamsForLeague(int leagueId);
-    List<Pokemon> getRosterById(int teamId);
+    Roster getRosterById(int teamId, int leagueId);
+    List<Roster> getAllTeamRostersForLeague(int leagueId);
     Team getTeamById(int id);
     List<Team> getTeamsByMatchId(int id);
     Team getTeamOfPokemonInLeague(int pokeId, int leagueId);

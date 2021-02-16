@@ -9,9 +9,11 @@ import com.mycompany.pokedraftleague.data.CoachDaoDB.CoachMapper;
 import com.mycompany.pokedraftleague.data.PokemonDaoDB.PokemonMapper;
 import com.mycompany.pokedraftleague.models.Coach;
 import com.mycompany.pokedraftleague.models.Pokemon;
+import com.mycompany.pokedraftleague.models.Roster;
 import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -52,12 +54,34 @@ public class TeamDaoDB implements TeamDao {
     }
 
     @Override
-    public List<Pokemon> getRosterById(int teamId) {
-        final String GET_POKEMON_BY_TEAM_ID = "SELECT p.* FROM team AS t "
-                + "JOIN roster AS r ON t.id = r.teamId "
-                + "JOIN pokemon AS p ON r.pokeId = p.id "
-                + "WHERE t.id = ?";
-        return jdbc.query(GET_POKEMON_BY_TEAM_ID, new PokemonMapper(), teamId);
+    public Roster getRosterById(int teamId, int leagueId) {
+        try {
+            Roster roster = new Roster();
+
+            final String GET_POKEMON_BY_TEAM_ID = "SELECT p.* FROM team AS t "
+                    + "JOIN roster AS r ON t.id = r.teamId "
+                    + "JOIN pokemon AS p ON r.pokeId = p.id "
+                    + "WHERE r.teamId = ? AND r.leagueId = ?";
+            roster.setRoster(jdbc.query(GET_POKEMON_BY_TEAM_ID, new PokemonMapper(), teamId, leagueId));
+
+            final String GET_TEAM_BY_ID = "SELECT * FROM team WHERE id = ?";
+            roster.setTeam(jdbc.queryForObject(GET_TEAM_BY_ID, new TeamMapper(), teamId));
+
+            return roster;
+        } catch (DataAccessException e) {
+            return null;
+        }
+    }
+    
+    public List<Roster> getAllTeamRostersForLeague(int leagueId) {
+        List<Roster> roster = new ArrayList<>();
+        List<Team> teams = getAllTeamsForLeague(leagueId);
+        
+        for (Team team : teams) {
+            roster.add(getRosterById(team.getId(), leagueId));
+        }
+        
+        return roster;
     }
 
     @Override

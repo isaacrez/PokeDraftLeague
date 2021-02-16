@@ -6,6 +6,7 @@
 package com.mycompany.pokedraftleague.controller;
 
 import com.mycompany.pokedraftleague.data.LeagueDao;
+import com.mycompany.pokedraftleague.data.TeamDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,8 +27,12 @@ public class LeagueController {
     @Autowired
     private final LeagueDao leagueDao;
     
-    public LeagueController (LeagueDao leagueDao) {
+    @Autowired
+    private final TeamDao teamDao;
+    
+    public LeagueController (LeagueDao leagueDao, TeamDao teamDao) {
         this.leagueDao = leagueDao;
+        this.teamDao = teamDao;
     }
     
     @GetMapping()
@@ -38,5 +43,10 @@ public class LeagueController {
     @GetMapping("/{leagueId}")
     public ResponseEntity getLeagueById(@PathVariable int leagueId) {
         return ResponseEntity.ok(leagueDao.getLeagueById(leagueId));
+    }
+    
+    @GetMapping("/roster/{leagueId}")
+    public ResponseEntity getRostersForLeague(@PathVariable int leagueId) {
+        return ResponseEntity.ok(teamDao.getAllTeamRostersForLeague(leagueId));
     }
 }
