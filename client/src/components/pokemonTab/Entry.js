@@ -1,4 +1,5 @@
 import React from 'react';
+import {cleanText, colorizeBy} from '../../util/pokeEntry';
 
 function Entry(props) {
 
@@ -93,34 +94,6 @@ function Entry(props) {
             }
         </tr>
     )
-}
-
-function cleanText(string) {
-    return capitalize(string.replace(/-/g, ' '));
-}
-
-function capitalize(string) {
-    return string.replace(/(\b[a-z](?!\s))/g, (c) => c.toUpperCase());
-}
-
-function colorizeBy(str) {
-    return intToRGB(hashCode(str));
-}
-
-function hashCode(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 12));
-    }
-    return hash;
-}
-
-function intToRGB(i) {
-    let c = (i & 0x00FFFFFF)
-        .toString(16)
-        .toUpperCase();
-
-    return "#00000".substring(0, 7 - c.length) + c;
 }
 
 export default Entry;
