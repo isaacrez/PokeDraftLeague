@@ -22,14 +22,42 @@ function Summary(props) {
             <h1>Team Summary</h1>
             <h2 className="fancy">{props.league.name}</h2>
             <h2>{team.name}</h2>
-            
+
             <DropdownSelector 
                 setValue={setTeam}
                 values={rosters.map(r => r.team.name)}
                 purpose={"Team"}
                 DEFAULT_VALUE={NO_TEAM_SELECT} />
+
+            <TableBody rosterInfo={rosters.filter(v => v.team.name === team)[0]} />
         </div>
     )
+}
+
+function TableBody(props) {
+
+    function makeRows() {
+        return props.rosterInfo.roster.map(v => 
+            <tr>
+                <td>{v.urlID}</td>
+            </tr>
+        )
+    }
+
+    console.log(props);
+
+    return props.rosterInfo ?  
+        (<table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {makeRows()}
+            </tbody>
+        </table>) :
+        null;
 }
 
 export default Summary;
