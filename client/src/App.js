@@ -4,6 +4,7 @@ import Header from './components/general/Header';
 import Home from './components/homeTab/Home';
 import Leaderboard from './components/leaderboardTab/Leaderboard';
 import Schedule from './components/scheduleTab/Schedule';
+import Summary from './components/summaryTab/Summary';
 import Pokemon from './components/pokemonTab/Pokemon';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -18,6 +19,7 @@ function App() {
     "Home": <Home setLeague={setLeague}/>,
     "Leaderboard": <Leaderboard league={league} />,
     "Schedule": <Schedule league={league}/>,
+    "Team Summary": <Summary league={league} />,
     "Pokémon": <Pokemon league={league}/>
   }
 
