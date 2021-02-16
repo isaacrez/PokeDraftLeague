@@ -1,5 +1,5 @@
 import React from 'react';
-import {cleanText, colorizeBy} from '../../util/pokeEntry';
+import {addLabel, addStats, addTyping, addAbilities, addLeagueStats, colorizeBy} from '../../util/pokeEntry';
 
 function Entry(props) {
 
@@ -25,71 +25,15 @@ function Entry(props) {
             .catch(error => console.log(error));
     }
 
-    function addLabel() {
-        return (
-            <td key={data.id}>
-                {data.sprites.other["official-artwork"].front_default && 
-                <img
-                    src={data.sprites.other["official-artwork"].front_default}
-                    className="icon"
-                    alt={`${data.name}`} />
-                }
-                <p>{cleanText(data.name)}</p>
-            </td>
-        )
-    }
-
-    function addStats() {
-        return data.stats.map((stat, index) => 
-            <td className="align-middle"
-                key={`${data.id}-${index}`}>
-                {stat.base_stat}
-            </td>
-        );
-    }
-
-    function addTyping() {
-        return addUpTo(data.types.map((typeObj, index) =>
-            <td key={`${data.id}-${index}`}>
-                <img src={`https://www.serebii.net/pokedex-bw/type/${typeObj.type.name}.gif`}
-                    alt={`${typeObj.type.name} type`} />
-            </td>
-        ), 2);
-    }
-
-    function addAbilities() {
-        return addUpTo(data.abilities.map((abilityObj, index) =>
-            <td key={`${data.id}-${index}`}>
-                {cleanText(abilityObj.ability.name)}
-            </td>
-        ), 4);
-    }
-
-    function addLeagueStats() {
-        return [
-            <td key={"team"}>{leagueStats.team ? leagueStats.team.acronym : "FREE"}</td>,
-            <td key={"directKOs"}>{leagueStats.directKOs}</td>,
-            <td key={"indirectKOs"}>{leagueStats.indirectKOs}</td>,
-            <td key={"deaths"}>{leagueStats.deaths}</td>
-        ]
-    }
-
-    function addUpTo(columns, limit) {
-        while (columns.length < limit) {
-            columns.push(<td key={columns.length} />)
-        }
-        return columns
-    }
-
     return (
         <tr style={leagueStats.team && {backgroundColor: colorizeBy(leagueStats.team.acronym)}}>
             {
                 loaded ? [
                     addLabel(data),
-                    props.display["Base Stats"] && addStats(),
-                    props.display["Typing"] && addTyping(),
-                    props.display["Abilities"] && addAbilities(),
-                    props.display["League Stats"] && addLeagueStats()
+                    props.display["Base Stats"] && addStats(data),
+                    props.display["Typing"] && addTyping(data),
+                    props.display["Abilities"] && addAbilities(data),
+                    props.display["League Stats"] && addLeagueStats(leagueStats)
                 ] : null
             }
         </tr>
