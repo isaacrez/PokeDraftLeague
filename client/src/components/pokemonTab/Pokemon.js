@@ -30,6 +30,8 @@ function Pokemon(props) {
 
             <PokeSearchBar />
 
+            <h2>{props.league.name}</h2>
+
             <PokeTable
                 league={props.league} 
                 page={pageInfo}
