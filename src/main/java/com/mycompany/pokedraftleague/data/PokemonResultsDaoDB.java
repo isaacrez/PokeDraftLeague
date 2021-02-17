@@ -76,53 +76,6 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
     public PokemonResults getPokemonResultsById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    @Override
-    public PokemonResults getResultsFor(int pokeId, int leagueId) {
-        PokemonResults result;
-        try {
-            final String GET_RESULTS_FOR = "SELECT SUM(directKOs), "
-                    + "SUM(indirectKOs), SUM(wasKOed) "
-                    + "FROM matchAttendee AS ma "
-                    + "JOIN `match` AS m ON ma.matchId = m.id "
-                    + "WHERE ma.pokeId = ? AND m.leagueId = ?";
-            result = jdbc.queryForObject(GET_RESULTS_FOR,
-                    new AggregatePokemonResultsMapper(),
-                    pokeId,
-                    leagueId);
-            result.setTeam(teamDao.getTeamOfPokemonInLeague(pokeId, leagueId));
-        } catch (DataAccessException e) {
-            result = new PokemonResults();
-            result.setDirectKOs(0);
-            result.setIndirectKOs(0);
-            result.setDeaths(0);
-        }
-        
-        result.setPokemon(getPokemonForResults(pokeId));
-        return result;
-    }
-    
-    @Override
-    public PokemonResults getResultsFor(int pokeId, int teamId, int leagueId) {
-        try {            
-            final String GET_RESULTS_FOR = "SELECT SUM(directKOs), "
-                    + "SUM(indirectKOs), SUM(wasKOed) "
-                    + "FROM matchAttendee AS ma "
-                    + "JOIN `match` AS m ON ma.matchId = m.id "
-                    + "WHERE ma.pokeId = ? AND ma.teamId = ? AND m.leagueId = ?";
-            
-            PokemonResults result = jdbc.queryForObject(GET_RESULTS_FOR,
-                    new AggregatePokemonResultsMapper(),
-                    pokeId,
-                    teamId,
-                    leagueId);
-            addTeamToResults(result, teamId);
-            result.setPokemon(getPokemonForResults(pokeId));
-            return result;
-        } catch (DataAccessException e) {
-            return null;
-        }
-    }
 
     @Override
     public PokemonResults addPokemonResults(PokemonResults pokemonResults) {
@@ -168,17 +121,6 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
     private Pokemon getPokemonForResults(int pokeId) {
         final String GET_POKEMON = "SELECT * FROM pokemon WHERE id = ?";
         return jdbc.queryForObject(GET_POKEMON, new PokemonMapper(), pokeId);
-    }
-    
-    public static final class AggregatePokemonResultsMapper implements RowMapper<PokemonResults> {
-        @Override
-        public PokemonResults mapRow(ResultSet rs, int i) throws SQLException {
-            PokemonResults results = new PokemonResults();
-            results.setDirectKOs(rs.getInt("SUM(directKOs)"));
-            results.setIndirectKOs(rs.getInt("SUM(indirectKOs)"));
-            results.setDeaths(rs.getInt("SUM(wasKOed)"));
-            return results;
-        }
     }
     
     public static final class PokemonResultsMapper implements RowMapper<PokemonResults> {

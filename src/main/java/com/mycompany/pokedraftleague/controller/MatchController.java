@@ -5,6 +5,7 @@
  */
 package com.mycompany.pokedraftleague.controller;
 
+import com.mycompany.pokedraftleague.data.AggregatePokemonResultsDao;
 import com.mycompany.pokedraftleague.data.MatchDao;
 import com.mycompany.pokedraftleague.data.MatchResultsDao;
 import com.mycompany.pokedraftleague.data.PokemonResultsDao;
@@ -41,11 +42,17 @@ public class MatchController {
     @Autowired
     private final PokemonResultsDao pokemonResultsDao;
     
-    public MatchController(MatchDao matchDao, TeamDao teamDao, MatchResultsDao matchResultsDao, PokemonResultsDao pokemonResultsDao) {
+    @Autowired
+    private final AggregatePokemonResultsDao aggregatePokemonResultsDao;
+    
+    public MatchController(MatchDao matchDao, TeamDao teamDao,
+            MatchResultsDao matchResultsDao, PokemonResultsDao pokemonResultsDao,
+            AggregatePokemonResultsDao aggregatePokemonResultsDao) {
         this.matchDao = matchDao;
         this.teamDao = teamDao;
         this.matchResultsDao = matchResultsDao;
         this.pokemonResultsDao = pokemonResultsDao;
+        this.aggregatePokemonResultsDao = aggregatePokemonResultsDao;
     }
     
     @GetMapping("/results")
@@ -56,14 +63,14 @@ public class MatchController {
     @GetMapping("/results/{pokeId}/{leagueId}")
     public ResponseEntity getPokeStatsForLeague(@PathVariable int pokeId,
             @PathVariable int leagueId) {
-        return ResponseEntity.ok(pokemonResultsDao.getResultsFor(pokeId, leagueId));
+        return ResponseEntity.ok(aggregatePokemonResultsDao.getResultsFor(pokeId, leagueId));
     }
     
     @GetMapping("/results/{pokeId}/{teamId}/{leagueId}")
     public ResponseEntity getPokeStatsOnTeamForLeague(@PathVariable int pokeId, 
             @PathVariable int teamId,
             @PathVariable int leagueId) {
-        return wrapInEntity(pokemonResultsDao.getResultsFor(pokeId, teamId, leagueId));
+        return wrapInEntity(aggregatePokemonResultsDao.getResultsFor(pokeId, teamId, leagueId));
     }
     
     @GetMapping("/schedule/{leagueId}")
