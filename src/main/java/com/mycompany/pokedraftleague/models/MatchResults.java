@@ -5,8 +5,6 @@
  */
 package com.mycompany.pokedraftleague.models;
 
-import java.util.Objects;
-
 /**
  *
  * @author isaacrez
