@@ -5,7 +5,7 @@
  */
 package com.mycompany.pokedraftleague.data;
 
-import com.mycompany.pokedraftleague.models.AggregatePokemonResults;
+import com.mycompany.pokedraftleague.models.AggregatePokemonStats;
 import com.mycompany.pokedraftleague.models.Pokemon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
  * @author isaacrez
  */
 @Repository
-public class AggregatePokemonResultsDaoDB implements AggregatePokemonResultsDao {
+public class AggregatePokemonStatsDaoDB implements AggregatePokemonStatsDao {
     
     @Autowired
     JdbcTemplate jdbc;
@@ -27,13 +27,13 @@ public class AggregatePokemonResultsDaoDB implements AggregatePokemonResultsDao 
     @Autowired
     PokemonDao pokemonDao;
     
-    AggregatePokemonResultsDaoDB(JdbcTemplate jdbc, PokemonDao pokemonDao) {
+    AggregatePokemonStatsDaoDB(JdbcTemplate jdbc, PokemonDao pokemonDao) {
         this.jdbc = jdbc;
         this.pokemonDao = pokemonDao;
     }
 
     @Override
-    public AggregatePokemonResults getResultsFor(int pokeId, int leagueId) {
+    public AggregatePokemonStats getStatsFor(int pokeId, int leagueId) {
         Pokemon pokemon = pokemonDao.getPokemonById(pokeId);
         
         if (pokemon != null) {
@@ -42,8 +42,8 @@ public class AggregatePokemonResultsDaoDB implements AggregatePokemonResultsDao 
                     + "FROM matchAttendee AS ma "
                     + "JOIN `match` AS m ON m.id = ma.matchId "
                     + "WHERE ma.pokeId = ? AND m.leagueId = ?";
-            AggregatePokemonResults results = jdbc.queryForObject(GET_RESULTS_FOR,
-                    new AggregatePokemonResultsMapper(),
+            AggregatePokemonStats results = jdbc.queryForObject(GET_RESULTS_FOR,
+                    new AggregatePokemonStatsMapper(),
                     pokeId,
                     leagueId);
             results.setPokemon(pokemonDao.getPokemonById(pokeId));
@@ -55,7 +55,7 @@ public class AggregatePokemonResultsDaoDB implements AggregatePokemonResultsDao 
     }
 
     @Override
-    public AggregatePokemonResults getResultsFor(int pokeId, int teamId, int leagueId) {
+    public AggregatePokemonStats getStatsFor(int pokeId, int teamId, int leagueId) {
         Pokemon pokemon = pokemonDao.getPokemonById(pokeId);
         
         if (pokemon != null) {
@@ -64,8 +64,8 @@ public class AggregatePokemonResultsDaoDB implements AggregatePokemonResultsDao 
                     + "FROM matchAttendee AS ma "
                     + "JOIN `match` AS m ON m.id = ma.matchId "
                     + "WHERE ma.pokeId = ? AND ma.teamId = ? AND m.leagueId = ?";
-            AggregatePokemonResults results = jdbc.queryForObject(GET_RESULTS_FOR,
-                    new AggregatePokemonResultsMapper(),
+            AggregatePokemonStats results = jdbc.queryForObject(GET_RESULTS_FOR,
+                    new AggregatePokemonStatsMapper(),
                     pokeId,
                     teamId,
                     leagueId);
@@ -77,10 +77,10 @@ public class AggregatePokemonResultsDaoDB implements AggregatePokemonResultsDao 
         }
     }
           
-    public static final class AggregatePokemonResultsMapper implements RowMapper<AggregatePokemonResults> {
+    public static final class AggregatePokemonStatsMapper implements RowMapper<AggregatePokemonStats> {
         @Override
-        public AggregatePokemonResults mapRow(ResultSet rs, int i) throws SQLException {
-            AggregatePokemonResults results = new AggregatePokemonResults();
+        public AggregatePokemonStats mapRow(ResultSet rs, int i) throws SQLException {
+            AggregatePokemonStats results = new AggregatePokemonStats();
             results.setGamesPlayed(rs.getInt("COUNT(*)"));
             results.setDirectKOs(rs.getInt("SUM(directKOs)"));
             results.setIndirectKOs(rs.getInt("SUM(indirectKOs)"));

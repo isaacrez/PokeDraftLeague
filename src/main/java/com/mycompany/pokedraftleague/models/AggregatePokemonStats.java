@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author isaacrez
  */
-public class AggregatePokemonResults {
+public class AggregatePokemonStats {
     
     Pokemon pokemon;
     int gamesPlayed;
@@ -91,7 +91,7 @@ public class AggregatePokemonResults {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AggregatePokemonResults other = (AggregatePokemonResults) obj;
+        final AggregatePokemonStats other = (AggregatePokemonStats) obj;
         if (this.gamesPlayed != other.gamesPlayed) {
             return false;
         }
