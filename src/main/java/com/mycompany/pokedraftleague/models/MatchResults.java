@@ -13,9 +13,8 @@ public class MatchResults {
     
     private int matchId;
     private int teamId;
-    private int directKOs;
-    private int indirectKOs;
-    private int deaths;
+    private boolean wasWon;
+    private int differential;
 
     public int getMatchId() {
         return matchId;
@@ -33,38 +32,29 @@ public class MatchResults {
         this.teamId = teamId;
     }
 
-    public int getDirectKOs() {
-        return directKOs;
+    public boolean isWasWon() {
+        return wasWon;
     }
 
-    public void setDirectKOs(int directKOs) {
-        this.directKOs = directKOs;
+    public void setWasWon(boolean wasWon) {
+        this.wasWon = wasWon;
     }
 
-    public int getIndirectKOs() {
-        return indirectKOs;
+    public int getDifferential() {
+        return differential;
     }
 
-    public void setIndirectKOs(int indirectKOs) {
-        this.indirectKOs = indirectKOs;
-    }
-
-    public int getDeaths() {
-        return deaths;
-    }
-
-    public void setDeaths(int deaths) {
-        this.deaths = deaths;
+    public void setDifferential(int differential) {
+        this.differential = differential;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.matchId;
-        hash = 97 * hash + this.teamId;
-        hash = 97 * hash + this.directKOs;
-        hash = 97 * hash + this.indirectKOs;
-        hash = 97 * hash + this.deaths;
+        int hash = 7;
+        hash = 79 * hash + this.matchId;
+        hash = 79 * hash + this.teamId;
+        hash = 79 * hash + (this.wasWon ? 1 : 0);
+        hash = 79 * hash + this.differential;
         return hash;
     }
 
@@ -86,16 +76,13 @@ public class MatchResults {
         if (this.teamId != other.teamId) {
             return false;
         }
-        if (this.directKOs != other.directKOs) {
+        if (this.wasWon != other.wasWon) {
             return false;
         }
-        if (this.indirectKOs != other.indirectKOs) {
-            return false;
-        }
-        if (this.deaths != other.deaths) {
+        if (this.differential != other.differential) {
             return false;
         }
         return true;
     }
-   
+
 }

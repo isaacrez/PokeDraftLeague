@@ -51,9 +51,14 @@ public class MatchResultsDaoDB implements MatchResultsDao {
             MatchResults results = new MatchResults();
             results.setMatchId(rs.getInt("matchId"));
             results.setTeamId(rs.getInt("teamId"));
-            results.setDirectKOs(rs.getInt("SUM(directKOs)"));
-            results.setIndirectKOs(rs.getInt("SUM(indirectKOs)"));
-            results.setDeaths(rs.getInt("SUM(wasKOed)"));
+
+            int differential = rs.getInt("SUM(directKOs)")
+                    + rs.getInt("SUM(indirectKOs") - rs.getInt("SUM(wasKOed)");
+            results.setDifferential(differential);
+            
+            boolean wasWon = differential > 0;
+            results.setWasWon(wasWon);
+
             return results;
         }
     }
