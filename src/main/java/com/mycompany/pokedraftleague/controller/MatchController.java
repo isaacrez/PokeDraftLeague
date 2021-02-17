@@ -55,9 +55,9 @@ public class MatchController {
         this.aggregatePokemonStatsDao = aggregatePokemonStatsDao;
     }
     
-    @GetMapping("/results")
-    public ResponseEntity getMatchResultsFor(@RequestBody MatchResults matchResults) {
-        return ResponseEntity.ok(matchResultsDao.getMatchResultsFor(matchResults));
+    @GetMapping("/results/temp/{matchId}/{teamId}")
+    public ResponseEntity getMatchResultsFor(@PathVariable int matchId, @PathVariable int teamId) {
+        return ResponseEntity.ok(matchResultsDao.getMatchResultsFor(matchId, teamId));
     }
     
     @GetMapping("/results/{pokeId}/{leagueId}")

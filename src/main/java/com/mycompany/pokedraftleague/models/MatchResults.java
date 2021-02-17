@@ -5,6 +5,8 @@
  */
 package com.mycompany.pokedraftleague.models;
 
+import java.util.Objects;
+
 /**
  *
  * @author isaacrez
@@ -12,7 +14,7 @@ package com.mycompany.pokedraftleague.models;
 public class MatchResults {
     
     private int matchId;
-    private int teamId;
+    private Team team;
     private boolean wasWon;
     private int differential;
 
@@ -24,12 +26,12 @@ public class MatchResults {
         this.matchId = matchId;
     }
 
-    public int getTeamId() {
-        return teamId;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public boolean isWasWon() {
@@ -50,11 +52,11 @@ public class MatchResults {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.matchId;
-        hash = 79 * hash + this.teamId;
-        hash = 79 * hash + (this.wasWon ? 1 : 0);
-        hash = 79 * hash + this.differential;
+        int hash = 5;
+        hash = 41 * hash + this.matchId;
+        hash = 41 * hash + Objects.hashCode(this.team);
+        hash = 41 * hash + (this.wasWon ? 1 : 0);
+        hash = 41 * hash + this.differential;
         return hash;
     }
 
@@ -73,7 +75,7 @@ public class MatchResults {
         if (this.matchId != other.matchId) {
             return false;
         }
-        if (this.teamId != other.teamId) {
+        if (this.team != other.team) {
             return false;
         }
         if (this.wasWon != other.wasWon) {

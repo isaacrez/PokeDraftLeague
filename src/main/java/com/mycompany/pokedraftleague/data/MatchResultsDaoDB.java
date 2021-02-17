@@ -22,24 +22,30 @@ import org.springframework.stereotype.Repository;
 public class MatchResultsDaoDB implements MatchResultsDao {
     
     private final JdbcTemplate jdbc;
+    private final TeamDao teamDao;
     
     @Autowired
-    public MatchResultsDaoDB(JdbcTemplate jdbcTemplate) {
+    public MatchResultsDaoDB(JdbcTemplate jdbcTemplate, TeamDao teamDao) {
         this.jdbc = jdbcTemplate;
+        this.teamDao = teamDao;
     }
     
     @Override
-    public MatchResults getMatchResultsFor(MatchResults matchResults) {
+    public MatchResults getMatchResultsFor(int matchId, int teamId) {
         try {
             final String GET_STATS = "SELECT matchId, teamId, "
                     + "SUM(directKOs), SUM(indirectKOs), SUM(wasKOed) "
                     + "FROM matchattendee "
                     + "WHERE matchId = ? AND teamId = ?";
             
-            return jdbc.queryForObject(GET_STATS,
+            MatchResults results = jdbc.queryForObject(GET_STATS,
                     new MatchResultsMapper(),
-                    matchResults.getMatchId(),
-                    matchResults.getTeamId());
+                    matchId,
+                    teamId);
+            results.setTeam(teamDao.getTeamById(teamId));
+            
+            return results;
+            
         } catch (DataAccessException e) {
             return null;
         }
@@ -50,7 +56,6 @@ public class MatchResultsDaoDB implements MatchResultsDao {
         public MatchResults mapRow(ResultSet rs, int index) throws SQLException {
             MatchResults results = new MatchResults();
             results.setMatchId(rs.getInt("matchId"));
-            results.setTeamId(rs.getInt("teamId"));
 
             int differential = rs.getInt("SUM(directKOs)")
                     + rs.getInt("SUM(indirectKOs)") - rs.getInt("SUM(wasKOed)");
