@@ -53,7 +53,7 @@ public class MatchResultsDaoDB implements MatchResultsDao {
             results.setTeamId(rs.getInt("teamId"));
 
             int differential = rs.getInt("SUM(directKOs)")
-                    + rs.getInt("SUM(indirectKOs") - rs.getInt("SUM(wasKOed)");
+                    + rs.getInt("SUM(indirectKOs)") - rs.getInt("SUM(wasKOed)");
             results.setDifferential(differential);
             
             boolean wasWon = differential > 0;
