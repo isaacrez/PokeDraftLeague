@@ -6,6 +6,7 @@
 package com.mycompany.pokedraftleague.controller;
 
 import com.mycompany.pokedraftleague.data.LeagueDao;
+import com.mycompany.pokedraftleague.data.MatchResultsDao;
 import com.mycompany.pokedraftleague.data.TeamDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +27,13 @@ public class LeagueController {
     
     private final LeagueDao leagueDao;
     private final TeamDao teamDao;
+    private final MatchResultsDao matchResultsDao;
 
     @Autowired
-    public LeagueController (LeagueDao leagueDao, TeamDao teamDao) {
+    public LeagueController (LeagueDao leagueDao, TeamDao teamDao, MatchResultsDao matchResultsDao) {
         this.leagueDao = leagueDao;
         this.teamDao = teamDao;
+        this.matchResultsDao = matchResultsDao;
     }
     
     @GetMapping()
@@ -46,5 +49,10 @@ public class LeagueController {
     @GetMapping("/roster/{leagueId}")
     public ResponseEntity getRostersForLeague(@PathVariable int leagueId) {
         return ResponseEntity.ok(teamDao.getAllTeamRostersForLeague(leagueId));
+    }
+    
+    @GetMapping("/results/{leagueId}/{teamId}")
+    public ResponseEntity getResultsForTeam(@PathVariable int  leagueId, @PathVariable int teamId) {
+        return ResponseEntity.ok(matchResultsDao.getTeamResultsFor(teamId, leagueId));
     }
 }
