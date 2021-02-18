@@ -46,8 +46,11 @@ function TableBody(props) {
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Direct KOs</th>
-                    <th>Indirect KOs</th>
+                    <th>Played</th>
+                    <th>Won</th>
+                    <th>Lost</th>
+                    <th>KOs</th>
+                    <th>Passive KOs</th>
                     <th>Deaths</th>
                     <th>+/-</th>
                 </tr>
@@ -72,8 +75,11 @@ function Entry(props) {
     }, [])
 
     return (
-        <tr>
+        <tr key={leagueStats.pokemon.id}>
             <td>{cleanText(props.pokemon.urlID)}</td>
+            <td>{leagueStats.gamesPlayed}</td>
+            <td>{leagueStats.gamesWon}</td>
+            <td>{leagueStats.gamesPlayed - leagueStats.gamesWon}</td>
             <td>{leagueStats.directKOs}</td>
             <td>{leagueStats.indirectKOs}</td>
             <td>{leagueStats.deaths}</td>
