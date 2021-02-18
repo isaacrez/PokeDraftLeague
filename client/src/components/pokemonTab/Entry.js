@@ -18,7 +18,7 @@ function Entry(props) {
     }, [props.pokemon]);
 
     function getLeagueStats(data) {
-        let url = `http://localhost:8080/api/match/results/${data.id}/${props.league.id}`;
+        let url = `http://localhost:8080/api/pokemon/stats/${data.id}/${props.league.id}`;
         fetch(url, {type: "GET"})
             .then(response => response.json())
             .then(stats => setLeagueStats(stats))

@@ -14,18 +14,35 @@ import java.util.Objects;
 public class AggregatePokemonStats {
     
     Pokemon pokemon;
+    Team team;
     int gamesPlayed;
     int gamesWon;
     int directKOs;
     int indirectKOs;
     int deaths;
 
+    public AggregatePokemonStats() {
+        this.gamesPlayed = 0;
+        this.gamesWon = 0;
+        this.directKOs = 0;
+        this.indirectKOs = 0;
+        this.deaths = 0;
+    }
+    
     public Pokemon getPokemon() {
         return pokemon;
     }
 
     public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public int getGamesPlayed() {
@@ -70,8 +87,9 @@ public class AggregatePokemonStats {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         hash = 17 * hash + Objects.hashCode(this.pokemon);
+        hash = 17 * hash + Objects.hashCode(this.team);
         hash = 17 * hash + this.gamesPlayed;
         hash = 17 * hash + this.gamesWon;
         hash = 17 * hash + this.directKOs;
@@ -110,7 +128,10 @@ public class AggregatePokemonStats {
         if (!Objects.equals(this.pokemon, other.pokemon)) {
             return false;
         }
+        if (!Objects.equals(this.team, other.team)) {
+            return false;
+        }
         return true;
     }
-    
+
 }
