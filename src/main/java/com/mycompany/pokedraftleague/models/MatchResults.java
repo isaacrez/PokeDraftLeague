@@ -15,7 +15,7 @@ public class MatchResults {
     
     private int matchId;
     private Team team;
-    private boolean wasWon;
+    private boolean won;
     private int differential;
 
     public int getMatchId() {
@@ -34,12 +34,12 @@ public class MatchResults {
         this.team = team;
     }
 
-    public boolean isWasWon() {
-        return wasWon;
+    public boolean isWon() {
+        return won;
     }
 
-    public void setWasWon(boolean wasWon) {
-        this.wasWon = wasWon;
+    public void setWon(boolean won) {
+        this.won = won;
     }
 
     public int getDifferential() {
@@ -55,7 +55,7 @@ public class MatchResults {
         int hash = 5;
         hash = 41 * hash + this.matchId;
         hash = 41 * hash + Objects.hashCode(this.team);
-        hash = 41 * hash + (this.wasWon ? 1 : 0);
+        hash = 41 * hash + (this.won ? 1 : 0);
         hash = 41 * hash + this.differential;
         return hash;
     }
@@ -78,7 +78,7 @@ public class MatchResults {
         if (this.team != other.team) {
             return false;
         }
-        if (this.wasWon != other.wasWon) {
+        if (this.won != other.won) {
             return false;
         }
         if (this.differential != other.differential) {

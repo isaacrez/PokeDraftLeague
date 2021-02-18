@@ -7,6 +7,7 @@ package com.mycompany.pokedraftleague.data;
 
 import com.mycompany.pokedraftleague.models.MatchResults;
 import com.mycompany.pokedraftleague.models.Team;
+import com.mycompany.pokedraftleague.models.TeamResults;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -67,11 +68,6 @@ public class MatchResultsDaoDB implements MatchResultsDao {
                     teamId,
                     leagueId);
             
-            Team team = teamDao.getTeamById(teamId);
-            for (MatchResults result : results) {
-                result.setTeam(team);
-            }
-            
             return results;
         } catch (DataAccessException e) {
             return null;
@@ -89,7 +85,7 @@ public class MatchResultsDaoDB implements MatchResultsDao {
             results.setDifferential(differential);
             
             boolean wasWon = differential > 0;
-            results.setWasWon(wasWon);
+            results.setWon(wasWon);
 
             return results;
         }
