@@ -27,18 +27,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/match")
 public class MatchController {
     
-    @Autowired
     private final MatchDao matchDao;
-    
-    @Autowired
     private final TeamDao teamDao;
-    
-    @Autowired
     private final MatchResultsDao matchResultsDao;
-    
-    @Autowired
     private final PokemonResultsDao pokemonResultsDao;
     
+    @Autowired
     public MatchController(MatchDao matchDao, TeamDao teamDao,
             MatchResultsDao matchResultsDao, PokemonResultsDao pokemonResultsDao) {
         this.matchDao = matchDao;

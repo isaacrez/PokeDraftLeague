@@ -24,12 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/league")
 public class LeagueController {
     
-    @Autowired
     private final LeagueDao leagueDao;
-    
-    @Autowired
     private final TeamDao teamDao;
-    
+
+    @Autowired
     public LeagueController (LeagueDao leagueDao, TeamDao teamDao) {
         this.leagueDao = leagueDao;
         this.teamDao = teamDao;
