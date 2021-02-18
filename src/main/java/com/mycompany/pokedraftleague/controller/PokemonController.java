@@ -5,6 +5,7 @@
  */
 package com.mycompany.pokedraftleague.controller;
 
+import com.mycompany.pokedraftleague.data.AggregatePokemonStatsDao;
 import com.mycompany.pokedraftleague.data.PokemonDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/pokemon")
 public class PokemonController {
     
-    @Autowired
     private final PokemonDao pokemonDao;
+    private final AggregatePokemonStatsDao aggregatePokemonStatsDao;
     
-    public PokemonController (PokemonDao pokemonDao) {
+    @Autowired
+    public PokemonController (PokemonDao pokemonDao, AggregatePokemonStatsDao aggregatePokemonStatsDao) {
         this.pokemonDao = pokemonDao;
+        this.aggregatePokemonStatsDao = aggregatePokemonStatsDao;
     }
     
     @GetMapping()
@@ -45,4 +48,16 @@ public class PokemonController {
         return ResponseEntity.ok(pokemonDao.getPokemonOn(teamId, leagueId));
     }
     
+    @GetMapping("/stats/{pokeId}/{leagueId}")
+    public ResponseEntity getPokeStatsForLeague(@PathVariable int pokeId,
+            @PathVariable int leagueId) {
+        return ResponseEntity.ok(aggregatePokemonStatsDao.getStatsFor(pokeId, leagueId));
+    }
+    
+    @GetMapping("/stats/{pokeId}/{teamId}/{leagueId}")
+    public ResponseEntity getPokeStatsOnTeamForLeague(@PathVariable int pokeId, 
+            @PathVariable int teamId,
+            @PathVariable int leagueId) {
+        return ResponseEntity.ok(aggregatePokemonStatsDao.getStatsFor(pokeId, teamId, leagueId));
+    }
 }
