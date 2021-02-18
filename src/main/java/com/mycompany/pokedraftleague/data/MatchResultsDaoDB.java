@@ -6,7 +6,6 @@
 package com.mycompany.pokedraftleague.data;
 
 import com.mycompany.pokedraftleague.models.MatchResults;
-import com.mycompany.pokedraftleague.models.Team;
 import com.mycompany.pokedraftleague.models.TeamResults;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,7 +54,7 @@ public class MatchResultsDaoDB implements MatchResultsDao {
     }
     
     @Override
-    public List<MatchResults> getTeamResults(int teamId, int leagueId) {
+    public TeamResults getTeamResults(int teamId, int leagueId) {
         try {
             final String GET_TEAM_STATS = "SELECT matchId, SUM(directKOs), "
                     + "SUM(indirectKOs), SUM(wasKOed) "
@@ -68,11 +67,27 @@ public class MatchResultsDaoDB implements MatchResultsDao {
                     teamId,
                     leagueId);
             
-            return results;
+            return buildTeamResults(results, teamId);
         } catch (DataAccessException e) {
             return null;
         }
     }
+    
+    private TeamResults buildTeamResults(List<MatchResults> results, int teamId) {
+        TeamResults teamResults = new TeamResults();
+        teamResults.setTeam(teamDao.getTeamById(teamId));
+        teamResults.setGamesPlayed(results.size());
+        
+        for (MatchResults result : results) {
+            if (result.isWon()) {
+                teamResults.setGamesWon(teamResults.getGamesWon() + 1);
+            }
+            teamResults.setDifferential(teamResults.getDifferential()
+                    + result.getDifferential());
+        }
+        
+        return teamResults;
+    } 
     
     public static final class MatchResultsMapper implements RowMapper<MatchResults> {
         @Override
