@@ -54,7 +54,7 @@ public class MatchResultsDaoDB implements MatchResultsDao {
     }
     
     @Override
-    public TeamResults getTeamResults(int teamId, int leagueId) {
+    public TeamResults getTeamResultsFor(int teamId, int leagueId) {
         try {
             final String GET_TEAM_STATS = "SELECT matchId, SUM(directKOs), "
                     + "SUM(indirectKOs), SUM(wasKOed) "

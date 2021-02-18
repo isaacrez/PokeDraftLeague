@@ -14,5 +14,5 @@ import com.mycompany.pokedraftleague.models.TeamResults;
  */
 public interface MatchResultsDao {
     MatchResults getMatchResultsFor(int matchId, int teamId);
-    TeamResults getTeamResults(int teamId, int leagueId);
+    TeamResults getTeamResultsFor(int teamId, int leagueId);
 }
