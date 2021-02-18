@@ -5,14 +5,12 @@
  */
 package com.mycompany.pokedraftleague.data;
 
-import com.mycompany.pokedraftleague.data.PokemonDaoDB.PokemonMapper;
 import com.mycompany.pokedraftleague.models.Pokemon;
 import com.mycompany.pokedraftleague.models.PokemonResults;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -25,12 +23,12 @@ import org.springframework.stereotype.Repository;
 public class PokemonResultsDaoDB implements PokemonResultsDao {
     
     private final JdbcTemplate jdbc;
-    private final TeamDao teamDao;
+    private final PokemonDao pokemonDao;
     
     @Autowired
-    public PokemonResultsDaoDB(JdbcTemplate jdbcTemplate, TeamDao teamDao) {
+    public PokemonResultsDaoDB(JdbcTemplate jdbcTemplate, PokemonDao pokemonDao) {
         this.jdbc = jdbcTemplate;
-        this.teamDao = teamDao;
+        this.pokemonDao = pokemonDao;
     }
 
     @Override
@@ -92,20 +90,6 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    private void addTeamToResults(PokemonResults results) {
-        try {
-            final String GET_TEAM_ID = "SELECT teamId FROM matchAttendee WHERE id = ?";
-            int teamId = jdbc.queryForObject(GET_TEAM_ID, Integer.class, results.getId());
-            addTeamToResults(results, teamId);
-        } catch (DataAccessException e) {
-            
-        }
-    }
-    
-    private void addTeamToResults(PokemonResults results, int teamId) {
-        results.setTeam(teamDao.getTeamById(teamId));
-    }
-    
     private void addPokemonToResults(List<PokemonResults> results) {
         for (PokemonResults result : results) {
             result.setPokemon(getPokemonForResults(result));
@@ -119,8 +103,7 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
     }
     
     private Pokemon getPokemonForResults(int pokeId) {
-        final String GET_POKEMON = "SELECT * FROM pokemon WHERE id = ?";
-        return jdbc.queryForObject(GET_POKEMON, new PokemonMapper(), pokeId);
+        return pokemonDao.getPokemonById(pokeId);
     }
     
     public static final class PokemonResultsMapper implements RowMapper<PokemonResults> {
