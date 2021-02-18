@@ -6,10 +6,8 @@
 package com.mycompany.pokedraftleague.data;
 
 import com.mycompany.pokedraftleague.models.MatchResults;
-import com.mycompany.pokedraftleague.models.TeamResults;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -52,42 +50,6 @@ public class MatchResultsDaoDB implements MatchResultsDao {
             return null;
         }
     }
-    
-    @Override
-    public TeamResults getTeamResultsFor(int teamId, int leagueId) {
-        try {
-            final String GET_TEAM_STATS = "SELECT matchId, SUM(directKOs), "
-                    + "SUM(indirectKOs), SUM(wasKOed) "
-                    + "FROM matchAttendee AS ma "
-                    + "JOIN `match` AS m ON m.id = ma.matchId "
-                    + "WHERE ma.teamId = ? AND m.leagueId = ? "
-                    + "GROUP BY m.id";
-            List<MatchResults> results = jdbc.query(GET_TEAM_STATS,
-                    new MatchResultsMapper(),
-                    teamId,
-                    leagueId);
-            
-            return buildTeamResults(results, teamId);
-        } catch (DataAccessException e) {
-            return null;
-        }
-    }
-    
-    private TeamResults buildTeamResults(List<MatchResults> results, int teamId) {
-        TeamResults teamResults = new TeamResults();
-        teamResults.setTeam(teamDao.getTeamById(teamId));
-        teamResults.setGamesPlayed(results.size());
-        
-        int differential = results.stream()
-                .reduce(0, (sum, rs) -> sum + rs.getDifferential(), Integer::sum);
-        teamResults.setDifferential(differential);
-        
-        int gamesWon = results.stream()
-                .reduce(0, (sum, rs) -> rs.isWon() ? sum + 1 : sum, Integer::sum);
-        teamResults.setGamesWon(gamesWon);
-        
-        return teamResults;
-    } 
     
     public static final class MatchResultsMapper implements RowMapper<MatchResults> {
         @Override

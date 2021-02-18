@@ -6,8 +6,8 @@
 package com.mycompany.pokedraftleague.controller;
 
 import com.mycompany.pokedraftleague.data.LeagueDao;
-import com.mycompany.pokedraftleague.data.MatchResultsDao;
 import com.mycompany.pokedraftleague.data.TeamDao;
+import com.mycompany.pokedraftleague.data.TeamResultsDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,13 +27,13 @@ public class LeagueController {
     
     private final LeagueDao leagueDao;
     private final TeamDao teamDao;
-    private final MatchResultsDao matchResultsDao;
+    private final TeamResultsDao teamResultsDao;
 
     @Autowired
-    public LeagueController (LeagueDao leagueDao, TeamDao teamDao, MatchResultsDao matchResultsDao) {
+    public LeagueController (LeagueDao leagueDao, TeamDao teamDao, TeamResultsDao teamResultsDao) {
         this.leagueDao = leagueDao;
         this.teamDao = teamDao;
-        this.matchResultsDao = matchResultsDao;
+        this.teamResultsDao = teamResultsDao;
     }
     
     @GetMapping()
@@ -53,6 +53,6 @@ public class LeagueController {
     
     @GetMapping("/results/{leagueId}/{teamId}")
     public ResponseEntity getResultsForTeam(@PathVariable int  leagueId, @PathVariable int teamId) {
-        return ResponseEntity.ok(matchResultsDao.getTeamResultsFor(teamId, leagueId));
+        return ResponseEntity.ok(teamResultsDao.getTeamResultsFor(teamId, leagueId));
     }
 }

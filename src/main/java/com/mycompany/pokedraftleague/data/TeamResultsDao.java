@@ -5,13 +5,12 @@
  */
 package com.mycompany.pokedraftleague.data;
 
-import com.mycompany.pokedraftleague.models.MatchResults;
 import com.mycompany.pokedraftleague.models.TeamResults;
 
 /**
  *
  * @author isaacrez
  */
-public interface MatchResultsDao {
-    MatchResults getMatchResultsFor(int matchId, int teamId);
+public interface TeamResultsDao {
+    TeamResults getTeamResultsFor(int teamId, int leagueId);
 }
