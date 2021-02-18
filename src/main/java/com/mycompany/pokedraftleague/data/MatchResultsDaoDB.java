@@ -6,8 +6,10 @@
 package com.mycompany.pokedraftleague.data;
 
 import com.mycompany.pokedraftleague.models.MatchResults;
+import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -46,6 +48,31 @@ public class MatchResultsDaoDB implements MatchResultsDao {
             
             return results;
             
+        } catch (DataAccessException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public List<MatchResults> getTeamResults(int teamId, int leagueId) {
+        try {
+            final String GET_TEAM_STATS = "SELECT matchId, SUM(directKOs), "
+                    + "SUM(indirectKOs), SUM(wasKOed) "
+                    + "FROM matchAttendee AS ma "
+                    + "JOIN `match` AS m ON m.id = ma.matchId "
+                    + "WHERE ma.teamId = ? AND m.leagueId = ? "
+                    + "GROUP BY m.id";
+            List<MatchResults> results = jdbc.query(GET_TEAM_STATS,
+                    new MatchResultsMapper(),
+                    teamId,
+                    leagueId);
+            
+            Team team = teamDao.getTeamById(teamId);
+            for (MatchResults result : results) {
+                result.setTeam(team);
+            }
+            
+            return results;
         } catch (DataAccessException e) {
             return null;
         }
