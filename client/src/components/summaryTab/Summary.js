@@ -72,10 +72,10 @@ function Entry(props) {
             .then(response => response.json())
             .then(stats => setLeagueStats(stats))
             .catch(error => console.log(error));
-    }, [])
+    }, [props.pokemon.id]);
 
     return (
-        <tr key={leagueStats.pokemon.id}>
+        <tr key={props.pokemon.id}>
             <td>{cleanText(props.pokemon.urlID)}</td>
             <td>{leagueStats.gamesPlayed}</td>
             <td>{leagueStats.gamesWon}</td>
@@ -85,7 +85,7 @@ function Entry(props) {
             <td>{leagueStats.deaths}</td>
             <td>{leagueStats.directKOs + leagueStats.indirectKOs - leagueStats.deaths}</td>
         </tr>
-    )
+    );
 }
 
 export default Summary;
