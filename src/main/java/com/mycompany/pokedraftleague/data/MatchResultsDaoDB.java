@@ -78,13 +78,13 @@ public class MatchResultsDaoDB implements MatchResultsDao {
         teamResults.setTeam(teamDao.getTeamById(teamId));
         teamResults.setGamesPlayed(results.size());
         
-        for (MatchResults result : results) {
-            if (result.isWon()) {
-                teamResults.setGamesWon(teamResults.getGamesWon() + 1);
-            }
-            teamResults.setDifferential(teamResults.getDifferential()
-                    + result.getDifferential());
-        }
+        int differential = results.stream()
+                .reduce(0, (sum, rs) -> sum + rs.getDifferential(), Integer::sum);
+        teamResults.setDifferential(differential);
+        
+        int gamesWon = results.stream()
+                .reduce(0, (sum, rs) -> rs.isWon() ? sum + 1 : sum, Integer::sum);
+        teamResults.setGamesWon(gamesWon);
         
         return teamResults;
     } 
