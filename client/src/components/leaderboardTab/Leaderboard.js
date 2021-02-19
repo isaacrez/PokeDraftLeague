@@ -23,7 +23,7 @@ function RegularLeaderboard(props) {
                 ? b.gamesWon - a.gamesWon
                 : b.differential - a.differential)
             .map((v, i) =>
-                <tr>
+                <tr key={v.team.name}>
                     <td className="fancy">{i + 1}</td>
                     <td>
                         <img src={`${process.env.PUBLIC_URL}/img/logos/${v.team.acronym}.png`}

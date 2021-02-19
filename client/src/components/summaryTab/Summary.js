@@ -38,7 +38,7 @@ function Summary(props) {
 function TableBody(props) {
 
     function makeRows() {
-        return props.rosterInfo.roster.map(pokemon => <Entry league={props.league} pokemon={pokemon} />)
+        return props.rosterInfo.roster.map(pokemon => <Entry league={props.league} pokemon={pokemon} key={pokemon.id} />)
     }
 
     return props.rosterInfo ?  
