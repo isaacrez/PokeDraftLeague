@@ -38,7 +38,7 @@ function TableBody(props) {
 
     return (
         <div className="scrollable-table">
-            <table>
+            <table className="hoverable">
                 <thead>
                     <tr>
                         <th>Week</th>

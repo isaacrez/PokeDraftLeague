@@ -25,7 +25,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header setMainContent={setMainContent} />
+      <Header mainContent={mainContent}
+        setMainContent={setMainContent}
+        league={league} />
       {stringToContent[mainContent]}
     </div>
   );

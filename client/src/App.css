@@ -52,7 +52,7 @@ nav button {
 
 nav button:hover {
   color: #61dafb;
-  background-color: #434343;
+  filter: brightness(75%);
   text-decoration: none;
 }
 
@@ -114,7 +114,7 @@ table {
 }
 
 table th, table td {
-  padding: 15px 0px;
+  padding: 1vh 0px;
 }
 
 table th {
@@ -131,7 +131,6 @@ thead {
 }
 
 tr {
-  row-gap: 15px;
 }
 
 tr:nth-child(odd) {
@@ -142,7 +141,7 @@ tr:nth-child(even) {
   background-color: #282828;
 }
 
-tbody tr:hover {
+.hoverable tr:hover {
   filter: brightness(75%);
 }
 
