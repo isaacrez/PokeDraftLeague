@@ -20,8 +20,6 @@ function Summary(props) {
 
     return (
         <div className="full-stripe">
-            <h1>Team Summary</h1>
-            <h2 className="fancy">{props.league.name}</h2>
             <h2>{team.name}</h2>
 
             <DropdownSelector 

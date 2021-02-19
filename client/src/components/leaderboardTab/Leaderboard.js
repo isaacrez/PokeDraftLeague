@@ -41,8 +41,6 @@ function RegularLeaderboard(props) {
 
     return (
         <div className="full-stripe">
-            <h1>Leaderboard</h1>
-            <h2>{props.league.name}</h2>
             <div className="scrollable-table">
                 <table>
                     <thead>
