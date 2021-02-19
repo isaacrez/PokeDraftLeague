@@ -8,46 +8,20 @@ function Leaderboard(props) {
 
 function RegularLeaderboard(props) {
 
-    const sampleData = [
-        {
-            team: {
-                name: "San Antonio Swamperts",
-                acronym: "SAS"
-            },
-            results: {
-                won: 10,
-                lost: 2,
-                differential: 12
-            }
-        },
-        {
-            team: {
-                name: "Brooklyn Beedrills",
-                acronym: "BrB"
-            },
-            results: {
-                won: 10,
-                lost: 2,
-                differential: 10
-            }
-        },
-        {
-            team: {
-                name: "Buffalo Buzzwoles",
-                acronym: "BBW"
-            },
-            results: {
-                won: 11,
-                lost: 1,
-                differential: 30
-            }
-        }
-    ]
+    const [teamResults, setTeamResults] = React.useState([]);
+
+    React.useEffect(() => {
+        let url = `http://localhost:8080/api/league/results/${props.league.id}`;
+        fetch(url, {type: "GET"})
+            .then(response => response.json())
+            .then(data => setTeamResults(data));
+    }, [])
+
 
     function generateRows() {
-        return sampleData.sort((a, b) => a.results.won - b.results.won !== 0
-                ? b.results.won - a.results.won
-                : b.results.differential - a.results.differential)
+        return teamResults.sort((a, b) => a.gamesWon - b.gamesWon !== 0
+                ? b.gamesWon - a.gamesWon
+                : b.differential - a.differential)
             .map((v, i) =>
                 <tr>
                     <td className="fancy">{i + 1}</td>
@@ -57,10 +31,10 @@ function RegularLeaderboard(props) {
                             alt={`${v.team.acronym}'s logo`} />
                     </td>
                     <td>{v.team.name}</td>
-                    <td>{v.results.won + v.results.lost}</td>
-                    <td>{v.results.won}</td>
-                    <td>{v.results.lost}</td>
-                    <td>{v.results.differential}</td>
+                    <td>{v.gamesPlayed}</td>
+                    <td>{v.gamesWon}</td>
+                    <td>{v.gamesPlayed - v.gamesWon}</td>
+                    <td>{v.differential}</td>
                 </tr>
             )
     }
