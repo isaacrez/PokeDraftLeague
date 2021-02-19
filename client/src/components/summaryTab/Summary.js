@@ -22,11 +22,13 @@ function Summary(props) {
         <div className="full-stripe">
             <h2>{team.name}</h2>
 
-            <DropdownSelector 
-                setValue={setTeam}
-                values={rosters.map(r => r.team.name)}
-                purpose={"Team"}
-                DEFAULT_VALUE={NO_TEAM_SELECT} />
+            <div className="mb-2">
+                <DropdownSelector 
+                    setValue={setTeam}
+                    values={rosters.map(r => r.team.name)}
+                    purpose={"Team"}
+                    DEFAULT_VALUE={NO_TEAM_SELECT} />
+            </div>
 
             <TableBody rosterInfo={rosters.filter(v => v.team.name === team)[0]} league={props.league} />
         </div>
