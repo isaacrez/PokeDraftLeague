@@ -14,6 +14,7 @@ import java.util.Objects;
 public class TeamResults {
     
     private Team team;
+    private int teamId;
     private int gamesPlayed;
     private int gamesWon;
     private int differential;
@@ -24,6 +25,14 @@ public class TeamResults {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+    
+    public int getTeamId() {
+        return teamId;
+    }
+    
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
     public int getGamesPlayed() {

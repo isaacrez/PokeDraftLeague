@@ -6,6 +6,7 @@
 package com.mycompany.pokedraftleague.data;
 
 import com.mycompany.pokedraftleague.models.TeamResults;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,5 @@ import com.mycompany.pokedraftleague.models.TeamResults;
  */
 public interface TeamResultsDao {
     TeamResults getTeamResultsFor(int teamId, int leagueId);
+    List<TeamResults> getTeamResultsForLeague(int leagueId);
 }
