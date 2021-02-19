@@ -9,7 +9,7 @@ function Header(props) {
         return options.map(option => 
             <tr>
                 <td>
-                    <button onClick={() => props.setMainContent(option)}
+                    <button onClick={() => {props.setMainContent(option); setVisible(false)}}
                         key={option}>
                         {option}
                     </button>
