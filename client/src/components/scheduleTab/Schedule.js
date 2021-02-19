@@ -37,9 +37,6 @@ function RegularSchedule(props) {
 
     return (
         <div className="full-stripe">
-            <h1>Match Schedule</h1>
-            <h2>{props.league.name}</h2>
-
             <div className="w-100 d-flex flex-wrap justify-content-between mb-3">
                 <DropdownSelector 
                     setValue={setWeek}
