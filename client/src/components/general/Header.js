@@ -7,10 +7,9 @@ function Header(props) {
 
     function buildButtons() {
         return options.map(option => 
-            <tr>
+            <tr key={option}>
                 <td>
-                    <button onClick={() => {props.setMainContent(option); setVisible(false)}}
-                        key={option}>
+                    <button onClick={() => {props.setMainContent(option); setVisible(false)}}>
                         {option}
                     </button>
                 </td>
