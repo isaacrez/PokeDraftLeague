@@ -136,9 +136,6 @@ thead {
   background-color: #282828;
 }
 
-tr {
-}
-
 tr:nth-child(odd) {
   background-color: #434343;
 }
