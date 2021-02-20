@@ -95,6 +95,10 @@ input:focus, button:focus {
   max-width: 150px;
 }
 
+.xl-icon {
+  max-width: 225px;
+}
+
 .full-stripe {
   background-color: #282828;
   width: 80%;

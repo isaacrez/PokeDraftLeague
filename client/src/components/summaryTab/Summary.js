@@ -42,15 +42,23 @@ function Summary(props) {
                     DEFAULT={{LABEL: "None", VALUE: NO_TEAM_SELECT}} />
             </div>
 
-            <h1>{teamName}</h1>
-
-            {teamStats && 
-            <div className="w-100 d-flex justify-content-around align-items-center">
-                <img src={`${process.env.PUBLIC_URL}/img/logos/${currSelection.team.acronym}.png`} className="lg-icon" />
-                <TeamStats teamStats={teamStats} />
-            </div>}
+            {teamStats && <SummaryHeader team={currSelection.team} teamStats={teamStats} />}
 
             <PokemonStats rosterInfo={currSelection} league={props.league} />
+        </div>
+    )
+}
+
+function SummaryHeader(props) {
+    return (
+        <div className="w-100 d-flex justify-content-around align-items-center">
+            <img src={`${process.env.PUBLIC_URL}/img/logos/${props.team.acronym}.png`}
+                className="xl-icon" />
+
+            <div className="d-flex flex-column align-items-center">
+                <h1>{props.team.name}</h1>
+                <TeamStats teamStats={props.teamStats} />
+            </div>
         </div>
     )
 }
