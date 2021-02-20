@@ -4,7 +4,9 @@ function DropdownSelector(props) {
 
     function makeOptions() {
         let options = props.values.map(v => <option key={v}>{v}</option>);
-        options.unshift(<option key={props.DEFAULT_VALUE} value={props.DEFAULT_VALUE}>All</option>)
+        props.DEFAULT && options.unshift(<option key={props.DEFAULT.VALUE} value={props.DEFAULT.VALUE}>
+            {props.DEFAULT.LABEL}
+        </option>)
         return options;
     }
 

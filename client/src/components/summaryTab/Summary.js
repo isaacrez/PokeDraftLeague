@@ -1,6 +1,6 @@
 import React from 'react';
 import DropdownSelector from '../general/DropdownSelector';
-import {addLeagueStats, cleanText} from '../../util/pokeEntry';
+import {cleanText} from '../../util/pokeEntry';
 
 const NO_TEAM_SELECT = "";
 
@@ -27,7 +27,7 @@ function Summary(props) {
                     setValue={setTeam}
                     values={rosters.map(r => r.team.name)}
                     purpose={"Team"}
-                    DEFAULT_VALUE={NO_TEAM_SELECT} />
+                    DEFAULT={{LABEL: "None", VALUE: NO_TEAM_SELECT}} />
             </div>
 
             <TableBody rosterInfo={rosters.filter(v => v.team.name === team)[0]} league={props.league} />

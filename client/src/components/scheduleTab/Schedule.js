@@ -42,13 +42,13 @@ function RegularSchedule(props) {
                     setValue={setWeek}
                     values={[...new Set(matches.map(m => m.scheduledWeek))]}
                     purpose={"Week"}
-                    DEFAULT_VALUE={NO_WEEK_SELECT} />
+                    DEFAULT={{LABEL: "All", VALUE: NO_WEEK_SELECT}} />
 
                 <DropdownSelector 
                     setValue={setTeam}
                     values={teams.map(t => t.name)}
                     purpose={"Team"}
-                    DEFAULT_VALUE={NO_TEAM_SELECT} />
+                    DEFAULT={{LABEL: "All", VALUE: NO_TEAM_SELECT}} />
             </div>
 
             <TableBody 

@@ -3,7 +3,7 @@ import React from 'react';
 function TableBody(props) {
 
     function isMatchValidWeek(match) {
-        return props.week === props.NO_WEEK_SELECT
+        return Number(props.week) === props.NO_WEEK_SELECT
             || match.scheduledWeek === Number(props.week);
     }
 
