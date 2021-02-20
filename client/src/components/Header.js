@@ -9,7 +9,9 @@ function Header(props) {
         <header>
             <nav className="w-100 d-flex justify-content-between align-items-center p-2">
 
-                <h1 className="mb-0">{props.league.name}</h1>
+                <h1 className="mb-0">
+                    {props.league.name ? props.league.name : "Pokédraft Leagues Online"}
+                </h1>
 
                 <DropdownSelector 
                     setValue={props.setMainContent}
