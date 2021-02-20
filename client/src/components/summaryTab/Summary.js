@@ -8,6 +8,7 @@ function Summary(props) {
 
     const [rosters, setRosters] = React.useState([]);
     const [team, setTeam] = React.useState("");
+    const [teamStats, setTeamStats] = React.useState({});
 
     React.useEffect(() => {
         let url = `http://localhost:8080/api/league/roster/${props.league.id}`;
@@ -18,17 +19,51 @@ function Summary(props) {
 
     }, [props.league.id])
 
+    React.useEffect(() => {
+        let currSelection = rosters.find(r => r.team.name === team);
+        if (currSelection) {
+            let teamId = currSelection.team.id;
+            let url = `http://localhost:8080/api/league/results/${props.league.id}/${teamId}`;
+            fetch(url, {type: "GET"})
+                .then(response => response.json())
+                .then(data => setTeamStats(data))
+                .catch(error => console.log(error));
+        }
+    }, [team])
+
     return (
         <div className="full-stripe">
             <h2>{team.name}</h2>
 
-            <div className="mb-2">
+            <div>
                 <DropdownSelector 
                     setValue={setTeam}
                     values={rosters.map(r => r.team.name)}
                     purpose={"Team"}
                     DEFAULT={{LABEL: "None", VALUE: NO_TEAM_SELECT}} />
             </div>
+
+            {teamStats && 
+            <div className="bubble my-3">
+                <div className="d-flex justify-content-between">
+                    <p>Played:</p>
+                    <p>{teamStats.gamesPlayed}</p>
+                </div>
+                <div className="d-flex justify-content-between">
+                    <p>Won:</p>
+                    <p>{teamStats.gamesWon}</p>
+                </div>
+                <div className="d-flex justify-content-between">
+                    <p>Lost:</p>
+                    <p>{teamStats.gamesPlayed - teamStats.gamesWon}</p>
+                </div>
+                <div className="d-flex justify-content-between">
+                    <p>Differential:</p>
+                    <p>{teamStats.differential > 0 ? 
+                        "+" + teamStats.differential
+                        : teamStats.differential}</p>
+                </div>
+            </div>}
 
             <TableBody rosterInfo={rosters.filter(v => v.team.name === team)[0]} league={props.league} />
         </div>
