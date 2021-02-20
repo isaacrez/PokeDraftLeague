@@ -283,14 +283,17 @@ input:checked + .slider:before {
 
 .neutral {
   color: #FFE9AD;
+  font-weight: bold;
 }
 
 .good {
   color: #439D67;
+  font-weight: bold;
 }
 
 .bad {
   color: #BB7E8C;
+  font-weight: bold;
 }
 
 .bubble {
