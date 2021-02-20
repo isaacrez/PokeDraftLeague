@@ -17,10 +17,6 @@ h1 {
   font-family: Lobster;
 }
 
-h2, h3, h4, h5, h6, p, td {
-  color: #FFE9AD;
-}
-
 .fancy {
   font-family: Lobster;
 }
@@ -285,7 +281,19 @@ input:checked + .slider:before {
   border-radius: 5px;
 }
 
-.bubble p {
+.neutral {
+  color: #FFE9AD;
+}
+
+.good {
+  color: #439D67;
+}
+
+.bad {
+  color: #BB7E8C;
+}
+
+.bubble {
   color: #77BEE4;
   font-size: 20px;
 }

@@ -8,7 +8,7 @@ function Summary(props) {
 
     const [rosters, setRosters] = React.useState([]);
     const [team, setTeam] = React.useState("");
-    const [teamStats, setTeamStats] = React.useState({});
+    const [teamStats, setTeamStats] = React.useState(null);
 
     React.useEffect(() => {
         let url = `http://localhost:8080/api/league/roster/${props.league.id}`;
@@ -31,12 +31,32 @@ function Summary(props) {
         }
     }, [team]);
 
+    return (
+        <div className="full-stripe">
+            <h2>{team.name}</h2>
+
+            <div>
+                <DropdownSelector 
+                    setValue={setTeam}
+                    values={rosters.map(r => r.team.name)}
+                    purpose={"Team"}
+                    DEFAULT={{LABEL: "None", VALUE: NO_TEAM_SELECT}} />
+            </div>
+
+            {teamStats && <TeamStats teamStats={teamStats} />}
+
+            <TableBody rosterInfo={rosters.filter(v => v.team.name === team)[0]} league={props.league} />
+        </div>
+    )
+}
+
+function TeamStats(props) {
     function buildTeamStats() {
         const stats = new Map([
-            ["Played", teamStats.gamesPlayed],
-            ["Won", teamStats.gamesWon],
-            ["Lost", teamStats.gamesPlayed - teamStats.gamesWon],
-            ["Differential", teamStats.differential > 0 ? `+${teamStats.differential}` : teamStats.differential]
+            ["Played", props.teamStats.gamesPlayed],
+            ["Won", props.teamStats.gamesWon],
+            ["Lost", props.teamStats.gamesPlayed - props.teamStats.gamesWon],
+            ["Differential", props.teamStats.differential > 0 ? `+${props.teamStats.differential}` : props.teamStats.differential]
         ]);
 
         let output = [];
@@ -50,25 +70,10 @@ function Summary(props) {
     }
 
     return (
-        <div className="full-stripe">
-            <h2>{team.name}</h2>
-
-            <div>
-                <DropdownSelector 
-                    setValue={setTeam}
-                    values={rosters.map(r => r.team.name)}
-                    purpose={"Team"}
-                    DEFAULT={{LABEL: "None", VALUE: NO_TEAM_SELECT}} />
-            </div>
-
-            {teamStats && 
-            <div className="bubble my-3">
-                {buildTeamStats()}
-            </div>}
-
-            <TableBody rosterInfo={rosters.filter(v => v.team.name === team)[0]} league={props.league} />
+        <div className="bubble my-3">
+            {buildTeamStats()}
         </div>
-    )
+    );
 }
 
 function TableBody(props) {
@@ -99,6 +104,8 @@ function TableBody(props) {
 function Entry(props) {
 
     const [leagueStats, setLeagueStats] = React.useState({});
+    const KD = leagueStats.directKOs + leagueStats.indirectKOs - leagueStats.deaths;
+    const classKD = KD === 0 ? "neutral" : KD > 0 ? "good" : "bad";
 
     React.useEffect(() => {
         let url = `http://localhost:8080/api/pokemon/stats/${props.pokemon.id}/${props.league.id}`;
@@ -115,7 +122,7 @@ function Entry(props) {
             <td>{leagueStats.directKOs}</td>
             <td>{leagueStats.indirectKOs}</td>
             <td>{leagueStats.deaths}</td>
-            <td>{leagueStats.directKOs + leagueStats.indirectKOs - leagueStats.deaths}</td>
+            <td className={classKD}>{KD}</td>
         </tr>
     );
 }
