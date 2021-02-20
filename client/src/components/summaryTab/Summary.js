@@ -34,9 +34,7 @@ function Summary(props) {
 
     return (
         <div className="full-stripe">
-            <h2>{teamName}</h2>
-
-            <div>
+            <div className="mb-3">
                 <DropdownSelector 
                     setValue={setTeamName}
                     values={rosters.map(r => r.team.name)}
@@ -44,7 +42,12 @@ function Summary(props) {
                     DEFAULT={{LABEL: "None", VALUE: NO_TEAM_SELECT}} />
             </div>
 
-            {teamStats && <TeamStats teamStats={teamStats} />}
+            <h1>{teamName}</h1>
+
+            <div className="w-100 d-flex justify-content-around align-items-center">
+                <img src={`${process.env.PUBLIC_URL}/img/logos/${currSelection.team.acronym}.png`} className="lg-icon" />
+                {teamStats && <TeamStats teamStats={teamStats} />}
+            </div>
 
             <PokemonStats rosterInfo={currSelection} league={props.league} />
         </div>
