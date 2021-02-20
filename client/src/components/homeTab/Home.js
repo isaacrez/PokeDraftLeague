@@ -4,19 +4,10 @@ import LeagueSelector from './LeagueSelector';
 function Home(props) {
     return(
         <div className="full-stripe">
-            <h1>Welcome!</h1>
 
-            <p>
-                To get started, select your league from
-                the dropdown menu below
-            </p>
+            <img src={`${process.env.PUBLIC_URL}/img/icon.png`} />
 
             <LeagueSelector setLeague={props.setLeague}/>
-
-            <p>
-                Then, access relevant information about 
-                your league using the tabs above
-            </p>
 
         </div>
     )

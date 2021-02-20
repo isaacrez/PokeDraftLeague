@@ -29,6 +29,7 @@ function LeagueSelector(props) {
             <input
                 list="leagues" 
                 onChange={(e) => {updateLeague(e.target.value)}}
+                placeholder="Select a League"
                 />
             <datalist id="leagues">
                 {createOptions(allLeagues)}
