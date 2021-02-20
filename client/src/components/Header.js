@@ -1,5 +1,5 @@
 import React from 'react';
-import DropdownSelector from './DropdownSelector';
+import DropdownSelector from './general/DropdownSelector';
 
 function Header(props) {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from './components/general/Header';
+import Header from './components/Header';
 import Home from './components/homeTab/Home';
 import Leaderboard from './components/leaderboardTab/Leaderboard';
 import Schedule from './components/scheduleTab/Schedule';
