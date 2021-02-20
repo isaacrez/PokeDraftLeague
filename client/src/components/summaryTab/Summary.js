@@ -44,10 +44,11 @@ function Summary(props) {
 
             <h1>{teamName}</h1>
 
+            {teamStats && 
             <div className="w-100 d-flex justify-content-around align-items-center">
                 <img src={`${process.env.PUBLIC_URL}/img/logos/${currSelection.team.acronym}.png`} className="lg-icon" />
-                {teamStats && <TeamStats teamStats={teamStats} />}
-            </div>
+                <TeamStats teamStats={teamStats} />
+            </div>}
 
             <PokemonStats rosterInfo={currSelection} league={props.league} />
         </div>
