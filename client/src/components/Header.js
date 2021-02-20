@@ -3,7 +3,8 @@ import DropdownSelector from './general/DropdownSelector';
 
 function Header(props) {
 
-    const options = ["Home", "Leaderboard", "Schedule", "Team Summary", "Matches", "Pokémon"];
+    const initialOptions = ["Home", "Pokémon"]
+    const fullOptions = ["Home", "Leaderboard", "Schedule", "Team Summary", "Matches", "Pokémon"];
 
     return (
         <header>
@@ -19,7 +20,7 @@ function Header(props) {
                 <div className="ml-auto">
                     <DropdownSelector 
                         setValue={props.setMainContent}
-                        values={options}
+                        values={props.league.name ? fullOptions : initialOptions}
                         purpose={""} />
                 </div>
 
