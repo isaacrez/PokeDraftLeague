@@ -1,19 +1,12 @@
 import React from 'react';
-import EmptySchedule from './EmptySchedule';
 import DropdownSelector from '../general/DropdownSelector';
 import TableBody from './TableBody';
 
-const NO_LEAGUE_SELECTED = -1;
 const NO_WEEK_SELECT = 0;
 const NO_TEAM_SELECT = "";
 
 function Schedule(props) {
-    return props.league.id === NO_LEAGUE_SELECTED ?
-        <EmptySchedule /> :
-        <RegularSchedule league={props.league} />;
-}
 
-function RegularSchedule(props) {
     const [matches, setMatches] = React.useState([]);
     const [teams, setTeams] = React.useState([]);
     const [week, setWeek] = React.useState(0);

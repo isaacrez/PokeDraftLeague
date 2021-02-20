@@ -1,12 +1,6 @@
 import React from 'react';
 
 function Leaderboard(props) {
-    return props.league.id === -1 ?
-        <EmptyLeaderboard /> :
-        <RegularLeaderboard league={props.league} />
-}
-
-function RegularLeaderboard(props) {
 
     const [teamResults, setTeamResults] = React.useState([]);
 
@@ -60,19 +54,6 @@ function RegularLeaderboard(props) {
             </div>
         </div>
     );
-}
-
-function EmptyLeaderboard() {
-    return (
-        <div className="full-stripe">
-            <h1>Leaderboard... is Missing!</h1>
-            <h2>No league selected</h2>
-            <p>
-                To view a leaderboard, you need to select a league 
-                from the "Home" tab first!
-            </p>
-        </div>
-    )
 }
 
 export default Leaderboard;
