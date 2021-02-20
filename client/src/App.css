@@ -146,7 +146,7 @@ tr:nth-child(even) {
 }
 
 .hoverable tr:hover {
-  filter: brightness(75%);
+  background-color: #666666;
 }
 
 tbody {
