@@ -45,7 +45,7 @@ function Summary(props) {
 
             {teamStats && <TeamStats teamStats={teamStats} />}
 
-            <TableBody rosterInfo={rosters.filter(v => v.team.name === team)[0]} league={props.league} />
+            <PokemonStats rosterInfo={rosters.filter(v => v.team.name === team)[0]} league={props.league} />
         </div>
     )
 }
@@ -76,7 +76,7 @@ function TeamStats(props) {
     );
 }
 
-function TableBody(props) {
+function PokemonStats(props) {
 
     function makeRows() {
         return props.rosterInfo.roster.map(pokemon => <Entry league={props.league} pokemon={pokemon} key={pokemon.id} />)
