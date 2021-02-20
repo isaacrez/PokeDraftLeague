@@ -8,8 +8,9 @@ const NO_TEAM_SELECT = "";
 function Summary(props) {
 
     const [rosters, setRosters] = React.useState([]);
-    const [team, setTeam] = React.useState("");
+    const [teamName, setTeamName] = React.useState("");
     const [teamStats, setTeamStats] = React.useState(null);
+    const currSelection = rosters.find(r => r.team.name === teamName);
 
     React.useEffect(() => {
         let url = `http://localhost:8080/api/league/roster/${props.league.id}`;
@@ -21,7 +22,6 @@ function Summary(props) {
     }, [props.league.id])
 
     React.useEffect(() => {
-        let currSelection = rosters.find(r => r.team.name === team);
         if (currSelection) {
             let teamId = currSelection.team.id;
             let url = `http://localhost:8080/api/league/results/${props.league.id}/${teamId}`;
@@ -30,15 +30,15 @@ function Summary(props) {
                 .then(data => setTeamStats(data))
                 .catch(error => console.log(error));
         }
-    }, [team]);
+    }, [teamName]);
 
     return (
         <div className="full-stripe">
-            <h2>{team.name}</h2>
+            <h2>{teamName}</h2>
 
             <div>
                 <DropdownSelector 
-                    setValue={setTeam}
+                    setValue={setTeamName}
                     values={rosters.map(r => r.team.name)}
                     purpose={"Team"}
                     DEFAULT={{LABEL: "None", VALUE: NO_TEAM_SELECT}} />
@@ -46,7 +46,7 @@ function Summary(props) {
 
             {teamStats && <TeamStats teamStats={teamStats} />}
 
-            <PokemonStats rosterInfo={rosters.filter(v => v.team.name === team)[0]} league={props.league} />
+            <PokemonStats rosterInfo={currSelection} league={props.league} />
         </div>
     )
 }
