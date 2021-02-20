@@ -29,7 +29,25 @@ function Summary(props) {
                 .then(data => setTeamStats(data))
                 .catch(error => console.log(error));
         }
-    }, [team])
+    }, [team]);
+
+    function buildTeamStats() {
+        const stats = new Map([
+            ["Played", teamStats.gamesPlayed],
+            ["Won", teamStats.gamesWon],
+            ["Lost", teamStats.gamesPlayed - teamStats.gamesWon],
+            ["Differential", teamStats.differential > 0 ? `+${teamStats.differential}` : teamStats.differential]
+        ]);
+
+        let output = [];
+        stats.forEach((val, desc) => output.push(
+            <div className="d-flex justify-content-between">
+                <p>{desc}:</p>
+                <p>{val}</p>
+            </div>
+        ));
+        return output;
+    }
 
     return (
         <div className="full-stripe">
@@ -45,24 +63,7 @@ function Summary(props) {
 
             {teamStats && 
             <div className="bubble my-3">
-                <div className="d-flex justify-content-between">
-                    <p>Played:</p>
-                    <p>{teamStats.gamesPlayed}</p>
-                </div>
-                <div className="d-flex justify-content-between">
-                    <p>Won:</p>
-                    <p>{teamStats.gamesWon}</p>
-                </div>
-                <div className="d-flex justify-content-between">
-                    <p>Lost:</p>
-                    <p>{teamStats.gamesPlayed - teamStats.gamesWon}</p>
-                </div>
-                <div className="d-flex justify-content-between">
-                    <p>Differential:</p>
-                    <p>{teamStats.differential > 0 ? 
-                        "+" + teamStats.differential
-                        : teamStats.differential}</p>
-                </div>
+                {buildTeamStats()}
             </div>}
 
             <TableBody rosterInfo={rosters.filter(v => v.team.name === team)[0]} league={props.league} />
