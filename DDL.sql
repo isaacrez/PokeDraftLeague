@@ -34,7 +34,7 @@ CREATE TABLE `Coach` (
 );
 
 CREATE TABLE `Roster` (
-    `leagueId` INT NOT NULL,
+	`leagueId` INT NOT NULL,
     `teamId` INT NOT NULL,
     `pokeId` INT NOT NULL,
     PRIMARY KEY(`leagueId`, `teamId`, `pokeId`)
@@ -49,7 +49,7 @@ CREATE TABLE `Match` (
 );
 
 CREATE TABLE `MatchTeam` (
-    `matchId` INT NOT NULL,
+	`matchId` INT NOT NULL,
     `teamId` INT NOT NULL,
     PRIMARY KEY(`matchId`, `teamId`)
 );
@@ -71,57 +71,101 @@ CREATE TABLE `MatchStatus` (
 
 CREATE TABLE `Pokemon` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(16) NOT NULL,
-    `form` VARCHAR(32)
+    `imgId` VARCHAR(7) NOT NULL,
+    `name` VARCHAR(32) NOT NULL,
+    `HP` TINYINT UNSIGNED NOT NULL,
+    `Atk` TINYINT UNSIGNED NOT NULL,
+	`Def` TINYINT UNSIGNED NOT NULL,
+    `SpA` TINYINT UNSIGNED NOT NULL,
+    `SpD` TINYINT UNSIGNED NOT NULL,
+    `Spe` TINYINT UNSIGNED NOT NULL    
+);
+
+CREATE TABLE `Type` (
+	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(8) NOT NULL
+);
+
+CREATE TABLE `PokemonType` (
+	`pokemonId` INT NOT NULL,
+    `typeId` INT NOT NULL,
+    PRIMARY KEY(`pokemonId`, `typeId`)
+);
+
+CREATE TABLE `Ability` (
+	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(16) NOT NULL
+);
+
+CREATE TABLE `PokemonAbility` (
+	`pokemonId` INT NOT NULL,
+    `abilityId` INT NOT NULL,
+    PRIMARY KEY(`pokemonId`, `abilityId`)
 );
 
 ALTER TABLE `LeagueTeam`
-    ADD CONSTRAINT `fk_leagueTeam_leagueId`
-        FOREIGN KEY (`leagueId`)
-    REFERENCES `League`(`id`),
-    ADD CONSTRAINT `fk_leagueTeam_teamId`
-        FOREIGN KEY (`teamId`)
-    REFERENCES `team`(`id`);
+	ADD CONSTRAINT `fk_leagueTeam_leagueId`
+		FOREIGN KEY (`leagueId`)
+        REFERENCES `League`(`id`),
+	ADD CONSTRAINT `fk_leagueTeam_teamId`
+		FOREIGN KEY (`teamId`)
+        REFERENCES `team`(`id`);
 
 ALTER TABLE `Team`
-    ADD CONSTRAINT `fk_team_coachId`
-        FOREIGN KEY (`coachId`)
-    REFERENCES `Coach`(`id`);
+	ADD CONSTRAINT `fk_team_coachId`
+		FOREIGN KEY (`coachId`)
+        REFERENCES `Coach`(`id`);
 
 ALTER TABLE `Match`
-    ADD CONSTRAINT `fk_match_leagueId`
-        FOREIGN KEY (`leagueId`)
-    REFERENCES `League`(`id`),
-    ADD CONSTRAINT `fk_match_statusId`
-        FOREIGN KEY (`statusId`)
-    REFERENCES `MatchStatus`(`id`);
+	ADD CONSTRAINT `fk_match_leagueId`
+		FOREIGN KEY (`leagueId`)
+        REFERENCES `League`(`id`),
+	ADD CONSTRAINT `fk_match_statusId`
+		FOREIGN KEY (`statusId`)
+        REFERENCES `MatchStatus`(`id`);
 
 ALTER TABLE `MatchTeam`
-    ADD CONSTRAINT `fk_matchTeam_matchId`
-        FOREIGN KEY(`matchId`)
-    REFERENCES `Match`(`id`),
-    ADD CONSTRAINT `fk_matchTeam_teamId`
-        FOREIGN KEY(`teamId`)
-        REFERENCES `Team`(`id`);
+	ADD CONSTRAINT `fk_matchTeam_matchId`
+		FOREIGN KEY(`matchId`)
+        REFERENCES `Match`(`id`),
+	ADD CONSTRAINT `fk_matchTeam_teamId`
+		FOREIGN KEY(`teamId`)
+		REFERENCES `Team`(`id`);
 
 ALTER TABLE `MatchAttendee`
-    ADD CONSTRAINT `fk_matchAttendee_matchId`
-        FOREIGN KEY (`matchId`)
-    REFERENCES `Match`(`id`),
-    ADD CONSTRAINT `fk_matchAttendee_pokeId`
-        FOREIGN KEY (`pokeId`)
-    REFERENCES `Pokemon`(`id`),
-    ADD CONSTRAINT `fk_matchAttendee_teamId`
-        FOREIGN KEY (`teamId`)
-    REFERENCES `Team`(`id`);
+	ADD CONSTRAINT `fk_matchAttendee_matchId`
+		FOREIGN KEY (`matchId`)
+        REFERENCES `Match`(`id`),
+	ADD CONSTRAINT `fk_matchAttendee_pokeId`
+		FOREIGN KEY (`pokeId`)
+        REFERENCES `Pokemon`(`id`),
+	ADD CONSTRAINT `fk_matchAttendee_teamId`
+		FOREIGN KEY (`teamId`)
+        REFERENCES `Team`(`id`);
 
 ALTER TABLE `Roster`
-    ADD CONSTRAINT `fk_roster_leagueId`
-        FOREIGN KEY (`leagueId`)
-        REFERENCES `League`(`id`),
-    ADD CONSTRAINT `fk_roster_teamId`
-        FOREIGN KEY (`teamId`)
-    REFERENCES `Team`(`id`),
-    ADD CONSTRAINT `fk_roster_pokeId`
-        FOREIGN KEY (`pokeId`)
-    REFERENCES `Pokemon`(`id`);
+	ADD CONSTRAINT `fk_roster_leagueId`
+		FOREIGN KEY (`leagueId`)
+		REFERENCES `League`(`id`),
+	ADD CONSTRAINT `fk_roster_teamId`
+		FOREIGN KEY (`teamId`)
+        REFERENCES `Team`(`id`),
+	ADD CONSTRAINT `fk_roster_pokeId`
+		FOREIGN KEY (`pokeId`)
+        REFERENCES `Pokemon`(`id`);
+        
+ALTER TABLE `PokemonType`
+	ADD CONSTRAINT `fk_pokemonType_pokemonId`
+		FOREIGN KEY (`pokemonId`)
+        REFERENCES `pokemon`(`id`),
+	ADD CONSTRAINT `fk_pokemonType_typeId`
+		FOREIGN KEY (`typeId`)
+        REFERENCES `type`(`id`);
+        
+ALTER TABLE `PokemonAbility`
+	ADD CONSTRAINT `fk_pokemonAbility_pokemonId`
+		FOREIGN KEY (`pokemonId`)
+        REFERENCES `pokemon`(`id`),
+	ADD CONSTRAINT `fk_pokemonAbility_abilityId`
+		FOREIGN KEY (`abilityId`)
+        REFERENCES `ability`(`id`);
