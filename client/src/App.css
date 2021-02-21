@@ -120,8 +120,8 @@ table {
   width: 100%;
 }
 
-table th, table td {
-  padding: 1vh 0px;
+table td {
+  padding: 1vh 5px;
 }
 
 table th {
