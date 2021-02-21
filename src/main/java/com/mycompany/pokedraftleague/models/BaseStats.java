@@ -9,7 +9,7 @@ package com.mycompany.pokedraftleague.models;
  *
  * @author isaacrez
  */
-class BaseStats {
+public class BaseStats {
     
     private int HP;
     private int Atk;
