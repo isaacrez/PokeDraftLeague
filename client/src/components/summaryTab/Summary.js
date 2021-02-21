@@ -10,6 +10,7 @@ function Summary(props) {
     const [rosters, setRosters] = React.useState([]);
     const [teamName, setTeamName] = React.useState("");
     const [teamStats, setTeamStats] = React.useState(null);
+    const [pokemon, setPokemon] = React.useState([]);
     const currSelection = rosters.find(r => r.team.name === teamName);
 
     React.useEffect(() => {
@@ -24,8 +25,8 @@ function Summary(props) {
     React.useEffect(() => {
         if (currSelection) {
             let teamId = currSelection.team.id;
-            let url = `http://localhost:8080/api/league/results/${props.league.id}/${teamId}`;
-            fetch(url, {type: "GET"})
+            let leagueStatsUrl = `http://localhost:8080/api/league/results/${props.league.id}/${teamId}`;
+            fetch(leagueStatsUrl, {type: "GET"})
                 .then(response => response.json())
                 .then(data => setTeamStats(data))
                 .catch(error => console.log(error));
@@ -44,8 +45,7 @@ function Summary(props) {
             </div>
 
             {teamStats && <SummaryHeader team={currSelection.team} teamStats={teamStats} />}
-
-            <PokemonStats rosterInfo={currSelection} league={props.league} />
+            {teamStats && <PokemonStats team={currSelection.team} league={props.league} />}
         </div>
     )
 }
