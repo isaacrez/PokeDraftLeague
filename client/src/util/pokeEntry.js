@@ -7,7 +7,7 @@ export const addLabel = data =>
             className="icon"
             alt={`${data.name}`} />
         }
-        <p>{cleanText(data.name)}</p>
+        <p>{data.name}</p>
     </td>);
 
 export const addStats = data =>
@@ -30,7 +30,7 @@ export const addTyping = data =>
 export const addAbilities = data =>
      addUpTo(data.abilities.map((abilityObj, index) =>
         <td key={`${data.id}-${index}`}>
-            {cleanText(abilityObj.ability.name)}
+            {abilityObj.ability.name}
         </td>
     ), 4);
 
@@ -49,17 +49,6 @@ function addUpTo(columns, limit) {
     }
     return columns
 }
-
-export const cleanText = (string) => replaceDashes(capitalize(string));
-
-function replaceDashes(string) {
-    return capitalize(string.replace(/-/g, ' '));
-}
-
-function capitalize(string) {
-    return string.replace(/(\b[a-z](?!\s))/g, (c) => c.toUpperCase());
-}
-
 
 export const colorizeBy = (string) => intToRGB(hashCode(string));
 

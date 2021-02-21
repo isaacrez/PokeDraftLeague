@@ -1,5 +1,4 @@
 import React from 'react';
-import {cleanText} from '../../util/pokeEntry';
 
 function PokemonStats(props) {
 
@@ -42,7 +41,7 @@ function Entry(props) {
 
     return (
         <tr key={props.pokemon.id}>
-            <td>{cleanText(props.pokemon.urlID)}</td>
+            <td>{props.pokemon.name}</td>
             <td>{leagueStats.gamesPlayed}</td>
             <td>{leagueStats.directKOs}</td>
             <td>{leagueStats.indirectKOs}</td>
