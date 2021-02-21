@@ -6,8 +6,8 @@ function PokeSearchBar() {
     React.useEffect(() => {
         fetch("http://localhost:8080/api/pokemon", {type: "GET"})
             .then(response => response.json())
-            .then(data => data.map(e => e.urlID))
-            .then(pokemonNames => setPokemon(pokemonNames));
+            .then(data => data.map(e => e.name))
+            .then(names => setPokemon(names));
     }, []);
 
     return (
