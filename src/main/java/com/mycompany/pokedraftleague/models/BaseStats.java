@@ -11,51 +11,51 @@ package com.mycompany.pokedraftleague.models;
  */
 public class BaseStats {
     
-    private int HP;
-    private int Atk;
-    private int Def;
-    private int SpA;
-    private int SpD;
+    private int hp;
+    private int atk;
+    private int def;
+    private int spAtk;
+    private int SpDef;
     private int Spe;
 
     public int getHP() {
-        return HP;
+        return hp;
     }
 
     public void setHP(int HP) {
-        this.HP = HP;
+        this.hp = HP;
     }
 
     public int getAtk() {
-        return Atk;
+        return atk;
     }
 
     public void setAtk(int Atk) {
-        this.Atk = Atk;
+        this.atk = Atk;
     }
 
     public int getDef() {
-        return Def;
+        return def;
     }
 
     public void setDef(int Def) {
-        this.Def = Def;
+        this.def = Def;
     }
 
-    public int getSpA() {
-        return SpA;
+    public int getSpAtk() {
+        return spAtk;
     }
 
-    public void setSpA(int SpA) {
-        this.SpA = SpA;
+    public void setSpAtk(int spAtk) {
+        this.spAtk = spAtk;
     }
 
-    public int getSpD() {
-        return SpD;
+    public int getSpDef() {
+        return SpDef;
     }
 
-    public void setSpD(int SpD) {
-        this.SpD = SpD;
+    public void setSpDef(int SpDef) {
+        this.SpDef = SpDef;
     }
 
     public int getSpe() {
@@ -69,11 +69,11 @@ public class BaseStats {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 89 * hash + this.HP;
-        hash = 89 * hash + this.Atk;
-        hash = 89 * hash + this.Def;
-        hash = 89 * hash + this.SpA;
-        hash = 89 * hash + this.SpD;
+        hash = 89 * hash + this.hp;
+        hash = 89 * hash + this.atk;
+        hash = 89 * hash + this.def;
+        hash = 89 * hash + this.spAtk;
+        hash = 89 * hash + this.SpDef;
         hash = 89 * hash + this.Spe;
         return hash;
     }
@@ -90,19 +90,19 @@ public class BaseStats {
             return false;
         }
         final BaseStats other = (BaseStats) obj;
-        if (this.HP != other.HP) {
+        if (this.hp != other.hp) {
             return false;
         }
-        if (this.Atk != other.Atk) {
+        if (this.atk != other.atk) {
             return false;
         }
-        if (this.Def != other.Def) {
+        if (this.def != other.def) {
             return false;
         }
-        if (this.SpA != other.SpA) {
+        if (this.spAtk != other.spAtk) {
             return false;
         }
-        if (this.SpD != other.SpD) {
+        if (this.SpDef != other.SpDef) {
             return false;
         }
         if (this.Spe != other.Spe) {
