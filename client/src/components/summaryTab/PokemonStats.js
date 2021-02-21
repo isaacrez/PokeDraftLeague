@@ -18,21 +18,23 @@ function PokemonStats(props) {
     }
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Played</th>
-                    <th>KOs</th>
-                    <th>Passive</th>
-                    <th>Deaths</th>
-                    <th>+/-</th>
-                </tr>
-            </thead>
-            <tbody>
-                {makeRows()}
-            </tbody>
-        </table>
+        <div className="scrollable-table short">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Played</th>
+                        <th>KOs</th>
+                        <th>Passive</th>
+                        <th>Deaths</th>
+                        <th>+/-</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {makeRows()}
+                </tbody>
+            </table>
+        </div>
     );
 }
 
@@ -61,7 +63,7 @@ function Entry(props) {
 
     return loaded ? (
         <tr key={props.data.pokemon.id}>
-            <td>{props.data.pokemon.name}</td>
+            {addLabel(props.data)}
             <td>{leagueStats.gamesPlayed}</td>
             <td>{leagueStats.directKOs}</td>
             <td>{leagueStats.indirectKOs}</td>

@@ -35,7 +35,7 @@ function Leaderboard(props) {
 
     return (
         <div className="full-stripe">
-            <div className="scrollable-table">
+            <div className="scrollable-table very-tall">
                 <table>
                     <thead>
                         <tr>

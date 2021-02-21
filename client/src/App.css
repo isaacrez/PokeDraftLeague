@@ -153,8 +153,19 @@ tbody {
   text-align: center;
 }
 
-.scrollable-table {
+.short {
+  max-height: 60vh;
+}
+
+.tall {
   max-height: 70vh;
+}
+
+.very-tall {
+  max-height: 85vh;
+}
+
+.scrollable-table {
   width: 100%;
   overflow: auto;
   margin-bottom: 10px;

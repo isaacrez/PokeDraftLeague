@@ -16,7 +16,7 @@ function PokeTable(props) {
     }, [props.page]);
 
     return (
-        <div className="scrollable-table">
+        <div className="scrollable-table tall">
             <table className="hoverable">
                 <thead>
                     <TableHeader 
