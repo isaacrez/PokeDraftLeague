@@ -11,7 +11,8 @@ function TeamStats(props) {
 
         let output = [];
         stats.forEach((val, desc) => output.push(
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between"
+                key={desc}>
                 <p>{desc}:</p>
                 <p>{val}</p>
             </div>
