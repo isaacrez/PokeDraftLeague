@@ -35,7 +35,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
         final String GET_ALL = "SELECT * FROM pokemon";
         List<DetailedPokemon> pokemon =  jdbc.query(GET_ALL,
                 new DetailedPokemonMapper());
-        addTypingAndAbilites(pokemon);
+        addTypingAndAbilities(pokemon);
         return pokemon;
     }
 
@@ -46,17 +46,30 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
                 new DetailedPokemonMapper(),
                 limit,
                 offset);
-        addTypingAndAbilites(pokemon);
+        addTypingAndAbilities(pokemon);
         return pokemon;
     }
     
-    private void addTypingAndAbilites(List<DetailedPokemon> pokemon) {
+    @Override
+    public List<DetailedPokemon> getPokemonFromRoster(int teamId, int leagueId) {
+        final String GET_FOR_TEAM = "SELECT p.* FROM pokemon AS p "
+                + "JOIN roster AS r ON p.id = r.pokeId "
+                + "WHERE teamId = ? AND leagueId = ?";
+        List<DetailedPokemon> pokemon = jdbc.query(GET_FOR_TEAM, 
+                new DetailedPokemonMapper(),
+                teamId,
+                leagueId);
+        addTypingAndAbilities(pokemon);
+        return pokemon;
+    }
+    
+    private void addTypingAndAbilities(List<DetailedPokemon> pokemon) {
         for (DetailedPokemon poke : pokemon) {
-            addTypingAndAbilites(poke);
+            addTypingAndAbilities(poke);
         }
     }
     
-    private void addTypingAndAbilites(DetailedPokemon pokemon) {
+    private void addTypingAndAbilities(DetailedPokemon pokemon) {
         addTyping(pokemon);
         addAbilities(pokemon);
     }

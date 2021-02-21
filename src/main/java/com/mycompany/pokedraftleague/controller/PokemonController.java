@@ -55,7 +55,7 @@ public class PokemonController {
     
     @GetMapping("/team/{teamId}/{leagueId}")
     public ResponseEntity getPokemonOn(@PathVariable int teamId, @PathVariable int leagueId) {
-        return ResponseEntity.ok(pokemonDao.getPokemonOn(teamId, leagueId));
+        return ResponseEntity.ok(detailedPokemonDao.getPokemonFromRoster(teamId, leagueId));
     }
     
     @GetMapping("/stats/{pokeId}/{leagueId}")
