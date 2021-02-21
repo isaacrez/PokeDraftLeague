@@ -14,6 +14,21 @@ function Pokemon(props) {
         "League Stats": false
     });
 
+    React.useEffect(() => {
+        props.league.id === -1 ? 
+        setOnDisplay({
+            "Base Stats": true,
+            "Typing": false,
+            "Abilities": false
+        }) :
+        setOnDisplay({
+            "Base Stats": true,
+            "Typing": false,
+            "Abilities": false,
+            "League Stats": false
+        })
+    }, [props.league])
+
     const pageInfo = {
         current: page,
         size: pageSize,
