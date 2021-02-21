@@ -37,7 +37,7 @@ function TableBody(props) {
     }
 
     return (
-        <div className="scrollable-table">
+        <div className="scrollable-table very-tall">
             <table className="hoverable">
                 <thead>
                     <tr>
