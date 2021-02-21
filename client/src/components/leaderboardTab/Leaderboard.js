@@ -9,7 +9,7 @@ function Leaderboard(props) {
         fetch(url, {type: "GET"})
             .then(response => response.json())
             .then(data => setTeamResults(data));
-    }, [])
+    }, [props.league.id])
 
 
     function generateRows() {

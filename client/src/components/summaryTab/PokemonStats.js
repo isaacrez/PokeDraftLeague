@@ -40,6 +40,7 @@ function Entry(props) {
             .then(stats => setLeagueStats(stats))
             .then(() => setLoaded(true))
             .catch(error => console.log(error));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.pokemon.id]);
 
     return loaded ? (

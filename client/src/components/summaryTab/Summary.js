@@ -18,7 +18,7 @@ function Summary(props) {
             .then(response => response.json())
             .then(rosterData => setRosters(rosterData))
             .catch(error => console.log(error));
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.league.id])
 
     React.useEffect(() => {
@@ -30,6 +30,7 @@ function Summary(props) {
                 .then(data => setTeamStats(data))
                 .catch(error => console.log(error));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamName]);
 
     return (
