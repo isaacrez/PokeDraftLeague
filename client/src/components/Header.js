@@ -11,7 +11,8 @@ function Header(props) {
             <nav className="w-100 d-flex align-items-center p-2">
 
                 <img src={`${process.env.PUBLIC_URL}/img/iconTextless.png`} 
-                    className="icon" />
+                    className="icon" 
+                    alt="" />
 
                 <h1 className="ml-3 mb-0">
                     {props.league.name ? props.league.name : "Pokédraft Leagues Online"}

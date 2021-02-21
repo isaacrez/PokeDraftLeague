@@ -5,7 +5,7 @@ function Home(props) {
     return(
         <div className="full-stripe">
 
-            <img src={`${process.env.PUBLIC_URL}/img/icon.png`} />
+            <img src={`${process.env.PUBLIC_URL}/img/icon.png`} alt="" />
 
             <LeagueSelector setLeague={props.setLeague}/>
 
