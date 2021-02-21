@@ -10,14 +10,16 @@ function Summary(props) {
     const [rosters, setRosters] = React.useState([]);
     const [teamName, setTeamName] = React.useState("");
     const [teamStats, setTeamStats] = React.useState(null);
-    const [pokemon, setPokemon] = React.useState([]);
     const currSelection = rosters.find(r => r.team.name === teamName);
 
     React.useEffect(() => {
         let url = `http://localhost:8080/api/league/roster/${props.league.id}`;
         fetch(url, {type: "GET"})
             .then(response => response.json())
-            .then(rosterData => setRosters(rosterData))
+            .then(rosterData => {
+                setRosters(rosterData);
+                setTeamName(rosterData[0].team.name);
+            })
             .catch(error => console.log(error));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.league.id])
@@ -40,8 +42,7 @@ function Summary(props) {
                 <DropdownSelector 
                     setValue={setTeamName}
                     values={rosters.map(r => r.team.name)}
-                    purpose={"Team"}
-                    DEFAULT={{LABEL: "None", VALUE: NO_TEAM_SELECT}} />
+                    purpose={"Team"} />
             </div>
 
             {teamStats && <SummaryHeader team={currSelection.team} teamStats={teamStats} />}
