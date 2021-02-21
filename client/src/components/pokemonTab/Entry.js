@@ -11,7 +11,7 @@ function Entry(props) {
             .then(response => response.json())
             .then(stats => setLeagueStats(stats))
             .catch(error => console.log(error));
-    }, [props.data]);
+    }, [props.data, props.league.id]);
 
     return (
         <tr style={leagueStats.team && {backgroundColor: colorizeBy(leagueStats.team.acronym)}}>
