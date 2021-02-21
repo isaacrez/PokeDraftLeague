@@ -33,16 +33,63 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
     @Override
     public List<DetailedPokemon> getAllPokemon() {
         final String GET_ALL = "SELECT * FROM pokemon";
-        return jdbc.query(GET_ALL, new DetailedPokemonMapper());
+        List<DetailedPokemon> pokemon =  jdbc.query(GET_ALL,
+                new DetailedPokemonMapper());
+        addTypingAndAbilites(pokemon);
+        return pokemon;
     }
 
     @Override
     public List<DetailedPokemon> getSliceOfPokemon(int limit, int offset) {
         final String GET_SLICE = "SELECT * FROM pokemon LIMIT ? OFFSET ?";
-        return jdbc.query(GET_SLICE,
+        List<DetailedPokemon> pokemon = jdbc.query(GET_SLICE,
                 new DetailedPokemonMapper(),
                 limit,
                 offset);
+        addTypingAndAbilites(pokemon);
+        return pokemon;
+    }
+    
+    private void addTypingAndAbilites(List<DetailedPokemon> pokemon) {
+        for (DetailedPokemon poke : pokemon) {
+            addTypingAndAbilites(poke);
+        }
+    }
+    
+    private void addTypingAndAbilites(DetailedPokemon pokemon) {
+        addTyping(pokemon);
+        addAbilities(pokemon);
+    }
+    
+    private void addTyping(DetailedPokemon pokemon) {
+        final String GET_TYPE = "SELECT t.name FROM `type` AS t "
+                + "JOIN pokemonType AS pt ON t.id = pt.typeId "
+                + "JOIN pokemon AS p ON pt.pokemonId = p.id "
+                + "WHERE p.id = ?";
+        
+        int id = pokemon.getPokemon().getId();
+        List<String> type = jdbc.query(GET_TYPE, new NameMapper(), id);
+        pokemon.setType(type);
+    }
+    
+    private void addAbilities(DetailedPokemon pokemon) {
+        final String GET_ABILITIES = "SELECT a.name FROM ability AS a "
+                + "JOIN pokemonAbility AS pa ON a.id = pa.abilityId "
+                + "JOIN pokemon AS p ON pa.pokemonId = p.id "
+                + "WHERE p.id = ?";
+        
+        int id = pokemon.getPokemon().getId();
+        List<String> abilities = jdbc.query(GET_ABILITIES, new NameMapper(), id);
+        pokemon.setAbilities(abilities);
+        
+    }
+    
+    public static final class NameMapper implements RowMapper<String> {
+        
+        @Override
+        public String mapRow(ResultSet rs, int i) throws SQLException {
+            return rs.getString("name");
+        }
     }
     
     public static final class DetailedPokemonMapper implements RowMapper<DetailedPokemon> {

@@ -5,6 +5,7 @@
  */
 package com.mycompany.pokedraftleague.models;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,6 +16,8 @@ public class DetailedPokemon {
     
     private Pokemon pokemon;
     private BaseStats stats;
+    private List<String> type;
+    private List<String> abilities;
 
     public Pokemon getPokemon() {
         return pokemon;
@@ -32,11 +35,29 @@ public class DetailedPokemon {
         this.stats = stats;
     }
 
+    public List<String> getType() {
+        return type;
+    }
+
+    public void setType(List<String> type) {
+        this.type = type;
+    }
+
+    public List<String> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<String> abilities) {
+        this.abilities = abilities;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.pokemon);
-        hash = 89 * hash + Objects.hashCode(this.stats);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.pokemon);
+        hash = 97 * hash + Objects.hashCode(this.stats);
+        hash = 97 * hash + Objects.hashCode(this.type);
+        hash = 97 * hash + Objects.hashCode(this.abilities);
         return hash;
     }
 
@@ -56,6 +77,12 @@ public class DetailedPokemon {
             return false;
         }
         if (!Objects.equals(this.stats, other.stats)) {
+            return false;
+        }
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
+        if (!Objects.equals(this.abilities, other.abilities)) {
             return false;
         }
         return true;
