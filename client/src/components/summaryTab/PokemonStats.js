@@ -40,8 +40,6 @@ function PokemonStats(props) {
 
 function Entry(props) {
 
-    console.log(props);
-
     const [leagueStats, setLeagueStats] = React.useState({});
     const [loaded, setLoaded] = React.useState(false);
     const KD = leagueStats.directKOs + leagueStats.indirectKOs - leagueStats.deaths;
