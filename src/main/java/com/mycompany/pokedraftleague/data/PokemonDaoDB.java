@@ -31,13 +31,12 @@ public class PokemonDaoDB implements PokemonDao {
         this.jdbc = jdbcTemplate;
     }
 
-
     @Override
     public List<Pokemon> getAllPokemon() {
         final String GET_ALL_POKEMON = "SELECT * FROM pokemon";
         return jdbc.query(GET_ALL_POKEMON, new PokemonMapper());
     }
-
+    
     @Override
     public Pokemon getPokemonById(int id) {
         try {
