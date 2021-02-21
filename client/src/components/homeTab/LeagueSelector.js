@@ -17,10 +17,8 @@ function LeagueSelector(props) {
     }
 
     function updateLeague(input) {
-        let league = allLeagues.filter(league => league.name === input);
-        if (league.length === 1) {
-            props.setLeague(league[0])
-        }
+        let league = allLeagues.find(league => league.name === input);
+        league && props.setLeague(league);
     }
 
     return (
