@@ -5,6 +5,7 @@ function SummaryHeader(props) {
     return (
         <div className="w-100 d-flex justify-content-around align-items-center">
             <img src={`${process.env.PUBLIC_URL}/img/logos/${props.team.acronym}.png`}
+                alt={`${props.team.acronym}'s logo`}
                 className="xl-icon" />
 
             <div className="d-flex flex-column align-items-center">
