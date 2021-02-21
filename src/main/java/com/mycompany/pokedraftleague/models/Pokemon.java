@@ -14,8 +14,8 @@ import java.util.Objects;
 public class Pokemon {
     
     private int id;
+    private String imgId;
     private String name;
-    private String form;
 
     public int getId() {
         return id;
@@ -25,36 +25,28 @@ public class Pokemon {
         this.id = id;
     }
 
+    public String getImgId() {
+        return imgId;
+    }
+
+    public void setImgId(String imgId) {
+        this.imgId = imgId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setForm(String form) {
-        this.form = form;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
-    public String getForm() {
-        return form;
-    }
-    
-    public String getUrlID() {
-        if (form != null && !form.isEmpty()) {
-            return name + "-" + form;
-        } else {
-            return name;
-        }
-    }
-
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Objects.hashCode(this.form);
+        int hash = 3;
+        hash = 43 * hash + this.id;
+        hash = 43 * hash + Objects.hashCode(this.imgId);
+        hash = 43 * hash + Objects.hashCode(this.name);
         return hash;
     }
 
@@ -73,13 +65,12 @@ public class Pokemon {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
+        if (!Objects.equals(this.imgId, other.imgId)) {
             return false;
         }
-        if (!Objects.equals(this.form, other.form)) {
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
         return true;
     }
-
 }

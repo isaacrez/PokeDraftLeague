@@ -92,8 +92,8 @@ public class PokemonDaoDB implements PokemonDao {
         public Pokemon mapRow(ResultSet rs, int index) throws SQLException {
             Pokemon pokemon = new Pokemon();
             pokemon.setId(rs.getInt("id"));
+            pokemon.setImgId(rs.getString("imgId"));
             pokemon.setName(rs.getString("name"));
-            pokemon.setForm(rs.getString("form"));
             return pokemon;
         }
     }
