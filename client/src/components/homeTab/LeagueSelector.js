@@ -1,6 +1,7 @@
 import React from 'react';
 
 function LeagueSelector(props) {
+
     const [allLeagues, setAllLeagues] = React.useState([]);
 
     React.useEffect(() => {
@@ -11,10 +12,8 @@ function LeagueSelector(props) {
             .catch((error) => console.log(error));
     }, [])
 
-    function createOptions(optionData) {
-        let options = [];
-        optionData.forEach(data => options.push(<option key={data.id}>{data.name}</option>));
-        return options;
+    function createOptions() {
+        return allLeagues.map(league => <option key={league.id}>{league.name}</option>);
     }
 
     function updateLeague(input) {
@@ -32,7 +31,7 @@ function LeagueSelector(props) {
                 placeholder="Select a League"
                 />
             <datalist id="leagues">
-                {createOptions(allLeagues)}
+                {createOptions()}
             </datalist>
         </div>
     );
