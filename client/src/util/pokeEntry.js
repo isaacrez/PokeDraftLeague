@@ -16,18 +16,18 @@ export const addStats = data =>
         </td>);
 
 export const addTyping = data =>
-    addUpTo(data.types.map((typeObj, index) =>
-        <td key={`${data.id}-${index}`}>
-            <img src={`https://www.serebii.net/pokedex-bw/type/${typeObj.type.name}.gif`}
-                alt={`${typeObj.type.name} type`} />
+    addUpTo(data.type.map((type, index) =>
+        <td key={`${data.pokemon.id}-${index}`}>
+            <img src={`https://www.serebii.net/pokedex-bw/type/${type.toLowerCase()}.gif`}
+                alt={`${type} type`} />
         </td>
     ), 2);
 
 
 export const addAbilities = data =>
-     addUpTo(data.abilities.map((abilityObj, index) =>
-        <td key={`${data.id}-${index}`}>
-            {abilityObj.ability.name}
+     addUpTo(data.abilities.map((ability, index) =>
+        <td key={`${data.pokemon.id}-${index}`}>
+            {ability}
         </td>
     ), 4);
 
