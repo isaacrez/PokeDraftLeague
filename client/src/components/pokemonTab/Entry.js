@@ -17,9 +17,9 @@ function Entry(props) {
         <tr style={leagueStats.team && {backgroundColor: colorizeBy(leagueStats.team.acronym)}}>
             {[addLabel(props.data),
             props.display["Base Stats"] && addStats(props.data),
-            props.display["Typing"] && addTyping(props.data),
-                    // props.display["Abilities"] && addAbilities(data),
-                    // props.display["League Stats"] && addLeagueStats(leagueStats)
+            // props.display["Typing"] && addTyping(props.data),
+            // props.display["Abilities"] && addAbilities(data),
+            props.display["League Stats"] && addLeagueStats(leagueStats)
             ]}
         </tr>
     )
