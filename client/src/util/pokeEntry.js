@@ -1,22 +1,19 @@
 
 export const addLabel = data => 
     (<td key={data.id}>
-        {data.sprites.other["official-artwork"].front_default && 
         <img
-            src={data.sprites.other["official-artwork"].front_default}
+            src={`https://www.serebii.net/swordshield/pokemon/${data.pokemon.imgId}.png`}
             className="icon"
-            alt={`${data.name}`} />
-        }
-        <p>{data.name}</p>
+            alt={`${data.pokemon.name}`} />
+        <p>{data.pokemon.name}</p>
     </td>);
 
-export const addStats = data =>
-    data.stats.map((stat, index) => 
+export const addStats = data => 
+    Object.values(data.stats).map((stat, index) => 
         <td className="align-middle"
-            key={`${data.id}-${index}`}>
-            {stat.base_stat}
-        </td>
-    );
+            key={`${data.pokemon.id}-${index}`}>
+            {stat}
+        </td>);
 
 export const addTyping = data =>
     addUpTo(data.types.map((typeObj, index) =>

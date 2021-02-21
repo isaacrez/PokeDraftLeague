@@ -3,39 +3,24 @@ import {addLabel, addStats, addTyping, addAbilities, addLeagueStats, colorizeBy}
 
 function Entry(props) {
 
-    const [data, setData] = React.useState({});
     const [leagueStats, setLeagueStats] = React.useState({});
-    const [loaded, setLoaded] = React.useState(false);
 
     React.useEffect(() => {
-        fetch(props.pokemon.url, {type: "GET"})
-            .then(response => response.json())
-            .then(pokeData => {
-                setData(pokeData);
-                getLeagueStats(pokeData);
-            }).then(() => setLoaded(true))
-            .catch(error => console.log(error));
-    }, [props.pokemon]);
-
-    function getLeagueStats(data) {
-        let url = `http://localhost:8080/api/pokemon/stats/${data.id}/${props.league.id}`;
+        let url = `http://localhost:8080/api/pokemon/stats/${props.data.pokemon.id}/${props.league.id}`;
         fetch(url, {type: "GET"})
             .then(response => response.json())
             .then(stats => setLeagueStats(stats))
             .catch(error => console.log(error));
-    }
+    }, [props.data]);
 
     return (
         <tr style={leagueStats.team && {backgroundColor: colorizeBy(leagueStats.team.acronym)}}>
-            {
-                loaded ? [
-                    addLabel(data),
-                    props.display["Base Stats"] && addStats(data),
-                    props.display["Typing"] && addTyping(data),
-                    props.display["Abilities"] && addAbilities(data),
-                    props.display["League Stats"] && addLeagueStats(leagueStats)
-                ] : null
-            }
+            {[addLabel(props.data),
+            props.display["Base Stats"] && addStats(props.data),
+            props.display["Typing"] && addTyping(props.data),
+                    // props.display["Abilities"] && addAbilities(data),
+                    // props.display["League Stats"] && addLeagueStats(leagueStats)
+            ]}
         </tr>
     )
 }

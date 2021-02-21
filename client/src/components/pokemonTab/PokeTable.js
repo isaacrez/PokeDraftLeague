@@ -7,11 +7,12 @@ function PokeTable(props) {
 
     React.useEffect(() => {
         let offset = (props.page.current - 1) * props.page.size;
-        let listUrl = `https://pokeapi.co/api/v2/pokemon?limit=${props.page.size}&offset=${offset}`;
+        let url = `http://localhost:8080/api/pokemon/full?limit=${props.page.size}&offset=${offset}`;
     
-        fetch(listUrl, {type: "GET"})
+        fetch(url, {type: "GET"})
             .then(response => response.json())
-            .then(data => setPokemon(data.results))
+            .then(data => setPokemon(data))
+            .then(() => console.log(pokemon))
             .catch(error => console.log(error));
     }, [props.page.current, props.page.size]);
 

@@ -5,7 +5,7 @@ function TableBody(props) {
 
     function generateTable() {
         return props.pokemon.map(poke => 
-            <Entry pokemon={poke} display={props.display} league={props.league} key={poke.name} />
+            <Entry data={poke} display={props.display} league={props.league} key={poke.name} />
         );
     }
 
