@@ -19,8 +19,8 @@ function TableHeader(props) {
         ],
         "League Stats": [
             <th key="currentTeam">Team</th>,
-            <th key="directKOs">Direct KOs</th>,
-            <th key="indirectKOs">Indirect KOs</th>,
+            <th key="directKOs">KOs</th>,
+            <th key="indirectKOs">Passive</th>,
             <th key="deaths">Deaths</th>
         ]
     };
