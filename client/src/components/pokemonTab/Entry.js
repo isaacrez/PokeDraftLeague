@@ -15,12 +15,11 @@ function Entry(props) {
 
     return (
         <tr style={leagueStats.team && {backgroundColor: colorizeBy(leagueStats.team.acronym)}}>
-            {[addLabel(props.data),
-            props.display["Base Stats"] && addStats(props.data),
-            props.display["Typing"] && addTyping(props.data),
-            props.display["Abilities"] && addAbilities(props.data),
-            props.display["League Stats"] && addLeagueStats(leagueStats)
-            ]}
+            {addLabel(props.data)}
+            {props.display["Base Stats"] && addStats(props.data)}
+            {props.display["Typing"] && addTyping(props.data)}
+            {props.display["Abilities"] && addAbilities(props.data)}
+            {props.display["League Stats"] && addLeagueStats(leagueStats)}
         </tr>
     )
 }
