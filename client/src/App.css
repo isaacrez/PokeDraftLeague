@@ -345,7 +345,7 @@ input:checked + .slider:before {
   font-weight: bold;
 }
 
-.taken {
+.taken, tr.taken {
   background-color: #BB7E8C;
   font-weight: bold;
 }

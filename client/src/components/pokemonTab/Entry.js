@@ -3,7 +3,8 @@ import {addLabel, addStats, addTyping, addAbilities, addLeagueStats, colorizeBy}
 
 function Entry(props) {
 
-    const [leagueStats, setLeagueStats] = React.useState({});
+    const [leagueStats, setLeagueStats] = React.useState(null);
+    const loaded = leagueStats !== null;
 
     React.useEffect(() => {
         let url = `http://localhost:8080/api/pokemon/stats?pokeId=${props.data.pokemon.id}
@@ -14,15 +15,17 @@ function Entry(props) {
             .catch(error => console.log(error));
     }, [props.data, props.league.id]);
 
-    return (
-        <tr style={leagueStats.team && {backgroundColor: colorizeBy(leagueStats.team.acronym)}}>
+    const classLabel = loaded ? (leagueStats.team.name ? "taken" : "") : "";
+
+    return loaded ? (
+        <tr className={classLabel}>
             {addLabel(props.data)}
             {props.display["Base Stats"] && addStats(props.data)}
             {props.display["Typing"] && addTyping(props.data)}
             {props.display["Abilities"] && addAbilities(props.data)}
             {props.display["League Stats"] && addLeagueStats(leagueStats)}
         </tr>
-    )
+    ) : null;
 }
 
 export default Entry;
