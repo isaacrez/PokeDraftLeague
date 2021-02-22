@@ -41,8 +41,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
     
     @Override
     public List<DetailedPokemon> getSliceOfPokemon(int limit, int offset) {
-        final String GET_SLICE = "SELECT * FROM pokemon AS p "
-                + "JOIN pokemonTier AS pt ON p.id = pt.pokemonId "
+        final String GET_SLICE = "SELECT NULL AS tier, p.* FROM pokemon AS p "
                 + "LIMIT ? OFFSET ?";
         List<DetailedPokemon> pokemon = jdbc.query(GET_SLICE,
                 new DetailedPokemonMapper(),
@@ -144,6 +143,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
             DetailedPokemon fullPokemon = new DetailedPokemon();
             fullPokemon.setPokemon(pokemon);
             fullPokemon.setStats(stats);
+            System.out.println(rs.getInt("tier"));
             fullPokemon.setTier(rs.getInt("tier"));
             return fullPokemon;
         }

@@ -11,8 +11,6 @@ function PokeTable(props) {
             + `&limit=${props.page.size}&offset=${offset}`;
         url += props.league.id === -1 ? "" : `leagueId=${props.league.id}`;
     
-        console.log(url);
-
         fetch(url, {type: "GET"})
             .then(response => response.json())
             .then(data => setPokemon(data))
