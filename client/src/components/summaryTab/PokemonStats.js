@@ -14,7 +14,9 @@ function PokemonStats(props) {
     }, [props.team.id, props.league.id]);
 
     function makeRows() {
-        return pokeData.map(data => <Entry league={props.league} data={data} key={data.pokemon.id} />)
+        return pokeData
+            .sort((a, b) => a.tier - b.tier)
+            .map(data => <Entry league={props.league} data={data} key={data.pokemon.id} />)
     }
 
     return (
@@ -23,6 +25,7 @@ function PokemonStats(props) {
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Tier</th>
                         <th>Played</th>
                         <th>KOs</th>
                         <th>Passive</th>
@@ -60,6 +63,7 @@ function Entry(props) {
     return loaded ? (
         <tr key={props.data.pokemon.id}>
             {addLabel(props.data)}
+            <td>{props.data.tier}</td>
             <td>{leagueStats.gamesPlayed}</td>
             <td>{leagueStats.directKOs}</td>
             <td>{leagueStats.indirectKOs}</td>
