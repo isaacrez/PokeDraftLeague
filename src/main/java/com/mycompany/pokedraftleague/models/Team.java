@@ -17,6 +17,10 @@ public class Team {
     private String name;
     private String acronym;
     private Coach coach;
+    
+    public Team() {
+        this.acronym = "FREE";
+    }
 
     public int getId() {
         return id;

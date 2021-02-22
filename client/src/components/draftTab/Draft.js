@@ -36,7 +36,7 @@ function TierSet(props) {
             .then(data => setData(data.map(d => new Object({
                 imgUrl: `https://www.serebii.net/swordshield/pokemon/${d.imgId}.png`,
                 title: d.name,
-                subtitle: "FREE"
+                subtitle: d.team.acronym
             }))))
             .catch(error => console.log(error));
     }, [props.league.id, props.tier]);
@@ -57,7 +57,7 @@ function RouletteSet(props) {
     }
 
     return(<div className="d-flex roulette overflow-auto">
-            {buildCards()}
+        {buildCards()}
     </div>)
 }
 

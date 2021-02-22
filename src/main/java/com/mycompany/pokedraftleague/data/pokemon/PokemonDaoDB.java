@@ -5,6 +5,7 @@
  */
 package com.mycompany.pokedraftleague.data.pokemon;
 
+import com.mycompany.pokedraftleague.data.league.TeamDao;
 import com.mycompany.pokedraftleague.models.League;
 import com.mycompany.pokedraftleague.models.Match;
 import com.mycompany.pokedraftleague.models.Pokemon;
@@ -25,10 +26,12 @@ import org.springframework.stereotype.Repository;
 public class PokemonDaoDB implements PokemonDao {
     
     private final JdbcTemplate jdbc;
+    private final TeamDao teamDao;
     
     @Autowired
-    public PokemonDaoDB(JdbcTemplate jdbcTemplate) {
+    public PokemonDaoDB(JdbcTemplate jdbcTemplate, TeamDao teamDao) {
         this.jdbc = jdbcTemplate;
+        this.teamDao = teamDao;
     }
 
     @Override
@@ -60,7 +63,22 @@ public class PokemonDaoDB implements PokemonDao {
         final String GET_FROM_TIER = "SELECT pt.tier, p.* FROM pokemon AS p "
                 + "JOIN pokemonTier AS pt ON p.id = pt.pokemonId "
                 + "WHERE tier = ? AND leagueId = ?";
-        return jdbc.query(GET_FROM_TIER, new PokemonMapper(), tier, leagueId);
+        List<Pokemon> pokemon = jdbc.query(GET_FROM_TIER,
+                new PokemonMapper(),
+                tier,
+                leagueId);
+        addTeamToPokemon(pokemon, leagueId);
+        return pokemon;
+    }
+
+    private void addTeamToPokemon(List<Pokemon> pokemon, int leagueId) {
+        for (Pokemon poke : pokemon) {
+            addTeamToPokemon(poke, leagueId);
+        }
+    }
+    
+    private void addTeamToPokemon(Pokemon pokemon, int leagueId) {
+        pokemon.setTeam(teamDao.getTeamOfPokemonInLeague(pokemon.getId(), leagueId));
     }
 
     @Override

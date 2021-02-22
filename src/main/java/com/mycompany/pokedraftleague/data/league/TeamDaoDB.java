@@ -116,7 +116,7 @@ public class TeamDaoDB implements TeamDao {
             addCoachToTeam(team);
             return team;
         } catch (DataAccessException e) {
-            return null;
+            return new Team();
         }
     }
 
