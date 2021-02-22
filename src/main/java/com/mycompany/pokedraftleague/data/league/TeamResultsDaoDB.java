@@ -61,23 +61,27 @@ public class TeamResultsDaoDB implements TeamResultsDao {
     
     @Override
     public List<TeamResults> getTeamResultsForLeague(int leagueId) {
-        final String GET_TEAM_RESULTS_FOR_LEAGUE = "SELECT rs.teamId, "
-                +   "COUNT(rs.won) AS gamesPlayed, " 
-                +   "SUM(rs.won) AS gamesWon, " 
-                +   "SUM(rs.differential) AS differential " 
-                + "FROM team AS t " 
-                + "JOIN matchTeam AS mt ON t.id = mt.teamId " 
-                + "JOIN `match` AS m ON mt.matchId = m.id " 
-                + "JOIN (SELECT matchId, teamId, " 
-                +   "NOT(SUM(wasKOed)) = 6 AS won, " 
-                +   "SUM(directKOs) + SUM(indirectKOs) - SUM(wasKOed) AS differential " 
-                +   "FROM matchattendee AS ma " 
-                +   "JOIN `match` AS m ON m.id = ma.matchId " 
-                +   "GROUP BY teamId, m.id) AS rs ON rs.matchId = m.id AND rs.teamId = t.id " 
-                + "WHERE m.leagueId = ? " 
+        final String GET_TEAM_RESULTS_FOR_LEAGUE = "SELECT t.id AS teamId, "
+                +   "COUNT(rs.won) AS gamesPlayed, "
+                +   "IFNULL(SUM(rs.won), 0) AS gamesWon, "
+                +   "IFNULL(SUM(rs.differential), 0) AS differential "
+                + "FROM team AS t "
+                + "JOIN leagueTeam AS lt ON t.id = lt.teamId "
+                + "LEFT OUTER JOIN (SELECT "
+                +       "matchId, "
+                +       "teamId,  "
+                +       "NOT(SUM(wasKOed)) = 6 AS won,  "
+                +       "SUM(directKOs) + SUM(indirectKOs) - SUM(wasKOed) AS differential "
+                +   "FROM matchattendee AS ma "
+                +   "JOIN `match` AS m ON m.id = ma.matchId  "
+                +   "WHERE m.leagueId = ? "
+                +   "GROUP BY teamId, m.id) "
+                + "AS rs ON rs.teamId = t.id "
+                + "WHERE lt.leagueId = ? "
                 + "GROUP BY t.id";
         List<TeamResults> results = jdbc.query(GET_TEAM_RESULTS_FOR_LEAGUE,
                 new TeamResultsMapper(),
+                leagueId,
                 leagueId);
         results.forEach(rs -> rs.setTeam(teamDao.getTeamById(rs.getTeamId())));
         return results;
