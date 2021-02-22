@@ -53,6 +53,8 @@ function TierSet(props) {
 
 function RouletteSet(props) {
 
+    const [isExpanded, setIsExpanded] = React.useState(false);
+
     function buildCards() {
         return props.data.map(d => 
             <Card imgUrl={d.imgUrl}
@@ -61,9 +63,21 @@ function RouletteSet(props) {
                 recolor={props.recolorIf(d)} />)
     }
 
-    return(<div className="d-flex roulette overflow-auto">
-        {buildCards()}
-    </div>)
+    return isExpanded ? 
+        (<div className="d-flex flex-column align-items-center">
+            <div className="d-flex roulette flex-wrap mb-1">
+                {buildCards()}
+            </div>
+            <button onClick={() => setIsExpanded(false)}
+                className="btn btn-secondary">Show less</button>
+        </div>) :
+        (<div className="d-flex flex-column align-items-center">
+            <div className="d-flex roulette overflow-auto mb-1">
+                {buildCards()}
+            </div>
+            <button onClick={() => setIsExpanded(true)}
+                className="btn btn-secondary">Show all</button>
+        </div>)
 }
 
 function Card(props) {
