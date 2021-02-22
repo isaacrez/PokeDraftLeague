@@ -6,7 +6,7 @@ function PokemonStats(props) {
     const [pokeData, setPokeData] = React.useState([]);
 
     React.useEffect(() => {
-        let pokemonUrl = `http://localhost:8080/api/pokemon/team/${props.team.id}/${props.league.id}`;
+        let pokemonUrl = `http://localhost:8080/api/pokemon/team?teamId=${props.team.id}&leagueId=${props.league.id}`;
         fetch(pokemonUrl, {type: "GET"})
             .then(response => response.json())
             .then(pokemonData => setPokeData(pokemonData))
@@ -50,7 +50,7 @@ function Entry(props) {
 
     React.useEffect(() => {
         setLoaded(false);
-        let url = `http://localhost:8080/api/pokemon/stats/${props.data.pokemon.id}/${props.league.id}`;
+        let url = `http://localhost:8080/api/pokemon/stats?pokeId=${props.data.pokemon.id}&leagueId=${props.league.id}`;
         fetch(url, {type: "GET"})
             .then(response => response.json())
             .then(stats => setLeagueStats(stats))

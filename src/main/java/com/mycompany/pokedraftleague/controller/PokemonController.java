@@ -55,21 +55,20 @@ public class PokemonController {
                 offset.orElseGet(() -> 0)));
     }
     
-    @GetMapping("/team/{teamId}/{leagueId}")
-    public ResponseEntity getPokemonOn(@PathVariable int teamId, @PathVariable int leagueId) {
+    @GetMapping("/team")
+    public ResponseEntity getPokemonOn(@RequestParam int teamId,
+                                       @RequestParam int leagueId) {
         return ResponseEntity.ok(detailedPokemonDao.getPokemonFromRoster(teamId, leagueId));
     }
     
-    @GetMapping("/stats/{pokeId}/{leagueId}")
-    public ResponseEntity getPokeStatsForLeague(@PathVariable int pokeId,
-            @PathVariable int leagueId) {
-        return ResponseEntity.ok(aggregatePokemonStatsDao.getStatsFor(pokeId, leagueId));
-    }
-    
-    @GetMapping("/stats/{pokeId}/{teamId}/{leagueId}")
-    public ResponseEntity getPokeStatsOnTeamForLeague(@PathVariable int pokeId, 
-            @PathVariable int teamId,
-            @PathVariable int leagueId) {
-        return ResponseEntity.ok(aggregatePokemonStatsDao.getStatsFor(pokeId, teamId, leagueId));
-    }
+    @GetMapping("/stats")
+    public ResponseEntity getPokeStatsForLeague(@RequestParam int pokeId,
+                                                @RequestParam int leagueId,
+                                                @RequestParam Optional<Integer> teamId) {
+        if (teamId.isEmpty()) {
+            return ResponseEntity.ok(aggregatePokemonStatsDao.getStatsFor(pokeId, leagueId));
+        } else {
+            return ResponseEntity.ok(aggregatePokemonStatsDao.getStatsFor(pokeId, teamId.get(), leagueId));
+        }
+    }    
 }

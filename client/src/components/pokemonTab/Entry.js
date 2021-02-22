@@ -6,7 +6,8 @@ function Entry(props) {
     const [leagueStats, setLeagueStats] = React.useState({});
 
     React.useEffect(() => {
-        let url = `http://localhost:8080/api/pokemon/stats/${props.data.pokemon.id}/${props.league.id}`;
+        let url = `http://localhost:8080/api/pokemon/stats?pokeId=${props.data.pokemon.id}
+                    &leagueId=${props.league.id}`;
         fetch(url, {type: "GET"})
             .then(response => response.json())
             .then(stats => setLeagueStats(stats))
