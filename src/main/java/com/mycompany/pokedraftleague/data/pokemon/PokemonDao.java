@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.pokedraftleague.data;
+package com.mycompany.pokedraftleague.data.pokemon;
 
 import com.mycompany.pokedraftleague.models.League;
 import com.mycompany.pokedraftleague.models.Match;
@@ -17,7 +17,6 @@ import java.util.List;
 public interface PokemonDao {
     List<Pokemon> getAllPokemon();
     Pokemon getPokemonById(int id);
-    List<Pokemon> getFormsFor(String name);
     List<Pokemon> getPokemonOn(int teamId, int leagueId);
     Pokemon getPokemonWithStatsFrom(int pokeId, Match match);
     Pokemon getPokemonWithStatsFrom(int pokeId, League league);

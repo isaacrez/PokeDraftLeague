@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.pokedraftleague.data;
+package com.mycompany.pokedraftleague.data.pokemon;
 
 import com.mycompany.pokedraftleague.models.League;
 import com.mycompany.pokedraftleague.models.Match;
@@ -45,12 +45,6 @@ public class PokemonDaoDB implements PokemonDao {
         } catch (DataAccessException e) {
             return null;
         }
-    }
-    
-    @Override
-    public List<Pokemon> getFormsFor(String name) {
-        final String GET_FORMS_FOR = "SELECT * FROM pokemon WHERE name = ?";
-        return jdbc.query(GET_FORMS_FOR, new PokemonMapper(), name);
     }
     
     @Override
