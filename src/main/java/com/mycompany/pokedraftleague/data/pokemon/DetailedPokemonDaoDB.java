@@ -32,7 +32,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
     
     @Override
     public List<DetailedPokemon> getAllPokemon() {
-        final String GET_ALL = "SELECT * FROM pokemon";
+        final String GET_ALL = "SELECT NULL AS tier, p.* FROM pokemon AS p";
         List<DetailedPokemon> pokemon =  jdbc.query(GET_ALL,
                 new DetailedPokemonMapper());
         addTypingAndAbilities(pokemon);
