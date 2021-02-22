@@ -68,7 +68,7 @@ function Entry(props) {
             <td>{leagueStats.directKOs}</td>
             <td>{leagueStats.indirectKOs}</td>
             <td>{leagueStats.deaths}</td>
-            <td className={classKD}>{KD}</td>
+            <td className={classKD}>{KD > 0 ? `+${KD}` : KD}</td>
         </tr>
     ) : null;
 }
