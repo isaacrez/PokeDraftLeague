@@ -14,7 +14,7 @@ function Draft(props) {
     }, [props.league.id]);
 
     function buildTiers() {
-        return tiers.map(t => <TierSet tier={t} league={props.league} />);
+        return tiers.map(t => <TierSet key={t} tier={t} league={props.league} />);
     }
 
     return (
