@@ -3,16 +3,25 @@ import React from 'react';
 function Draft(props) {
     return (
         <div className="full-stripe">
-            <div className="w-100 d-flex mx-3 flex-wrap">
-                <Card imgUrl="https://www.serebii.net/swordshield/pokemon/001.png"
-                    title="Bulbasaur"
-                    subtitle="FREE" />
-                <Card imgUrl="https://www.serebii.net/swordshield/pokemon/003.png"
-                    title="Venusaur"
-                    subtitle="LSL" />
-            </div>
+            <TierSet tier={1}/>
+            <TierSet tier={2}/>
         </div>
     )
+}
+
+function TierSet(props) {
+    return(<div className="w-100">
+        <h1 className="text-center">Tier {props.tier}</h1>
+
+        <div className="w-100 d-flex mx-3 flex-wrap">
+            <Card imgUrl="https://www.serebii.net/swordshield/pokemon/001.png"
+                title="Bulbasaur"
+                subtitle="FREE" />
+            <Card imgUrl="https://www.serebii.net/swordshield/pokemon/003.png"
+                title="Venusaur"
+                subtitle="LSL" />
+        </div>
+    </div>)
 }
 
 function Card(props) {
