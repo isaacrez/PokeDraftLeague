@@ -14,7 +14,7 @@ function PokeTable(props) {
             .then(response => response.json())
             .then(data => setPokemon(data))
             .catch(error => console.log(error));
-    }, [props.page]);
+    }, [props.page, props.league.id]);
 
     return (
         <div className="scrollable-table tall">
