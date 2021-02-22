@@ -51,6 +51,15 @@ public class LeagueDaoDB implements LeagueDao {
         }
     }
     
+    @Override
+    public List<Integer> getTiersInLeague(int id) {
+        final String GET_TIERS_FOR_LEAGUE = "SELECT tier FROM pokemonTier "
+                + "WHERE leagueId = ? "
+                + "GROUP BY tier "
+                + "ORDER BY tier";
+        return jdbc.queryForList(GET_TIERS_FOR_LEAGUE, Integer.class, id);
+    }
+    
     private void addTeamsToLeague(List<League> leagues) {
         for (League league : leagues) {
             addTeamsToLeague(league);

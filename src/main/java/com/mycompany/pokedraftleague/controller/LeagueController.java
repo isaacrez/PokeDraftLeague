@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -49,6 +50,11 @@ public class LeagueController {
     @GetMapping("/roster/{leagueId}")
     public ResponseEntity getRostersForLeague(@PathVariable int leagueId) {
         return ResponseEntity.ok(teamDao.getAllTeamRostersForLeague(leagueId));
+    }
+    
+    @GetMapping("/tiers")
+    public ResponseEntity getTiersForLeague(@RequestParam int leagueId) {
+        return ResponseEntity.ok(leagueDao.getTiersInLeague(leagueId));
     }
     
     @GetMapping("results/{leagueId}")
