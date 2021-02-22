@@ -323,7 +323,11 @@ input:checked + .slider:before {
 }
 
 .roulette {
+  display: inline-flex;
+  margin: 5px 0;
   max-width: 75vw;
+  max-height: 80vh;
+  overflow: auto;
   width: 100%;
 }
 

@@ -15,8 +15,8 @@ function RouletteSet(props) {
                     className="btn btn-secondary">
                     {isExpanded ? "Show less" : "Show more"} </button>
 
-    let classLabels = "d-flex roulette mb-1 ";
-    classLabels += isExpanded ? "overflow-auto" : "overflow-auto";
+    let classLabels = "roulette ";
+    classLabels += isExpanded ? "flex-wrap" : "";
 
     return (<div className="d-flex flex-column align-items-center">
         <div className={classLabels}>
