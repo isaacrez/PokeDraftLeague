@@ -8,6 +8,7 @@ package com.mycompany.pokedraftleague.data.pokemon;
 import com.mycompany.pokedraftleague.data.league.TeamDao;
 import com.mycompany.pokedraftleague.models.League;
 import com.mycompany.pokedraftleague.models.Match;
+import com.mycompany.pokedraftleague.models.PackagedResult;
 import com.mycompany.pokedraftleague.models.Pokemon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,9 +36,15 @@ public class PokemonDaoDB implements PokemonDao {
     }
 
     @Override
-    public List<Pokemon> getAllPokemon() {
+    public PackagedResult<Pokemon> getAllPokemon() {
         final String GET_ALL_POKEMON = "SELECT * FROM pokemon";
-        return jdbc.query(GET_ALL_POKEMON, new PokemonMapper());
+        List<Pokemon> results = jdbc.query(GET_ALL_POKEMON, new PokemonMapper());
+        
+        final String GET_COUNT = "SELECT COUNT(*) FROM pokemon";
+        int count = jdbc.queryForObject(GET_COUNT, Integer.class);
+        
+        PackagedResult<Pokemon> output = new PackagedResult(count, results);
+        return output;
     }
     
     @Override
