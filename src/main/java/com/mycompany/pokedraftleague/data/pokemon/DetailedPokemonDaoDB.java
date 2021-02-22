@@ -99,8 +99,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
                 + "WHERE p.id = ?";
         
         int id = pokemon.getPokemon().getId();
-        List<String> type = jdbc.query(GET_TYPE, new NameMapper(), id);
-        pokemon.setType(type);
+        pokemon.setType(jdbc.queryForList(GET_TYPE, String.class, id));
     }
     
     private void addAbilities(DetailedPokemon pokemon) {
@@ -110,17 +109,8 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
                 + "WHERE p.id = ?";
         
         int id = pokemon.getPokemon().getId();
-        List<String> abilities = jdbc.query(GET_ABILITIES, new NameMapper(), id);
-        pokemon.setAbilities(abilities);
+        pokemon.setAbilities(jdbc.queryForList(GET_ABILITIES, String.class, id));
         
-    }
-    
-    public static final class NameMapper implements RowMapper<String> {
-        
-        @Override
-        public String mapRow(ResultSet rs, int i) throws SQLException {
-            return rs.getString("name");
-        }
     }
     
     public static final class DetailedPokemonMapper implements RowMapper<DetailedPokemon> {
