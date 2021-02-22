@@ -34,11 +34,12 @@ function TierSet(props) {
 
         fetch(url, {type: "GET"})
             .then(response => response.json())
-            .then(data => setData(data.map(d => new Object({
+            .then(data => data.map(d => ({
                 imgUrl: `https://www.serebii.net/swordshield/pokemon/${d.imgId}.png`,
                 title: d.name,
                 subtitle: d.team.acronym
-            }))))
+            })))
+            .then(data => setData(data))
             .catch(error => console.log(error));
     }, [props.league.id, props.tier]);
 
