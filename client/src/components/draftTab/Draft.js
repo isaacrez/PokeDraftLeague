@@ -41,9 +41,13 @@ function TierSet(props) {
             .catch(error => console.log(error));
     }, [props.league.id, props.tier]);
 
+    function recolor(dataPoint) {
+        return dataPoint.subtitle !== "FREE";
+    }
+
     return(<div className="mb-4">
         <h1 className="text-center">Tier {props.tier}</h1>
-        <RouletteSet data={data} />
+        <RouletteSet data={data} recolorIf={recolor} />
     </div>)
 }
 
@@ -53,7 +57,8 @@ function RouletteSet(props) {
         return props.data.map(d => 
             <Card imgUrl={d.imgUrl}
                 title={d.title}
-                subtitle={d.subtitle} />)
+                subtitle={d.subtitle}
+                recolor={props.recolorIf(d)} />)
     }
 
     return(<div className="d-flex roulette overflow-auto">
@@ -62,7 +67,8 @@ function RouletteSet(props) {
 }
 
 function Card(props) {
-    return (<div className="card mx-1">
+    let recolor = props.recolor ? "taken" : null;
+    return (<div className={`card mx-1 ${recolor}`}>
         <img src={props.imgUrl} />
         <p>
             {props.title}

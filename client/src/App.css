@@ -341,3 +341,8 @@ input:checked + .slider:before {
   color: #BB7E8C;
   font-weight: bold;
 }
+
+.taken {
+  background-color: #BB7E8C;
+  font-weight: bold;
+}
