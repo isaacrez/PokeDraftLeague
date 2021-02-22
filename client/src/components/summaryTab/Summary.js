@@ -3,8 +3,6 @@ import DropdownSelector from '../general/DropdownSelector';
 import PokemonStats from './PokemonStats';
 import SummaryHeader from './SummaryHeader';
 
-const NO_TEAM_SELECT = "";
-
 function Summary(props) {
 
     const [rosters, setRosters] = React.useState([]);
