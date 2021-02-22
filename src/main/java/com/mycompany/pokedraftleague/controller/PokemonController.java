@@ -45,13 +45,19 @@ public class PokemonController {
     }
     
     @GetMapping("/full")
-    public ResponseEntity getSlice(@RequestParam int leagueId,
+    public ResponseEntity getSlice(@RequestParam Optional<Integer> leagueId,
                                    @RequestParam Optional<Integer> limit,
                                    @RequestParam Optional<Integer> offset) {
-        return ResponseEntity.ok(detailedPokemonDao.getSliceOfPokemon(
-                leagueId,
-                limit.orElseGet(() -> 5),
-                offset.orElseGet(() -> 0)));
+        if (leagueId.isPresent()) {
+            return ResponseEntity.ok(detailedPokemonDao.getSliceOfPokemon(
+                    leagueId.get(),
+                    limit.orElseGet(() -> 5),
+                    offset.orElseGet(() -> 0)));
+        } else {
+            return ResponseEntity.ok(detailedPokemonDao.getSliceOfPokemon(
+                    limit.orElseGet(() -> 5),
+                    offset.orElseGet(() -> 0)));
+        }
     }
     
     @GetMapping("/team")

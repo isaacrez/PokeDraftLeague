@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface DetailedPokemonDao {
     List<DetailedPokemon> getAllPokemon();
+    List<DetailedPokemon> getSliceOfPokemon(int limit, int offset);
     List<DetailedPokemon> getSliceOfPokemon(int leagueId, int limit, int offset);
     List<DetailedPokemon> getPokemonFromRoster(int teamId, int leagueId);
 }

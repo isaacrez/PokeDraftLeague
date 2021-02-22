@@ -38,6 +38,19 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
         addTypingAndAbilities(pokemon);
         return pokemon;
     }
+    
+    @Override
+    public List<DetailedPokemon> getSliceOfPokemon(int limit, int offset) {
+        final String GET_SLICE = "SELECT * FROM pokemon AS p "
+                + "JOIN pokemonTier AS pt ON p.id = pt.pokemonId "
+                + "LIMIT ? OFFSET ?";
+        List<DetailedPokemon> pokemon = jdbc.query(GET_SLICE,
+                new DetailedPokemonMapper(),
+                limit,
+                offset);
+        addTypingAndAbilities(pokemon);
+        return pokemon;
+    }
 
     @Override
     public List<DetailedPokemon> getSliceOfPokemon(int leagueId, int limit, int offset) {
