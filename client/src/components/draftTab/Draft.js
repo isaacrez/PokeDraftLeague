@@ -44,10 +44,10 @@ function TierSet(props) {
             subtitle="FREE" />)
     }
 
-    return(<div className="w-100">
+    return(<div className="mx-3 roulette">
         <h1 className="text-center">Tier {props.tier}</h1>
 
-        <div className="w-100 d-flex mx-3 flex-wrap">
+        <div className="d-flex mx-3 justify-content-center overflow-auto">
             {buildCards()}
         </div>
     </div>)
@@ -56,8 +56,11 @@ function TierSet(props) {
 function Card(props) {
     return (<div className="card">
         <img src={props.imgUrl} />
-        <p>{props.title}</p>
-        <p>{props.subtitle}</p>
+        <p>
+            {props.title}
+            <br />
+            {props.subtitle}
+        </p>
     </div>)
 }
 
