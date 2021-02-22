@@ -7,7 +7,8 @@ function PokeTable(props) {
 
     React.useEffect(() => {
         let offset = (props.page.current - 1) * props.page.size;
-        let url = `http://localhost:8080/api/pokemon/full?limit=${props.page.size}&offset=${offset}`;
+        let url = `http://localhost:8080/api/pokemon/full?leagueId=${props.league.id}
+            &limit=${props.page.size}&offset=${offset}`;
     
         fetch(url, {type: "GET"})
             .then(response => response.json())

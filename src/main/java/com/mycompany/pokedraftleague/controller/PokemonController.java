@@ -46,9 +46,11 @@ public class PokemonController {
     }
     
     @GetMapping("/full")
-    public ResponseEntity getSlice(@RequestParam Optional<Integer> limit,
+    public ResponseEntity getSlice(@RequestParam int leagueId,
+                                   @RequestParam Optional<Integer> limit,
                                    @RequestParam Optional<Integer> offset) {
         return ResponseEntity.ok(detailedPokemonDao.getSliceOfPokemon(
+                leagueId,
                 limit.orElseGet(() -> 5),
                 offset.orElseGet(() -> 0)));
     }

@@ -40,10 +40,14 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
     }
 
     @Override
-    public List<DetailedPokemon> getSliceOfPokemon(int limit, int offset) {
-        final String GET_SLICE = "SELECT * FROM pokemon LIMIT ? OFFSET ?";
+    public List<DetailedPokemon> getSliceOfPokemon(int leagueId, int limit, int offset) {
+        final String GET_SLICE = "SELECT * FROM pokemon AS p "
+                + "JOIN pokemonTier AS pt ON p.id = pt.pokemonId "
+                + "WHERE pt.leagueId = ? "
+                + "LIMIT ? OFFSET ?";
         List<DetailedPokemon> pokemon = jdbc.query(GET_SLICE,
                 new DetailedPokemonMapper(),
+                leagueId,
                 limit,
                 offset);
         addTypingAndAbilities(pokemon);
@@ -52,9 +56,11 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
     
     @Override
     public List<DetailedPokemon> getPokemonFromRoster(int teamId, int leagueId) {
-        final String GET_FOR_TEAM = "SELECT p.* FROM pokemon AS p "
+        final String GET_FOR_TEAM = "SELECT pt.tier, p.* FROM pokemon AS p "
                 + "JOIN roster AS r ON p.id = r.pokeId "
-                + "WHERE teamId = ? AND leagueId = ?";
+                + "JOIN pokemonTier AS pt ON p.id = pt.pokemonId "
+                + "WHERE r.teamId = ? AND r.leagueId = pt.leagueId "
+                + "AND pt.leagueId = ?";
         List<DetailedPokemon> pokemon = jdbc.query(GET_FOR_TEAM, 
                 new DetailedPokemonMapper(),
                 teamId,
@@ -125,6 +131,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
             DetailedPokemon fullPokemon = new DetailedPokemon();
             fullPokemon.setPokemon(pokemon);
             fullPokemon.setStats(stats);
+            fullPokemon.setTier(rs.getInt("tier"));
             return fullPokemon;
         }
     }

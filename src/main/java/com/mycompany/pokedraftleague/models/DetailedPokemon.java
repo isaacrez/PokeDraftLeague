@@ -15,6 +15,7 @@ import java.util.Objects;
 public class DetailedPokemon {
     
     private Pokemon pokemon;
+    private int tier;
     private BaseStats stats;
     private List<String> type;
     private List<String> abilities;
@@ -27,6 +28,14 @@ public class DetailedPokemon {
         this.pokemon = pokemon;
     }
 
+    public int getTier() {
+        return tier;
+    }
+
+    public void setTier(int tier) {
+        this.tier = tier;
+    }
+    
     public BaseStats getStats() {
         return stats;
     }
@@ -54,10 +63,11 @@ public class DetailedPokemon {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.pokemon);
-        hash = 97 * hash + Objects.hashCode(this.stats);
-        hash = 97 * hash + Objects.hashCode(this.type);
-        hash = 97 * hash + Objects.hashCode(this.abilities);
+        hash = 37 * hash + Objects.hashCode(this.pokemon);
+        hash = 37 * hash + this.tier;
+        hash = 37 * hash + Objects.hashCode(this.stats);
+        hash = 37 * hash + Objects.hashCode(this.type);
+        hash = 37 * hash + Objects.hashCode(this.abilities);
         return hash;
     }
 
@@ -73,6 +83,9 @@ public class DetailedPokemon {
             return false;
         }
         final DetailedPokemon other = (DetailedPokemon) obj;
+        if (this.tier != other.tier) {
+            return false;
+        }
         if (!Objects.equals(this.pokemon, other.pokemon)) {
             return false;
         }

@@ -46,8 +46,6 @@ function Entry(props) {
     const classKD = KD === 0 ? "neutral" : KD > 0 ? "good" : "bad";
 
     React.useEffect(() => {
-        console.log(props);
-
         setLoaded(false);
         let url = `http://localhost:8080/api/pokemon/stats/${props.data.pokemon.id}/${props.league.id}`;
         fetch(url, {type: "GET"})
