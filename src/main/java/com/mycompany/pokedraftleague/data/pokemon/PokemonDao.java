@@ -20,7 +20,7 @@ public interface PokemonDao {
     List<Pokemon> getPokemonOn(int teamId, int leagueId);
     Pokemon getPokemonWithStatsFrom(int pokeId, Match match);
     Pokemon getPokemonWithStatsFrom(int pokeId, League league);
-    List<Pokemon> getPokemonFromTier(int tier, int leagueId, int limit, int offset);
+    List<Pokemon> getPokemonFromTier(int tier, int leagueId);
     Pokemon addPokemon(Pokemon pokemon);
     void updatePokemon(Pokemon pokemon);
     void deletePokemonById(int id);

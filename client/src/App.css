@@ -323,7 +323,7 @@ input:checked + .slider:before {
 }
 
 .roulette {
-  max-width: 70vw;
+  max-width: 75vw;
   width: 100%;
 }
 

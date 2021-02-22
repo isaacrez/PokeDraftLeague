@@ -41,7 +41,7 @@ function TierSet(props) {
             .catch(error => console.log(error));
     }, [props.league.id, props.tier]);
 
-    return(<div>
+    return(<div className="mb-4">
         <h1 className="text-center">Tier {props.tier}</h1>
         <RouletteSet data={data} />
     </div>)
@@ -56,15 +56,13 @@ function RouletteSet(props) {
                 subtitle={d.subtitle} />)
     }
 
-    return(<div className="mx-3 roulette">
-        <div className="d-flex mx-3 justify-content-center overflow-auto">
+    return(<div className="d-flex roulette overflow-auto">
             {buildCards()}
-        </div>
     </div>)
 }
 
 function Card(props) {
-    return (<div className="card">
+    return (<div className="card mx-1">
         <img src={props.imgUrl} />
         <p>
             {props.title}
