@@ -3,12 +3,14 @@ import React from 'react';
 function Draft(props) {
     return (
         <div className="full-stripe">
-            <Card imgUrl="https://www.serebii.net/swordshield/pokemon/001.png"
-                title="Bulbasaur"
-                subtitle="FREE" />
-            <Card imgUrl="https://www.serebii.net/swordshield/pokemon/003.png"
-                title="Venusaur"
-                subtitle="LSL" />
+            <div className="w-100 d-flex mx-3 flex-wrap">
+                <Card imgUrl="https://www.serebii.net/swordshield/pokemon/001.png"
+                    title="Bulbasaur"
+                    subtitle="FREE" />
+                <Card imgUrl="https://www.serebii.net/swordshield/pokemon/003.png"
+                    title="Venusaur"
+                    subtitle="LSL" />
+            </div>
         </div>
     )
 }

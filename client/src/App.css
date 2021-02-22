@@ -299,6 +299,7 @@ input:checked + .slider:before {
 
 .card {
   max-width: 175px;
+  margin: 5px;
   background-color: #434343;
   border: 1px solid #666666;
   border-radius: 15px;
