@@ -1,4 +1,5 @@
 import React from 'react';
+import RouletteSet from '../general/RouletteSet';
 
 function Draft(props) {
 
@@ -48,47 +49,6 @@ function TierSet(props) {
     return(<div className="mb-4">
         <h1 className="text-center">Tier {props.tier}</h1>
         <RouletteSet data={data} recolorIf={recolor} />
-    </div>)
-}
-
-function RouletteSet(props) {
-
-    const [isExpanded, setIsExpanded] = React.useState(false);
-
-    function buildCards() {
-        return props.data.map(d => 
-            <Card imgUrl={d.imgUrl}
-                title={d.title}
-                subtitle={d.subtitle}
-                recolor={props.recolorIf(d)} />)
-    }
-
-    return isExpanded ? 
-        (<div className="d-flex flex-column align-items-center">
-            <div className="d-flex roulette flex-wrap mb-1">
-                {buildCards()}
-            </div>
-            <button onClick={() => setIsExpanded(false)}
-                className="btn btn-secondary">Show less</button>
-        </div>) :
-        (<div className="d-flex flex-column align-items-center">
-            <div className="d-flex roulette overflow-auto mb-1">
-                {buildCards()}
-            </div>
-            <button onClick={() => setIsExpanded(true)}
-                className="btn btn-secondary">Show all</button>
-        </div>)
-}
-
-function Card(props) {
-    let recolor = props.recolor ? "taken" : null;
-    return (<div className={`card mx-1 ${recolor}`}>
-        <img src={props.imgUrl} />
-        <p>
-            {props.title}
-            <br />
-            {props.subtitle}
-        </p>
     </div>)
 }
 
