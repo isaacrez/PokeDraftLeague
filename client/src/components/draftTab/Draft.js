@@ -25,7 +25,7 @@ function Draft(props) {
 
 function TierSet(props) {
 
-    const [pokemon, setPokemon] = React.useState([]);
+    const [data, setData] = React.useState([]);
 
     React.useEffect(() => {
         let url = `http://localhost:8080/api/pokemon/tier?tier=${props.tier}`
@@ -33,20 +33,30 @@ function TierSet(props) {
 
         fetch(url, {type: "GET"})
             .then(response => response.json())
-            .then(data => setPokemon(data))
+            .then(data => setData(data.map(d => new Object({
+                imgUrl: `https://www.serebii.net/swordshield/pokemon/${d.imgId}.png`,
+                title: d.name,
+                subtitle: "FREE"
+            }))))
             .catch(error => console.log(error));
     }, [props.league.id, props.tier]);
 
+    return(<div>
+        <h1 className="text-center">Tier {props.tier}</h1>
+        <RouletteSet data={data} />
+    </div>)
+}
+
+function RouletteSet(props) {
+
     function buildCards() {
-        return pokemon.map(p =>
-            <Card imgUrl={`https://www.serebii.net/swordshield/pokemon/${p.imgId}.png`}
-            title={p.name}
-            subtitle="FREE" />)
+        return props.data.map(d => 
+            <Card imgUrl={d.imgUrl}
+                title={d.title}
+                subtitle={d.subtitle} />)
     }
 
     return(<div className="mx-3 roulette">
-        <h1 className="text-center">Tier {props.tier}</h1>
-
         <div className="d-flex mx-3 justify-content-center overflow-auto">
             {buildCards()}
         </div>
