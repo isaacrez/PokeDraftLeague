@@ -5,6 +5,7 @@ import Home from './components/homeTab/Home';
 import Leaderboard from './components/leaderboardTab/Leaderboard';
 import Schedule from './components/scheduleTab/Schedule';
 import Summary from './components/summaryTab/Summary';
+import Match from './components/matchesTab/Match';
 import Draft from './components/draftTab/Draft';
 import Pokemon from './components/pokemonTab/Pokemon';
 
@@ -33,6 +34,11 @@ function App() {
   {
     label: "Team Summary",
     output: <Summary league={league} />,
+    alwaysAccessible: false
+  },
+  {
+    label: "Match",
+    output: <Match league={league} />,
     alwaysAccessible: false
   },
   {
