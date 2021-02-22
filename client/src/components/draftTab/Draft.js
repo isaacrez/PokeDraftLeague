@@ -13,7 +13,7 @@ function Draft(props) {
     }, [props.league.id]);
 
     function buildTiers() {
-        return tiers.map(t => <TierSet tier={t} />);
+        return tiers.map(t => <TierSet tier={t} league={props.league} />);
     }
 
     return (
@@ -24,16 +24,31 @@ function Draft(props) {
 }
 
 function TierSet(props) {
+
+    const [pokemon, setPokemon] = React.useState([]);
+
+    React.useEffect(() => {
+        let url = `http://localhost:8080/api/pokemon/tier?tier=${props.tier}`
+                + `&leagueId=${props.league.id}`;
+
+        fetch(url, {type: "GET"})
+            .then(response => response.json())
+            .then(data => setPokemon(data))
+            .catch(error => console.log(error));
+    }, [props.league.id, props.tier]);
+
+    function buildCards() {
+        return pokemon.map(p =>
+            <Card imgUrl={`https://www.serebii.net/swordshield/pokemon/${p.imgId}.png`}
+            title={p.name}
+            subtitle="FREE" />)
+    }
+
     return(<div className="w-100">
         <h1 className="text-center">Tier {props.tier}</h1>
 
         <div className="w-100 d-flex mx-3 flex-wrap">
-            <Card imgUrl="https://www.serebii.net/swordshield/pokemon/001.png"
-                title="Bulbasaur"
-                subtitle="FREE" />
-            <Card imgUrl="https://www.serebii.net/swordshield/pokemon/003.png"
-                title="Venusaur"
-                subtitle="LSL" />
+            {buildCards()}
         </div>
     </div>)
 }
