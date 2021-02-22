@@ -288,8 +288,7 @@ input:checked + .slider:before {
 .bubble {
   color: #77BEE4;
   font-size: 20px;
-  width: 90%;
-  max-width: 300px;
+  width: 95%;
 
   background-color: #434343;
   padding: 10px;

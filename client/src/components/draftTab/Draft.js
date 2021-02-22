@@ -46,7 +46,7 @@ function TierSet(props) {
         return dataPoint.subtitle !== "FREE";
     }
 
-    return(<div className="mb-4">
+    return(<div className="bubble mb-4">
         <h1 className="text-center">Tier {props.tier}</h1>
         <RouletteSet data={data} recolorIf={recolor} />
     </div>)
