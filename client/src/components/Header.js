@@ -3,8 +3,18 @@ import DropdownSelector from './general/DropdownSelector';
 
 function Header(props) {
 
-    const initialOptions = ["Home", "Pokémon"]
-    const fullOptions = ["Home", "Leaderboard", "Schedule", "Team Summary", "Matches", "Draft", "Pokémon"];
+    const initialOptions = props.accessiblePages
+                            .filter(o => o.alwaysAccessible)
+                            .map(o => o.label);
+
+    const fullOptions = props.accessiblePages.map(o => o.label);
+
+    function setNewPage(label) {
+        let newPage = props.accessiblePages
+                        .find(o => o.label === label)
+                        .output
+        props.setMainContent(newPage);
+    }
 
     return (
         <header>
@@ -20,7 +30,7 @@ function Header(props) {
 
                 <div className="ml-auto">
                     <DropdownSelector 
-                        setValue={props.setMainContent}
+                        setValue={setNewPage}
                         values={props.league.name ? fullOptions : initialOptions}
                         purpose={""} />
                 </div>

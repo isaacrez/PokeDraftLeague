@@ -13,24 +13,50 @@ import './App.css';
 
 
 function App() {
-  const [league, setLeague] = React.useState({name: "", id: -1});
-  const [mainContent, setMainContent] = React.useState("Home");
 
-  let stringToContent = {
-    "Home": <Home setLeague={setLeague}/>,
-    "Leaderboard": <Leaderboard league={league} />,
-    "Schedule": <Schedule league={league}/>,
-    "Team Summary": <Summary league={league} />,
-    "Draft": <Draft league={league} />,
-    "Pokémon": <Pokemon league={league}/>
-  }
+  const [league, setLeague] = React.useState({name: "", id: -1});
+  const accessiblePages = [{
+    label: "Home",
+    output: <Home setLeague={setLeague} />,
+    alwaysAccessible: true
+  },
+  {
+    label: "Leaderboard",
+    output: <Leaderboard league={league} />,
+    alwaysAccessible: false
+  },
+  {
+    label: "Schedule",
+    output: <Schedule league={league}/>,
+    alwaysAccessible: false
+  },
+  {
+    label: "Team Summary",
+    output: <Summary league={league} />,
+    alwaysAccessible: false
+  },
+  {
+    label: "Draft",
+    output: <Draft league={league} />,
+    alwaysAccessible: false
+  },
+  {
+    label: "Pokémon",
+    output: <Pokemon league={league}/>,
+    alwaysAccessible: true
+  }]
+
+  const [mainContent, setMainContent] = React.useState(
+    accessiblePages.find(o => o.label === "Home").output
+  );
 
   return (
     <div className="App">
-      <Header mainContent={mainContent}
+      <Header accessiblePages={accessiblePages}
+        mainContent={mainContent}
         setMainContent={setMainContent}
         league={league} />
-      {stringToContent[mainContent]}
+      {mainContent}
     </div>
   );
 }
