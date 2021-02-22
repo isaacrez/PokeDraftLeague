@@ -286,7 +286,8 @@ input:checked + .slider:before {
 }
 
 .bubble {
-  text-align: justify;
+  color: #77BEE4;
+  font-size: 20px;
   width: 90%;
   max-width: 300px;
 
@@ -294,6 +295,25 @@ input:checked + .slider:before {
   padding: 10px;
   border: 1px solid #666666;
   border-radius: 5px;
+}
+
+.card {
+  max-width: 175px;
+  background-color: #434343;
+  border: 1px solid #666666;
+  border-radius: 15px;
+}
+
+.card img {
+  background-color: #666666;
+  border-radius: 15px 15px 0 0;
+  margin-bottom: 2px;
+}
+
+.card p {
+  color: #77BEE4;
+  text-align: center;
+  font-size: 20px;
 }
 
 .neutral {
@@ -309,9 +329,4 @@ input:checked + .slider:before {
 .bad {
   color: #BB7E8C;
   font-weight: bold;
-}
-
-.bubble {
-  color: #77BEE4;
-  font-size: 20px;
 }

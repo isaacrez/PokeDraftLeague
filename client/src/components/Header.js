@@ -4,7 +4,7 @@ import DropdownSelector from './general/DropdownSelector';
 function Header(props) {
 
     const initialOptions = ["Home", "Pokémon"]
-    const fullOptions = ["Home", "Leaderboard", "Schedule", "Team Summary", "Matches", "Pokémon"];
+    const fullOptions = ["Home", "Leaderboard", "Schedule", "Team Summary", "Matches", "Draft", "Pokémon"];
 
     return (
         <header>
