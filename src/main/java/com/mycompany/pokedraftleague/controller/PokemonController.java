@@ -39,9 +39,15 @@ public class PokemonController {
         this.aggregatePokemonStatsDao = aggregatePokemonStatsDao;
     }
     
-    @GetMapping()
-    public ResponseEntity getPokemon() {
-        return ResponseEntity.ok(pokemonDao.getAllPokemon());
+    @GetMapping("/tier")
+    public ResponseEntity getPokemon(@RequestParam int tier,
+                                     @RequestParam int leagueId,
+                                     @RequestParam Optional<Integer> limit,
+                                     @RequestParam Optional<Integer> offset) {
+        return ResponseEntity.ok(pokemonDao.getPokemonFromTier(tier,
+                leagueId,
+                limit.orElseGet(() -> 5),
+                offset.orElseGet(() -> 0)));
     }
     
     @GetMapping("/full")
