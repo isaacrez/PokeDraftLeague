@@ -5,10 +5,10 @@
  */
 package com.mycompany.pokedraftleague.controller;
 
-import com.mycompany.pokedraftleague.data.MatchDao;
-import com.mycompany.pokedraftleague.data.MatchResultsDao;
-import com.mycompany.pokedraftleague.data.PokemonResultsDao;
-import com.mycompany.pokedraftleague.data.TeamDao;
+import com.mycompany.pokedraftleague.data.match.MatchDao;
+import com.mycompany.pokedraftleague.data.match.MatchResultsDao;
+import com.mycompany.pokedraftleague.data.pokemon.PokemonResultsDao;
+import com.mycompany.pokedraftleague.data.league.TeamDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

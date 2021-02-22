@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.pokedraftleague.data;
+package com.mycompany.pokedraftleague.data.match;
 
+import com.mycompany.pokedraftleague.data.league.TeamDao;
 import com.mycompany.pokedraftleague.models.MatchResults;
 import java.sql.ResultSet;
 import java.sql.SQLException;

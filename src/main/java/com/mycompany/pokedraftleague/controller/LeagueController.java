@@ -5,9 +5,9 @@
  */
 package com.mycompany.pokedraftleague.controller;
 
-import com.mycompany.pokedraftleague.data.LeagueDao;
-import com.mycompany.pokedraftleague.data.TeamDao;
-import com.mycompany.pokedraftleague.data.TeamResultsDao;
+import com.mycompany.pokedraftleague.data.league.LeagueDao;
+import com.mycompany.pokedraftleague.data.league.TeamDao;
+import com.mycompany.pokedraftleague.data.league.TeamResultsDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

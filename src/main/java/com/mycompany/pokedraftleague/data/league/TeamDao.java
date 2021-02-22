@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.pokedraftleague.data;
+package com.mycompany.pokedraftleague.data.league;
 
-import com.mycompany.pokedraftleague.models.Pokemon;
 import com.mycompany.pokedraftleague.models.Roster;
 import com.mycompany.pokedraftleague.models.Team;
 import java.util.List;

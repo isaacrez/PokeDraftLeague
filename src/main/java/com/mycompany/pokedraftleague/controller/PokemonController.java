@@ -5,15 +5,14 @@
  */
 package com.mycompany.pokedraftleague.controller;
 
-import com.mycompany.pokedraftleague.data.AggregatePokemonStatsDao;
-import com.mycompany.pokedraftleague.data.PokemonDao;
+import com.mycompany.pokedraftleague.data.pokemon.AggregatePokemonStatsDao;
+import com.mycompany.pokedraftleague.data.pokemon.PokemonDao;
 import com.mycompany.pokedraftleague.data.pokemon.DetailedPokemonDao;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

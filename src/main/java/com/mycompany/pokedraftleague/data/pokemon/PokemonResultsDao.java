@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.pokedraftleague.data;
+package com.mycompany.pokedraftleague.data.pokemon;
 
 import com.mycompany.pokedraftleague.models.PokemonResults;
 import java.util.List;

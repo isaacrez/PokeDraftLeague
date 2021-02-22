@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.pokedraftleague.data;
+package com.mycompany.pokedraftleague.data.league;
 
 import com.mycompany.pokedraftleague.data.CoachDaoDB.CoachMapper;
-import com.mycompany.pokedraftleague.data.PokemonDaoDB.PokemonMapper;
+import com.mycompany.pokedraftleague.data.pokemon.PokemonDaoDB.PokemonMapper;
 import com.mycompany.pokedraftleague.models.Coach;
-import com.mycompany.pokedraftleague.models.Pokemon;
 import com.mycompany.pokedraftleague.models.Roster;
 import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
