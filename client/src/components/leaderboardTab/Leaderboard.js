@@ -11,6 +11,13 @@ function Leaderboard(props) {
             .then(data => setTeamResults(data));
     }, [props.league.id])
 
+    function addDifferential(differential) {
+        let label = differential > 0 ? "good" :
+            differential < 0 ? "bad" : "neutral";
+        let text = differential > 0 ? `+${differential}` : differential;
+        return <td className={label}>{text}</td>
+    }
+
 
     function generateRows() {
         return teamResults.sort((a, b) => a.gamesWon - b.gamesWon !== 0
@@ -28,7 +35,7 @@ function Leaderboard(props) {
                     <td>{v.gamesPlayed}</td>
                     <td>{v.gamesWon}</td>
                     <td>{v.gamesPlayed - v.gamesWon}</td>
-                    <td>{v.differential}</td>
+                    {addDifferential(v.differential)}
                 </tr>
             )
     }
