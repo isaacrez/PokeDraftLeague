@@ -7,6 +7,7 @@ import TableNavBar from '../general/TableNavBar';
 function Pokemon(props) {
     const [page, setPage] = React.useState(1);
     const [pageSize, setPageSize] = React.useState(5);
+    const [total, setTotal] = React.useState(1);
     const [onDisplay, setOnDisplay] = React.useState({
         "Base Stats": true,
         "Typing": false,
@@ -32,8 +33,10 @@ function Pokemon(props) {
     const pageInfo = {
         current: page,
         size: pageSize,
+        total: total,
         setCurrent: setPage,
-        setSize: setPageSize
+        setSize: setPageSize,
+        setTotal: setTotal
     }
 
     return (

@@ -38,12 +38,12 @@ public class PokemonDaoDB implements PokemonDao {
     @Override
     public PackagedResult<Pokemon> getAllPokemon() {
         final String GET_ALL_POKEMON = "SELECT * FROM pokemon";
-        List<Pokemon> results = jdbc.query(GET_ALL_POKEMON, new PokemonMapper());
+        List<Pokemon> pokemon = jdbc.query(GET_ALL_POKEMON, new PokemonMapper());
         
         final String GET_COUNT = "SELECT COUNT(*) FROM pokemon";
         int count = jdbc.queryForObject(GET_COUNT, Integer.class);
         
-        PackagedResult<Pokemon> output = new PackagedResult(count, results);
+        PackagedResult<Pokemon> output = new PackagedResult(count, pokemon);
         return output;
     }
     

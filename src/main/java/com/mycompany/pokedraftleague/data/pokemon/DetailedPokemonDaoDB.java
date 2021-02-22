@@ -8,6 +8,7 @@ package com.mycompany.pokedraftleague.data.pokemon;
 import com.mycompany.pokedraftleague.models.DetailedPokemon;
 import com.mycompany.pokedraftleague.models.Pokemon;
 import com.mycompany.pokedraftleague.models.BaseStats;
+import com.mycompany.pokedraftleague.models.PackagedResult;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,16 +32,17 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
     }
     
     @Override
-    public List<DetailedPokemon> getAllPokemon() {
+    public PackagedResult<DetailedPokemon> getAllPokemon() {
         final String GET_ALL = "SELECT NULL AS tier, p.* FROM pokemon AS p";
         List<DetailedPokemon> pokemon =  jdbc.query(GET_ALL,
                 new DetailedPokemonMapper());
         addTypingAndAbilities(pokemon);
-        return pokemon;
+        
+        return new PackagedResult(getCount(), pokemon);
     }
     
     @Override
-    public List<DetailedPokemon> getSliceOfPokemon(int limit, int offset) {
+    public PackagedResult<DetailedPokemon> getSliceOfPokemon(int limit, int offset) {
         final String GET_SLICE = "SELECT NULL AS tier, p.* FROM pokemon AS p "
                 + "LIMIT ? OFFSET ?";
         List<DetailedPokemon> pokemon = jdbc.query(GET_SLICE,
@@ -48,11 +50,12 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
                 limit,
                 offset);
         addTypingAndAbilities(pokemon);
-        return pokemon;
+        
+        return new PackagedResult(getCount(), pokemon);
     }
 
     @Override
-    public List<DetailedPokemon> getSliceOfPokemon(int leagueId, int limit, int offset) {
+    public PackagedResult<DetailedPokemon> getSliceOfPokemon(int leagueId, int limit, int offset) {
         final String GET_SLICE = "SELECT * FROM pokemon AS p "
                 + "JOIN pokemonTier AS pt ON p.id = pt.pokemonId "
                 + "WHERE pt.leagueId = ? "
@@ -63,7 +66,8 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
                 limit,
                 offset);
         addTypingAndAbilities(pokemon);
-        return pokemon;
+        
+        return new PackagedResult(getCount(leagueId), pokemon);
     }
     
     @Override
@@ -79,6 +83,17 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
                 leagueId);
         addTypingAndAbilities(pokemon);
         return pokemon;
+    }
+    
+    private int getCount() {
+        final String GET_COUNT = "SELECT COUNT(*) FROM pokemon";
+        return jdbc.queryForObject(GET_COUNT, Integer.class);
+    }
+    
+    private int getCount(int leagueId) {
+        final String GET_COUNT = "SELECT COUNT(*) FROM pokemonTier "
+                + "WHERE leagueId = ?";
+        return jdbc.queryForObject(GET_COUNT, Integer.class, leagueId);
     }
     
     private void addTypingAndAbilities(List<DetailedPokemon> pokemon) {
