@@ -34,6 +34,11 @@ function Summary(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [teamName]);
 
+    let mainContent = teamStats ? [
+        <SummaryHeader team={currSelection.team} teamStats={teamStats} key={1} />,
+        <PokemonStats team={currSelection.team} league={props.league} key={2} />
+    ] : null;
+
     return (
         <div className="full-stripe">
             <div className="mb-3">
@@ -43,8 +48,7 @@ function Summary(props) {
                     purpose={"Team"} />
             </div>
 
-            {teamStats && <SummaryHeader team={currSelection.team} teamStats={teamStats} />}
-            {teamStats && <PokemonStats team={currSelection.team} league={props.league} />}
+            {mainContent}
         </div>
     )
 }
