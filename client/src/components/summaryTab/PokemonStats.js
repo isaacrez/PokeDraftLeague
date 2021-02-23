@@ -37,12 +37,17 @@ function PokemonStats(props) {
 function Entry(props) {
 
     const [leagueStats, setLeagueStats] = React.useState({});
+    const content = [props.data.tier, leagueStats.gamesPlayed, leagueStats.directKOs,
+        leagueStats.indirectKOs, leagueStats.deaths];
+
     const KD = leagueStats.directKOs + leagueStats.indirectKOs - leagueStats.deaths || 0;
     const classKD = KD === 0 ? "neutral" : KD > 0 ? "good" : "bad";
 
-    const content = [props.data.tier, leagueStats.gamesPlayed, leagueStats.directKOs,
-                    leagueStats.indirectKOs, leagueStats.deaths];
-    const cells = content.map((s, i) => <td key={i}>{s}</td>)
+    const cells = [
+        addLabel(props.data),
+        content.map((s, i) => <td key={i}>{s}</td>),
+        <td className={classKD} key={"kd"}>{KD > 0 ? `+${KD}` : KD}</td>
+    ];
 
     React.useEffect(() => {
         let url = `http://localhost:8080/api/pokemon/stats?pokeId=${props.data.pokemon.id}&leagueId=${props.league.id}`;
@@ -53,9 +58,7 @@ function Entry(props) {
     }, [props.data.pokemon.id, props.league.id]);
 
     return (<tr key={props.data.pokemon.id}>
-        {addLabel(props.data)}
         {cells}
-        <td className={classKD}>{KD > 0 ? `+${KD}` : KD}</td>
     </tr>);
 }
 
