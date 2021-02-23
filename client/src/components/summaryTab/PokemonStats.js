@@ -13,12 +13,8 @@ function PokemonStats(props) {
             .catch(error => console.log(error));
     }, [props.team.id, props.league.id]);
 
-    function makeRows() {
-        console.log(pokeData);
-        return pokeData
-            .sort((a, b) => a.tier - b.tier)
-            .map(data => <Entry league={props.league} data={data} key={data.pokemon.id} />)
-    }
+    const rows = pokeData.sort((a, b) => a.tier - b.tier)
+                .map(data => <Entry league={props.league} data={data} key={data.pokemon.id} />)
 
     return (
         <div className="scrollable-table short">
@@ -35,7 +31,7 @@ function PokemonStats(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {makeRows()}
+                    {rows}
                 </tbody>
             </table>
         </div>
