@@ -1,30 +1,23 @@
 import React from 'react';
 
 function TeamStats(props) {
-    function buildTeamStats() {
-        const stats = new Map([
-            ["Played", props.teamStats.gamesPlayed],
-            ["Won", props.teamStats.gamesWon],
-            ["Lost", props.teamStats.gamesPlayed - props.teamStats.gamesWon],
-            ["Differential", props.teamStats.differential > 0 ? `+${props.teamStats.differential}` : props.teamStats.differential]
-        ]);
 
-        let output = [];
-        stats.forEach((val, desc) => output.push(
-            <div className="d-flex justify-content-between"
-                key={desc}>
-                <p>{desc}:</p>
-                <p>{val}</p>
-            </div>
-        ));
-        return output;
-    }
+    const statsData = [
+        {label: "Played:", value: props.teamStats.gamesPlayed},
+        {label: "Won:", value: props.teamStats.gamesWon},
+        {label: "Lost:", value: props.teamStats.gamesPlayed - props.teamStats.gamesWon},
+        {label: "Differential:", value: props.teamStats.differential > 0 ? `+${props.teamStats.differential}` : props.teamStats.differential}
+    ]
 
-    return (
-        <div className="bubble my-3">
-            {buildTeamStats()}
-        </div>
-    );
+    const stats = statsData.map(o => 
+        <div className="d-flex justify-content-between" key={o.label}>
+            <p>{o.label}</p>
+            <p>{o.value}</p>
+        </div>);
+
+    return (<div className="bubble my-3">
+            {stats}
+        </div>);
 }
 
 export default TeamStats;
