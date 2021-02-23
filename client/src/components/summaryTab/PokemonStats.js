@@ -37,7 +37,7 @@ function PokemonStats(props) {
 function Entry(props) {
 
     const [leagueStats, setLeagueStats] = React.useState({});
-    const KD = leagueStats.directKOs + leagueStats.indirectKOs - leagueStats.deaths;
+    const KD = leagueStats.directKOs + leagueStats.indirectKOs - leagueStats.deaths || 0;
     const classKD = KD === 0 ? "neutral" : KD > 0 ? "good" : "bad";
 
     const content = [props.data.tier, leagueStats.gamesPlayed, leagueStats.directKOs,
@@ -52,7 +52,6 @@ function Entry(props) {
             .catch(error => console.log(error));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.data.pokemon.id]);
-
 
     return (<tr key={props.data.pokemon.id}>
         {addLabel(props.data)}
