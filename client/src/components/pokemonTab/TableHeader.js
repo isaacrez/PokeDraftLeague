@@ -2,43 +2,22 @@ import React from 'react';
 
 function TableHeader(props) {
 
-    const extensions = {
-        "Base Stats": [
-            <th key="HP">HP</th>,
-            <th key="Atk">Atk</th>,
-            <th key="Def">Def</th>,
-            <th key="SpAtk">SpAtk</th>,
-            <th key="SpDef">SpDef</th>,
-            <th key="Spe">Spe</th>
-        ],
-        "Typing": [
-            <th key="type" colSpan="2">Type</th>
-        ],
-        "Abilities": [
-            <th key="abilities" colSpan="4">Abilities</th>
-        ],
-        "League Stats": [
-            <th key="currentTeam">Team</th>,
-            <th key="directKOs">KOs</th>,
-            <th key="indirectKOs">Passive</th>,
-            <th key="deaths">Deaths</th>
-        ]
+    const headerContent = {
+        "Base Stats": [["HP", "Atk", "Def", "SpAtk", "SpDef", "Spe"], 1],
+        "Typing": [["Type"], 2],
+        "Abilities": [["Abilities"], 4],
+        "League Stats": [["Team", "KOs", "Passive", "Deaths"], 1]
     };
 
-    function addHeaders() {
-        let headers = [];
-        for (let label in extensions) {
-            if (props.display[label]) {
-                headers.push(extensions[label]);
-            }
-        }
-        return headers;
-    }
+    const header = Object.keys(props.display)
+        .filter(d => props.display[d])
+        .map(d => headerContent[d][0]
+            .map(label => <th key={label} colSpan={headerContent[d][1]}>{label}</th>))
 
     return (
         <tr>
             <th>Pokémon</th>
-            {addHeaders()}
+            {header}
         </tr>
     )
 } 
