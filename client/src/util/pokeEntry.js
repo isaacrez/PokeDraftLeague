@@ -1,6 +1,6 @@
 
 export const addLabel = data => 
-    (<td key={data.id}>
+    (<td key={data.pokemon.id}>
         <img
             src={`https://www.serebii.net/swordshield/pokemon/${data.pokemon.imgId}.png`}
             className="icon"
