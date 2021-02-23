@@ -3,6 +3,7 @@ import React from 'react';
 function LeagueSelector(props) {
 
     const [allLeagues, setAllLeagues] = React.useState([]);
+    const options = allLeagues.map(league => <option key={league.id}>{league.name}</option>);
 
     React.useEffect(() => {
         let url = "http://localhost:8080/api/league";
@@ -11,10 +12,6 @@ function LeagueSelector(props) {
             .then(leagueData => setAllLeagues(leagueData))
             .catch((error) => console.log(error));
     }, [])
-
-    function createOptions() {
-        return allLeagues.map(league => <option key={league.id}>{league.name}</option>);
-    }
 
     function updateLeague(input) {
         let league = allLeagues.find(league => league.name === input);
@@ -29,7 +26,7 @@ function LeagueSelector(props) {
                 placeholder="Select a League"
                 />
             <datalist id="leagues">
-                {createOptions()}
+                {options}
             </datalist>
         </div>
     );
