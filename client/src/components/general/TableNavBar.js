@@ -5,7 +5,10 @@ function TableNavBar(props) {
 
     const fullPageProp = {...props.page,
         max: Math.ceil(props.page.total / props.page.size)
-    }
+    };
+
+    const sizeOptions = [5, 10, 25, 50];
+    const options = sizeOptions.map(d => <option key={d}>{d}</option>);
 
     return(
         <div className="d-flex justify-content-between align-items-center w-100">
@@ -19,10 +22,7 @@ function TableNavBar(props) {
                 <p className="mb-0">Entries per page</p>
                 <select className="ml-3"
                     onClick={e => {props.page.setSize(e.target.value)}}>
-                    <option>5</option>
-                    <option>10</option>
-                    <option>25</option>
-                    <option>50</option>
+                    {options}
                 </select>
             </div>
         </div>
