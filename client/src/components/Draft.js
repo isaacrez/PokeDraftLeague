@@ -1,5 +1,5 @@
 import React from 'react';
-import RouletteSet from '../general/RouletteSet';
+import RouletteSet from './general/RouletteSet';
 
 function Draft(props) {
 

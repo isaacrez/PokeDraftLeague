@@ -1,8 +1,8 @@
 import React from 'react';
-import ToggleBar from '../general/ToggleBar';
-import PokeSearchBar from './PokeSearchBar';
-import PokeTable from './PokeTable';
-import TableNavBar from '../general/TableNavBar';
+import ToggleBar from './general/ToggleBar';
+import PokeSearchBar from './pokemonTab/PokeSearchBar';
+import PokeTable from './pokemonTab/PokeTable';
+import TableNavBar from './general/TableNavBar';
 
 function Pokemon(props) {
     const [page, setPage] = React.useState(1);

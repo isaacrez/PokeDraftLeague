@@ -1,7 +1,7 @@
 import React from 'react';
-import DropdownSelector from '../general/DropdownSelector';
-import PokemonStats from './PokemonStats';
-import SummaryHeader from './SummaryHeader';
+import DropdownSelector from './general/DropdownSelector';
+import PokemonStats from './summaryTab/PokemonStats';
+import SummaryHeader from './summaryTab/SummaryHeader';
 
 function Summary(props) {
 

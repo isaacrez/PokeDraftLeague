@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Header from './components/Header';
-import Home from './components/homeTab/Home';
-import Leaderboard from './components/leaderboardTab/Leaderboard';
-import Schedule from './components/scheduleTab/Schedule';
-import Summary from './components/summaryTab/Summary';
-import Match from './components/matchesTab/Match';
-import Draft from './components/draftTab/Draft';
-import Pokemon from './components/pokemonTab/Pokemon';
+import Home from './components/Home';
+import Leaderboard from './components/Leaderboard';
+import Schedule from './components/Schedule';
+import Summary from './components/Summary';
+import Match from './components/Match';
+import Draft from './components/Draft';
+import Pokemon from './components/Pokemon';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';

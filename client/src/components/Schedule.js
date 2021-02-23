@@ -1,6 +1,6 @@
 import React from 'react';
-import DropdownSelector from '../general/DropdownSelector';
-import TableBody from './TableBody';
+import DropdownSelector from './general/DropdownSelector';
+import TableBody from './scheduleTab/TableBody';
 
 const NO_WEEK_SELECT = 0;
 const NO_TEAM_SELECT = "";

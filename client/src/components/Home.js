@@ -1,5 +1,5 @@
 import React from 'react';
-import LeagueSelector from './LeagueSelector';
+import LeagueSelector from './homeTab/LeagueSelector';
 
 function Home(props) {
     return(
