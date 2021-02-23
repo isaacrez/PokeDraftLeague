@@ -1,18 +1,14 @@
 import React from 'react';
 
 function SearchBar(props) {
-
-    function createOptions(optionData) {
-        let options = [];
-        optionData.forEach(data => options.push(<option key={data}>{data}</option>));
-        return options;
-    }
+    
+    const options = props.options.map(d => <option key={d}>{d}</option>);
 
     return (
         <form className="search-bar">
             <input list="list"></input>
             <datalist id="list">
-                {createOptions(props.options)}
+                {options}
             </datalist>
             <button type="button">Search</button>
         </form>
