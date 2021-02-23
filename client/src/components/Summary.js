@@ -19,7 +19,6 @@ function Summary(props) {
                 setTeamName(rosterData[0].team.name);
             })
             .catch(error => console.log(error));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.league.id])
 
     React.useEffect(() => {
@@ -31,8 +30,7 @@ function Summary(props) {
                 .then(data => setTeamStats(data))
                 .catch(error => console.log(error));
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [teamName]);
+    }, [currSelection, props.league.id]);
 
     let mainContent = teamStats ? [
         <SummaryHeader team={currSelection.team} teamStats={teamStats} key={1} />,
