@@ -1,6 +1,6 @@
 import React from 'react';
 import TableHeader from './TableHeader';
-import TableBody from './TableBody';
+import Entry from './Entry';
 
 function PokeTable(props) {
     const [pokemon, setPokemon] = React.useState([]);
@@ -20,6 +20,13 @@ function PokeTable(props) {
             .catch(error => console.log(error));
     }, [props.page, props.league.id]);
 
+    const tableBody = pokemon.map(poke => 
+        <Entry data={poke}
+            display={props.display}
+            league={props.league}
+            key={poke.pokemon.id} />
+    )
+
     return (
         <div className="scrollable-table tall">
             <table className="hoverable">
@@ -27,10 +34,9 @@ function PokeTable(props) {
                     <TableHeader 
                         display={props.display} />
                 </thead>
-                <TableBody 
-                    display={props.display}
-                    pokemon={pokemon}
-                    league={props.league} />
+                <tbody>
+                    {tableBody}
+                </tbody>
             </table>                
         </div>
     );
