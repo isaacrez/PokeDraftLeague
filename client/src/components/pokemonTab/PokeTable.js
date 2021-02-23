@@ -3,17 +3,17 @@ import Entry from './Entry';
 
 function PokeTable(props) {
     const [pokemon, setPokemon] = React.useState([]);
-    const headerContent = {
-        "Base Stats": [["HP", "Atk", "Def", "SpAtk", "SpDef", "Spe"], 1],
-        "Typing": [["Type"], 2],
-        "Abilities": [["Abilities"], 4],
-        "League Stats": [["Team", "KOs", "Passive", "Deaths"], 1]
+    const headerInfo = {
+        "Base Stats": {content: ["HP", "Atk", "Def", "SpAtk", "SpDef", "Spe"], span: 1},
+        "Typing": {content: ["Type"], span: 2},
+        "Abilities": {content: ["Abilities"], span: 4},
+        "League Stats": {content: ["Team", "KOs", "Passive", "Deaths"], span: 1}
     };
     
     const header = Object.keys(props.display)
         .filter(d => props.display[d])
-        .map(d => headerContent[d][0]
-            .map(label => <th key={label} colSpan={headerContent[d][1]}>{label}</th>))
+        .map(d => headerInfo[d].content
+            .map(label => <th key={label} colSpan={headerInfo[d].span}>{label}</th>))
 
     const tableBody = pokemon.map(poke => 
         <Entry data={poke}
