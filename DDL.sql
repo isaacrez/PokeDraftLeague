@@ -13,6 +13,11 @@ CREATE TABLE `League` (
     `admin` VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE `DraftType` (
+	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(30) NOT NULL
+);
+
 CREATE TABLE `Team` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `coachId` INT NOT NULL,
@@ -110,6 +115,10 @@ CREATE TABLE `PokemonTier` (
     PRIMARY KEY(`pokemonId`, `leagueId`)
 );
 
+ALTER TABLE `League`
+    ADD CONSTRAINT `fk_league_draftTypeId`
+        FOREIGN KEY (`draftTypeId`)
+        REFERENCES `DraftType`(`id`);
 
 ALTER TABLE `LeagueTeam`
     ADD CONSTRAINT `fk_leagueTeam_leagueId`
