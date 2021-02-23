@@ -50,8 +50,7 @@ function Entry(props) {
             .then(response => response.json())
             .then(stats => setLeagueStats(stats))
             .catch(error => console.log(error));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.data.pokemon.id]);
+    }, [props.data.pokemon.id, props.league.id]);
 
     return (<tr key={props.data.pokemon.id}>
         {addLabel(props.data)}
