@@ -15,17 +15,28 @@ function Entry(props) {
             .catch(error => console.log(error));
     }, [props.data, props.league.id]);
 
-    const classLabel = loaded ? (leagueStats.team.name ? "taken" : "") : "";
+    return loaded ?
+        <LoadedEntry display={props.display} data={props.data} leagueStats={leagueStats} />
+        : null;
+}
 
-    return loaded ? (
-        <tr className={classLabel}>
-            {addLabel(props.data)}
-            {props.display["Base Stats"] && addStats(props.data)}
-            {props.display["Typing"] && addTyping(props.data)}
-            {props.display["Abilities"] && addAbilities(props.data)}
-            {props.display["League Stats"] && addLeagueStats(leagueStats)}
-        </tr>
-    ) : null;
+function LoadedEntry(props) {
+    const displayOptions = {
+        "Base Stats": addStats(props.data),
+        "Typing": addTyping(props.data),
+        "Abilities": addAbilities(props.data),
+        "League Stats": addLeagueStats(props.leagueStats)
+    }
+    
+    const cells = [
+        addLabel(props.data),
+        Object.keys(props.display)
+            .map(d => props.display[d] ? displayOptions[d] : null)
+    ];
+
+    const recolor = props.leagueStats.team.name ? "taken" : "";
+
+    return (<tr className={recolor}>{cells}</tr>);
 }
 
 export default Entry;
