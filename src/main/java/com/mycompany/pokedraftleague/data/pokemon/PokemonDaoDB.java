@@ -66,10 +66,11 @@ public class PokemonDaoDB implements PokemonDao {
     }
     
     @Override
-    public List<Pokemon> getPokemonFromTier(int tier, int leagueId) {
-        final String GET_FROM_TIER = "SELECT pt.tier, p.* FROM pokemon AS p "
+    public List<Pokemon> getPokemonFromTier(String tier, int leagueId) {
+        final String GET_FROM_TIER = "SELECT t.label AS tier, p.* FROM pokemon AS p "
                 + "JOIN pokemonTier AS pt ON p.id = pt.pokemonId "
-                + "WHERE tier = ? AND leagueId = ?";
+                + "JOIN tier AS t ON pt.tierId = t.id "
+                + "WHERE t.label = ? AND leagueId = ?";
         List<Pokemon> pokemon = jdbc.query(GET_FROM_TIER,
                 new PokemonMapper(),
                 tier,

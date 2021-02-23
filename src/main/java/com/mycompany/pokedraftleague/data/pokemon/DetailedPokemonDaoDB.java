@@ -56,9 +56,11 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
 
     @Override
     public PackagedResult<DetailedPokemon> getSliceOfPokemon(int leagueId, int limit, int offset) {
-        final String GET_SLICE = "SELECT * FROM pokemon AS p "
+        final String GET_SLICE = "SELECT t.value AS tier, p.* FROM pokemon AS p "
                 + "JOIN pokemonTier AS pt ON p.id = pt.pokemonId "
+                + "JOIN tier AS t ON pt.tierId = t.id "
                 + "WHERE pt.leagueId = ? "
+                + "ORDER BY id "
                 + "LIMIT ? OFFSET ?";
         List<DetailedPokemon> pokemon = jdbc.query(GET_SLICE,
                 new DetailedPokemonMapper(),
@@ -72,9 +74,10 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
     
     @Override
     public List<DetailedPokemon> getPokemonFromRoster(int teamId, int leagueId) {
-        final String GET_FOR_TEAM = "SELECT pt.tier, p.* FROM pokemon AS p "
+        final String GET_FOR_TEAM = "SELECT t.value AS tier, p.* FROM pokemon AS p "
                 + "JOIN roster AS r ON p.id = r.pokeId "
                 + "JOIN pokemonTier AS pt ON p.id = pt.pokemonId "
+                + "JOIN tier AS t ON pt.tierId = t.id "
                 + "WHERE r.teamId = ? AND r.leagueId = pt.leagueId "
                 + "AND pt.leagueId = ?";
         List<DetailedPokemon> pokemon = jdbc.query(GET_FOR_TEAM, 
@@ -148,8 +151,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
             DetailedPokemon fullPokemon = new DetailedPokemon();
             fullPokemon.setPokemon(pokemon);
             fullPokemon.setStats(stats);
-            System.out.println(rs.getInt("tier"));
-            fullPokemon.setTier(rs.getInt("tier"));
+            fullPokemon.setTier(rs.getString("tier"));
             return fullPokemon;
         }
     }

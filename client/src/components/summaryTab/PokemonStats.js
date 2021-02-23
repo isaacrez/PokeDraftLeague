@@ -14,6 +14,7 @@ function PokemonStats(props) {
     }, [props.team.id, props.league.id]);
 
     function makeRows() {
+        console.log(pokeData);
         return pokeData
             .sort((a, b) => a.tier - b.tier)
             .map(data => <Entry league={props.league} data={data} key={data.pokemon.id} />)

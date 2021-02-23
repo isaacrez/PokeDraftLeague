@@ -45,7 +45,7 @@ public class PokemonController {
     }
     
     @GetMapping("/tier")
-    public ResponseEntity getPokemon(@RequestParam int tier,
+    public ResponseEntity getPokemon(@RequestParam String tier,
                                      @RequestParam int leagueId) {
         return ResponseEntity.ok(pokemonDao.getPokemonFromTier(tier, leagueId));
     }

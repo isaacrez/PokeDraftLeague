@@ -15,7 +15,7 @@ import java.util.List;
 public interface LeagueDao {
     List<League> getAllLeagues();
     League getLeagueById(int id);
-    List<Integer> getTiersInLeague(int id);
+    List<String> getTiersInLeague(int id);
     League addLeague(League league);
     void updateLeague(League league);
     void deleteLeagueById(int id);
