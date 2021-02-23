@@ -1,5 +1,5 @@
 import React from 'react';
-import {addLabel, addStats, addTyping, addAbilities, addLeagueStats, colorizeBy} from '../../util/pokeEntry';
+import {addLabel, addStats, addTyping, addAbilities, addLeagueStats} from '../../util/pokeEntry';
 
 function Entry(props) {
 
