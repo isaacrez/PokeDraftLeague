@@ -10,11 +10,12 @@ USE `PokeDraft`;
 CREATE TABLE `League` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(60) NOT NULL,
-    `admin` VARCHAR(30) NOT NULL
+    `admin` VARCHAR(30) NOT NULL,
+    `draftTypeId` INT NOT NULL
 );
 
 CREATE TABLE `DraftType` (
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(30) NOT NULL
 );
 
@@ -54,7 +55,7 @@ CREATE TABLE `Match` (
 );
 
 CREATE TABLE `MatchTeam` (
-	`matchId` INT NOT NULL,
+    `matchId` INT NOT NULL,
     `teamId` INT NOT NULL,
     PRIMARY KEY(`matchId`, `teamId`)
 );
@@ -98,7 +99,7 @@ CREATE TABLE `PokemonType` (
 );
 
 CREATE TABLE `Ability` (
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(16) NOT NULL
 );
 
@@ -108,8 +109,14 @@ CREATE TABLE `PokemonAbility` (
     PRIMARY KEY(`pokemonId`, `abilityId`)
 );
 
+CREATE TABLE `Tier` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `value` SMALLINT NOT NULL,
+    `label` VARCHAR(30) NOT NULL
+);
+
 CREATE TABLE `PokemonTier` (
-    `tier` SMALLINT NOT NULL,
+    `tierID` INT NOT NULL,
     `pokemonId` INT NOT NULL,
     `leagueId` INT NOT NULL,
     PRIMARY KEY(`pokemonId`, `leagueId`)
@@ -188,6 +195,9 @@ ALTER TABLE `PokemonAbility`
     REFERENCES `ability`(`id`);
 
 ALTER TABLE `PokemonTier`
+    ADD CONSTRAINT `fk_pokemonTier_tierId`
+        FOREIGN KEY (`tierId`)
+        REFERENCES `tier`(`id`),
     ADD CONSTRAINT `fk_pokemonTier_pokemonId`
         FOREIGN KEY (`pokemonId`)
     REFERENCES `pokemon`(`id`),
