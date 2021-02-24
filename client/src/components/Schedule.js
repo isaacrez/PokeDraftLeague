@@ -13,13 +13,13 @@ function Schedule(props) {
     const [team, setTeam] = React.useState("");
 
     React.useEffect(() => {
-        let scheduleUrl = "http://localhost:8080/api/match/schedule/" + props.league.id;
+        let scheduleUrl = `http://localhost:8080/api/match/schedule?leagueId=${props.league.id}`;
         fetch(scheduleUrl, {type: "GET"})
             .then(response => response.json())
             .then(matchData => setMatches(matchData))
             .catch(error => console.log(error));
 
-        let leagueUrl = "http://localhost:8080/api/league/" + props.league.id;
+        let leagueUrl = `http://localhost:8080/api/league/${props.league.id}`;
         fetch(leagueUrl, {type: "GET"})
             .then(response => response.json())
             .then(leagueData => setTeams(leagueData.teams))

@@ -9,13 +9,13 @@ import com.mycompany.pokedraftleague.data.match.MatchDao;
 import com.mycompany.pokedraftleague.data.match.MatchResultsDao;
 import com.mycompany.pokedraftleague.data.pokemon.PokemonResultsDao;
 import com.mycompany.pokedraftleague.data.league.TeamDao;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -41,36 +41,29 @@ public class MatchController {
         this.pokemonResultsDao = pokemonResultsDao;
     }
     
-    @GetMapping("/results/{matchId}/{teamId}")
-    public ResponseEntity getMatchResultsFor(@PathVariable int matchId, @PathVariable int teamId) {
+    @GetMapping("/results")
+    public ResponseEntity getMatchResultsFor(@RequestParam int matchId,
+                                             @RequestParam int teamId) {
         return ResponseEntity.ok(matchResultsDao.getMatchResultsFor(matchId, teamId));
     }
     
-    @GetMapping("/schedule/{leagueId}")
-    public ResponseEntity getScheduleFor(@PathVariable int leagueId) {
+    @GetMapping("/schedule")
+    public ResponseEntity getScheduleFor(@RequestParam int leagueId) {
         return ResponseEntity.ok(matchDao.getMatchesByLeagueId(leagueId));
     }
     
-    @GetMapping("/teams/{matchId}")
-    public ResponseEntity getTeamsIn(@PathVariable int matchId) {
+    @GetMapping("/teams")
+    public ResponseEntity getTeamsIn(@RequestParam int matchId) {
         return ResponseEntity.ok(teamDao.getTeamsByMatchId(matchId));
     }
     
-    @GetMapping("/lineup/{matchId}")
-    public ResponseEntity getAllParticipantsIn(@PathVariable int matchId) {
-        return ResponseEntity.ok(pokemonResultsDao.getAllPokemonInMatch(matchId));
-    }
-    
-    @GetMapping("/lineup/{matchId}/{teamId}")
-    public ResponseEntity getParticipantsIn(@PathVariable int matchId, @PathVariable int teamId) {
-        return ResponseEntity.ok(pokemonResultsDao.getAllPokemonInMatch(matchId));
-    }
-    
-    private ResponseEntity wrapInEntity(Object input) {
-        if (input == null) {
-            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+    @GetMapping("/lineup")
+    public ResponseEntity getAllParticipantsIn(@RequestParam int matchId,
+                                               @RequestParam Optional<Integer> teamId) {
+        if (teamId.isPresent()) {
+            return ResponseEntity.ok(pokemonResultsDao.getPokemonInMatchFor(matchId, teamId.get()));
         } else {
-            return ResponseEntity.ok(input);
+            return ResponseEntity.ok(pokemonResultsDao.getAllPokemonInMatch(matchId));
         }
     }
 }
