@@ -5,8 +5,10 @@
  */
 package com.mycompany.pokedraftleague.data.pokemon;
 
+import com.mycompany.pokedraftleague.data.league.TeamDao;
 import com.mycompany.pokedraftleague.models.Pokemon;
 import com.mycompany.pokedraftleague.models.PokemonResults;
+import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,37 +26,28 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
     
     private final JdbcTemplate jdbc;
     private final PokemonDao pokemonDao;
+    private final TeamDao teamDao;
     
     @Autowired
-    public PokemonResultsDaoDB(JdbcTemplate jdbcTemplate, PokemonDao pokemonDao) {
-        this.jdbc = jdbcTemplate;
+    public PokemonResultsDaoDB(JdbcTemplate jdbc, PokemonDao pokemonDao, TeamDao teamDao) {
+        this.jdbc = jdbc;
         this.pokemonDao = pokemonDao;
-    }
-
-    @Override
-    public List<PokemonResults> getAllPokemonResults() {
-        final String GET_ALL_POKE_RESULTS = "SELECT * FROM matchAttendee";
-        List<PokemonResults> results = jdbc.query(GET_ALL_POKE_RESULTS, new PokemonResultsMapper());
-        addPokemonToResults(results);
-        return results;
+        this.teamDao = teamDao;
     }
 
     @Override
     public List<PokemonResults> getAllResultsForTeam(int teamId) {
         final String GET_RESULTS_FOR_TEAM = "SELECT * FROM matchAttendee WHERE teamId = ?";
         List<PokemonResults> results = jdbc.query(GET_RESULTS_FOR_TEAM, new PokemonResultsMapper());
-        addPokemonToResults(results);
+        addPropertiesToResults(results, teamId);
         return results;
     }
     
     @Override
     public List<PokemonResults> getAllPokemonInMatch(int matchId) {
-        final String GET_ALL_POKEMON_IN_MATCH = "SELECT * FROM matchAttendee "
-                + "WHERE matchId = ?";
-        List<PokemonResults> results = jdbc.query(GET_ALL_POKEMON_IN_MATCH,
-                new PokemonResultsMapper(),
-                matchId);
-        addPokemonToResults(results);
+        List<Team> teams = teamDao.getTeamsByMatchId(matchId);
+        List<PokemonResults> results = getPokemonInMatchFor(matchId, teams.get(0).getId());
+        results.addAll(getPokemonInMatchFor(matchId, teams.get(1).getId()));
         return results;
     }
 
@@ -66,7 +59,7 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
                 new PokemonResultsMapper(),
                 matchId,
                 teamId);
-        addPokemonToResults(results);
+        addPropertiesToResults(results, teamId);
         return results;
     }
     
@@ -90,9 +83,11 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    private void addPokemonToResults(List<PokemonResults> results) {
+    private void addPropertiesToResults(List<PokemonResults> results, int teamId) {
+        Team team = teamDao.getTeamById(teamId);
         for (PokemonResults result : results) {
             result.setPokemon(getPokemonForResults(result));
+            result.getPokemon().setTeam(team);
         }
     }
     

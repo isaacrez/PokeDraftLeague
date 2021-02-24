@@ -13,7 +13,6 @@ import java.util.List;
  * @author isaacrez
  */
 public interface PokemonResultsDao {
-    List<PokemonResults> getAllPokemonResults();
     List<PokemonResults> getAllResultsForTeam(int teamId);
     List<PokemonResults> getAllPokemonInMatch(int matchId);
     List<PokemonResults> getPokemonInMatchFor(int matchId, int teamId);
