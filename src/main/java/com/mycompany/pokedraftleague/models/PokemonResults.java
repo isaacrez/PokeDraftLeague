@@ -14,7 +14,6 @@ import java.util.Objects;
 public class PokemonResults {
     
     private int id;
-    private Team team;
     private Pokemon pokemon;
     private int directKOs;
     private int indirectKOs;
@@ -26,14 +25,6 @@ public class PokemonResults {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
     }
 
     public Pokemon getPokemon() {
@@ -72,7 +63,6 @@ public class PokemonResults {
     public int hashCode() {
         int hash = 7;
         hash = 73 * hash + this.id;
-        hash = 73 * hash + Objects.hashCode(this.team);
         hash = 73 * hash + Objects.hashCode(this.pokemon);
         hash = 73 * hash + this.directKOs;
         hash = 73 * hash + this.indirectKOs;
@@ -102,9 +92,6 @@ public class PokemonResults {
             return false;
         }
         if (this.deaths != other.deaths) {
-            return false;
-        }
-        if (!Objects.equals(this.team, other.team)) {
             return false;
         }
         if (!Objects.equals(this.pokemon, other.pokemon)) {
