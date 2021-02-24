@@ -44,6 +44,15 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
     }
     
     @Override
+    public List<PokemonResults> getAllPokemonInMatch(int teamId1, int teamId2) {
+        final String GET_MATCH_ID = "SELECT mt1.matchId FROM matchTeam AS mt1 "
+                + "JOIN matchTeam AS mt2 ON mt1.matchId = mt2.matchId "
+                + "WHERE mt1.teamId = ? AND mt2.teamId = ?";
+        int matchId = jdbc.queryForObject(GET_MATCH_ID, Integer.class, teamId1, teamId2);
+        return getAllPokemonInMatch(matchId);
+    }
+    
+    @Override
     public List<PokemonResults> getAllPokemonInMatch(int matchId) {
         List<Team> teams = teamDao.getTeamsByMatchId(matchId);
         List<PokemonResults> results = getPokemonInMatchFor(matchId, teams.get(0).getId());
