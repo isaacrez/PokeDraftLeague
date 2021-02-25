@@ -11,6 +11,7 @@ import com.mycompany.pokedraftleague.data.pokemon.PokemonResultsDao;
 import com.mycompany.pokedraftleague.data.league.TeamDao;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,12 +59,18 @@ public class MatchController {
     }
     
     @GetMapping("/lineup")
-    public ResponseEntity getAllParticipantsIn(@RequestParam int matchId,
-                                               @RequestParam Optional<Integer> teamId) {
+    public ResponseEntity getAllParticipantsIn(@RequestParam Optional<Integer> matchId,
+                                               @RequestParam Optional<Integer> teamId,
+                                               @RequestParam Optional<Integer> teamId2) {
         if (teamId.isPresent()) {
-            return ResponseEntity.ok(pokemonResultsDao.getPokemonInMatchFor(matchId, teamId.get()));
-        } else {
-            return ResponseEntity.ok(pokemonResultsDao.getAllPokemonInMatch(matchId));
+            if (teamId2.isPresent()) {
+                return ResponseEntity.ok(pokemonResultsDao.getAllPokemonInMatch(teamId.get(), teamId2.get()));
+            } else if (matchId.isPresent()) {
+                return ResponseEntity.ok(pokemonResultsDao.getPokemonInMatchFor(matchId.get(), teamId.get()));
+            }
+        } else if (matchId.isPresent()) {
+            return ResponseEntity.ok(pokemonResultsDao.getAllPokemonInMatch(matchId.get()));
         }
+        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
     }
 }
