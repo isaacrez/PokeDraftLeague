@@ -55,6 +55,7 @@ function MatchData(props) {
 
     const tableBody = data.map(d => <tr key={d.id}>
         {addLabel(d)}
+        <td className="fancy">{d.pokemon.team.acronym}</td>
         <td>{d.directKOs}</td>
         <td>{d.indirectKOs}</td>
         <td>{d.deaths}</td>
@@ -75,6 +76,7 @@ function MatchData(props) {
             <thead>
                 <tr>
                     <th>Pokemon</th>
+                    <th>Team</th>
                     <th>KOs</th>
                     <th>Passive KOs</th>
                     <th>Deaths</th>
