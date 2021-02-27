@@ -42,7 +42,46 @@ function Match(props) {
                             .map(t => t.name)}
                         purpose={"Team Two"} />
         </div>
+        
+        <MatchData league={props.league} 
+            teamIds={teamIds} />
     </div>);
+}
+
+function MatchData(props) {
+
+    const [data, setData] = React.useState([]);
+
+    const tableBody = data.map(d => <tr key={d.id}>
+        <td>{d.pokemon.name}</td>
+        <td>{d.directKOs}</td>
+        <td>{d.indirectKOs}</td>
+        <td>{d.deaths}</td>
+    </tr>);
+
+    React.useEffect(() => {
+        let url = `http://localhost:8080/api/match/lineup`
+                + `?teamId=${props.teamIds[0]}&teamId2=${props.teamIds[1]}`
+                + `&leagueId=${props.league.id}`;
+        fetch(url, {type: "GET"})
+            .then(response => response.json())
+            .then(matchData => setData(matchData))
+            .catch(error => console.log(error));
+    }, [props.teamIds, props.league.id])
+
+    return (<table>
+        <thead>
+            <tr>
+                <th>Pokemon</th>
+                <th>KOs</th>
+                <th>Passive KOs</th>
+                <th>Deaths</th>
+            </tr>
+        </thead>
+        <tbody>
+            {tableBody}
+        </tbody>
+    </table>)
 }
 
 export default Match;
