@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -44,12 +45,21 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
     }
     
     @Override
-    public List<PokemonResults> getAllPokemonInMatch(int teamId1, int teamId2) {
-        final String GET_MATCH_ID = "SELECT mt1.matchId FROM matchTeam AS mt1 "
-                + "JOIN matchTeam AS mt2 ON mt1.matchId = mt2.matchId "
-                + "WHERE mt1.teamId = ? AND mt2.teamId = ?";
-        int matchId = jdbc.queryForObject(GET_MATCH_ID, Integer.class, teamId1, teamId2);
-        return getAllPokemonInMatch(matchId);
+    public List<PokemonResults> getAllPokemonInMatch(int teamId1, int teamId2, int leagueId) {
+        try {
+            final String GET_MATCH_ID = "SELECT m.id FROM matchTeam AS mt1 "
+                    + "JOIN matchTeam AS mt2 ON mt1.matchId = mt2.matchId "
+                    + "JOIN `match` AS m ON mt1.matchId = m.id "
+                    + "WHERE mt1.teamId = ? AND mt2.teamId = ? AND m.leagueId = ?";
+            int matchId = jdbc.queryForObject(GET_MATCH_ID,
+                    Integer.class,
+                    teamId1,
+                    teamId2,
+                    leagueId);
+            return getAllPokemonInMatch(matchId);
+        } catch (DataAccessException e) {
+            return null;
+        }
     }
     
     @Override

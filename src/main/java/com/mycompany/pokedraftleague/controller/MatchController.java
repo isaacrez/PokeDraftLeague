@@ -61,10 +61,12 @@ public class MatchController {
     @GetMapping("/lineup")
     public ResponseEntity getAllParticipantsIn(@RequestParam Optional<Integer> matchId,
                                                @RequestParam Optional<Integer> teamId,
-                                               @RequestParam Optional<Integer> teamId2) {
+                                               @RequestParam Optional<Integer> teamId2,
+                                               @RequestParam Optional<Integer> leagueId) {
         if (teamId.isPresent()) {
-            if (teamId2.isPresent()) {
-                return ResponseEntity.ok(pokemonResultsDao.getAllPokemonInMatch(teamId.get(), teamId2.get()));
+            if (teamId2.isPresent() & leagueId.isPresent()) {
+                return ResponseEntity.ok(pokemonResultsDao
+                        .getAllPokemonInMatch(teamId.get(), teamId2.get(), leagueId.get()));
             } else if (matchId.isPresent()) {
                 return ResponseEntity.ok(pokemonResultsDao.getPokemonInMatchFor(matchId.get(), teamId.get()));
             }
