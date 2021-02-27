@@ -1,5 +1,6 @@
 import React from 'react';
 import DropdownSelector from './general/DropdownSelector';
+import { addLabel } from '../util/pokeEntry';
 
 function Match(props) {
 
@@ -53,7 +54,7 @@ function MatchData(props) {
     const [data, setData] = React.useState([]);
 
     const tableBody = data.map(d => <tr key={d.id}>
-        <td>{d.pokemon.name}</td>
+        {addLabel(d)}
         <td>{d.directKOs}</td>
         <td>{d.indirectKOs}</td>
         <td>{d.deaths}</td>
@@ -69,19 +70,21 @@ function MatchData(props) {
             .catch(error => console.log(error));
     }, [props.teamIds, props.league.id])
 
-    return (<table>
-        <thead>
-            <tr>
-                <th>Pokemon</th>
-                <th>KOs</th>
-                <th>Passive KOs</th>
-                <th>Deaths</th>
-            </tr>
-        </thead>
-        <tbody>
-            {tableBody}
-        </tbody>
-    </table>)
+    return (<div className="scrollable-table tall">
+        <table>
+            <thead>
+                <tr>
+                    <th>Pokemon</th>
+                    <th>KOs</th>
+                    <th>Passive KOs</th>
+                    <th>Deaths</th>
+                </tr>
+            </thead>
+            <tbody>
+                {tableBody}
+            </tbody>
+        </table>
+    </div>);
 }
 
 export default Match;
