@@ -28,7 +28,7 @@ function Match(props) {
     }, [props.league.id])
 
     return (<div className="full-stripe">
-        <div className="d-flex w-100 justify-content-around">
+        <div className="d-flex w-100 justify-content-around mb-3">
             <DropdownSelector 
                         setValue={(name) => setTeamId(name, setTeamOneId)}
                         values={teams
