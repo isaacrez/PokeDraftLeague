@@ -12,21 +12,12 @@ import java.util.Objects;
  *
  * @author isaacrez
  */
-public class DetailedPokemon {
+public class DetailedPokemon extends Pokemon {
     
-    private Pokemon pokemon;
     private String tier;
     private BaseStats stats;
     private List<String> type;
     private List<String> abilities;
-
-    public Pokemon getPokemon() {
-        return pokemon;
-    }
-
-    public void setPokemon(Pokemon pokemon) {
-        this.pokemon = pokemon;
-    }
 
     public String getTier() {
         return tier;
@@ -63,7 +54,6 @@ public class DetailedPokemon {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.pokemon);
         hash = 37 * hash + Objects.hashCode(this.tier);
         hash = 37 * hash + Objects.hashCode(this.stats);
         hash = 37 * hash + Objects.hashCode(this.type);
@@ -84,9 +74,6 @@ public class DetailedPokemon {
         }
         final DetailedPokemon other = (DetailedPokemon) obj;
         if (!Objects.equals(this.tier, other.tier)) {
-            return false;
-        }
-        if (!Objects.equals(this.pokemon, other.pokemon)) {
             return false;
         }
         if (!Objects.equals(this.stats, other.stats)) {

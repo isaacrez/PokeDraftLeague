@@ -6,7 +6,6 @@
 package com.mycompany.pokedraftleague.data.pokemon;
 
 import com.mycompany.pokedraftleague.models.pokemon.DetailedPokemon;
-import com.mycompany.pokedraftleague.models.pokemon.Pokemon;
 import com.mycompany.pokedraftleague.models.pokemon.BaseStats;
 import com.mycompany.pokedraftleague.models.PackagedResult;
 import java.sql.ResultSet;
@@ -116,7 +115,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
                 + "JOIN pokemon AS p ON pt.pokemonId = p.id "
                 + "WHERE p.id = ?";
         
-        int id = pokemon.getPokemon().getId();
+        int id = pokemon.getId();
         pokemon.setType(jdbc.queryForList(GET_TYPE, String.class, id));
     }
     
@@ -126,7 +125,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
                 + "JOIN pokemon AS p ON pa.pokemonId = p.id "
                 + "WHERE p.id = ?";
         
-        int id = pokemon.getPokemon().getId();
+        int id = pokemon.getId();
         pokemon.setAbilities(jdbc.queryForList(GET_ABILITIES, String.class, id));
         
     }
@@ -135,11 +134,12 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
 
         @Override
         public DetailedPokemon mapRow(ResultSet rs, int i) throws SQLException {
-            Pokemon pokemon = new Pokemon();
+            DetailedPokemon pokemon = new DetailedPokemon();
             pokemon.setId(rs.getInt("id"));
             pokemon.setImgId(rs.getString("imgId"));
             pokemon.setName(rs.getString("name"));
-            
+            pokemon.setTier(rs.getString("tier"));
+
             BaseStats stats = new BaseStats();
             stats.setHP(rs.getInt("HP"));
             stats.setAtk(rs.getInt("Atk"));
@@ -147,12 +147,8 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
             stats.setSpAtk(rs.getInt("SpA"));
             stats.setSpDef(rs.getInt("SpD"));
             stats.setSpe(rs.getInt("Spe"));
-            
-            DetailedPokemon fullPokemon = new DetailedPokemon();
-            fullPokemon.setPokemon(pokemon);
-            fullPokemon.setStats(stats);
-            fullPokemon.setTier(rs.getString("tier"));
-            return fullPokemon;
+            pokemon.setStats(stats);
+            return pokemon;
         }
     }
 }
