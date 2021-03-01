@@ -5,9 +5,9 @@
  */
 package com.mycompany.pokedraftleague.data.pokemon;
 
-import com.mycompany.pokedraftleague.models.DetailedPokemon;
-import com.mycompany.pokedraftleague.models.Pokemon;
-import com.mycompany.pokedraftleague.models.BaseStats;
+import com.mycompany.pokedraftleague.models.pokemon.DetailedPokemon;
+import com.mycompany.pokedraftleague.models.pokemon.Pokemon;
+import com.mycompany.pokedraftleague.models.pokemon.BaseStats;
 import com.mycompany.pokedraftleague.models.PackagedResult;
 import java.sql.ResultSet;
 import java.sql.SQLException;

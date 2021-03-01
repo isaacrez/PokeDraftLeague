@@ -6,8 +6,8 @@
 package com.mycompany.pokedraftleague.data.pokemon;
 
 import com.mycompany.pokedraftleague.data.league.TeamDao;
-import com.mycompany.pokedraftleague.models.AggregatePokemonStats;
-import com.mycompany.pokedraftleague.models.Pokemon;
+import com.mycompany.pokedraftleague.models.pokemon.AggregatePokemonStats;
+import com.mycompany.pokedraftleague.models.pokemon.Pokemon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +58,6 @@ public class AggregatePokemonStatsDaoDB implements AggregatePokemonStatsDao {
             results = new AggregatePokemonStats();
         }
 
-        results.setPokemon(pokemonDao.getPokemonById(pokeId));
-        results.setTeam(teamDao.getTeamOfPokemonInLeague(pokeId, leagueId));
-
         return results;
     }
 
@@ -82,8 +79,6 @@ public class AggregatePokemonStatsDaoDB implements AggregatePokemonStatsDao {
                 pokeId,
                 teamId,
                 leagueId);
-        results.setPokemon(pokemon);
-        results.setTeam(teamDao.getTeamById(teamId));
 
         return results;
     }

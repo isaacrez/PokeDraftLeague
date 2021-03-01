@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.pokedraftleague.models;
+package com.mycompany.pokedraftleague.models.pokemon;
 
 /**
  *
@@ -15,8 +15,8 @@ public class BaseStats {
     private int atk;
     private int def;
     private int spAtk;
-    private int SpDef;
-    private int Spe;
+    private int spDef;
+    private int spe;
 
     public int getHP() {
         return hp;
@@ -51,19 +51,19 @@ public class BaseStats {
     }
 
     public int getSpDef() {
-        return SpDef;
+        return spDef;
     }
 
     public void setSpDef(int SpDef) {
-        this.SpDef = SpDef;
+        this.spDef = SpDef;
     }
 
     public int getSpe() {
-        return Spe;
+        return spe;
     }
 
     public void setSpe(int Spe) {
-        this.Spe = Spe;
+        this.spe = Spe;
     }
 
     @Override
@@ -73,8 +73,8 @@ public class BaseStats {
         hash = 89 * hash + this.atk;
         hash = 89 * hash + this.def;
         hash = 89 * hash + this.spAtk;
-        hash = 89 * hash + this.SpDef;
-        hash = 89 * hash + this.Spe;
+        hash = 89 * hash + this.spDef;
+        hash = 89 * hash + this.spe;
         return hash;
     }
 
@@ -102,10 +102,10 @@ public class BaseStats {
         if (this.spAtk != other.spAtk) {
             return false;
         }
-        if (this.SpDef != other.SpDef) {
+        if (this.spDef != other.spDef) {
             return false;
         }
-        if (this.Spe != other.Spe) {
+        if (this.spe != other.spe) {
             return false;
         }
         return true;

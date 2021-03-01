@@ -5,7 +5,7 @@
  */
 package com.mycompany.pokedraftleague.data.pokemon;
 
-import com.mycompany.pokedraftleague.models.DetailedPokemon;
+import com.mycompany.pokedraftleague.models.pokemon.DetailedPokemon;
 import com.mycompany.pokedraftleague.models.PackagedResult;
 import java.util.List;
 

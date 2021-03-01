@@ -5,7 +5,7 @@
  */
 package com.mycompany.pokedraftleague.data.pokemon;
 
-import com.mycompany.pokedraftleague.models.AggregatePokemonStats;
+import com.mycompany.pokedraftleague.models.pokemon.AggregatePokemonStats;
 
 /**
  *

@@ -8,7 +8,7 @@ package com.mycompany.pokedraftleague.data.pokemon;
 import com.mycompany.pokedraftleague.models.League;
 import com.mycompany.pokedraftleague.models.Match;
 import com.mycompany.pokedraftleague.models.PackagedResult;
-import com.mycompany.pokedraftleague.models.Pokemon;
+import com.mycompany.pokedraftleague.models.pokemon.Pokemon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;

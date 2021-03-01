@@ -3,38 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.pokedraftleague.models;
-
-import java.util.Objects;
+package com.mycompany.pokedraftleague.models.pokemon;
 
 /**
  *
  * @author isaacrez
  */
-public class PokemonStats {
+public class PokemonStats extends Pokemon {
     
-    private int id;
-    private Pokemon pokemon;
     private int directKOs;
     private int indirectKOs;
     private int deaths;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Pokemon getPokemon() {
-        return pokemon;
-    }
     
-    public void setPokemon(Pokemon pokemon) {
-        this.pokemon = pokemon;
+    public PokemonStats() {
+        this.directKOs = 0;
+        this.indirectKOs = 0;
+        this.deaths = 0;
     }
-    
+
     public int getDirectKOs() {
         return directKOs;
     }
@@ -61,12 +47,10 @@ public class PokemonStats {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + this.id;
-        hash = 73 * hash + Objects.hashCode(this.pokemon);
-        hash = 73 * hash + this.directKOs;
-        hash = 73 * hash + this.indirectKOs;
-        hash = 73 * hash + this.deaths;
+        int hash = 5;
+        hash = 97 * hash + this.directKOs;
+        hash = 97 * hash + this.indirectKOs;
+        hash = 97 * hash + this.deaths;
         return hash;
     }
 
@@ -82,9 +66,6 @@ public class PokemonStats {
             return false;
         }
         final PokemonStats other = (PokemonStats) obj;
-        if (this.id != other.id) {
-            return false;
-        }
         if (this.directKOs != other.directKOs) {
             return false;
         }
@@ -94,10 +75,6 @@ public class PokemonStats {
         if (this.deaths != other.deaths) {
             return false;
         }
-        if (!Objects.equals(this.pokemon, other.pokemon)) {
-            return false;
-        }
         return true;
     }
-
 }

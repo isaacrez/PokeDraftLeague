@@ -6,8 +6,7 @@
 package com.mycompany.pokedraftleague.data.pokemon;
 
 import com.mycompany.pokedraftleague.data.league.TeamDao;
-import com.mycompany.pokedraftleague.models.Pokemon;
-import com.mycompany.pokedraftleague.models.PokemonStats;
+import com.mycompany.pokedraftleague.models.pokemon.PokemonStats;
 import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +39,6 @@ public class PokemonStatsDaoDB implements PokemonStatsDao {
     public List<PokemonStats> getAllResultsForTeam(int teamId) {
         final String GET_RESULTS_FOR_TEAM = "SELECT * FROM matchAttendee WHERE teamId = ?";
         List<PokemonStats> results = jdbc.query(GET_RESULTS_FOR_TEAM, new PokemonStatsMapper());
-        addPropertiesToResults(results);
         return results;
     }
     
@@ -78,7 +76,6 @@ public class PokemonStatsDaoDB implements PokemonStatsDao {
                 new PokemonStatsMapper(),
                 matchId,
                 teamId);
-        addPropertiesToResults(results);
         return results;
     }
     
@@ -100,22 +97,6 @@ public class PokemonStatsDaoDB implements PokemonStatsDao {
     @Override
     public void deletePokemonResultsById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    private void addPropertiesToResults(List<PokemonStats> results) {
-        for (PokemonStats result : results) {
-            result.setPokemon(getPokemonForResults(result));
-        }
-    }
-    
-    private Pokemon getPokemonForResults(PokemonStats pokemonResults) {
-        final String GET_POKE_ID = "SELECT pokeId FROM matchAttendee WHERE id = ?";
-        int pokeId = jdbc.queryForObject(GET_POKE_ID, Integer.class, pokemonResults.getId());
-        return getPokemonForResults(pokeId);
-    }
-    
-    private Pokemon getPokemonForResults(int pokeId) {
-        return pokemonDao.getPokemonById(pokeId);
     }
     
     public static final class PokemonStatsMapper implements RowMapper<PokemonStats> {
