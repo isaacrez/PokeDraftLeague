@@ -7,7 +7,7 @@ package com.mycompany.pokedraftleague.data.pokemon;
 
 import com.mycompany.pokedraftleague.data.league.TeamDao;
 import com.mycompany.pokedraftleague.models.Pokemon;
-import com.mycompany.pokedraftleague.models.PokemonResults;
+import com.mycompany.pokedraftleague.models.PokemonStats;
 import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,29 +23,29 @@ import org.springframework.stereotype.Repository;
  * @author isaacrez
  */
 @Repository
-public class PokemonResultsDaoDB implements PokemonResultsDao {
+public class PokemonStatsDaoDB implements PokemonStatsDao {
     
     private final JdbcTemplate jdbc;
     private final PokemonDao pokemonDao;
     private final TeamDao teamDao;
     
     @Autowired
-    public PokemonResultsDaoDB(JdbcTemplate jdbc, PokemonDao pokemonDao, TeamDao teamDao) {
+    public PokemonStatsDaoDB(JdbcTemplate jdbc, PokemonDao pokemonDao, TeamDao teamDao) {
         this.jdbc = jdbc;
         this.pokemonDao = pokemonDao;
         this.teamDao = teamDao;
     }
 
     @Override
-    public List<PokemonResults> getAllResultsForTeam(int teamId) {
+    public List<PokemonStats> getAllResultsForTeam(int teamId) {
         final String GET_RESULTS_FOR_TEAM = "SELECT * FROM matchAttendee WHERE teamId = ?";
-        List<PokemonResults> results = jdbc.query(GET_RESULTS_FOR_TEAM, new PokemonResultsMapper());
-        addPropertiesToResults(results, teamId);
+        List<PokemonStats> results = jdbc.query(GET_RESULTS_FOR_TEAM, new PokemonStatsMapper());
+        addPropertiesToResults(results);
         return results;
     }
     
     @Override
-    public List<PokemonResults> getAllPokemonInMatch(int teamId1, int teamId2, int leagueId) {
+    public List<PokemonStats> getAllPokemonInMatch(int teamId1, int teamId2, int leagueId) {
         try {
             final String GET_MATCH_ID = "SELECT m.id FROM matchTeam AS mt1 "
                     + "JOIN matchTeam AS mt2 ON mt1.matchId = mt2.matchId "
@@ -63,37 +63,37 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
     }
     
     @Override
-    public List<PokemonResults> getAllPokemonInMatch(int matchId) {
+    public List<PokemonStats> getAllPokemonInMatch(int matchId) {
         List<Team> teams = teamDao.getTeamsByMatchId(matchId);
-        List<PokemonResults> results = getPokemonInMatchFor(matchId, teams.get(0).getId());
+        List<PokemonStats> results = getPokemonInMatchFor(matchId, teams.get(0).getId());
         results.addAll(getPokemonInMatchFor(matchId, teams.get(1).getId()));
         return results;
     }
 
     @Override
-    public List<PokemonResults> getPokemonInMatchFor(int matchId, int teamId) {
+    public List<PokemonStats> getPokemonInMatchFor(int matchId, int teamId) {
         final String GET_POKEMON_IN_MATCH = "SELECT * FROM matchAttendee "
                 + "WHERE matchId = ? AND teamId = ?";
-        List<PokemonResults> results = jdbc.query(GET_POKEMON_IN_MATCH,
-                new PokemonResultsMapper(),
+        List<PokemonStats> results = jdbc.query(GET_POKEMON_IN_MATCH,
+                new PokemonStatsMapper(),
                 matchId,
                 teamId);
-        addPropertiesToResults(results, teamId);
+        addPropertiesToResults(results);
         return results;
     }
     
     @Override
-    public PokemonResults getPokemonResultsById(int id) {
+    public PokemonStats getPokemonResultsById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PokemonResults addPokemonResults(PokemonResults pokemonResults) {
+    public PokemonStats addPokemonResults(PokemonStats pokemonResults) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updatePokemonResults(PokemonResults pokemonResults) {
+    public void updatePokemonResults(PokemonStats pokemonResults) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -102,15 +102,13 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    private void addPropertiesToResults(List<PokemonResults> results, int teamId) {
-        Team team = teamDao.getTeamById(teamId);
-        for (PokemonResults result : results) {
+    private void addPropertiesToResults(List<PokemonStats> results) {
+        for (PokemonStats result : results) {
             result.setPokemon(getPokemonForResults(result));
-            result.getPokemon().setTeam(team);
         }
     }
     
-    private Pokemon getPokemonForResults(PokemonResults pokemonResults) {
+    private Pokemon getPokemonForResults(PokemonStats pokemonResults) {
         final String GET_POKE_ID = "SELECT pokeId FROM matchAttendee WHERE id = ?";
         int pokeId = jdbc.queryForObject(GET_POKE_ID, Integer.class, pokemonResults.getId());
         return getPokemonForResults(pokeId);
@@ -120,15 +118,15 @@ public class PokemonResultsDaoDB implements PokemonResultsDao {
         return pokemonDao.getPokemonById(pokeId);
     }
     
-    public static final class PokemonResultsMapper implements RowMapper<PokemonResults> {
+    public static final class PokemonStatsMapper implements RowMapper<PokemonStats> {
         @Override
-        public PokemonResults mapRow(ResultSet rs, int index) throws SQLException {
-            PokemonResults pokemonResults = new PokemonResults();
-            pokemonResults.setId(rs.getInt("id"));
-            pokemonResults.setDirectKOs(rs.getInt("directKOs"));
-            pokemonResults.setIndirectKOs(rs.getInt("indirectKOs"));
-            pokemonResults.setDeaths(rs.getInt("wasKOed"));
-            return pokemonResults;
+        public PokemonStats mapRow(ResultSet rs, int index) throws SQLException {
+            PokemonStats pokemonStats = new PokemonStats();
+            pokemonStats.setId(rs.getInt("id"));
+            pokemonStats.setDirectKOs(rs.getInt("directKOs"));
+            pokemonStats.setIndirectKOs(rs.getInt("indirectKOs"));
+            pokemonStats.setDeaths(rs.getInt("wasKOed"));
+            return pokemonStats;
         }
     }
 }

@@ -16,7 +16,6 @@ public class Pokemon {
     private int id;
     private String imgId;
     private String name;
-    private Team team;
 
     public int getId() {
         return id;
@@ -42,21 +41,12 @@ public class Pokemon {
         this.name = name;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 83 * hash + this.id;
         hash = 83 * hash + Objects.hashCode(this.imgId);
         hash = 83 * hash + Objects.hashCode(this.name);
-        hash = 83 * hash + Objects.hashCode(this.team);
         return hash;
     }
 
@@ -79,9 +69,6 @@ public class Pokemon {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.team, other.team)) {
             return false;
         }
         return true;

@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author isaacrez
  */
-public class PokemonResults {
+public class PokemonStats {
     
     private int id;
     private Pokemon pokemon;
@@ -81,7 +81,7 @@ public class PokemonResults {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PokemonResults other = (PokemonResults) obj;
+        final PokemonStats other = (PokemonStats) obj;
         if (this.id != other.id) {
             return false;
         }

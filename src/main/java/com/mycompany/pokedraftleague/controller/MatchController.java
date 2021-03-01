@@ -7,8 +7,8 @@ package com.mycompany.pokedraftleague.controller;
 
 import com.mycompany.pokedraftleague.data.match.MatchDao;
 import com.mycompany.pokedraftleague.data.match.MatchResultsDao;
-import com.mycompany.pokedraftleague.data.pokemon.PokemonResultsDao;
 import com.mycompany.pokedraftleague.data.league.TeamDao;
+import com.mycompany.pokedraftleague.data.pokemon.PokemonStatsDao;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,15 +31,15 @@ public class MatchController {
     private final MatchDao matchDao;
     private final TeamDao teamDao;
     private final MatchResultsDao matchResultsDao;
-    private final PokemonResultsDao pokemonResultsDao;
+    private final PokemonStatsDao pokemonStatsDao;
     
     @Autowired
     public MatchController(MatchDao matchDao, TeamDao teamDao,
-            MatchResultsDao matchResultsDao, PokemonResultsDao pokemonResultsDao) {
+            MatchResultsDao matchResultsDao, PokemonStatsDao pokemonStatsDao) {
         this.matchDao = matchDao;
         this.teamDao = teamDao;
         this.matchResultsDao = matchResultsDao;
-        this.pokemonResultsDao = pokemonResultsDao;
+        this.pokemonStatsDao = pokemonStatsDao;
     }
     
     @GetMapping("/results")
@@ -65,13 +65,13 @@ public class MatchController {
                                                @RequestParam Optional<Integer> leagueId) {
         if (teamId.isPresent()) {
             if (teamId2.isPresent() & leagueId.isPresent()) {
-                return ResponseEntity.ok(pokemonResultsDao
+                return ResponseEntity.ok(pokemonStatsDao
                         .getAllPokemonInMatch(teamId.get(), teamId2.get(), leagueId.get()));
             } else if (matchId.isPresent()) {
-                return ResponseEntity.ok(pokemonResultsDao.getPokemonInMatchFor(matchId.get(), teamId.get()));
+                return ResponseEntity.ok(pokemonStatsDao.getPokemonInMatchFor(matchId.get(), teamId.get()));
             }
         } else if (matchId.isPresent()) {
-            return ResponseEntity.ok(pokemonResultsDao.getAllPokemonInMatch(matchId.get()));
+            return ResponseEntity.ok(pokemonStatsDao.getAllPokemonInMatch(matchId.get()));
         }
         return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
     }

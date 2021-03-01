@@ -18,7 +18,7 @@ public class Match {
     private int id;
     
     private List<Team> teams;
-    private List<PokemonResults> pokemonParticipants;
+    private List<PokemonStats> pokemonParticipants;
     
     private String status;
     private Date dateSubmitted;
@@ -40,11 +40,11 @@ public class Match {
         this.teams = teams;
     }
 
-    public List<PokemonResults> getPokemonParticipants() {
+    public List<PokemonStats> getPokemonParticipants() {
         return pokemonParticipants;
     }
 
-    public void setPokemonParticipants(List<PokemonResults> pokemonParticipants) {
+    public void setPokemonParticipants(List<PokemonStats> pokemonParticipants) {
         this.pokemonParticipants = pokemonParticipants;
     }
 
