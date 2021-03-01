@@ -13,16 +13,16 @@ import java.util.Objects;
  */
 public class TeamResults {
     
-    private Team team;
+    private MinimumTeam team;
     private int gamesPlayed;
     private int gamesWon;
     private int differential;
 
-    public Team getTeam() {
+    public MinimumTeam getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(MinimumTeam team) {
         this.team = team;
     }
     

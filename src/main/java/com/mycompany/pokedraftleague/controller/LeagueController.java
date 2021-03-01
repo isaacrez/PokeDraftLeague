@@ -8,6 +8,7 @@ package com.mycompany.pokedraftleague.controller;
 import com.mycompany.pokedraftleague.data.league.LeagueDao;
 import com.mycompany.pokedraftleague.data.league.TeamDao;
 import com.mycompany.pokedraftleague.data.league.TeamResultsDao;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,13 +58,13 @@ public class LeagueController {
         return ResponseEntity.ok(leagueDao.getTiersInLeague(leagueId));
     }
     
-    @GetMapping("/results/{leagueId}")
-    public ResponseEntity getResultsForLeague(@PathVariable int leagueId) {
-        return ResponseEntity.ok(teamResultsDao.getTeamResultsForLeague(leagueId));
-    }
-    
-    @GetMapping("/results/{leagueId}/{teamId}")
-    public ResponseEntity getResultsForTeam(@PathVariable int  leagueId, @PathVariable int teamId) {
-        return ResponseEntity.ok(teamResultsDao.getTeamResultsFor(teamId, leagueId));
+    @GetMapping("/results")
+    public ResponseEntity getResultsForLeague(@RequestParam int leagueId,
+                                              @RequestParam Optional<Integer> teamId) {
+        if (teamId.isPresent()) {
+            return ResponseEntity.ok(teamResultsDao.getTeamResultsFor(teamId.get(), leagueId));
+        } else {
+            return ResponseEntity.ok(teamResultsDao.getTeamResultsForLeague(leagueId));
+        }
     }
 }

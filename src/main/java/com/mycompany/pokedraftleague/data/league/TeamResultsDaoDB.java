@@ -5,7 +5,7 @@
  */
 package com.mycompany.pokedraftleague.data.league;
 
-import com.mycompany.pokedraftleague.models.Team;
+import com.mycompany.pokedraftleague.models.MinimumTeam;
 import com.mycompany.pokedraftleague.models.TeamResults;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +35,7 @@ public class TeamResultsDaoDB implements TeamResultsDao {
     @Override
     public TeamResults getTeamResultsFor(int teamId, int leagueId) {
         try {
-            final String GET_TEAM_RESULTS = "SELECT rs.teamId, "
+            final String GET_TEAM_RESULTS = "SELECT t.*, "
                     + "COUNT(*) AS gamesPlayed, "
                     + "SUM(rs.won) AS gamesWon, "
                     + "SUM(rs.differential) AS differential "
@@ -45,7 +45,8 @@ public class TeamResultsDaoDB implements TeamResultsDao {
                     + 	"FROM matchattendee AS ma "
                     + 	"JOIN `match` AS m ON m.id = ma.matchId "
                     + 	"WHERE ma.teamId = ? AND m.leagueId = ? "
-                    + 	"GROUP BY m.id) AS rs";
+                    + 	"GROUP BY m.id) AS rs "
+                    + "JOIN team AS t ON t.id = rs.teamId";
             
             TeamResults rs = jdbc.queryForObject(GET_TEAM_RESULTS,
                     new TeamResultsMapper(),
@@ -94,7 +95,7 @@ public class TeamResultsDaoDB implements TeamResultsDao {
             teamResults.setGamesWon(rs.getInt("gamesWon"));
             teamResults.setDifferential(rs.getInt("differential"));
             
-            Team team = new Team();
+            MinimumTeam team = new MinimumTeam();
             team.setId(rs.getInt("id"));
             team.setName(rs.getString("name"));
             team.setAcronym(rs.getString("acronym"));
