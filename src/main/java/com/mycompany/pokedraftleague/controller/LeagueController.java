@@ -57,7 +57,7 @@ public class LeagueController {
         return ResponseEntity.ok(leagueDao.getTiersInLeague(leagueId));
     }
     
-    @GetMapping("results/{leagueId}")
+    @GetMapping("/results/{leagueId}")
     public ResponseEntity getResultsForLeague(@PathVariable int leagueId) {
         return ResponseEntity.ok(teamResultsDao.getTeamResultsForLeague(leagueId));
     }
