@@ -22,7 +22,7 @@ function LoadedEntry(props) {
 
 
     function addAbilities() {
-        addUpTo(props.data.abilities.map((ability, index) =>
+        return addUpTo(props.data.abilities.map((ability, index) =>
             <td key={`${props.data.id}-${index}`}>
                 {ability}
             </td>
