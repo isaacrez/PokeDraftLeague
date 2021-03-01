@@ -34,9 +34,9 @@ function LoadedEntry(props) {
             .map(d => props.display[d] ? displayOptions[d] : null)
     ];
 
-    // const recolor = props.leagueStats.team.name ? "taken" : "";
+    const recolor = props.data.team.acronym !== "FREE" ? "taken" : "";
 
-    return (<tr>{cells}</tr>);
+    return (<tr className={recolor}>{cells}</tr>);
 }
 
 export default Entry;
