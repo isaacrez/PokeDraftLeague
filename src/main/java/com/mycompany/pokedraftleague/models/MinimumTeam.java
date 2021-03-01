@@ -16,6 +16,10 @@ public class MinimumTeam {
     private int id;
     private String name;
     private String acronym;
+    
+    public MinimumTeam() {
+        this.acronym = "FREE";
+    }
 
     public int getId() {
         return id;

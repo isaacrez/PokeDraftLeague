@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author isaacrez
  */
-public class DetailedPokemon extends Pokemon {
+public class DetailedPokemon extends AffiliatedPokemon {
     
     private String tier;
     private BaseStats stats;

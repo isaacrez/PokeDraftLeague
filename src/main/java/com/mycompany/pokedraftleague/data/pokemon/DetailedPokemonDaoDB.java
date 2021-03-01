@@ -5,6 +5,8 @@
  */
 package com.mycompany.pokedraftleague.data.pokemon;
 
+import com.mycompany.pokedraftleague.data.league.TeamDaoDB.TeamMapper;
+import com.mycompany.pokedraftleague.models.MinimumTeam;
 import com.mycompany.pokedraftleague.models.pokemon.DetailedPokemon;
 import com.mycompany.pokedraftleague.models.pokemon.BaseStats;
 import com.mycompany.pokedraftleague.models.PackagedResult;
@@ -12,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -66,7 +69,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
                 leagueId,
                 limit,
                 offset);
-        addTypingAndAbilities(pokemon);
+        addTypingAndAbilities(pokemon, leagueId);
         
         return new PackagedResult(getCount(leagueId), pokemon);
     }
@@ -83,7 +86,7 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
                 new DetailedPokemonMapper(),
                 teamId,
                 leagueId);
-        addTypingAndAbilities(pokemon);
+        addTypingAndAbilities(pokemon, leagueId);
         return pokemon;
     }
     
@@ -103,10 +106,22 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
             addTypingAndAbilities(poke);
         }
     }
-    
+        
     private void addTypingAndAbilities(DetailedPokemon pokemon) {
         addTyping(pokemon);
         addAbilities(pokemon);
+    }
+    
+    private void addTypingAndAbilities(List<DetailedPokemon> pokemon, int leagueId) {
+        for (DetailedPokemon poke : pokemon) {
+            addTypingAndAbilities(poke, leagueId);
+        }
+    }
+    
+    private void addTypingAndAbilities(DetailedPokemon pokemon, int leagueId) {
+        addTyping(pokemon);
+        addAbilities(pokemon);
+        addTeam(pokemon, leagueId);
     }
     
     private void addTyping(DetailedPokemon pokemon) {
@@ -127,7 +142,21 @@ public class DetailedPokemonDaoDB implements DetailedPokemonDao {
         
         int id = pokemon.getId();
         pokemon.setAbilities(jdbc.queryForList(GET_ABILITIES, String.class, id));
-        
+    }
+    
+    private void addTeam(DetailedPokemon pokemon, int leagueId) {
+        try {
+            final String GET_TEAM = "SELECT t.* FROM team AS t "
+                    + "JOIN leagueTeam AS lt ON t.id = lt.teamId "
+                    + "JOIN roster AS r ON r.teamId = t.id AND r.leagueId = lt.leagueId "
+                    + "WHERE lt.leagueId = ? AND r.pokeId = ?";
+            pokemon.setTeam(jdbc.queryForObject(GET_TEAM,
+                    new TeamMapper(),
+                    leagueId,
+                    pokemon.getId()));
+        } catch (DataAccessException e) {
+            pokemon.setTeam(new MinimumTeam());
+        }
     }
     
     public static final class DetailedPokemonMapper implements RowMapper<DetailedPokemon> {
