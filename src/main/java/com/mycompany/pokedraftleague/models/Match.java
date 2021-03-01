@@ -6,7 +6,6 @@
 package com.mycompany.pokedraftleague.models;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -16,8 +15,6 @@ import java.util.Objects;
 public class Match {
     
     private int id;
-    private List<Lineup> participants;
-    
     private String status;
     private Date dateSubmitted;
     private int scheduledWeek;
@@ -28,14 +25,6 @@ public class Match {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public List<Lineup> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<Lineup> participants) {
-        this.participants = participants;
     }
 
     public String getStatus() {
@@ -64,12 +53,11 @@ public class Match {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.participants);
-        hash = 97 * hash + Objects.hashCode(this.status);
-        hash = 97 * hash + Objects.hashCode(this.dateSubmitted);
-        hash = 97 * hash + this.scheduledWeek;
+        int hash = 5;
+        hash = 67 * hash + this.id;
+        hash = 67 * hash + Objects.hashCode(this.status);
+        hash = 67 * hash + Objects.hashCode(this.dateSubmitted);
+        hash = 67 * hash + this.scheduledWeek;
         return hash;
     }
 
@@ -92,9 +80,6 @@ public class Match {
             return false;
         }
         if (!Objects.equals(this.status, other.status)) {
-            return false;
-        }
-        if (!Objects.equals(this.participants, other.participants)) {
             return false;
         }
         if (!Objects.equals(this.dateSubmitted, other.dateSubmitted)) {
