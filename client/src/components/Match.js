@@ -5,13 +5,13 @@ import { addLabel } from '../util/pokeEntry';
 function Match(props) {
 
     const [teams, setTeams] = React.useState([]);
-    const [teamOneId, setTeamOneId] = React.useState(0);
-    const [teamTwoId, setTeamTwoId] = React.useState(0);
+    const [teamOne, setTeamOne] = React.useState({id: 0});
+    const [teamTwo, setTeamTwo] = React.useState({id: 0});
     
-    const teamIds = [teamOneId, teamTwoId];
+    const teamIds = [teamOne.id, teamTwo.id];
 
     function setTeamId(teamName, setFunction) {
-        setFunction(teams.find(t => t.name === teamName).id);
+        setFunction(teams.find(t => t.name === teamName));
     }
 
     React.useEffect(() => {
@@ -19,9 +19,9 @@ function Match(props) {
         fetch(url, {type: "GET"})
             .then(response => response.json())
             .then(leagueData => {
-                setTeams(leagueData.teams)
-                setTeamOneId(leagueData.teams[0].id)
-                setTeamTwoId(leagueData.teams[1].id)
+                setTeams(leagueData.teams);
+                setTeamOne(leagueData.teams[0]);
+                setTeamTwo(leagueData.teams[1]);
             })
             .catch(error => console.log(error));
 
@@ -30,18 +30,28 @@ function Match(props) {
     return (<div className="full-stripe">
         <div className="d-flex w-100 justify-content-around mb-3">
             <DropdownSelector 
-                        setValue={(name) => setTeamId(name, setTeamOneId)}
+                        setValue={(name) => setTeamId(name, setTeamOne)}
                         values={teams
-                            .filter(t => Number(t.id) !== teamTwoId)
+                            .filter(t => Number(t.id) !== teamTwo.id)
                             .map(t => t.name)}
                         purpose={"Team One"} />
 
             <DropdownSelector 
-                        setValue={(name) => setTeamId(name, setTeamTwoId)}
+                        setValue={(name) => setTeamId(name, setTeamTwo)}
                         values={teams
-                            .filter(t => Number(t.id) !== teamOneId)
+                            .filter(t => Number(t.id) !== teamOne.id)
                             .map(t => t.name)}
                         purpose={"Team Two"} />
+        </div>
+
+        <div className="d-flex mx-auto align-items-center mb-3">
+            <img src={`${process.env.PUBLIC_URL}/img/logos/${teamOne.acronym}.png`}
+                alt={``}
+                className="lg-icon" />
+            <h2 className="mx-5">vs</h2>
+            <img src={`${process.env.PUBLIC_URL}/img/logos/${teamTwo.acronym}.png`}
+                alt={``}
+                className="lg-icon" />
         </div>
         
         <MatchData league={props.league} 
@@ -71,7 +81,7 @@ function MatchData(props) {
             .catch(error => console.log(error));
     }, [props.teamIds, props.league.id])
 
-    return (<div className="scrollable-table tall">
+    return (<div className="scrollable-table short">
         <table>
             <thead>
                 <tr>
