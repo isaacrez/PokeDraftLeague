@@ -44,18 +44,22 @@ function Match(props) {
                         purpose={"Team Two"} />
         </div>
 
-        <div className="d-flex mx-auto align-items-center mb-3">
-            <img src={`${process.env.PUBLIC_URL}/img/logos/${teamOne.acronym}.png`}
-                alt={``}
-                className="lg-icon" />
-            <h2 className="mx-5">vs</h2>
-            <img src={`${process.env.PUBLIC_URL}/img/logos/${teamTwo.acronym}.png`}
-                alt={``}
-                className="lg-icon" />
-        </div>
+        <LogoBar acronyms={[teamOne.acronym, teamTwo.acronym]} />
         
         <MatchData league={props.league} 
             teamIds={teamIds} />
+    </div>);
+}
+
+function LogoBar(props) {
+    return (<div className="d-flex mx-auto align-items-center mb-3">
+        <img src={`${process.env.PUBLIC_URL}/img/logos/${props.acronyms[0]}.png`}
+            alt={`${props.acronyms[0]}'s logo`}
+            className="lg-icon" />
+        <h2 className="mx-5">vs</h2>
+        <img src={`${process.env.PUBLIC_URL}/img/logos/${props.acronyms[1]}.png`}
+            alt={`${props.acronyms[1]}'s logo`}
+            className="lg-icon" />
     </div>);
 }
 
