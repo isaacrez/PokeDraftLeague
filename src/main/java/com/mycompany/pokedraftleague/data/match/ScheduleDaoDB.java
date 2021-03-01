@@ -5,9 +5,11 @@
  */
 package com.mycompany.pokedraftleague.data.match;
 
+import com.mycompany.pokedraftleague.data.CoachDaoDB.CoachMapper;
 import com.mycompany.pokedraftleague.data.league.TeamDaoDB.TeamMapper;
 import com.mycompany.pokedraftleague.models.Match;
 import com.mycompany.pokedraftleague.models.MinimumMatch;
+import com.mycompany.pokedraftleague.models.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -81,6 +83,15 @@ public class ScheduleDaoDB implements ScheduleDao {
         match.setTeams(jdbc.query(GET_TEAMS_FOR_MATCH,
                 new TeamMapper(),
                 match.getId()));
+        
+        for (Team team : match.getTeams()) {
+            final String GET_COACH_FOR_TEAM = "SELECT * FROM coach AS c "
+                    + "JOIN team AS t on c.id = t.coachId "
+                    + "WHERE t.id = ?";
+            team.setCoach(jdbc.queryForObject(GET_COACH_FOR_TEAM,
+                    new CoachMapper(),
+                    team.getId()));
+        }
     }
 
     public static final class MinimumMatchMapper implements RowMapper<MinimumMatch> {
