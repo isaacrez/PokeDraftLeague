@@ -5,18 +5,14 @@
  */
 package com.mycompany.pokedraftleague.data.match;
 
-import com.mycompany.pokedraftleague.models.Match;
+import com.mycompany.pokedraftleague.models.MinimumMatch;
 import java.util.List;
 
 /**
  *
  * @author isaacrez
  */
-public interface MatchDao {
-    List<Match> getAllMatches();
-    Match getMatchById(int id);
-    List<Match> getMatchesByLeagueId(int id);
-    Match addMatch(Match match);
-    void updateMatch(Match match);
-    void deleteMatchById(int id);
+public interface ScheduleDao {
+    MinimumMatch getMatchById(int id);
+    List<MinimumMatch> getScheduleForLeague(int id);
 }

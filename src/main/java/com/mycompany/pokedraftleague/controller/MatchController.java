@@ -5,9 +5,9 @@
  */
 package com.mycompany.pokedraftleague.controller;
 
-import com.mycompany.pokedraftleague.data.match.MatchDao;
 import com.mycompany.pokedraftleague.data.match.MatchResultsDao;
 import com.mycompany.pokedraftleague.data.league.TeamDao;
+import com.mycompany.pokedraftleague.data.match.ScheduleDao;
 import com.mycompany.pokedraftleague.data.pokemon.PokemonStatsDao;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +28,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/match")
 public class MatchController {
     
-    private final MatchDao matchDao;
+    private final ScheduleDao scheduleDao;
     private final TeamDao teamDao;
     private final MatchResultsDao matchResultsDao;
     private final PokemonStatsDao pokemonStatsDao;
     
     @Autowired
-    public MatchController(MatchDao matchDao, TeamDao teamDao,
+    public MatchController(ScheduleDao scheduleDao, TeamDao teamDao,
             MatchResultsDao matchResultsDao, PokemonStatsDao pokemonStatsDao) {
-        this.matchDao = matchDao;
+        this.scheduleDao = scheduleDao;
         this.teamDao = teamDao;
         this.matchResultsDao = matchResultsDao;
         this.pokemonStatsDao = pokemonStatsDao;
@@ -50,7 +50,7 @@ public class MatchController {
     
     @GetMapping("/schedule")
     public ResponseEntity getScheduleFor(@RequestParam int leagueId) {
-        return ResponseEntity.ok(matchDao.getMatchesByLeagueId(leagueId));
+        return ResponseEntity.ok(scheduleDao.getScheduleForLeague(leagueId));
     }
     
     @GetMapping("/teams")
