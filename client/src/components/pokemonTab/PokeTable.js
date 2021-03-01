@@ -19,7 +19,7 @@ function PokeTable(props) {
         <Entry data={poke}
             display={props.display}
             league={props.league}
-            key={poke.pokemon.id} />
+            key={poke.id} />
     )
 
     React.useEffect(() => {

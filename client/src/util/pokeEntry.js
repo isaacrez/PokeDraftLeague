@@ -11,13 +11,13 @@ export const addLabel = data =>
 export const addStats = data => 
     Object.values(data.stats).map((stat, index) => 
         <td className="align-middle"
-            key={`${data.pokemon.id}-${index}`}>
+            key={`${data.id}-${index}`}>
             {stat}
         </td>);
 
 export const addTyping = data =>
     addUpTo(data.type.map((type, index) =>
-        <td key={`${data.pokemon.id}-${index}`}>
+        <td key={`${data.id}-${index}`}>
             <img src={`https://www.serebii.net/pokedex-bw/type/${type.toLowerCase()}.gif`}
                 alt={`${type} type`} />
         </td>
@@ -26,7 +26,7 @@ export const addTyping = data =>
 
 export const addAbilities = data =>
      addUpTo(data.abilities.map((ability, index) =>
-        <td key={`${data.pokemon.id}-${index}`}>
+        <td key={`${data.id}-${index}`}>
             {ability}
         </td>
     ), 4);

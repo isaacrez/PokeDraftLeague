@@ -7,7 +7,7 @@ function Entry(props) {
     const loaded = leagueStats !== null;
 
     React.useEffect(() => {
-        let url = `http://localhost:8080/api/pokemon/stats?pokeId=${props.data.pokemon.id}
+        let url = `http://localhost:8080/api/pokemon/stats?pokeId=${props.data.id}
                     &leagueId=${props.league.id}`;
         fetch(url, {type: "GET"})
             .then(response => response.json())
@@ -34,9 +34,9 @@ function LoadedEntry(props) {
             .map(d => props.display[d] ? displayOptions[d] : null)
     ];
 
-    const recolor = props.leagueStats.team.name ? "taken" : "";
+    // const recolor = props.leagueStats.team.name ? "taken" : "";
 
-    return (<tr className={recolor}>{cells}</tr>);
+    return (<tr>{cells}</tr>);
 }
 
 export default Entry;
