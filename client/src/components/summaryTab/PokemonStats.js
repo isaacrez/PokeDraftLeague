@@ -6,8 +6,10 @@ function PokemonStats(props) {
     const [pokeData, setPokeData] = React.useState([]);
     const headerLabels = ["Name", "Tier", "Played", "KOs", "Passive", "Deaths", "+/-"];
 
+    console.log(pokeData);
+
     const rows = pokeData.sort((a, b) => a.tier - b.tier)
-                .map(data => <Entry league={props.league} data={data} key={data.pokemon.id} />);
+                .map(data => <Entry league={props.league} data={data} key={data.id} />);
     const header = headerLabels.map(s => <th key={s}>{s}</th>);
 
     React.useEffect(() => {

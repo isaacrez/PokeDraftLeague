@@ -24,7 +24,8 @@ function Summary(props) {
     React.useEffect(() => {
         if (currSelection) {
             let teamId = currSelection.team.id;
-            let leagueStatsUrl = `http://localhost:8080/api/league/results/${props.league.id}/${teamId}`;
+            let leagueStatsUrl = `http://localhost:8080/api/league/results` 
+                + `?leagueId=${props.league.id}&teamId=${teamId}`;
             fetch(leagueStatsUrl, {type: "GET"})
                 .then(response => response.json())
                 .then(data => setTeamStats(data))

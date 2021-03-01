@@ -17,14 +17,14 @@ function Entry(props) {
     ];
 
     React.useEffect(() => {
-        let url = `http://localhost:8080/api/pokemon/stats?pokeId=${props.data.pokemon.id}&leagueId=${props.league.id}`;
+        let url = `http://localhost:8080/api/pokemon/stats?pokeId=${props.data.id}&leagueId=${props.league.id}`;
         fetch(url, {type: "GET"})
             .then(response => response.json())
             .then(stats => setLeagueStats(stats))
             .catch(error => console.log(error));
-    }, [props.data.pokemon.id, props.league.id]);
+    }, [props.data.id, props.league.id]);
 
-    return (<tr key={props.data.pokemon.id}>
+    return (<tr key={props.data.id}>
         {cells}
     </tr>);
 }
