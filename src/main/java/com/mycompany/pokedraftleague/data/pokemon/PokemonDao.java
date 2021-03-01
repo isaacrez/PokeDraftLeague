@@ -8,6 +8,7 @@ package com.mycompany.pokedraftleague.data.pokemon;
 import com.mycompany.pokedraftleague.models.League;
 import com.mycompany.pokedraftleague.models.Match;
 import com.mycompany.pokedraftleague.models.PackagedResult;
+import com.mycompany.pokedraftleague.models.pokemon.AffiliatedPokemon;
 import com.mycompany.pokedraftleague.models.pokemon.Pokemon;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface PokemonDao {
     List<Pokemon> getPokemonOn(int teamId, int leagueId);
     Pokemon getPokemonWithStatsFrom(int pokeId, Match match);
     Pokemon getPokemonWithStatsFrom(int pokeId, League league);
-    List<Pokemon> getPokemonFromTier(String tier, int leagueId);
+    List<AffiliatedPokemon> getPokemonFromTier(String tier, int leagueId);
     Pokemon addPokemon(Pokemon pokemon);
     void updatePokemon(Pokemon pokemon);
     void deletePokemonById(int id);

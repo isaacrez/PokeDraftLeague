@@ -7,7 +7,9 @@ package com.mycompany.pokedraftleague.data.pokemon;
 
 import com.mycompany.pokedraftleague.models.League;
 import com.mycompany.pokedraftleague.models.Match;
+import com.mycompany.pokedraftleague.models.MinimumTeam;
 import com.mycompany.pokedraftleague.models.PackagedResult;
+import com.mycompany.pokedraftleague.models.pokemon.AffiliatedPokemon;
 import com.mycompany.pokedraftleague.models.pokemon.Pokemon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,13 +65,18 @@ public class PokemonDaoDB implements PokemonDao {
     }
     
     @Override
-    public List<Pokemon> getPokemonFromTier(String tier, int leagueId) {
-        final String GET_FROM_TIER = "SELECT t.label AS tier, p.* FROM pokemon AS p "
+    public List<AffiliatedPokemon> getPokemonFromTier(String tier, int leagueId) {
+        final String GET_FROM_TIER = "SELECT tm.id AS teamId, tm.name AS teamName, "
+                + "IFNULL(tm.acronym, 'FREE') AS acronym, t.label AS tier, "
+                + "p.* FROM pokemon AS p "
                 + "JOIN pokemonTier AS pt ON p.id = pt.pokemonId "
                 + "JOIN tier AS t ON pt.tierId = t.id "
-                + "WHERE t.label = ? AND leagueId = ?";
-        List<Pokemon> pokemon = jdbc.query(GET_FROM_TIER,
-                new PokemonMapper(),
+                + "LEFT OUTER JOIN roster AS r "
+                + "ON r.leagueId = pt.leagueId AND r.pokeId = p.id "
+                + "LEFT OUTER JOIN team AS tm ON tm.id = r.teamId "
+                + "WHERE t.label = ? AND pt.leagueId = ?";
+        List<AffiliatedPokemon> pokemon = jdbc.query(GET_FROM_TIER,
+                new AffiliatedPokemonMapper(),
                 tier,
                 leagueId);
         return pokemon;
@@ -98,6 +105,23 @@ public class PokemonDaoDB implements PokemonDao {
     @Override
     public void deletePokemonById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public static final class AffiliatedPokemonMapper implements RowMapper<AffiliatedPokemon> {
+        @Override
+        public AffiliatedPokemon mapRow(ResultSet rs, int i) throws SQLException {
+            AffiliatedPokemon pokemon = new AffiliatedPokemon();
+            pokemon.setId(rs.getInt("id"));
+            pokemon.setImgId(rs.getString("imgId"));
+            pokemon.setName(rs.getString("name"));
+            
+            MinimumTeam team = new MinimumTeam();
+            team.setId(rs.getInt("teamId"));
+            team.setName(rs.getString("teamName"));
+            team.setAcronym(rs.getString("acronym"));
+            pokemon.setTeam(team);
+            return pokemon;
+        }
     }
     
     public static final class PokemonMapper implements RowMapper<Pokemon> {
