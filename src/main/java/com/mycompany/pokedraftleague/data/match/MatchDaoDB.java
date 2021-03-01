@@ -5,7 +5,6 @@
  */
 package com.mycompany.pokedraftleague.data.match;
 
-import com.mycompany.pokedraftleague.data.league.TeamDao;
 import com.mycompany.pokedraftleague.models.Match;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,15 +22,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MatchDaoDB implements MatchDao {
     
-    @Autowired
-    private final TeamDao teamDao;
-    
     private final JdbcTemplate jdbc;
     
     @Autowired
-    public MatchDaoDB(JdbcTemplate jdbcTemplate, TeamDao teamDao) {
+    public MatchDaoDB(JdbcTemplate jdbcTemplate) {
         this.jdbc = jdbcTemplate;
-        this.teamDao = teamDao;
     }
 
     @Override
@@ -70,7 +65,6 @@ public class MatchDaoDB implements MatchDao {
     
     private void addAdvancedProperties(Match match) {
         addStatusToMatch(match);
-        match.setTeams(teamDao.getTeamsByMatchId(match.getId()));
     }
     
     private void addStatusToMatch(Match match) {

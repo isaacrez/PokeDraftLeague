@@ -5,7 +5,6 @@
  */
 package com.mycompany.pokedraftleague.models;
 
-import com.mycompany.pokedraftleague.models.pokemon.PokemonStats;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -17,9 +16,7 @@ import java.util.Objects;
 public class Match {
     
     private int id;
-    
-    private List<Team> teams;
-    private List<PokemonStats> pokemonParticipants;
+    private List<Lineup> participants;
     
     private String status;
     private Date dateSubmitted;
@@ -33,20 +30,12 @@ public class Match {
         this.id = id;
     }
 
-    public List<Team> getTeams() {
-        return teams;
+    public List<Lineup> getParticipants() {
+        return participants;
     }
 
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
-    }
-
-    public List<PokemonStats> getPokemonParticipants() {
-        return pokemonParticipants;
-    }
-
-    public void setPokemonParticipants(List<PokemonStats> pokemonParticipants) {
-        this.pokemonParticipants = pokemonParticipants;
+    public void setParticipants(List<Lineup> participants) {
+        this.participants = participants;
     }
 
     public String getStatus() {
@@ -61,8 +50,8 @@ public class Match {
         return dateSubmitted;
     }
 
-    public void setDateSubmitted(Date completedOn) {
-        this.dateSubmitted = completedOn;
+    public void setDateSubmitted(Date dateSubmitted) {
+        this.dateSubmitted = dateSubmitted;
     }
 
     public int getScheduledWeek() {
@@ -75,13 +64,12 @@ public class Match {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + this.id;
-        hash = 13 * hash + Objects.hashCode(this.teams);
-        hash = 13 * hash + Objects.hashCode(this.pokemonParticipants);
-        hash = 13 * hash + Objects.hashCode(this.status);
-        hash = 13 * hash + Objects.hashCode(this.dateSubmitted);
-        hash = 13 * hash + this.scheduledWeek;
+        int hash = 7;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.participants);
+        hash = 97 * hash + Objects.hashCode(this.status);
+        hash = 97 * hash + Objects.hashCode(this.dateSubmitted);
+        hash = 97 * hash + this.scheduledWeek;
         return hash;
     }
 
@@ -106,10 +94,7 @@ public class Match {
         if (!Objects.equals(this.status, other.status)) {
             return false;
         }
-        if (!Objects.equals(this.teams, other.teams)) {
-            return false;
-        }
-        if (!Objects.equals(this.pokemonParticipants, other.pokemonParticipants)) {
+        if (!Objects.equals(this.participants, other.participants)) {
             return false;
         }
         if (!Objects.equals(this.dateSubmitted, other.dateSubmitted)) {
@@ -117,5 +102,4 @@ public class Match {
         }
         return true;
     }
-    
 }

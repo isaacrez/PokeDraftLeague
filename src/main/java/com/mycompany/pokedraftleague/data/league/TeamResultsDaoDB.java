@@ -5,6 +5,7 @@
  */
 package com.mycompany.pokedraftleague.data.league;
 
+import com.mycompany.pokedraftleague.models.Team;
 import com.mycompany.pokedraftleague.models.TeamResults;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,7 +51,6 @@ public class TeamResultsDaoDB implements TeamResultsDao {
                     new TeamResultsMapper(),
                     teamId,
                     leagueId);
-            rs.setTeam(teamDao.getTeamById(teamId));
             return rs;
         } catch (DataAccessException e) {
             System.out.println(e);
@@ -60,7 +60,7 @@ public class TeamResultsDaoDB implements TeamResultsDao {
     
     @Override
     public List<TeamResults> getTeamResultsForLeague(int leagueId) {
-        final String GET_TEAM_RESULTS_FOR_LEAGUE = "SELECT t.id AS teamId, "
+        final String GET_TEAM_RESULTS_FOR_LEAGUE = "SELECT t.*, "
                 +   "COUNT(rs.won) AS gamesPlayed, "
                 +   "IFNULL(SUM(rs.won), 0) AS gamesWon, "
                 +   "IFNULL(SUM(rs.differential), 0) AS differential "
@@ -82,7 +82,6 @@ public class TeamResultsDaoDB implements TeamResultsDao {
                 new TeamResultsMapper(),
                 leagueId,
                 leagueId);
-        results.forEach(rs -> rs.setTeam(teamDao.getTeamById(rs.getTeamId())));
         return results;
     }
     
@@ -94,7 +93,12 @@ public class TeamResultsDaoDB implements TeamResultsDao {
             teamResults.setGamesPlayed(rs.getInt("gamesPlayed"));
             teamResults.setGamesWon(rs.getInt("gamesWon"));
             teamResults.setDifferential(rs.getInt("differential"));
-            teamResults.setTeamId(rs.getInt("teamId"));
+            
+            Team team = new Team();
+            team.setId(rs.getInt("id"));
+            team.setName(rs.getString("name"));
+            team.setAcronym(rs.getString("acronym"));
+            teamResults.setTeam(team);
             return teamResults;
         }
         
