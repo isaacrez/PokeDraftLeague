@@ -15,14 +15,14 @@ import java.util.Objects;
  */
 public class Lineup {
     
-    private Team team;
+    private MinimumTeam team;
     private List<PokemonStats> pokemon;
 
-    public Team getTeam() {
+    public MinimumTeam getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(MinimumTeam team) {
         this.team = team;
     }
 

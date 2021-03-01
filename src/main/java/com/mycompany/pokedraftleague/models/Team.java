@@ -11,41 +11,10 @@ import java.util.Objects;
  *
  * @author isaacrez
  */
-public class Team {
+public class Team extends MinimumTeam {
     
-    private int id;
-    private String name;
-    private String acronym;
     private Coach coach;
     
-    public Team() {
-        this.acronym = "FREE";
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAcronym() {
-        return acronym;
-    }
-
-    public void setAcronym(String acronym) {
-        this.acronym = acronym;
-    }
-
     public Coach getCoach() {
         return coach;
     }
@@ -57,9 +26,7 @@ public class Team {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Objects.hashCode(this.acronym);
-        hash = 97 * hash + Objects.hashCode(this.coach);
+        hash = 37 * hash + Objects.hashCode(this.coach);
         return hash;
     }
 
@@ -75,16 +42,9 @@ public class Team {
             return false;
         }
         final Team other = (Team) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.acronym, other.acronym)) {
-            return false;
-        }
         if (!Objects.equals(this.coach, other.coach)) {
             return false;
         }
         return true;
     }
-    
 }
